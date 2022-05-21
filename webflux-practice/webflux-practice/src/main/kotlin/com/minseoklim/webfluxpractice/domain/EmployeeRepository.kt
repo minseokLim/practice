@@ -22,4 +22,9 @@ class EmployeeRepository {
     fun findAllEmployees(): Flux<Employee> {
         return Flux.fromIterable(employeeData.values)
     }
+
+    fun updateEmployee(employee: Employee): Mono<Employee> {
+        employeeData[employee.id] = employee
+        return Mono.just(employee)
+    }
 }
