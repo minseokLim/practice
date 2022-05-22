@@ -15,7 +15,7 @@ class SecurityConfig {
     ): SecurityWebFilterChain {
         http.csrf().disable()
             .authorizeExchange()
-            .pathMatchers(HttpMethod.PUT, "/employees").hasRole("ADMIN")
+            .pathMatchers(HttpMethod.PUT, "/employees/**").hasRole("ADMIN")
             .pathMatchers("/**").permitAll()
             .and()
             .httpBasic()

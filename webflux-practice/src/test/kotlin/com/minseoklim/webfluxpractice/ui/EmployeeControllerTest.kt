@@ -10,26 +10,28 @@ import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.web.reactive.function.client.WebClient
 
+// assertion이 메인 스레드에서 이뤄지지 않기 때문에 의미가 없었구나...;;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class EmployeeControllerTest {
 
     @LocalServerPort
     private var port = 0
-    private lateinit var webClient: WebClient
+    private lateinit var client: WebClient
 
     @BeforeEach
     internal fun setUp() {
-        webClient = WebClient.create("http://localhost:$port")
+        client = WebClient.create("http://localhost:$port")
     }
 
     @Test
     fun getEmployeeById() {
-        val employeeMono = webClient.get()
+        val employeeMono = client.get()
             .uri("/employees/{id}", 1)
             .retrieve()
             .bodyToMono(Employee::class.java)
 
         employeeMono.subscribe {
+            println("getEmployeeById 성공")
             println(it)
             assertThat(it).isNotNull
         }
@@ -40,12 +42,13 @@ internal class EmployeeControllerTest {
 
     @Test
     fun getAllEmployees() {
-        val employeeFlux = webClient.get()
+        val employeeFlux = client.get()
             .uri("/employees")
             .retrieve()
             .bodyToFlux(Employee::class.java)
 
         employeeFlux.subscribe {
+            println("getAllEmployees 성공")
             println(it)
             assertThat(it).isNotNull
         }
@@ -56,8 +59,8 @@ internal class EmployeeControllerTest {
 
     @Test
     fun updateEmployee() {
-        val employeeMono = webClient.put()
-            .uri("/employees")
+        val employeeMono = client.put()
+            .uri("/employees/{id}", 1)
             .bodyValue(Employee(1, "임민석"))
             .retrieve()
             .onStatus({ !it.equals(HttpStatus.UNAUTHORIZED) }) { fail { "테스트 실패" } }

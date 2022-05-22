@@ -1,10 +1,9 @@
 package com.minseoklim.webfluxpractice.domain
 
-import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
-@Repository
+// @Repository
 class EmployeeRepository {
     private val employeeData = mutableMapOf<Int, Employee>()
 
