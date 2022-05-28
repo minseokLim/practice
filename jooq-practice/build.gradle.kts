@@ -1,11 +1,12 @@
+import nu.studer.gradle.jooq.JooqEdition
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jooq.meta.jaxb.ForcedType
 import org.jooq.meta.jaxb.Logging
+import org.jooq.meta.jaxb.OnError.LOG
 import org.jooq.meta.jaxb.Property
 
 plugins {
     // spring
-    id("org.springframework.boot") version "2.7.0"
+    id("org.springframework.boot") version "2.6.8"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
 
     // kotlin
@@ -29,6 +30,7 @@ repositories {
 
 dependencies {
     // spring
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
 
     // kotlin
@@ -40,6 +42,9 @@ dependencies {
 
     // jooq
     jooqGenerator("com.h2database:h2")
+    jooqGenerator("org.jooq:jooq-meta-extensions:" + dependencyManagement.importedProperties["jooq.version"])
+    // TODO : ktlint exclude 잘 안됨. 우회하는 방법을 찾아봐야 하나... 일단 아쉬운대로 -> ktlint | grep -v generated
+    // https://github.com/JLLeitschuh/ktlint-gradle/issues/184
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -57,36 +62,26 @@ tasks.withType<Test> {
 }
 
 jooq {
+    version.set(dependencyManagement.importedProperties["jooq.version"])
+    edition.set(JooqEdition.OSS)
+
     configurations {
         create("main") {
             jooqConfiguration.apply {
                 logging = Logging.WARN
-                jdbc.apply {
-                    driver = "org.h2.Driver"
-                    url = "jdbc:h2:~/test;AUTO_SERVER=TRUE"
-                    user = "sa"
-                    password = ""
-                    properties = listOf(
-                        Property().apply {
-                            key = "PAGE_SIZE"
-                            value = "2048"
-                        }
-                    )
-                }
+                onError = LOG
                 generator.apply {
-                    name = "org.jooq.codegen.DefaultGenerator"
+                    name = "org.jooq.codegen.KotlinGenerator"
                     database.apply {
-                        name = "org.jooq.meta.h2.H2Database"
-                        forcedTypes = listOf(
-                            ForcedType().apply {
-                                name = "varchar"
-                                includeExpression = ".*"
-                                includeTypes = "JSONB?"
+                        name = "org.jooq.meta.extensions.ddl.DDLDatabase"
+                        properties = listOf(
+                            Property().apply {
+                                key = "scripts"
+                                value = "src/main/resources/schema.sql"
                             },
-                            ForcedType().apply {
-                                name = "varchar"
-                                includeExpression = ".*"
-                                includeTypes = "INET"
+                            Property().apply {
+                                key = "sort"
+                                value = "semantic"
                             }
                         )
                     }

@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS author_book, author, book;
-
 CREATE TABLE author
 (
     id         INT         NOT NULL PRIMARY KEY,
