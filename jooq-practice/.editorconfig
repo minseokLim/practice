@@ -1,0 +1,2 @@
+[src/generated/**.kt]
+disabled_rules = import-ordering, no-semi, no-consecutive-blank-lines, colon-spacing
