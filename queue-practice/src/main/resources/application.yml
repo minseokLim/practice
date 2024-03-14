@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: queue
+  data:
+    redis:
+      url: redis://localhost:6379
+      timeout: 1s
+      connect-timeout: 3s
+      client-type: lettuce
