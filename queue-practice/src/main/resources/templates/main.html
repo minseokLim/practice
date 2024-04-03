@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>메인 화면</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const queryParams = new URLSearchParams(window.location.search);
+        const token = queryParams.get('token');
+
+        window.addEventListener('beforeunload', function (event) {
+            deleteToken();
+        });
+
+        function deleteToken() {
+            axios.delete('/token', {
+                params: {
+                    token: token
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>메인 화면</h1>
+</body>
+</html>

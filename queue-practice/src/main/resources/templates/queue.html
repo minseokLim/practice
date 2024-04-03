@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>대기열 화면</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let token = null;
+        let isRedirect = false;
+
+        window.onload = function () {
+            createToken();
+            setInterval(checkToken, 5000);
+        }
+
+        window.addEventListener('beforeunload', function (event) {
+            if (!isRedirect) {
+                deleteToken();
+            }
+        });
+
+        function createToken() {
+            axios.post('/token')
+                .then(function (response) {
+                    token = response.data.token;
+
+                    if (response.data.isAccessible) {
+                        isRedirect = true;
+                        window.location.href = '/main?token=' + encodeURIComponent(token);
+                    } else {
+                        document.getElementById('queueCount').innerText = response.data.remaining;
+                    }
+                });
+        }
+
+        function checkToken() {
+            if (token != null) {
+                axios.get('/token', {
+                    params: {
+                        token: token
+                    }
+                }).then(function (response) {
+                    if (response.data.isAccessible) {
+                        isRedirect = true;
+                        window.location.href = '/main?token=' + encodeURIComponent(response.data.token);
+                    } else {
+                        document.getElementById('queueCount').innerText = response.data.remaining;
+                    }
+                });
+            }
+        }
+
+        function deleteToken() {
+            axios.delete('/token', {
+                params: {
+                    token: token
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>대기열 화면</h1>
+<div>
+    현재 고객님 앞으로 <span id="queueCount">0</span>명이 대기중입니다.
+</div>
+</body>
+</html>
