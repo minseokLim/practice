@@ -8,12 +8,18 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.servlet.resource.NoResourceFoundException
 
 @RestControllerAdvice
 class WebControllerAdvice {
     @ExceptionHandler(BadRequestException::class)
     fun handleBadRequestException(e: BadRequestException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse.of(e), HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(NoResourceFoundException::class)
+    fun handleNoResourceFoundException(e: NoResourceFoundException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(ErrorResponse("NO_RESOURCE_FOUND", e.message), HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(NotFoundException::class)
