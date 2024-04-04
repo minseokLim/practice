@@ -30,4 +30,10 @@ class QueueController(
         queueService.deleteToken(token)
         return ResponseEntity.noContent().build()
     }
+
+    @PostMapping("/access-limit")
+    fun setAccessLimit(@RequestParam accessLimit: Long): ResponseEntity<Unit> {
+        queueService.setAccessLimit(accessLimit)
+        return ResponseEntity.ok().build()
+    }
 }
