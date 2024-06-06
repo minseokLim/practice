@@ -14,6 +14,12 @@ spring:
       ddl-auto: create
     show-sql: true
     open-in-view: false
+  data:
+    redis:
+      url: redis://localhost:6379
+      timeout: 1s
+      connect-timeout: 3s
+      client-type: lettuce
 
 jwt:
   secret-key: 01234567890123456789012345678901
