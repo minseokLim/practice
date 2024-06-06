@@ -10,7 +10,7 @@ class RefreshTokenValidator(
 ) {
     fun validate(refreshToken: String) {
         val refreshTokenId = tokenParser.extractId(refreshToken)
-        if (!refreshTokenRepository.existsById(refreshTokenId) || !tokenParser.validateRefreshToken(refreshToken)) {
+        if (!refreshTokenRepository.existsById(refreshTokenId) || !tokenParser.isValidRefreshToken(refreshToken)) {
             throw BadCredentialsException("Invalid refresh token")
         }
     }

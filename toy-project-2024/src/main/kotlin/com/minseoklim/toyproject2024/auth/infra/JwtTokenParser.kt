@@ -50,15 +50,15 @@ class JwtTokenParser(
         }
     }
 
-    override fun validateAccessToken(accessToken: String): Boolean {
-        return validateToken(accessToken, TokenType.ACCESS)
+    override fun isValidAccessToken(accessToken: String): Boolean {
+        return isValidToken(accessToken, TokenType.ACCESS)
     }
 
-    override fun validateRefreshToken(refreshToken: String): Boolean {
-        return validateToken(refreshToken, TokenType.REFRESH)
+    override fun isValidRefreshToken(refreshToken: String): Boolean {
+        return isValidToken(refreshToken, TokenType.REFRESH)
     }
 
-    private fun validateToken(token: String, tokenType: TokenType): Boolean {
+    private fun isValidToken(token: String, tokenType: TokenType): Boolean {
         try {
             val claims = jwtParser.parseSignedClaims(token).payload
             val extractedType = TokenType.valueOf(claims[TOKEN_TYPE_KEY, String::class.java])

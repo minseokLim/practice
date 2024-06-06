@@ -44,13 +44,13 @@ class JwtTokenParserTest {
     }
 
     @Test
-    fun validateAccessToken() {
+    fun isValidAccessToken() {
         // given
         val authentication = TestingAuthenticationToken("member", "password")
         val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
-        val validated1 = tokenParser.validateAccessToken(accessToken)
+        val validated1 = tokenParser.isValidAccessToken(accessToken)
 
         // then
         assertThat(validated1).isTrue
@@ -60,13 +60,13 @@ class JwtTokenParserTest {
         val shortTermAccessToken = shortTermTokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
-        val validated2 = tokenParser.validateAccessToken(shortTermAccessToken)
+        val validated2 = tokenParser.isValidAccessToken(shortTermAccessToken)
 
         // then
         assertThat(validated2).isFalse
 
         // when
-        val validated3 = tokenParser.validateAccessToken("invalidToken")
+        val validated3 = tokenParser.isValidAccessToken("invalidToken")
 
         // then
         assertThat(validated3).isFalse
@@ -75,19 +75,19 @@ class JwtTokenParserTest {
         val refreshToken = tokenProvider.createRefreshToken("refreshTokenId")
 
         // when
-        val validated4 = tokenParser.validateAccessToken(refreshToken)
+        val validated4 = tokenParser.isValidAccessToken(refreshToken)
 
         // then
         assertThat(validated4).isFalse
     }
 
     @Test
-    fun validateRefreshToken() {
+    fun isValidRefreshToken() {
         // given
         val refreshToken = tokenProvider.createRefreshToken("refreshTokenId")
 
         // when
-        val validated1 = tokenParser.validateRefreshToken(refreshToken)
+        val validated1 = tokenParser.isValidRefreshToken(refreshToken)
 
         // then
         assertThat(validated1).isTrue
@@ -97,13 +97,13 @@ class JwtTokenParserTest {
         val shortTermRefreshToken = shortTermTokenProvider.createRefreshToken("refreshTokenId")
 
         // when
-        val validated2 = tokenParser.validateRefreshToken(shortTermRefreshToken)
+        val validated2 = tokenParser.isValidRefreshToken(shortTermRefreshToken)
 
         // then
         assertThat(validated2).isFalse
 
         // when
-        val validated3 = tokenParser.validateRefreshToken("invalidToken")
+        val validated3 = tokenParser.isValidRefreshToken("invalidToken")
 
         // then
         assertThat(validated3).isFalse
@@ -113,7 +113,7 @@ class JwtTokenParserTest {
         val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
-        val validated4 = tokenParser.validateRefreshToken(accessToken)
+        val validated4 = tokenParser.isValidRefreshToken(accessToken)
 
         // then
         assertThat(validated4).isFalse

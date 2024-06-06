@@ -17,7 +17,7 @@ class JwtFilter(
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
         val accessToken = resolveAccessToken(request as HttpServletRequest)
 
-        if (accessToken.isNotBlank() && tokenParser.validateAccessToken(accessToken)) {
+        if (accessToken.isNotBlank() && tokenParser.isValidAccessToken(accessToken)) {
             val authentication = tokenParser.extractAuthentication(accessToken)
             SecurityContextHolder.getContext().authentication = authentication
         }
