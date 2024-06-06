@@ -14,7 +14,7 @@ class JwtTokenProviderTest {
         val authentication = TestingAuthenticationToken("member", "password")
 
         // when
-        val accessToken = tokenProvider.createAccessToken(authentication)
+        val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // then
         assertThat(accessToken).isNotNull
@@ -23,7 +23,7 @@ class JwtTokenProviderTest {
     @Test
     fun createRefreshToken() {
         // when
-        val refreshToken = tokenProvider.createRefreshToken()
+        val refreshToken = tokenProvider.createRefreshToken("refreshTokenId")
 
         // then
         assertThat(refreshToken).isNotNull

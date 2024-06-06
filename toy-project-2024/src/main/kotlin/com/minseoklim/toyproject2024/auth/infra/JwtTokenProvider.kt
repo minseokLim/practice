@@ -19,11 +19,12 @@ class JwtTokenProvider(
 ) : TokenProvider {
     private val secretKey: Key = Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8))
 
-    override fun createAccessToken(authentication: Authentication): String {
+    override fun createAccessToken(authentication: Authentication, id: String): String {
         val now = Date()
         val validity = Date(now.time + accessTokenValidityInMilliseconds)
 
         return Jwts.builder()
+            .id(id)
             .subject(authentication.name)
             .claim(TOKEN_TYPE_KEY, TokenType.ACCESS)
             .signWith(secretKey)
@@ -32,11 +33,12 @@ class JwtTokenProvider(
             .compact()
     }
 
-    override fun createRefreshToken(): String {
+    override fun createRefreshToken(id: String): String {
         val now = Date()
         val validity = Date(now.time + refreshTokenValidityInMilliseconds)
 
         return Jwts.builder()
+            .id(id)
             .claim(TOKEN_TYPE_KEY, TokenType.REFRESH)
             .signWith(secretKey)
             .issuedAt(now)

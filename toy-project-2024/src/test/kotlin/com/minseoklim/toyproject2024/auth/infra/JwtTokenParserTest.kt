@@ -15,7 +15,7 @@ class JwtTokenParserTest {
     fun extractAuthentication() {
         // given
         val authentication = TestingAuthenticationToken("member", "password")
-        val accessToken = tokenProvider.createAccessToken(authentication)
+        val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
         val extractedAuthentication = tokenParser.extractAuthentication(accessToken)
@@ -30,10 +30,24 @@ class JwtTokenParserTest {
     }
 
     @Test
+    fun extractId() {
+        // given
+        val id = "accessTokenId"
+        val authentication = TestingAuthenticationToken("member", "password")
+        val accessToken = tokenProvider.createAccessToken(authentication, id)
+
+        // when
+        val extractedId = tokenParser.extractId(accessToken)
+
+        // then
+        assertThat(extractedId).isEqualTo(id)
+    }
+
+    @Test
     fun validateAccessToken() {
         // given
         val authentication = TestingAuthenticationToken("member", "password")
-        val accessToken = tokenProvider.createAccessToken(authentication)
+        val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
         val validated1 = tokenParser.validateAccessToken(accessToken)
@@ -43,7 +57,7 @@ class JwtTokenParserTest {
 
         // given
         val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
-        val shortTermAccessToken = shortTermTokenProvider.createAccessToken(authentication)
+        val shortTermAccessToken = shortTermTokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
         val validated2 = tokenParser.validateAccessToken(shortTermAccessToken)
@@ -58,7 +72,7 @@ class JwtTokenParserTest {
         assertThat(validated3).isFalse
 
         // given
-        val refreshToken = tokenProvider.createRefreshToken()
+        val refreshToken = tokenProvider.createRefreshToken("refreshTokenId")
 
         // when
         val validated4 = tokenParser.validateAccessToken(refreshToken)
@@ -70,7 +84,7 @@ class JwtTokenParserTest {
     @Test
     fun validateRefreshToken() {
         // given
-        val refreshToken = tokenProvider.createRefreshToken()
+        val refreshToken = tokenProvider.createRefreshToken("refreshTokenId")
 
         // when
         val validated1 = tokenParser.validateRefreshToken(refreshToken)
@@ -80,7 +94,7 @@ class JwtTokenParserTest {
 
         // given
         val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
-        val shortTermRefreshToken = shortTermTokenProvider.createRefreshToken()
+        val shortTermRefreshToken = shortTermTokenProvider.createRefreshToken("refreshTokenId")
 
         // when
         val validated2 = tokenParser.validateRefreshToken(shortTermRefreshToken)
@@ -96,7 +110,7 @@ class JwtTokenParserTest {
 
         // given
         val authentication = TestingAuthenticationToken("member", "password")
-        val accessToken = tokenProvider.createAccessToken(authentication)
+        val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
         val validated4 = tokenParser.validateRefreshToken(accessToken)

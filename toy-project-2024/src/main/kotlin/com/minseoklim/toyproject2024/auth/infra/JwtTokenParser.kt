@@ -41,6 +41,15 @@ class JwtTokenParser(
         }
     }
 
+    override fun extractId(token: String): String {
+        try {
+            val claims = jwtParser.parseSignedClaims(token).payload
+            return claims.id
+        } catch (e: JwtException) {
+            throw BadCredentialsException(e.message)
+        }
+    }
+
     override fun validateAccessToken(accessToken: String): Boolean {
         return validateToken(accessToken, TokenType.ACCESS)
     }
