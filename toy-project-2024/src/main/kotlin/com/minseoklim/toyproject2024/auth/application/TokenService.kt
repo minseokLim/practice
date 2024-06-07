@@ -71,4 +71,16 @@ class TokenService(
             .orElseThrow { throw BadCredentialsException("Invalid refresh token") }
         refreshTokenEntity.delete()
     }
+
+    fun deleteAllAccessToken(memberId: Int) {
+        accessTokenRepository.findAllByMemberId(memberId).forEach {
+            it.delete()
+        }
+    }
+
+    fun deleteAllRefreshToken(memberId: Int) {
+        refreshTokenRepository.findAllByMemberId(memberId).forEach {
+            it.delete()
+        }
+    }
 }

@@ -24,4 +24,15 @@ class LogoutService(
             )
         )
     }
+
+    fun logoutAll(memberId: Int) {
+        tokenService.deleteAllAccessToken(memberId)
+        tokenService.deleteAllRefreshToken(memberId)
+        accessTokenDbCheckFlagRepository.save(
+            AccessTokenDbCheckFlag(
+                memberId = memberId,
+                timeToLive = accessTokenDbCheckInMilliseconds
+            )
+        )
+    }
 }

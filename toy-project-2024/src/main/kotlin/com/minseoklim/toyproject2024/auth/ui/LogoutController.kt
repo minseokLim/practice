@@ -17,4 +17,10 @@ class LogoutController(
         logoutService.logout(memberId, request)
         return ResponseEntity.ok().build()
     }
+
+    @PostMapping("/logout-all")
+    fun logoutAll(@MemberId memberId: Int): ResponseEntity<Unit> {
+        logoutService.logoutAll(memberId)
+        return ResponseEntity.ok().build()
+    }
 }
