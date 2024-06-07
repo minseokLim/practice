@@ -10,6 +10,7 @@ plugins {
     kotlin("kapt")
 
     id("jacoco")
+    id("jacoco-report-aggregation")
 }
 
 repositories {
@@ -84,26 +85,42 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
-        finalizedBy("jacocoTestReport")
     }
+}
 
-    tasks.jacocoTestReport {
-        reports {
-            html.required.set(true)
-        }
+dependencies {
+    jacocoAggregation(project(":app-module"))
+    jacocoAggregation(project(":auth-module"))
+    jacocoAggregation(project(":common-module"))
+    jacocoAggregation(project(":member-module"))
+}
 
-        classDirectories.setFrom(
-            fileTree(
-                mapOf(
-                    "dir" to "${layout.buildDirectory.get()}/classes/kotlin/main", // QClass들을 제외시키기 위함
-                    "exclude" to listOf(
-                        "**/config/*",
-                        "**/support/*",
-                        "**/dto/*",
-                        "**/ToyProject2024ApplicationKt.class"
+tasks.withType<Test> {
+    useJUnitPlatform()
+    finalizedBy("testCodeCoverageReport")
+}
+
+tasks.testCodeCoverageReport {
+    classDirectories.setFrom(
+        files(
+            *listOf(
+                project(":app-module"),
+                project(":auth-module"),
+                project(":common-module"),
+                project(":member-module")
+            ).map {
+                it.fileTree(
+                    mapOf(
+                        "dir" to "${it.layout.buildDirectory.get()}/classes/kotlin/main", // QClass들을 제외시키기 위함
+                        "exclude" to listOf(
+                            "**/config/*",
+                            "**/support/*",
+                            "**/dto/*",
+                            "**/ApplicationKt.class"
+                        )
                     )
                 )
-            )
+            }.toTypedArray()
         )
-    }
+    )
 }
