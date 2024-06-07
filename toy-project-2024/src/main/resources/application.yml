@@ -25,3 +25,4 @@ jwt:
   secret-key: 01234567890123456789012345678901
   access-token-validity-in-milliseconds: 3600000
   refresh-token-validity-in-milliseconds: 86400000
+  access-token-db-check-in-milliseconds: 3600000

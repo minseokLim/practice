@@ -58,14 +58,14 @@ class TokenService(
         return createToken(authentication)
     }
 
-    private fun deleteAccessToken(accessToken: String) {
+    fun deleteAccessToken(accessToken: String) {
         val accessTokenId = tokenParser.extractId(accessToken)
         val accessTokenEntity = accessTokenRepository.findById(accessTokenId)
             .orElseThrow { throw BadCredentialsException("Invalid access token") }
         accessTokenEntity.delete()
     }
 
-    private fun deleteRefreshToken(refreshToken: String) {
+    fun deleteRefreshToken(refreshToken: String) {
         val refreshTokenId = tokenParser.extractId(refreshToken)
         val refreshTokenEntity = refreshTokenRepository.findById(refreshTokenId)
             .orElseThrow { throw BadCredentialsException("Invalid refresh token") }
