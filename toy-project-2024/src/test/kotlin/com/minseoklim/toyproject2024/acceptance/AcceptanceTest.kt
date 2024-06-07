@@ -99,6 +99,26 @@ class AcceptanceTest {
 
         // then
         `토큰 유효성 검사 실패`(validateTokenResponseAfterLogout)
+
+        // given
+        val accessRefreshTokenPairs = (1..10).map {
+            val response = `로그인 요청`(loginRequest)
+            response.extractAccessToken() to response.extractRefreshToken()
+        }
+
+        // when
+        val logoutAllResponse = `회원 전체 로그아웃 요청`(accessRefreshTokenPairs.first().first)
+
+        // then
+        `회원 전체 로그아웃됨`(logoutAllResponse)
+
+        accessRefreshTokenPairs.forEach {
+            // when
+            val validateTokenResponseAfterLogoutAll = `토큰 유효성 검사 요청`(it.first)
+
+            // then
+            `토큰 유효성 검사 실패`(validateTokenResponseAfterLogoutAll)
+        }
     }
 
     private fun `회원 가입 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
@@ -147,6 +167,14 @@ class AcceptanceTest {
     }
 
     private fun 로그아웃됨(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+    }
+
+    private fun `회원 전체 로그아웃 요청`(accessToken: String): ExtractableResponse<Response> {
+        return RequestUtil.post("/logout-all", accessToken, emptyMap())
+    }
+
+    private fun `회원 전체 로그아웃됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
