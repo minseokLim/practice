@@ -79,6 +79,26 @@ class AcceptanceTest {
 
         // then
         `토큰 재발급됨`(refreshTokenResponse)
+
+        // given
+        val newAccessToken = refreshTokenResponse.extractAccessToken()
+        val newRefreshToken = refreshTokenResponse.extractRefreshToken()
+        val logoutRequest = mapOf(
+            "accessToken" to newAccessToken,
+            "refreshToken" to newRefreshToken
+        )
+
+        // when
+        val logoutResponse = `로그아웃 요청`(newAccessToken, logoutRequest)
+
+        // then
+        로그아웃됨(logoutResponse)
+
+        // when
+        val validateTokenResponseAfterLogout = `토큰 유효성 검사 요청`(newAccessToken)
+
+        // then
+        `토큰 유효성 검사 실패`(validateTokenResponseAfterLogout)
     }
 
     private fun `회원 가입 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
@@ -108,6 +128,10 @@ class AcceptanceTest {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
+    private fun `토큰 유효성 검사 실패`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED)
+    }
+
     private fun `토큰 재발급 요청`(request: Map<String, Any>): ExtractableResponse<Response> {
         return RequestUtil.post("/refresh-token", null, request)
     }
@@ -116,6 +140,14 @@ class AcceptanceTest {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
         assertThat(response.extractAccessToken()).isNotNull
         assertThat(response.extractRefreshToken()).isNotNull
+    }
+
+    private fun `로그아웃 요청`(accessToken: String, request: Map<String, Any>): ExtractableResponse<Response> {
+        return RequestUtil.post("/logout", accessToken, request)
+    }
+
+    private fun 로그아웃됨(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
     companion object {
