@@ -1,5 +1,7 @@
 package com.minseoklim.toyproject2024.auth.filter
 
+import com.minseoklim.toyproject2024.auth.domain.AccessTokenDbCheckFlagRepository
+import com.minseoklim.toyproject2024.auth.domain.AccessTokenRepository
 import com.minseoklim.toyproject2024.auth.domain.TokenParser
 import jakarta.servlet.Filter
 import jakarta.servlet.FilterChain
@@ -7,19 +9,22 @@ import jakarta.servlet.ServletRequest
 import jakarta.servlet.ServletResponse
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpHeaders
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 
 @Component
 class JwtFilter(
-    private val tokenParser: TokenParser
+    private val tokenParser: TokenParser,
+    private val accessTokenDbCheckFlagRepository: AccessTokenDbCheckFlagRepository,
+    private val accessTokenRepository: AccessTokenRepository
 ) : Filter {
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
         val accessToken = resolveAccessToken(request as HttpServletRequest)
 
         if (accessToken.isNotBlank() && tokenParser.isValidAccessToken(accessToken)) {
             val authentication = tokenParser.extractAuthentication(accessToken)
-            SecurityContextHolder.getContext().authentication = authentication
+            setAuthentication(authentication, accessToken)
         }
 
         chain.doFilter(request, response)
@@ -34,6 +39,17 @@ class JwtFilter(
             return authorization.substring(AUTHORIZATION_PREFIX.length)
         }
         return ""
+    }
+
+    private fun setAuthentication(authentication: Authentication, accessToken: String) {
+        if (accessTokenDbCheckFlagRepository.existsById(authentication.name.toInt())) {
+            val accessTokenId = tokenParser.extractId(accessToken)
+            if (accessTokenRepository.existsById(accessTokenId)) {
+                SecurityContextHolder.getContext().authentication = authentication
+            }
+        } else {
+            SecurityContextHolder.getContext().authentication = authentication
+        }
     }
 
     companion object {
