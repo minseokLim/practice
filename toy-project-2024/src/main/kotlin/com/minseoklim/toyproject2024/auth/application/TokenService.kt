@@ -10,6 +10,7 @@ import com.minseoklim.toyproject2024.auth.domain.TokenParser
 import com.minseoklim.toyproject2024.auth.domain.TokenProvider
 import com.minseoklim.toyproject2024.auth.dto.TokenRequest
 import com.minseoklim.toyproject2024.auth.dto.TokenResponse
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -50,13 +51,24 @@ class TokenService(
     fun refreshToken(request: TokenRequest): TokenResponse {
         refreshTokenValidator.validate(request.refreshToken)
 
-        val accessTokenId = tokenParser.extractId(request.accessToken)
-        accessTokenRepository.deleteById(accessTokenId)
-
-        val refreshTokenId = tokenParser.extractId(request.refreshToken)
-        refreshTokenRepository.deleteById(refreshTokenId)
+        deleteAccessToken(request.accessToken)
+        deleteRefreshToken(request.refreshToken)
 
         val authentication = tokenParser.extractAuthentication(request.accessToken)
         return createToken(authentication)
+    }
+
+    private fun deleteAccessToken(accessToken: String) {
+        val accessTokenId = tokenParser.extractId(accessToken)
+        val accessTokenEntity = accessTokenRepository.findById(accessTokenId)
+            .orElseThrow { throw BadCredentialsException("Invalid access token") }
+        accessTokenEntity.delete()
+    }
+
+    private fun deleteRefreshToken(refreshToken: String) {
+        val refreshTokenId = tokenParser.extractId(refreshToken)
+        val refreshTokenEntity = refreshTokenRepository.findById(refreshTokenId)
+            .orElseThrow { throw BadCredentialsException("Invalid refresh token") }
+        refreshTokenEntity.delete()
     }
 }
