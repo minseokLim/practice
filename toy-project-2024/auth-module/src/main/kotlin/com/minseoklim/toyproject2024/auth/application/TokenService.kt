@@ -25,21 +25,20 @@ class TokenService(
     private val refreshTokenValidator: RefreshTokenValidator
 ) {
     fun createToken(authentication: Authentication): TokenResponse {
-        val accessTokenId = TokenIdGenerator.generate()
-        val accessToken = tokenProvider.createAccessToken(authentication, accessTokenId)
+        val tokenId = TokenIdGenerator.generate()
+        val accessToken = tokenProvider.createAccessToken(authentication, tokenId)
         accessTokenRepository.save(
             AccessToken(
-                id = accessTokenId,
+                id = tokenId,
                 memberId = authentication.name.toInt(),
                 content = accessToken
             )
         )
 
-        val refreshTokenId = TokenIdGenerator.generate()
-        val refreshToken = tokenProvider.createRefreshToken(refreshTokenId)
+        val refreshToken = tokenProvider.createRefreshToken(tokenId)
         refreshTokenRepository.save(
             RefreshToken(
-                id = refreshTokenId,
+                id = tokenId,
                 memberId = authentication.name.toInt(),
                 content = refreshToken
             )
