@@ -4,6 +4,8 @@ import com.minseoklim.toyproject2024.member.domain.LoginIdValidator
 import com.minseoklim.toyproject2024.member.domain.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,5 +21,11 @@ class MemberService(
         loginIdValidator.checkExistence(request.loginId)
         val member = memberRepository.save(request.toEntity(passwordEncoder))
         return MemberResponse.of(member)
+    }
+
+    @Transactional(readOnly = true)
+    fun list(pageable: Pageable): Page<MemberResponse> {
+        val members = memberRepository.findAll(pageable)
+        return members.map { MemberResponse.of(it) }
     }
 }
