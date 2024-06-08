@@ -8,7 +8,8 @@ data class MemberResponse(
     val loginId: String,
     val name: String,
     val email: String,
-    val roles: Set<Role>
+    val roles: Set<Role>,
+    val isDeleted: Boolean
 ) {
     companion object {
         fun of(member: Member): MemberResponse {
@@ -18,7 +19,8 @@ data class MemberResponse(
                     loginId = loginId.value,
                     name = name.value,
                     email = email.value,
-                    roles = getRoles()
+                    roles = getRoles(),
+                    isDeleted = isDeleted
                 )
             }
         }

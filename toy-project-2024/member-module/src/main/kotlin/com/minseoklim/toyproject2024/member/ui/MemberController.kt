@@ -7,6 +7,7 @@ import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -39,5 +40,12 @@ class MemberController(
     fun get(@PathVariable id: Int): ResponseEntity<MemberResponse> {
         val response = memberService.get(id)
         return ResponseEntity.ok(response)
+    }
+
+    @DeleteMapping("/{id}")
+    @CheckAdminPermission
+    fun delete(@PathVariable id: Int): ResponseEntity<Unit> {
+        memberService.delete(id)
+        return ResponseEntity.noContent().build()
     }
 }

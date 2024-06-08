@@ -25,6 +25,7 @@ class Member(
     val name: Name = Name(name)
     val email: Email = Email(email)
     val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+    var isDeleted: Boolean = false
 
     fun addRole(role: Role) {
         memberRoles.addRole(role)
@@ -32,5 +33,9 @@ class Member(
 
     fun getRoles(): Set<Role> {
         return memberRoles.getRoles()
+    }
+
+    fun delete() {
+        isDeleted = true
     }
 }

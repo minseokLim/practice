@@ -39,4 +39,21 @@ class MemberTest {
         // then
         assertThat(roles).hasSize(1)
     }
+
+    @Test
+    fun delete() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+
+        // when
+        member.delete()
+
+        // then
+        assertThat(member.isDeleted).isTrue
+    }
 }

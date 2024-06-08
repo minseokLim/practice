@@ -25,6 +25,7 @@ class CustomUserDetailsService(
             .username(member.id.toString())
             .password(member.password.value)
             .authorities(member.getRoles())
+            .disabled(member.isDeleted)
             .build()
     }
 }
