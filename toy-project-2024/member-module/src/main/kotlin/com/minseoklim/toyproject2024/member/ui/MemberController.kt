@@ -63,4 +63,10 @@ class MemberController(
         val response = memberService.update(id, request)
         return ResponseEntity.ok(response)
     }
+
+    @DeleteMapping("/me")
+    fun deleteMe(@MemberId id: Int): ResponseEntity<Unit> {
+        memberService.delete(id)
+        return ResponseEntity.noContent().build()
+    }
 }
