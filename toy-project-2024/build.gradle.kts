@@ -11,6 +11,8 @@ plugins {
 
     id("jacoco")
     id("jacoco-report-aggregation")
+
+    id("java-test-fixtures")
 }
 
 repositories {
@@ -27,6 +29,8 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.kapt")
 
     apply(plugin = "jacoco")
+
+    apply(plugin = "java-test-fixtures")
 
     group = "com.minseoklim"
     version = "0.0.1-SNAPSHOT"
@@ -68,6 +72,8 @@ subprojects {
         testImplementation("io.rest-assured:rest-assured")
         testImplementation("io.mockk:mockk:1.13.11")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test")
+        testFixturesImplementation("io.rest-assured:rest-assured")
     }
 
     allOpen {

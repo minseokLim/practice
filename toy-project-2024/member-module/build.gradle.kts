@@ -7,4 +7,5 @@ dependencies {
     // module
     implementation(project(":common-module"))
     testImplementation(project(":test-module"))
+    testFixturesImplementation(project(":test-module"))
 }
