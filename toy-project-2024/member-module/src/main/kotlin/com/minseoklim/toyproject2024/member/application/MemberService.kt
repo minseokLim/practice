@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.member.application
 
+import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.member.domain.LoginIdValidator
 import com.minseoklim.toyproject2024.member.domain.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
@@ -27,5 +28,12 @@ class MemberService(
     fun list(pageable: Pageable): Page<MemberResponse> {
         val members = memberRepository.findAll(pageable)
         return members.map { MemberResponse.of(it) }
+    }
+
+    @Transactional(readOnly = true)
+    fun get(id: Int): MemberResponse {
+        val member = memberRepository.findById(id)
+            .orElseThrow { NotFoundException("MEMBER_NOT_FOUND", "찾을 수 없는 회원입니다.") }
+        return MemberResponse.of(member)
     }
 }

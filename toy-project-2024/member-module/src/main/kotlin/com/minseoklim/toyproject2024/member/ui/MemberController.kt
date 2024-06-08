@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -31,5 +32,12 @@ class MemberController(
     fun list(pageable: Pageable): ResponseEntity<Page<MemberResponse>> {
         val responses = memberService.list(pageable)
         return ResponseEntity.ok(responses)
+    }
+
+    @GetMapping("/{id}")
+    @CheckAdminPermission
+    fun get(@PathVariable id: Int): ResponseEntity<MemberResponse> {
+        val response = memberService.get(id)
+        return ResponseEntity.ok(response)
     }
 }
