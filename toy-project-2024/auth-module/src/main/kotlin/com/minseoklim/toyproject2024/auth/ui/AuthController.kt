@@ -3,6 +3,7 @@ package com.minseoklim.toyproject2024.auth.ui
 import com.minseoklim.toyproject2024.auth.application.TokenService
 import com.minseoklim.toyproject2024.auth.dto.TokenRequest
 import com.minseoklim.toyproject2024.auth.dto.TokenResponse
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +20,7 @@ class AuthController(
     }
 
     @PostMapping("/refresh-token")
-    fun refreshToken(@RequestBody request: TokenRequest): ResponseEntity<TokenResponse> {
+    fun refreshToken(@Valid @RequestBody request: TokenRequest): ResponseEntity<TokenResponse> {
         val response = tokenService.refreshToken(request)
         return ResponseEntity.ok(response)
     }

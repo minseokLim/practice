@@ -6,6 +6,7 @@ import com.minseoklim.toyproject2024.member.application.MemberService
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -25,7 +26,7 @@ class MemberController(
     private val memberService: MemberService
 ) {
     @PostMapping
-    fun join(@RequestBody request: MemberJoinRequest): ResponseEntity<MemberResponse> {
+    fun join(@Valid @RequestBody request: MemberJoinRequest): ResponseEntity<MemberResponse> {
         val response = memberService.join(request)
         val uri = URI.create("/members/${response.id}")
         return ResponseEntity.created(uri).body(response)
@@ -59,7 +60,7 @@ class MemberController(
     }
 
     @PutMapping("/me")
-    fun updateMe(@MemberId id: Int, @RequestBody request: MemberUpdateRequest): ResponseEntity<MemberResponse> {
+    fun updateMe(@MemberId id: Int, @Valid @RequestBody request: MemberUpdateRequest): ResponseEntity<MemberResponse> {
         val response = memberService.update(id, request)
         return ResponseEntity.ok(response)
     }
