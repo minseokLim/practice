@@ -24,6 +24,7 @@ class CustomUserDetailsService(
         return User.builder()
             .username(member.id.toString())
             .password(member.password.value)
+            .authorities(member.getRoles())
             .build()
     }
 }

@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain
 
+import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -23,4 +24,13 @@ class Member(
     val password: Password = Password(password)
     val name: Name = Name(name)
     val email: Email = Email(email)
+    val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+
+    fun addRole(role: Role) {
+        memberRoles.addRole(role)
+    }
+
+    fun getRoles(): Set<Role> {
+        return memberRoles.getRoles()
+    }
 }

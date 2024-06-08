@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 import java.security.Key
@@ -26,6 +27,7 @@ class JwtTokenProvider(
         return Jwts.builder()
             .id(id)
             .subject(authentication.name)
+            .claim(AUTHORITIES_KEY, toString(authentication.authorities))
             .claim(TOKEN_TYPE_KEY, TokenType.ACCESS)
             .signWith(secretKey)
             .issuedAt(now)
@@ -46,7 +48,13 @@ class JwtTokenProvider(
             .compact()
     }
 
+    private fun toString(authorities: Collection<GrantedAuthority>): String {
+        return authorities.joinToString(AUTHORITY_DELIMITER) { it.authority }
+    }
+
     companion object {
+        const val AUTHORITIES_KEY = "auth"
+        const val AUTHORITY_DELIMITER = ","
         const val TOKEN_TYPE_KEY = "typ"
     }
 }
