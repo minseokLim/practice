@@ -9,6 +9,7 @@ dependencies {
     implementation(project(":common-module"))
 
     testImplementation(project(":test-module"))
+    testImplementation(testFixtures(project(":auth-module")))
 
     testFixturesImplementation(project(":test-module"))
 }

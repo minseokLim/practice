@@ -17,4 +17,56 @@ object MemberAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.CREATED)
         assertThat(response.extractId()).isNotNull
     }
+
+    fun `회원 목록 조회 요청`(accessToken: String): ExtractableResponse<Response> {
+        return RequestUtil.get("/members", accessToken)
+    }
+
+    fun `회원 목록 조회됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
+    }
+
+    fun `회원 조회 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
+        return RequestUtil.get("/members/$id", accessToken)
+    }
+
+    fun `회원 조회됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.extractId()).isNotNull
+    }
+
+    fun `회원 탈퇴 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
+        return RequestUtil.delete("/members/$id", accessToken)
+    }
+
+    fun `회원 탈퇴됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.NO_CONTENT)
+    }
+
+    fun `내 계정 조회 요청`(accessToken: String): ExtractableResponse<Response> {
+        return RequestUtil.get("/members/me", accessToken)
+    }
+
+    fun `내 계정 조회됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.extractId()).isNotNull
+    }
+
+    fun `내 계정 수정 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.put("/members/me", accessToken, request)
+    }
+
+    fun `내 계정 수정됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.extractId()).isNotNull
+    }
+
+    fun `내 계정 탈퇴 요청`(accessToken: String): ExtractableResponse<Response> {
+        return RequestUtil.delete("/members/me", accessToken)
+    }
+
+    fun `내 계정 탈퇴됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.NO_CONTENT)
+    }
 }
