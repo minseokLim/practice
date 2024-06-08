@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.member.ui
 
 import com.minseoklim.toyproject2024.auth.annotation.CheckAdminPermission
+import com.minseoklim.toyproject2024.auth.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.MemberService
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
@@ -47,5 +48,11 @@ class MemberController(
     fun delete(@PathVariable id: Int): ResponseEntity<Unit> {
         memberService.delete(id)
         return ResponseEntity.noContent().build()
+    }
+
+    @GetMapping("/me")
+    fun getMe(@MemberId id: Int): ResponseEntity<MemberResponse> {
+        val response = memberService.get(id)
+        return ResponseEntity.ok(response)
     }
 }
