@@ -41,6 +41,31 @@ class MemberTest {
     }
 
     @Test
+    fun update() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+        val other = Member(
+            loginId = "test1234",
+            password = "newPassword",
+            name = "newName",
+            email = "new@test.com"
+        )
+
+        // when
+        member.update(other)
+
+        // then
+        assertThat(member.password).isEqualTo(other.password)
+        assertThat(member.name).isEqualTo(other.name)
+        assertThat(member.email).isEqualTo(other.email)
+    }
+
+    @Test
     fun delete() {
         // given
         val member = Member(

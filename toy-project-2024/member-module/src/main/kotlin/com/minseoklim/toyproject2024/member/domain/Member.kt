@@ -21,9 +21,9 @@ class Member(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
     val loginId: LoginId = LoginId(loginId)
-    val password: Password = Password(password)
-    val name: Name = Name(name)
-    val email: Email = Email(email)
+    var password: Password = Password(password)
+    var name: Name = Name(name)
+    var email: Email = Email(email)
     val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
     var isDeleted: Boolean = false
 
@@ -33,6 +33,12 @@ class Member(
 
     fun getRoles(): Set<Role> {
         return memberRoles.getRoles()
+    }
+
+    fun update(other: Member) {
+        password = other.password
+        name = other.name
+        email = other.email
     }
 
     fun delete() {

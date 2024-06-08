@@ -7,6 +7,7 @@ import com.minseoklim.toyproject2024.member.domain.Member
 import com.minseoklim.toyproject2024.member.domain.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
+import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -36,6 +37,12 @@ class MemberService(
     @Transactional(readOnly = true)
     fun get(id: Int): MemberResponse {
         val member = getMember(id)
+        return MemberResponse.of(member)
+    }
+
+    fun update(id: Int, request: MemberUpdateRequest): MemberResponse {
+        val member = getMember(id)
+        member.update(request.toEntity(member, passwordEncoder))
         return MemberResponse.of(member)
     }
 
