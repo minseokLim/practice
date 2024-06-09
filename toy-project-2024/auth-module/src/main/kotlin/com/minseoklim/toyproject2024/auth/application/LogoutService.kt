@@ -17,17 +17,16 @@ class LogoutService(
     fun logout(memberId: Int, request: TokenRequest) {
         tokenService.deleteAccessToken(request.accessToken)
         tokenService.deleteRefreshToken(request.refreshToken)
-        accessTokenDbCheckFlagRepository.save(
-            AccessTokenDbCheckFlag(
-                memberId = memberId,
-                timeToLive = accessTokenDbCheckInMilliseconds
-            )
-        )
+        turnOnAccessTokenDbCheckFlag(memberId)
     }
 
     fun logoutAll(memberId: Int) {
         tokenService.deleteAllAccessToken(memberId)
         tokenService.deleteAllRefreshToken(memberId)
+        turnOnAccessTokenDbCheckFlag(memberId)
+    }
+
+    private fun turnOnAccessTokenDbCheckFlag(memberId: Int) {
         accessTokenDbCheckFlagRepository.save(
             AccessTokenDbCheckFlag(
                 memberId = memberId,
