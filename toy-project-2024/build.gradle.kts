@@ -55,14 +55,14 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
 
         // swagger
-        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("springdocOpenapiStarterWebmvcUiVersion")}")
 
         // log
-        implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+        implementation("io.github.microutils:kotlin-logging-jvm:${property("kotlinLoggingJvmVersion")}")
 
         // querydsl
-        implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
-        kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
+        implementation("com.querydsl:querydsl-jpa:${property("querydslVersion")}:jakarta")
+        kapt("com.querydsl:querydsl-apt:${property("querydslVersion")}:jakarta")
 
         // db
         runtimeOnly("com.h2database:h2")
@@ -70,7 +70,7 @@ subprojects {
         // test
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.rest-assured:rest-assured")
-        testImplementation("io.mockk:mockk:1.13.11")
+        testImplementation("io.mockk:mockk:${property("mockkVersion")}")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
         testFixturesImplementation("org.springframework.boot:spring-boot-starter-test")
         testFixturesImplementation("io.rest-assured:rest-assured")
