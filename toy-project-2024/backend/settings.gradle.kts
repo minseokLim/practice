@@ -1,4 +1,4 @@
-rootProject.name = "toy-project-2024"
+rootProject.name = "toy-project-2024-backend"
 include("app-module")
 include("auth-module")
 include("common-module")
