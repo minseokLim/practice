@@ -8,6 +8,7 @@ import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.BadCredentialsException
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
@@ -31,6 +32,15 @@ class WebControllerAdvice {
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(e: BadCredentialsException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse(HttpStatus.UNAUTHORIZED.name), HttpStatus.UNAUTHORIZED)
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
+        val errorMessage = e.bindingResult.allErrors
+            .map { it.defaultMessage }
+            .joinToString(separator = System.lineSeparator())
+
+        return ResponseEntity(ErrorResponse("NOT_VALID_ARGUMENT", errorMessage), HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(Exception::class)
