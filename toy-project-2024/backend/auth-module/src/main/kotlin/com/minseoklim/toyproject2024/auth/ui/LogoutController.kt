@@ -14,8 +14,8 @@ class LogoutController(
     private val logoutService: LogoutService
 ) {
     @PostMapping("/logout")
-    fun logout(@MemberId memberId: Int, @Valid @RequestBody request: TokenRequest): ResponseEntity<Unit> {
-        logoutService.logout(memberId, request)
+    fun logout(@Valid @RequestBody request: TokenRequest): ResponseEntity<Unit> {
+        logoutService.logout(request)
         return ResponseEntity.ok().build()
     }
 

@@ -14,10 +14,10 @@ class LogoutService(
     private val accessTokenDbCheckFlagRepository: AccessTokenDbCheckFlagRepository,
     @Value("\${jwt.access-token-db-check-in-milliseconds}") private val accessTokenDbCheckInMilliseconds: Long
 ) {
-    fun logout(memberId: Int, request: TokenRequest) {
+    fun logout(request: TokenRequest) {
         tokenService.deleteAccessToken(request.accessToken)
         tokenService.deleteRefreshToken(request.refreshToken)
-        turnOnAccessTokenDbCheckFlag(memberId)
+        turnOnAccessTokenDbCheckFlag(tokenService.extractMemberId(request.accessToken))
     }
 
     fun logoutAll(memberId: Int) {

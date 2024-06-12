@@ -42,8 +42,8 @@ object AuthAcceptanceTestFixture {
         assertThat(response.extractRefreshToken()).isNotNull
     }
 
-    fun `로그아웃 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
-        return RequestUtil.post("/logout", accessToken, request)
+    fun `로그아웃 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/logout", null, request)
     }
 
     fun 로그아웃됨(response: ExtractableResponse<Response>) {

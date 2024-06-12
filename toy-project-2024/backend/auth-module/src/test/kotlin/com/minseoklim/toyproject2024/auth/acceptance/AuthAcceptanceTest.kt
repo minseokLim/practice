@@ -79,7 +79,7 @@ class AuthAcceptanceTest : AcceptanceTest() {
         )
 
         // when
-        val logoutResponse = `로그아웃 요청`(newAccessToken, logoutRequest)
+        val logoutResponse = `로그아웃 요청`(logoutRequest)
 
         // then
         로그아웃됨(logoutResponse)

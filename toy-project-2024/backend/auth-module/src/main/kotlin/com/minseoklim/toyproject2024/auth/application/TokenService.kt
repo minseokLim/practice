@@ -82,4 +82,8 @@ class TokenService(
             it.delete()
         }
     }
+
+    fun extractMemberId(accessToken: String): Int {
+        return tokenParser.extractAuthentication(accessToken).name.toInt()
+    }
 }

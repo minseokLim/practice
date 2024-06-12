@@ -40,7 +40,7 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers(HttpMethod.POST, "/login", "/refresh-token", "/members").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/login", "/logout", "/refresh-token", "/members").permitAll()
                     .requestMatchers(HttpMethod.GET, "/").permitAll()
                     .requestMatchers(
                         "/h2-console/**",
