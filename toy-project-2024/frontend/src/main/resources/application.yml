@@ -11,3 +11,5 @@ spring:
       enabled: true
     livereload:
       enabled: true
+
+api-base-url: http://localhost:8080

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>임민석의 토이 프로젝트</title>
+</head>
+<body>
+    <script>
+        window.onload = function () {
+            const accessToken = localStorage.getItem('accessToken');
+            const refreshToken = localStorage.getItem('refreshToken');
+
+            if (accessToken === null || refreshToken === null) {
+                window.location.href = '/login';
+            } else {
+                window.location.href = '/main';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<section th:fragment="jsImport">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
+        const apiBaseUrl = /*[[${apiBaseUrl}]]*/ 'http://localhost:8080';
+
+        function requestToApi(path, method, data, callback) {
+            const accessToken = localStorage.getItem('accessToken');
+            const refreshToken = localStorage.getItem('refreshToken');
+
+            if (accessToken === null || refreshToken === null) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '/login';
+                return;
+            }
+
+            axios.request({
+                url: apiBaseUrl + path,
+                method: method,
+                data: data,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                }
+            }).then(response => {
+                callback(response);
+            }).catch(error => {
+                if (error.response.status === 401) {
+                    axios.post(apiBaseUrl + '/refresh-token', {
+                        accessToken: accessToken,
+                        refreshToken: refreshToken
+                    }).then(response => {
+                        localStorage.setItem('accessToken', response.data.accessToken);
+                        localStorage.setItem('refreshToken', response.data.refreshToken);
+
+                        axios.request({
+                            url: apiBaseUrl + path,
+                            method: method,
+                            data: data,
+                            headers: {
+                                'Authorization': 'Bearer ' + response.data.accessToken
+                            }
+                        }).then(response => {
+                            callback(response);
+                        }).catch(error => {
+                            alert('로그인이 필요합니다.');
+                            window.location.href = '/login';
+                        });
+                    }).catch(error => {
+                        alert('로그인이 필요합니다.');
+                        window.location.href = '/login';
+                    });
+                } else {
+                    alert('요청에 실패했습니다.');
+                }
+            });
+        }
+
+        function getMemberInfo() {
+            return JSON.parse(localStorage.getItem('memberInfo'));
+        }
+    </script>
+</section>
+</html>
