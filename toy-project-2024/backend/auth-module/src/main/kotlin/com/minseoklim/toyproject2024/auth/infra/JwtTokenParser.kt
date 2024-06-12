@@ -7,6 +7,7 @@ import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.AUTHO
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.AUTHORITY_DELIMITER
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.TOKEN_TYPE_KEY
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
@@ -31,15 +32,9 @@ class JwtTokenParser(
     override fun extractAuthentication(accessToken: String): Authentication {
         try {
             val claims = jwtParser.parseSignedClaims(accessToken).payload
-            val authorities = extractAuthorities(claims)
-
-            val principal = User.builder()
-                .username(claims.subject)
-                .password("N/A")
-                .authorities(authorities)
-                .build()
-
-            return UsernamePasswordAuthenticationToken(principal, accessToken, authorities)
+            return extractAuthentication(claims)
+        } catch (e: ExpiredJwtException) {
+            return extractAuthentication(e.claims)
         } catch (e: JwtException) {
             throw BadCredentialsException(e.message)
         }
@@ -49,6 +44,8 @@ class JwtTokenParser(
         try {
             val claims = jwtParser.parseSignedClaims(token).payload
             return claims.id
+        } catch (e: ExpiredJwtException) {
+            return e.claims.id
         } catch (e: JwtException) {
             throw BadCredentialsException(e.message)
         }
@@ -60,6 +57,18 @@ class JwtTokenParser(
 
     override fun isValidRefreshToken(refreshToken: String): Boolean {
         return isValidToken(refreshToken, TokenType.REFRESH)
+    }
+
+    private fun extractAuthentication(claims: Claims): Authentication {
+        val authorities = extractAuthorities(claims)
+
+        val principal = User.builder()
+            .username(claims.subject)
+            .password("N/A")
+            .authorities(authorities)
+            .build()
+
+        return UsernamePasswordAuthenticationToken(principal, null, authorities)
     }
 
     private fun extractAuthorities(claims: Claims): Set<GrantedAuthority> {

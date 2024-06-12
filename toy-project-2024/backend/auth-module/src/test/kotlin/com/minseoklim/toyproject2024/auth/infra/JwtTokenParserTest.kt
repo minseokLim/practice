@@ -15,13 +15,23 @@ class JwtTokenParserTest {
     fun extractAuthentication() {
         // given
         val authentication = TestingAuthenticationToken("member", "password")
-        val accessToken = tokenProvider.createAccessToken(authentication, "accessTokenId")
+        val accessToken1 = tokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
-        val extractedAuthentication = tokenParser.extractAuthentication(accessToken)
+        val extractedAuthentication1 = tokenParser.extractAuthentication(accessToken1)
 
         // then
-        assertThat(extractedAuthentication).isNotNull
+        assertThat(extractedAuthentication1).isNotNull
+
+        // given
+        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val accessToken2 = shortTermTokenProvider.createAccessToken(authentication, "accessTokenId")
+
+        // when
+        val extractedAuthentication2 = tokenParser.extractAuthentication(accessToken2)
+
+        // then
+        assertThat(extractedAuthentication2).isNotNull
 
         // when, then
         assertThatThrownBy {
@@ -34,13 +44,28 @@ class JwtTokenParserTest {
         // given
         val id = "accessTokenId"
         val authentication = TestingAuthenticationToken("member", "password")
-        val accessToken = tokenProvider.createAccessToken(authentication, id)
+        val accessToken1 = tokenProvider.createAccessToken(authentication, id)
 
         // when
-        val extractedId = tokenParser.extractId(accessToken)
+        val extractedId1 = tokenParser.extractId(accessToken1)
 
         // then
-        assertThat(extractedId).isEqualTo(id)
+        assertThat(extractedId1).isEqualTo(id)
+
+        // given
+        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val accessToken2 = shortTermTokenProvider.createAccessToken(authentication, id)
+
+        // when
+        val extractedId2 = tokenParser.extractId(accessToken2)
+
+        // then
+        assertThat(extractedId2).isEqualTo(id)
+
+        // when, then
+        assertThatThrownBy {
+            tokenParser.extractId("invalidToken")
+        }.isInstanceOf(BadCredentialsException::class.java)
     }
 
     @Test
