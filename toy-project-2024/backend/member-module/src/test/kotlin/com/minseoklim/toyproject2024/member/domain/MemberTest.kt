@@ -21,7 +21,7 @@ class MemberTest {
         member.addRole(Role.ADMIN)
 
         // then
-        assertThat(member.memberRoles.values.map { it.role }).contains(Role.ADMIN)
+        assertThat(member.getRoles()).contains(Role.ADMIN)
     }
 
     @Test

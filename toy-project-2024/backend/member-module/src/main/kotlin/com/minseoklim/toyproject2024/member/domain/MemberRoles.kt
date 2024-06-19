@@ -13,7 +13,7 @@ import java.util.Objects
 class MemberRoles(
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "member_role", joinColumns = [JoinColumn(name = "member_id")])
-    val values: MutableSet<MemberRole> = mutableSetOf()
+    private val values: MutableSet<MemberRole> = mutableSetOf()
 ) {
     fun addRole(role: Role) {
         values.add(MemberRole(role))

@@ -21,12 +21,22 @@ class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
+
     val loginId: LoginId = LoginId(loginId)
+
     var password: Password = Password(password)
+        protected set
+
     var name: Name = Name(name)
+        protected set
+
     var email: Email = Email(email)
-    val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+        protected set
+
+    val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+
     var isDeleted: Boolean = false
+        protected set
 
     fun addRole(role: Role) {
         memberRoles.addRole(role)
