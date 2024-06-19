@@ -6,6 +6,8 @@ import jakarta.persistence.ElementCollection
 import jakarta.persistence.Embeddable
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
+import org.hibernate.proxy.HibernateProxy
+import java.util.Objects
 
 @Embeddable
 class MemberRoles(
@@ -21,16 +23,18 @@ class MemberRoles(
         return values.map { it.role }.toSet()
     }
 
-    override fun equals(other: Any?): Boolean {
+    final override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
+        if (other == null) return false
+        val oEffectiveClass =
+            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
+        val thisEffectiveClass =
+            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
+        if (thisEffectiveClass != oEffectiveClass) return false
         other as MemberRoles
 
         return values == other.values
     }
 
-    override fun hashCode(): Int {
-        return values.hashCode()
-    }
+    final override fun hashCode(): Int = Objects.hash(values);
 }

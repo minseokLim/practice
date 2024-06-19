@@ -3,6 +3,7 @@ package com.minseoklim.toyproject2024.member.domain
 import com.minseoklim.toyproject2024.auth.domain.Role
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.test.util.ReflectionTestUtils
 
 class MemberTest {
 
@@ -80,5 +81,32 @@ class MemberTest {
 
         // then
         assertThat(member.isDeleted).isTrue
+    }
+
+    @Test
+    fun equalsAndHashCode() {
+        // given
+        val member1 = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+        val member2 = Member(
+            loginId = "other1234",
+            password = "otherPassword",
+            name = "otherName",
+            email = "other@other.com"
+        )
+        ReflectionTestUtils.setField(member1, "id", 1)
+        ReflectionTestUtils.setField(member2, "id", 1)
+        val set = hashSetOf<Member>()
+
+        // when
+        set.add(member1)
+        set.add(member2)
+
+        // then
+        assertThat(set.size).isEqualTo(1)
     }
 }
