@@ -24,19 +24,19 @@ class Member(
 
     val loginId: LoginId = LoginId(loginId)
 
-    var password: Password = Password(password)
-        protected set
+    final var password: Password = Password(password)
+        private set
 
-    var name: Name = Name(name)
-        protected set
+    final var name: Name = Name(name)
+        private set
 
-    var email: Email = Email(email)
-        protected set
+    final var email: Email = Email(email)
+        private set
 
     val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
 
-    var isDeleted: Boolean = false
-        protected set
+    final var isDeleted: Boolean = false
+        private set
 
     fun addRole(role: Role) {
         memberRoles.addRole(role)

@@ -17,8 +17,8 @@ class AccessToken(
     val memberId: Int,
     val content: String
 ) : BaseTimeEntity() {
-    var isDeleted: Boolean = false
-        protected set
+    final var isDeleted: Boolean = false
+        private set
 
     fun delete() {
         isDeleted = true
