@@ -4,6 +4,9 @@ val bootJar: BootJar by tasks
 bootJar.enabled = false
 
 dependencies {
+    // spring
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
     // jwt
     implementation("io.jsonwebtoken:jjwt-api:${property("jjwtVersion")}")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:${property("jjwtVersion")}")

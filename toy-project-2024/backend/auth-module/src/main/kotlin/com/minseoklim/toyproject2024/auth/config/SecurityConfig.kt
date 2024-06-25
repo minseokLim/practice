@@ -41,7 +41,7 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it
                     .requestMatchers(HttpMethod.POST, "/login", "/logout", "/refresh-token", "/members").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/", "/login", "/join").permitAll()
                     .requestMatchers(
                         "/h2-console/**",
                         "/swagger-ui/**",
