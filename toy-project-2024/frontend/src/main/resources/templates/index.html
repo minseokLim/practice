@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>임민석의 토이 프로젝트</title>
 </head>
 <body>
+    <section th:insert="~{layout/jsImport::jsImport}"></section>
     <script>
         window.onload = function () {
-            const accessToken = localStorage.getItem('accessToken');
-            const refreshToken = localStorage.getItem('refreshToken');
+            setTokensIntoLocalStorage();
 
-            if (accessToken === null || refreshToken === null) {
+            if (localStorage.getItem('accessToken') === null || localStorage.getItem('refreshToken') === null) {
                 window.location.href = '/login';
             } else {
                 window.location.href = '/main';
             }
         };
+
+        function setTokensIntoLocalStorage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const accessToken = urlParams.get('accessToken');
+            const refreshToken = urlParams.get('refreshToken');
+
+            if (accessToken != null && refreshToken != null) {
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+            }
+        }
     </script>
 </body>
 </html>

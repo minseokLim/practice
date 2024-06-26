@@ -24,6 +24,16 @@
     </div>
     <section th:insert="~{layout/jsImport::jsImport}"></section>
     <script th:inline="javascript">
+        window.onload = function () {
+            setMemberInfoIntoLocalStorage();
+        };
+
+        document.getElementById('logout-button').addEventListener('click', logout);
+
+        function setMemberInfoIntoLocalStorage() {
+            requestToApi('/members/me', 'GET', null, response => localStorage.setItem('memberInfo', JSON.stringify(response.data)));
+        }
+
         function logout() {
             axios.post(apiBaseUrl + '/logout', {
                 accessToken: localStorage.getItem('accessToken'),
@@ -46,8 +56,6 @@
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('memberInfo');
         }
-
-        document.getElementById('logout-button').addEventListener('click', logout);
     </script>
 </body>
 </html>
