@@ -17,8 +17,8 @@ class RefreshToken(
     val memberId: Int,
     val content: String
 ) : BaseTimeEntity() {
-    final var isDeleted: Boolean = false
-        private set
+    var isDeleted: Boolean = false
+        protected set
 
     fun delete() {
         isDeleted = true
