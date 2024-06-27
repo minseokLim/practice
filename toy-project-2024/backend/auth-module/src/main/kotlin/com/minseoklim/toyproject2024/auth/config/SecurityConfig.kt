@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService
+import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
@@ -19,7 +22,9 @@ import org.springframework.web.cors.CorsConfiguration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 class SecurityConfig(
-    private val jwtFilter: JwtFilter
+    private val jwtFilter: JwtFilter,
+    private val oAuth2AuthenticationSuccessHandler: OAuth2AuthenticationSuccessHandler,
+    private val oAuth2UserService: OAuth2UserService<OAuth2UserRequest, OAuth2User>
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -56,6 +61,15 @@ class SecurityConfig(
                 it.authenticationEntryPoint { _, response, _ ->
                     response.sendError(401, HttpStatus.UNAUTHORIZED.name)
                 }
+            }
+            .oauth2Login { oAuth2LoginConfigurer ->
+                oAuth2LoginConfigurer
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
+                    .userInfoEndpoint { userInfoEndpointConfig ->
+                        userInfoEndpointConfig.userService {
+                            oAuth2UserService.loadUser(it)
+                        }
+                    }
             }
 
         return http.build()

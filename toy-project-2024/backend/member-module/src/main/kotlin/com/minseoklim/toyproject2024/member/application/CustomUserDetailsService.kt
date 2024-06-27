@@ -23,7 +23,7 @@ class CustomUserDetailsService(
     private fun toUserDetails(member: Member): UserDetails {
         return User.builder()
             .username(member.id.toString())
-            .password(member.password.value)
+            .password(member.password?.value)
             .authorities(member.getRoles())
             .disabled(member.isDeleted)
             .build()

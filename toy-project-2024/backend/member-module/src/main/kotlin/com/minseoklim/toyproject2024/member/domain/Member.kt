@@ -3,6 +3,8 @@ package com.minseoklim.toyproject2024.member.domain
 import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -11,20 +13,22 @@ import jakarta.persistence.UniqueConstraint
 import org.hibernate.proxy.HibernateProxy
 
 @Entity
-@Table(uniqueConstraints = [UniqueConstraint(columnNames = ["login_id"])])
+@Table(uniqueConstraints = [UniqueConstraint(columnNames = ["login_id"]), UniqueConstraint(columnNames = ["social_id", "social_type"])])
 class Member(
-    loginId: String,
-    password: String,
+    loginId: String?,
+    password: String?,
     name: String,
-    email: String
+    email: String,
+    socialType: SocialType? = null,
+    socialId: String? = null
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
 
-    val loginId: LoginId = LoginId(loginId)
+    val loginId: LoginId? = loginId?.let { LoginId(loginId) }
 
-    var password: Password = Password(password)
+    var password: Password? = password?.let { Password(password) }
         protected set
 
     var name: Name = Name(name)
@@ -35,8 +39,27 @@ class Member(
 
     val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
 
+    @Enumerated(EnumType.STRING)
+    val socialType: SocialType? = socialType
+
+    val socialId: SocialId? = socialId?.let { SocialId(socialId) }
+
     var isDeleted: Boolean = false
         protected set
+
+    constructor(
+        name: String,
+        email: String,
+        socialType: SocialType,
+        socialId: String
+    ) : this(
+        loginId = null,
+        password = null,
+        name = name,
+        email = email,
+        socialType = socialType,
+        socialId = socialId
+    )
 
     fun addRole(role: Role) {
         memberRoles.addRole(role)

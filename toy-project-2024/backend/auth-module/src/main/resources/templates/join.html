@@ -39,9 +39,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirectUrl = urlParams.get('redirectUrl');
-
         document.getElementById('join-button').addEventListener('click', join);
 
         function join() {
@@ -64,7 +61,7 @@
             }).then(response => {
                 if (response.status === 201) {
                     alert('회원 가입 성공');
-                    window.location.href = '/login?redirectUrl=' + encodeURIComponent(redirectUrl);
+                    window.location.href = '/login';
                 } else {
                     alert('회원 가입 실패');
                 }

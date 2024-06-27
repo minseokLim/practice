@@ -19,6 +19,6 @@ data class MemberUpdateRequest(
     val email: String
 ) {
     fun toEntity(original: Member, passwordEncoder: PasswordEncoder): Member {
-        return Member(original.loginId.value, passwordEncoder.encode(password), name, email)
+        return Member(original.loginId?.value, passwordEncoder.encode(password), name, email)
     }
 }

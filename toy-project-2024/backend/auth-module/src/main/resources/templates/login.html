@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -23,17 +23,21 @@
                 </div>
                 <button class="btn btn-primary" id="login-button">로그인</button>
                 <button class="btn btn-primary" id="join-button">회원 가입</button>
+                <div class="mb-3" style="margin-top: 50px;">
+                    <button class="btn btn-primary">
+                        <a href="/oauth2/authorization/google" style="color: white; text-decoration: none">구글 로그인</a>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirectUrl = urlParams.get('redirectUrl');
+    <script th:inline="javascript">
+        const redirectUrl = /*[[${frontendBaseUrl}]]*/ 'http://localhost:8081';
 
         document.getElementById('login-button').addEventListener('click', login);
         document.getElementById('join-button').addEventListener('click', function () {
-            window.location.href = '/join?redirectUrl=' + encodeURIComponent(redirectUrl);
+            window.location.href = '/join';
         });
 
         function login() {

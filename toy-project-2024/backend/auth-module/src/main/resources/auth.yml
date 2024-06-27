@@ -1,5 +1,19 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
 jwt:
   secret-key: 01234567890123456789012345678901
   access-token-validity-in-milliseconds: 3600000
   refresh-token-validity-in-milliseconds: 86400000
   access-token-db-check-in-milliseconds: 3600000
+frontend:
+  base-url: http://localhost:8081

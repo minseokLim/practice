@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface MemberRepository : JpaRepository<Member, Int> {
     fun findByLoginIdValue(loginId: String): Member?
     fun countByLoginIdValue(loginId: String): Int
+    fun findBySocialTypeAndSocialIdValue(socialType: SocialType, socialId: String): Member?
 }
