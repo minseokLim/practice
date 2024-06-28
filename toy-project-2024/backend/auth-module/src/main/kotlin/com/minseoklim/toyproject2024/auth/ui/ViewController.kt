@@ -1,17 +1,15 @@
 package com.minseoklim.toyproject2024.auth.ui
 
-import org.springframework.beans.factory.annotation.Value
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class ViewController(
-    @Value("\${frontend.base-url}") private val frontendBaseUrl: String
-) {
+class ViewController {
+
     @GetMapping("/login")
-    fun login(model: Model): String {
-        model.addAttribute("frontendBaseUrl", frontendBaseUrl)
+    fun login(request: HttpServletRequest): String {
+        request.session.setAttribute("REDIRECT_URL", request.getParameter("redirectUrl"))
         return "login"
     }
 

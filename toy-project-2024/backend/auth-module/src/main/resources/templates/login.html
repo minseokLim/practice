@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<html lang="kr">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -32,12 +32,13 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script th:inline="javascript">
-        const redirectUrl = /*[[${frontendBaseUrl}]]*/ 'http://localhost:8081';
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirectUrl');
 
         document.getElementById('login-button').addEventListener('click', login);
         document.getElementById('join-button').addEventListener('click', function () {
-            window.location.href = '/join';
+            window.location.href = '/join?redirectUrl=' + encodeURIComponent(redirectUrl);
         });
 
         function login() {

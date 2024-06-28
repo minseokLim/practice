@@ -15,5 +15,3 @@ jwt:
   access-token-validity-in-milliseconds: 3600000
   refresh-token-validity-in-milliseconds: 86400000
   access-token-db-check-in-milliseconds: 3600000
-frontend:
-  base-url: http://localhost:8081
