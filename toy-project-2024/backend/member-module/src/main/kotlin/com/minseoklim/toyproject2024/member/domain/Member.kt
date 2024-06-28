@@ -37,10 +37,10 @@ class Member(
 
     val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
 
-    val socialInfos: SocialInfos = SocialInfos().apply {
+    val socialLinks: SocialLinks = SocialLinks().apply {
         socialType?.let { socialType ->
             socialId?.let { socialId ->
-                addSocialInfo(socialType, socialId)
+                addSocialLink(socialType, socialId)
             }
         }
     }
@@ -70,12 +70,12 @@ class Member(
         return memberRoles.getRoles()
     }
 
-    fun addSocialInfo(socialType: SocialType, socialId: String) {
-        socialInfos.addSocialInfo(socialType, socialId)
+    fun addSocialLink(socialType: SocialType, socialId: String) {
+        socialLinks.addSocialLink(socialType, socialId)
     }
 
-    fun getSocialInfos(): Set<SocialInfo> {
-        return socialInfos.getSocialInfos()
+    fun getSocialLinks(): Set<SocialLink> {
+        return socialLinks.getSocialLinks()
     }
 
     fun update(other: Member) {

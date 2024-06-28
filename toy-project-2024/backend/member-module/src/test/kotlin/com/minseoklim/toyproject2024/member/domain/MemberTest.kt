@@ -42,7 +42,7 @@ class MemberTest {
     }
 
     @Test
-    fun addSocialInfo() {
+    fun addSocialLink() {
         // given
         val member = Member(
             loginId = "test1234",
@@ -52,14 +52,14 @@ class MemberTest {
         )
 
         // when
-        member.addSocialInfo(SocialType.GOOGLE, "1234")
+        member.addSocialLink(SocialType.GOOGLE, "1234")
 
         // then
-        assertThat(member.getSocialInfos()).contains(SocialInfo(SocialType.GOOGLE, "1234"))
+        assertThat(member.getSocialLinks()).contains(SocialLink(SocialType.GOOGLE, "1234"))
     }
 
     @Test
-    fun getSocialInfos() {
+    fun getSocialLinks() {
         // given
         val member = Member(
             loginId = "test1234",
@@ -69,10 +69,10 @@ class MemberTest {
         )
 
         // when
-        val socialInfos = member.getSocialInfos()
+        val socialLinks = member.getSocialLinks()
 
         // then
-        assertThat(socialInfos).isEmpty()
+        assertThat(socialLinks).isEmpty()
     }
 
     @Test

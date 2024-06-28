@@ -10,20 +10,20 @@ import org.hibernate.proxy.HibernateProxy
 import java.util.Objects
 
 @Embeddable
-class SocialInfos(
+class SocialLinks(
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
         name = "social_info",
         joinColumns = [JoinColumn(name = "member_id")],
         uniqueConstraints = [UniqueConstraint(columnNames = ["social_id", "social_type"])]
     )
-    private val values: MutableSet<SocialInfo> = mutableSetOf()
+    private val values: MutableSet<SocialLink> = mutableSetOf()
 ) {
-    fun addSocialInfo(socialType: SocialType, socialId: String) {
-        values.add(SocialInfo(socialType, socialId))
+    fun addSocialLink(socialType: SocialType, socialId: String) {
+        values.add(SocialLink(socialType, socialId))
     }
 
-    fun getSocialInfos(): Set<SocialInfo> {
+    fun getSocialLinks(): Set<SocialLink> {
         return values.toSet()
     }
 
@@ -35,7 +35,7 @@ class SocialInfos(
         val thisEffectiveClass =
             if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
         if (thisEffectiveClass != oEffectiveClass) return false
-        other as SocialInfos
+        other as SocialLinks
 
         return values == other.values
     }

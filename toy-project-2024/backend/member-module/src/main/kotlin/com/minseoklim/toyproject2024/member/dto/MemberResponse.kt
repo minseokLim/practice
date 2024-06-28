@@ -22,7 +22,7 @@ data class MemberResponse(
                     name = name.value,
                     email = email.value,
                     roles = getRoles(),
-                    socialTypes = getSocialInfos().map { it.socialType }.toSet(),
+                    socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted
                 )
             }
