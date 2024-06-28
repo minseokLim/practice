@@ -19,7 +19,7 @@ class CustomOAuth2UserService(
         val socialType = SocialType.valueOf(userRequest.clientRegistration.registrationId.uppercase())
         val socialId = socialType.extractSocialId(attributes)
 
-        val foundMember = memberRepository.findBySocialTypeAndSocialIdValue(socialType, socialId)
+        val foundMember = memberRepository.findBySocialTypeAndSocialId(socialType, socialId)
         val member = foundMember ?: memberRepository.save(socialType.toMemberEntity(attributes))
 
         return object : OAuth2User {

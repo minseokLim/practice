@@ -10,7 +10,7 @@ data class MemberResponse(
     val name: String,
     val email: String,
     val roles: Set<Role>,
-    val socialType: SocialType?,
+    val socialTypes: Set<SocialType>,
     val isDeleted: Boolean
 ) {
     companion object {
@@ -22,7 +22,7 @@ data class MemberResponse(
                     name = name.value,
                     email = email.value,
                     roles = getRoles(),
-                    socialType = socialType,
+                    socialTypes = getSocialInfos().map { it.socialType }.toSet(),
                     isDeleted = isDeleted
                 )
             }

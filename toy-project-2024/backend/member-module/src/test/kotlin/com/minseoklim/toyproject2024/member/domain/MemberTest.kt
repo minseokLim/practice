@@ -42,6 +42,40 @@ class MemberTest {
     }
 
     @Test
+    fun addSocialInfo() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+
+        // when
+        member.addSocialInfo(SocialType.GOOGLE, "1234")
+
+        // then
+        assertThat(member.getSocialInfos()).contains(SocialInfo(SocialType.GOOGLE, "1234"))
+    }
+
+    @Test
+    fun getSocialInfos() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+
+        // when
+        val socialInfos = member.getSocialInfos()
+
+        // then
+        assertThat(socialInfos).isEmpty()
+    }
+
+    @Test
     fun update() {
         // given
         val member = Member(

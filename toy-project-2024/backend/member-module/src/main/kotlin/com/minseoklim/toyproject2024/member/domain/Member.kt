@@ -3,8 +3,6 @@ package com.minseoklim.toyproject2024.member.domain
 import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -13,7 +11,7 @@ import jakarta.persistence.UniqueConstraint
 import org.hibernate.proxy.HibernateProxy
 
 @Entity
-@Table(uniqueConstraints = [UniqueConstraint(columnNames = ["login_id"]), UniqueConstraint(columnNames = ["social_id", "social_type"])])
+@Table(uniqueConstraints = [UniqueConstraint(columnNames = ["login_id"])])
 class Member(
     loginId: String?,
     password: String?,
@@ -39,10 +37,13 @@ class Member(
 
     val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
 
-    @Enumerated(EnumType.STRING)
-    val socialType: SocialType? = socialType
-
-    val socialId: SocialId? = socialId?.let { SocialId(socialId) }
+    val socialInfos: SocialInfos = SocialInfos().apply {
+        socialType?.let { socialType ->
+            socialId?.let { socialId ->
+                addSocialInfo(socialType, socialId)
+            }
+        }
+    }
 
     var isDeleted: Boolean = false
         protected set
@@ -67,6 +68,14 @@ class Member(
 
     fun getRoles(): Set<Role> {
         return memberRoles.getRoles()
+    }
+
+    fun addSocialInfo(socialType: SocialType, socialId: String) {
+        socialInfos.addSocialInfo(socialType, socialId)
+    }
+
+    fun getSocialInfos(): Set<SocialInfo> {
+        return socialInfos.getSocialInfos()
     }
 
     fun update(other: Member) {
