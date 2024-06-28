@@ -18,6 +18,19 @@ class SocialLinksTest {
     }
 
     @Test
+    fun deleteSocialLink() {
+        // given
+        val socialLinks = SocialLinks()
+        socialLinks.addSocialLink(SocialType.GOOGLE, "1234")
+
+        // when
+        socialLinks.deleteSocialLink(SocialType.GOOGLE)
+
+        // then
+        assertThat(socialLinks.getSocialLinks()).isEmpty()
+    }
+
+    @Test
     fun getSocialLinks() {
         // given
         val socialLinks = SocialLinks()

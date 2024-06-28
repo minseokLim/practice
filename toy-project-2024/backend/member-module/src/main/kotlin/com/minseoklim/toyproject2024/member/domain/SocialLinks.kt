@@ -23,6 +23,10 @@ class SocialLinks(
         values.add(SocialLink(socialType, socialId))
     }
 
+    fun deleteSocialLink(socialType: SocialType) {
+        values.removeIf { it.socialType == socialType }
+    }
+
     fun getSocialLinks(): Set<SocialLink> {
         return values.toSet()
     }

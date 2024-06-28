@@ -1,7 +1,9 @@
 package com.minseoklim.toyproject2024.member.domain
 
 import com.minseoklim.toyproject2024.auth.domain.Role
+import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
@@ -56,6 +58,37 @@ class MemberTest {
 
         // then
         assertThat(member.getSocialLinks()).contains(SocialLink(SocialType.GOOGLE, "1234"))
+    }
+
+    @Test
+    fun deleteSocialLink() {
+        // given
+        val member1 = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+        member1.addSocialLink(SocialType.GOOGLE, "1234")
+
+        // when
+        member1.deleteSocialLink(SocialType.GOOGLE)
+
+        // then
+        assertThat(member1.getSocialLinks()).isEmpty()
+
+        // given
+        val member2 = Member(
+            name = "testName",
+            email = "test@test.com",
+            socialType = SocialType.GOOGLE,
+            socialId = "1234"
+        )
+
+        // when, then
+        assertThatThrownBy {
+            member2.deleteSocialLink(SocialType.GOOGLE)
+        }.isInstanceOf(BadRequestException::class.java)
     }
 
     @Test

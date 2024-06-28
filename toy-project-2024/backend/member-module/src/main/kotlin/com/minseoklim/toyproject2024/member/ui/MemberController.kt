@@ -3,9 +3,11 @@ package com.minseoklim.toyproject2024.member.ui
 import com.minseoklim.toyproject2024.auth.annotation.CheckAdminPermission
 import com.minseoklim.toyproject2024.auth.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.MemberService
+import com.minseoklim.toyproject2024.member.domain.SocialType
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest
+import com.minseoklim.toyproject2024.member.dto.SocialLinkCreateRequest
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -68,6 +70,18 @@ class MemberController(
     @DeleteMapping("/me")
     fun deleteMe(@MemberId id: Int): ResponseEntity<Unit> {
         memberService.delete(id)
+        return ResponseEntity.noContent().build()
+    }
+
+    @PostMapping("/me/social-links")
+    fun addSocialLink(@MemberId id: Int, @Valid @RequestBody request: SocialLinkCreateRequest): ResponseEntity<Unit> {
+        memberService.addSocialLink(id, request)
+        return ResponseEntity.ok().build()
+    }
+
+    @DeleteMapping("/me/social-links/{socialType}")
+    fun deleteSocialLink(@MemberId id: Int, @PathVariable socialType: SocialType): ResponseEntity<Unit> {
+        memberService.deleteSocialLink(id, socialType)
         return ResponseEntity.noContent().build()
     }
 }

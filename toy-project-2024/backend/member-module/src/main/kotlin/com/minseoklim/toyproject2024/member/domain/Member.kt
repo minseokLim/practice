@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.member.domain
 
 import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -72,6 +73,13 @@ class Member(
 
     fun addSocialLink(socialType: SocialType, socialId: String) {
         socialLinks.addSocialLink(socialType, socialId)
+    }
+
+    fun deleteSocialLink(socialType: SocialType) {
+        socialLinks.deleteSocialLink(socialType)
+        if (loginId == null && socialLinks.getSocialLinks().isEmpty()) {
+            throw BadRequestException("SOCIAL_LINK_REQUIRED", "로그인 ID가 없는 경우, 1개 이상의 소셜 계정 연동은 필수입니다.")
+        }
     }
 
     fun getSocialLinks(): Set<SocialLink> {

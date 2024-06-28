@@ -5,9 +5,11 @@ import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.member.domain.LoginIdValidator
 import com.minseoklim.toyproject2024.member.domain.Member
 import com.minseoklim.toyproject2024.member.domain.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.SocialType
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest
+import com.minseoklim.toyproject2024.member.dto.SocialLinkCreateRequest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -50,6 +52,16 @@ class MemberService(
         val member = getMember(id)
         member.delete()
         logoutService.logoutAll(id)
+    }
+
+    fun addSocialLink(id: Int, request: SocialLinkCreateRequest) {
+        val member = getMember(id)
+        member.addSocialLink(request.socialType, request.socialId)
+    }
+
+    fun deleteSocialLink(id: Int, socialType: SocialType) {
+        val member = getMember(id)
+        member.deleteSocialLink(socialType)
     }
 
     private fun getMember(id: Int): Member {
