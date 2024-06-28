@@ -58,6 +58,11 @@ class MemberTest {
 
         // then
         assertThat(member.getSocialLinks()).contains(SocialLink(SocialType.GOOGLE, "1234"))
+
+        // when, then
+        assertThatThrownBy {
+            member.addSocialLink(SocialType.GOOGLE, "5678")
+        }.isInstanceOf(BadRequestException::class.java)
     }
 
     @Test
