@@ -69,4 +69,20 @@ object MemberAcceptanceTestFixture {
     fun `내 계정 탈퇴됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.NO_CONTENT)
     }
+
+    fun `내 소셜 계정 연동 추가 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/members/me/social-links", accessToken, request)
+    }
+
+    fun `내 소셜 계정 연동 추가됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+    }
+
+    fun `내 소셜 계정 연동 제거 요청`(accessToken: String, socialType: String): ExtractableResponse<Response> {
+        return RequestUtil.delete("/members/me/social-links/$socialType", accessToken)
+    }
+
+    fun `내 소셜 계정 연동 제거됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.NO_CONTENT)
+    }
 }

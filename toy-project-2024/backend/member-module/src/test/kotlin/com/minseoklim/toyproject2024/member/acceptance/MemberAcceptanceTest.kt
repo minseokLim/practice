@@ -9,6 +9,10 @@ import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixtu
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 계정 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 계정 탈퇴 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 계정 탈퇴됨`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 제거 요청`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 제거됨`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 추가 요청`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 추가됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 요청`
@@ -103,6 +107,24 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
         // then
         `내 계정 수정됨`(myMemberUpdateResponse)
+
+        // given
+        val mySocialLinkCreateRequest = mapOf(
+            "socialType" to "GOOGLE",
+            "socialId" to "testSocialId"
+        )
+
+        // when
+        val mySocialLinkCreateResponse = `내 소셜 계정 연동 추가 요청`(accessToken, mySocialLinkCreateRequest)
+
+        // then
+        `내 소셜 계정 연동 추가됨`(mySocialLinkCreateResponse)
+
+        // when
+        val mySocialLinkDeleteResponse = `내 소셜 계정 연동 제거 요청`(accessToken, "GOOGLE")
+
+        // then
+        `내 소셜 계정 연동 제거됨`(mySocialLinkDeleteResponse)
 
         // when
         val myMemberDeleteResponse = `내 계정 탈퇴 요청`(accessToken)
