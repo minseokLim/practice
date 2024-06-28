@@ -43,12 +43,20 @@
                         }).then(response => {
                             callback(response);
                         }).catch(error => {
-                            alert('로그인이 필요합니다.');
-                            window.location.href = '/login';
+                            if (error.response.status === 401) {
+                                alert('로그인이 필요합니다.');
+                                window.location.href = '/login';
+                            } else {
+                                alert('요청에 실패했습니다.')
+                            }
                         });
                     }).catch(error => {
-                        alert('로그인이 필요합니다.');
-                        window.location.href = '/login';
+                        if (error.response.status === 401) {
+                            alert('로그인이 필요합니다.');
+                            window.location.href = '/login';
+                        } else {
+                            alert('토큰 갱신에 실패했습니다.')
+                        }
                     });
                 } else {
                     alert('요청에 실패했습니다.');
