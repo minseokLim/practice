@@ -27,7 +27,7 @@ class Name(
         return value == other.value
     }
 
-    final override fun hashCode(): Int = Objects.hash(value);
+    final override fun hashCode(): Int = Objects.hash(value)
 
     companion object {
         const val REGEX_STR = "^[a-zA-Z가-힇0-9]{2,10}\$"

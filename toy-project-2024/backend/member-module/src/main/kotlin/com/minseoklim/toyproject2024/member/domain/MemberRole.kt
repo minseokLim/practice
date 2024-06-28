@@ -25,5 +25,5 @@ class MemberRole(
         return role != null && role == other.role
     }
 
-    final override fun hashCode(): Int = Objects.hash(role);
+    final override fun hashCode(): Int = Objects.hash(role)
 }

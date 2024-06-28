@@ -27,7 +27,7 @@ class Password(
         return value == other.value
     }
 
-    final override fun hashCode(): Int = Objects.hash(value);
+    final override fun hashCode(): Int = Objects.hash(value)
 
     companion object {
         const val ERR_MSG = "비밀번호는 공백일 수 없습니다."

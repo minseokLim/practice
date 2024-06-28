@@ -27,7 +27,7 @@ class SocialId(
         return value == other.value
     }
 
-    final override fun hashCode(): Int = Objects.hash(value);
+    final override fun hashCode(): Int = Objects.hash(value)
 
     companion object {
         const val ERR_MSG = "소셜 ID는 공백일 수 없습니다."

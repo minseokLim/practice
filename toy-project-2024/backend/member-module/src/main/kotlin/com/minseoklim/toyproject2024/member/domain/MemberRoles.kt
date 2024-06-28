@@ -36,5 +36,5 @@ class MemberRoles(
         return values == other.values
     }
 
-    final override fun hashCode(): Int = Objects.hash(values);
+    final override fun hashCode(): Int = Objects.hash(values)
 }

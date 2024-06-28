@@ -27,22 +27,10 @@ class TokenService(
     fun createToken(authentication: Authentication): TokenResponse {
         val tokenId = TokenIdGenerator.generate()
         val accessToken = tokenProvider.createAccessToken(authentication, tokenId)
-        accessTokenRepository.save(
-            AccessToken(
-                id = tokenId,
-                memberId = authentication.name.toInt(),
-                content = accessToken
-            )
-        )
+        accessTokenRepository.save(AccessToken(tokenId, authentication.name.toInt(), accessToken))
 
         val refreshToken = tokenProvider.createRefreshToken(tokenId)
-        refreshTokenRepository.save(
-            RefreshToken(
-                id = tokenId,
-                memberId = authentication.name.toInt(),
-                content = refreshToken
-            )
-        )
+        refreshTokenRepository.save(RefreshToken(tokenId, authentication.name.toInt(), refreshToken))
 
         return TokenResponse(accessToken, refreshToken)
     }

@@ -27,7 +27,7 @@ class LoginId(
         return value == other.value
     }
 
-    final override fun hashCode(): Int = Objects.hash(value);
+    final override fun hashCode(): Int = Objects.hash(value)
 
     companion object {
         const val REGEX_STR = "^[a-z0-9]{5,20}\$"
