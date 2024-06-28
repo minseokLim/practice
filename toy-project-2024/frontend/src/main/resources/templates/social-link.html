@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>소셜 연동</title>
+</head>
+<body>
+    <section th:insert="~{layout/jsImport::jsImport}"></section>
+    <script th:inline="javascript">
+        const socialId = /*[[${socialId}]]*/ '';
+        const socialType = /*[[${socialType}]]*/ '';
+
+        window.onload = function () {
+            addSocialLink();
+        };
+
+        function addSocialLink() {
+            return requestToApi('/members/me/social-links', 'POST', {
+                socialId: socialId,
+                socialType: socialType
+            }, response => {
+                alert('소셜 연동이 완료되었습니다.');
+                window.location.href = '/main';
+            });
+        }
+    </script>
+</body>
+</html>
