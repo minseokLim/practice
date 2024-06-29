@@ -3,8 +3,7 @@ package com.minseoklim.toyproject2024.member.domain
 import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
@@ -95,6 +94,20 @@ class MemberTest {
         assertThatThrownBy {
             member2.deleteSocialLink(SocialType.GOOGLE)
         }.isInstanceOf(BadRequestException::class.java)
+
+        // given
+        val member3 = Member(
+            name = "testName",
+            email = "test@test.com",
+            socialType = SocialType.GOOGLE,
+            socialId = "1234"
+        )
+        member3.addSocialLink(SocialType.KAKAO, "1234")
+
+        // when, then
+        assertThatNoException().isThrownBy {
+            member3.deleteSocialLink(SocialType.KAKAO)
+        }
     }
 
     @Test
