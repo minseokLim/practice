@@ -3,8 +3,8 @@ package com.minseoklim.toyproject2024.util
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class AesUtilTest {
-    private val aesUtil = AesUtil(SECRET, IV)
+class EncryptionUtilTest {
+    private val encryptionUtil = EncryptionUtil(PASSWORD, SALT)
 
     @Test
     fun encrypt() {
@@ -12,7 +12,7 @@ class AesUtilTest {
         val input = "test"
 
         // when
-        val encrypted = aesUtil.encrypt(input)
+        val encrypted = encryptionUtil.encrypt(input)
 
         // then
         assertThat(encrypted).isNotNull
@@ -22,17 +22,17 @@ class AesUtilTest {
     fun decrypt() {
         // given
         val input = "test"
-        val encrypted = aesUtil.encrypt(input)
+        val encrypted = encryptionUtil.encrypt(input)
 
         // when
-        val decrypted = aesUtil.decrypt(encrypted)
+        val decrypted = encryptionUtil.decrypt(encrypted)
 
         // then
         assertThat(decrypted).isEqualTo(input)
     }
 
     companion object {
-        private const val SECRET = "01234567890123456789012345678901"
-        private const val IV = "0123456789012345"
+        private const val PASSWORD = "70617373776F7264"
+        private const val SALT = "73616C74"
     }
 }

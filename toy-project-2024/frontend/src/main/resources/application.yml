@@ -38,6 +38,6 @@ spring:
             user-name-attribute: id
 
 api-base-url: http://localhost:8080
-aes:
-  secret: ${AES_SECRET}
-  iv: ${AES_IV}
+encryptor:
+  password: ${ENCRYPTOR_PASSWORD}
+  salt: ${ENCRYPTOR_SALT}
