@@ -1,6 +1,8 @@
 package com.minseoklim.toyproject2024.member.domain
 
-import org.assertj.core.api.Assertions.*
+import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class SocialIdTest {
@@ -21,13 +23,11 @@ class SocialIdTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val set = hashSetOf<SocialId>()
+        val socialId1 = SocialId("test1234")
+        val socialId2 = SocialId("test1234")
+        val socialId3 = SocialId("other1234")
 
-        // when
-        set.add(SocialId("test1234"))
-        set.add(SocialId("test1234"))
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(socialId1, socialId2, socialId3)
     }
 }

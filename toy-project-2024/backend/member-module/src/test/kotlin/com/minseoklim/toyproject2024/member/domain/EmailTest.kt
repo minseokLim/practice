@@ -1,6 +1,8 @@
 package com.minseoklim.toyproject2024.member.domain
 
-import org.assertj.core.api.Assertions.*
+import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class EmailTest {
@@ -21,13 +23,11 @@ class EmailTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val set = hashSetOf<Email>()
+        val email1 = Email("test@test.com")
+        val email2 = Email("test@test.com")
+        val email3 = Email("other@other.com")
 
-        // when
-        set.add(Email("test@test.com"))
-        set.add(Email("test@test.com"))
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(email1, email2, email3)
     }
 }

@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain
 
-import org.assertj.core.api.Assertions.assertThat
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.junit.jupiter.api.Test
 
 class SocialLinkTest {
@@ -8,13 +8,11 @@ class SocialLinkTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val set = hashSetOf<SocialLink>()
+        val socialLink1 = SocialLink(SocialType.GOOGLE, "1234")
+        val socialLink2 = SocialLink(SocialType.GOOGLE, "1234")
+        val socialLink3 = SocialLink(SocialType.KAKAO, "1234")
 
-        // when
-        set.add(SocialLink(SocialType.GOOGLE, "1234"))
-        set.add(SocialLink(SocialType.GOOGLE, "1234"))
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(socialLink1, socialLink2, socialLink3)
     }
 }

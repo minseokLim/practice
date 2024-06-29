@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.member.domain
 
 import com.minseoklim.toyproject2024.auth.domain.Role
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -170,15 +171,16 @@ class MemberTest {
             name = "otherName",
             email = "other@other.com"
         )
+        val member3 = Member(
+            loginId = "other1234",
+            password = "otherPassword",
+            name = "otherName",
+            email = "other@other.com"
+        )
         ReflectionTestUtils.setField(member1, "id", 1)
         ReflectionTestUtils.setField(member2, "id", 1)
-        val set = hashSetOf<Member>()
 
-        // when
-        set.add(member1)
-        set.add(member2)
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(member1, member2, member3)
     }
 }

@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.member.domain
 
 import com.minseoklim.toyproject2024.auth.domain.Role
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -35,13 +36,11 @@ class MemberRolesTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val set = hashSetOf<MemberRoles>()
+        val memberRoles1 = MemberRoles().apply { addRole(Role.MEMBER) }
+        val memberRoles2 = MemberRoles().apply { addRole(Role.MEMBER) }
+        val memberRoles3 = MemberRoles().apply { addRole(Role.ADMIN) }
 
-        // when
-        set.add(MemberRoles().apply { addRole(Role.MEMBER) })
-        set.add(MemberRoles().apply { addRole(Role.MEMBER) })
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(memberRoles1, memberRoles2, memberRoles3)
     }
 }

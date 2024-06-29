@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.auth.domain
 
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -34,13 +35,13 @@ class AccessTokenTest {
             memberId = 2,
             content = "other content"
         )
-        val set = hashSetOf<AccessToken>()
+        val accessToken3 = AccessToken(
+            id = "other id",
+            memberId = 3,
+            content = "other content"
+        )
 
-        // when
-        set.add(accessToken1)
-        set.add(accessToken2)
-
-        // then
-        assertThat(set.size).isEqualTo(1)
+        // when, then
+        TestUtil.testEqualsAndHashCode(accessToken1, accessToken2, accessToken3)
     }
 }
