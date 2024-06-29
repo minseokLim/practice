@@ -8,7 +8,7 @@ data class MemberResponse(
     val id: Int,
     val loginId: String?,
     val name: String,
-    val email: String,
+    val email: String?,
     val roles: Set<Role>,
     val socialTypes: Set<SocialType>,
     val isDeleted: Boolean
@@ -20,7 +20,7 @@ data class MemberResponse(
                     id = id!!,
                     loginId = loginId?.value,
                     name = name.value,
-                    email = email.value,
+                    email = email?.value,
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted

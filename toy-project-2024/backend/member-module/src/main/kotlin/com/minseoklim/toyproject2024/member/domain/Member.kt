@@ -17,7 +17,7 @@ class Member(
     loginId: String?,
     password: String?,
     name: String,
-    email: String,
+    email: String?,
     socialType: SocialType? = null,
     socialId: String? = null
 ) : BaseTimeEntity() {
@@ -33,7 +33,7 @@ class Member(
     var name: Name = Name(name)
         protected set
 
-    var email: Email = Email(email)
+    var email: Email? = email?.let { Email(email) }
         protected set
 
     val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
@@ -51,7 +51,7 @@ class Member(
 
     constructor(
         name: String,
-        email: String,
+        email: String? = null,
         socialType: SocialType,
         socialId: String
     ) : this(
