@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("org.springframework.boot")
@@ -85,10 +85,10 @@ subprojects {
         annotation("jakarta.persistence.MappedSuperclass")
     }
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs += "-Xjsr305=strict"
-            jvmTarget = "17"
+    kotlin {
+        compilerOptions {
+            freeCompilerArgs.addAll("-Xjsr305=strict")
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
