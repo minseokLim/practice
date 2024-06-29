@@ -14,6 +14,19 @@ enum class SocialType {
         override fun extractSocialId(attributes: Map<String, Any>): String {
             return attributes["sub"] as String
         }
+    },
+    KAKAO {
+        override fun toMemberEntity(attributes: Map<String, Any>): Member {
+            return Member(
+                name = (attributes["properties"] as Map<*, *>)["nickname"] as String,
+                socialType = this,
+                socialId = extractSocialId(attributes)
+            )
+        }
+
+        override fun extractSocialId(attributes: Map<String, Any>): String {
+            return attributes["id"].toString()
+        }
     };
 
     abstract fun toMemberEntity(attributes: Map<String, Any>): Member
