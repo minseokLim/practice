@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class LoginService(
     private val authenticationManagerBuilder: AuthenticationManagerBuilder,
-    private val tokenService: TokenService
+    private val createTokenService: CreateTokenService
 ) {
     fun login(request: LoginRequest): TokenResponse {
         val authenticationManager = authenticationManagerBuilder.getObject()
         val authentication = authenticationManager.authenticate(request.toAuthentication())
 
-        return tokenService.createToken(authentication)
+        return createTokenService.createToken(authentication)
     }
 }

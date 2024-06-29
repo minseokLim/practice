@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.auth.config
 
-import com.minseoklim.toyproject2024.auth.application.TokenService
+import com.minseoklim.toyproject2024.auth.application.CreateTokenService
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Configuration
@@ -9,14 +9,14 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 class OAuth2AuthenticationSuccessHandler(
-    private val tokenService: TokenService
+    private val createTokenService: CreateTokenService
 ) : AuthenticationSuccessHandler {
     override fun onAuthenticationSuccess(
         request: HttpServletRequest,
         response: HttpServletResponse,
         authentication: Authentication
     ) {
-        val tokenResponse = tokenService.createToken(authentication)
+        val tokenResponse = createTokenService.createToken(authentication)
         val encodedAccessToken = tokenResponse.accessToken
         val encodedRefreshToken = tokenResponse.refreshToken
 

@@ -1,24 +1,18 @@
 package com.minseoklim.toyproject2024.member.application
 
 import com.minseoklim.toyproject2024.auth.application.LogoutService
-import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.member.domain.LoginIdValidator
-import com.minseoklim.toyproject2024.member.domain.Member
 import com.minseoklim.toyproject2024.member.domain.MemberRepository
-import com.minseoklim.toyproject2024.member.domain.SocialType
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest
-import com.minseoklim.toyproject2024.member.dto.SocialLinkCreateRequest
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class MemberService(
+class MemberCommandService(
     private val memberRepository: MemberRepository,
     private val loginIdValidator: LoginIdValidator,
     private val passwordEncoder: PasswordEncoder,
@@ -30,42 +24,15 @@ class MemberService(
         return MemberResponse.of(member)
     }
 
-    @Transactional(readOnly = true)
-    fun list(pageable: Pageable): Page<MemberResponse> {
-        val members = memberRepository.findAll(pageable)
-        return members.map { MemberResponse.of(it) }
-    }
-
-    @Transactional(readOnly = true)
-    fun get(id: Int): MemberResponse {
-        val member = getMember(id)
-        return MemberResponse.of(member)
-    }
-
     fun update(id: Int, request: MemberUpdateRequest): MemberResponse {
-        val member = getMember(id)
+        val member = MemberServiceHelper.getMember(memberRepository, id)
         member.update(request.toEntity(member, passwordEncoder))
         return MemberResponse.of(member)
     }
 
     fun delete(id: Int) {
-        val member = getMember(id)
+        val member = MemberServiceHelper.getMember(memberRepository, id)
         member.delete()
         logoutService.logoutAll(id)
-    }
-
-    fun addSocialLink(id: Int, request: SocialLinkCreateRequest) {
-        val member = getMember(id)
-        member.addSocialLink(request.socialType, request.socialId)
-    }
-
-    fun deleteSocialLink(id: Int, socialType: SocialType) {
-        val member = getMember(id)
-        member.deleteSocialLink(socialType)
-    }
-
-    private fun getMember(id: Int): Member {
-        return memberRepository.findById(id)
-            .orElseThrow { NotFoundException("MEMBER_NOT_FOUND", "찾을 수 없는 회원입니다.") }
     }
 }
