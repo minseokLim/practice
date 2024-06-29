@@ -24,6 +24,9 @@
                 <button id="google-link-button" style="display: none;" class="btn btn-primary">
                     <a href="/oauth2/authorization/google" style="color: white; text-decoration: none">구글 연동</a>
                 </button>
+                <button id="kakao-link-button" style="display: none;" class="btn btn-primary">
+                    <a href="/oauth2/authorization/kakao" style="color: white; text-decoration: none">카카오 연동</a>
+                </button>
             </div>
         </div>
     </div>
@@ -46,6 +49,9 @@
         function displayLinkButtons(memberInfo) {
             if (!memberInfo.socialTypes.includes('GOOGLE')) {
                 document.getElementById('google-link-button').style.display = 'block';
+            }
+            if (!memberInfo.socialTypes.includes('KAKAO')) {
+                document.getElementById('kakao-link-button').style.display = 'block';
             }
         }
 
