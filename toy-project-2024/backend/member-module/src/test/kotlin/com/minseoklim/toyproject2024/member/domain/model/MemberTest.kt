@@ -5,6 +5,7 @@ import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.test.util.ReflectionTestUtils
 
 class MemberTest {
@@ -167,6 +168,29 @@ class MemberTest {
 
         // then
         assertThat(member.isDeleted).isTrue
+    }
+
+    @Test
+    fun validateVersion() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+        val memberVersion = 1L
+        ReflectionTestUtils.setField(member, "version", memberVersion)
+
+        // when, then
+        assertThatNoException().isThrownBy {
+            member.validateVersion(memberVersion)
+        }
+
+        // when, then
+        assertThatThrownBy {
+            member.validateVersion(2L)
+        }.isInstanceOf(OptimisticLockingFailureException::class.java)
     }
 
     @Test

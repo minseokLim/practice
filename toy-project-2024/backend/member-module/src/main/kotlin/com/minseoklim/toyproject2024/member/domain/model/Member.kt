@@ -9,7 +9,9 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
+import jakarta.persistence.Version
 import org.hibernate.proxy.HibernateProxy
+import org.springframework.dao.OptimisticLockingFailureException
 
 @Entity
 @Table(uniqueConstraints = [UniqueConstraint(columnNames = ["login_id"])])
@@ -48,6 +50,9 @@ class Member(
 
     var isDeleted: Boolean = false
         protected set
+
+    @Version
+    val version: Long? = null
 
     constructor(
         name: String,
@@ -97,6 +102,12 @@ class Member(
 
     fun delete() {
         isDeleted = true
+    }
+
+    fun validateVersion(version: Long) {
+        if (this.version != version) {
+            throw OptimisticLockingFailureException("요청한 version과 현재 version이 일치하지 않습니다.")
+        }
     }
 
     final override fun equals(other: Any?): Boolean {

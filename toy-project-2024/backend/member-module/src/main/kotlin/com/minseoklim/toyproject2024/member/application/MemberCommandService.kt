@@ -26,6 +26,7 @@ class MemberCommandService(
 
     fun update(id: Int, request: MemberUpdateRequest): MemberResponse {
         val member = MemberServiceHelper.getMember(memberRepository, id)
+        member.validateVersion(request.version)
         member.update(request.toEntity(member, passwordEncoder))
         return MemberResponse.of(member)
     }

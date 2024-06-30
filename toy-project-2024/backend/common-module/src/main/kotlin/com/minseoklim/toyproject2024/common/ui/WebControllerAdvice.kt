@@ -5,6 +5,7 @@ import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.common.exception.UnauthorizedException
 import mu.KLogging
+import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.BadCredentialsException
@@ -32,6 +33,11 @@ class WebControllerAdvice {
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(e: BadCredentialsException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse(HttpStatus.UNAUTHORIZED.name), HttpStatus.UNAUTHORIZED)
+    }
+
+    @ExceptionHandler(OptimisticLockingFailureException::class)
+    fun handleOptimisticLockingFailureException(e: OptimisticLockingFailureException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(ErrorResponse("UPDATE_VERSION_CONFLICT", e.message), HttpStatus.CONFLICT)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)

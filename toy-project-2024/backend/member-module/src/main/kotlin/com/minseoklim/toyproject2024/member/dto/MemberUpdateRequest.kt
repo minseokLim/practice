@@ -16,7 +16,9 @@ data class MemberUpdateRequest(
     val name: String,
 
     @get:Pattern(regexp = Email.REGEX_STR, message = Email.ERR_MSG)
-    val email: String
+    val email: String,
+
+    val version: Long
 ) {
     fun toEntity(original: Member, passwordEncoder: PasswordEncoder): Member {
         return Member(original.loginId?.value, passwordEncoder.encode(password), name, email)

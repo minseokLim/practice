@@ -11,7 +11,8 @@ data class MemberResponse(
     val email: String?,
     val roles: Set<Role>,
     val socialTypes: Set<SocialType>,
-    val isDeleted: Boolean
+    val isDeleted: Boolean,
+    val version: Long
 ) {
     companion object {
         fun of(member: Member): MemberResponse {
@@ -23,7 +24,8 @@ data class MemberResponse(
                     email = email?.value,
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
-                    isDeleted = isDeleted
+                    isDeleted = isDeleted,
+                    version = version!!
                 )
             }
         }
