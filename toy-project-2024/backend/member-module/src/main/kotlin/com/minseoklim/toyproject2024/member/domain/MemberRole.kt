@@ -22,7 +22,7 @@ class MemberRole(
         if (thisEffectiveClass != oEffectiveClass) return false
         other as MemberRole
 
-        return role != null && role == other.role
+        return role == other.role
     }
 
     final override fun hashCode(): Int = Objects.hash(role)
