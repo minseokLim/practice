@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.auth.acceptance
 
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그아웃 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그아웃 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그아웃됨
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 요청`
@@ -109,6 +110,18 @@ class AuthAcceptanceTest : AcceptanceTest() {
             // then
             `토큰 유효성 검사 실패`(validateTokenResponseAfterLogoutAll)
         }
+    }
+
+    @Test
+    fun `예외 상황`() {
+        // given
+        val logoutRequest = mapOf("accessToken" to "invalidAccessToken", "refreshToken" to "invalidRefreshToken")
+
+        // when
+        val logoutResponse = `로그아웃 요청`(logoutRequest)
+
+        // then
+        `로그아웃 실패`(logoutResponse)
     }
 
     companion object {

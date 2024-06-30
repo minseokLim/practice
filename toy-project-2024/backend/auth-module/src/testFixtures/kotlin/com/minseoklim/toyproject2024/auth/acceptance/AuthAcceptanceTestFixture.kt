@@ -50,6 +50,10 @@ object AuthAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
+    fun `로그아웃 실패`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED)
+    }
+
     fun `회원 전체 로그아웃 요청`(accessToken: String): ExtractableResponse<Response> {
         return RequestUtil.post("/logout-all", accessToken, emptyMap())
     }
