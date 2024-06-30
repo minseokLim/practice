@@ -32,6 +32,10 @@ object AuthAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED)
     }
 
+    fun `모든 토큰 유효성 검사 실패`(responses: Collection<ExtractableResponse<Response>>) {
+        assertThat(responses).allMatch { it.httpStatus() == HttpStatus.UNAUTHORIZED }
+    }
+
     fun `토큰 재발급 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
         return RequestUtil.post("/refresh-token", null, request)
     }

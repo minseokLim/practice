@@ -23,9 +23,17 @@ object TestUtil {
         return this.jsonPath()["version"]
     }
 
+    fun <T> runSynchronously(times: Int, vararg actions: (Int) -> T): List<T> {
+        return (0 until times).flatMap {
+            actions.map { action ->
+                action(it)
+            }
+        }
+    }
+
     fun <T> runConcurrently(times: Int, vararg actions: (Int) -> T): List<T> {
         return runBlocking {
-            (1..times).flatMap {
+            (0 until times).flatMap {
                 actions.map { action ->
                     async(Executors.newFixedThreadPool(times).asCoroutineDispatcher()) {
                         action(it)

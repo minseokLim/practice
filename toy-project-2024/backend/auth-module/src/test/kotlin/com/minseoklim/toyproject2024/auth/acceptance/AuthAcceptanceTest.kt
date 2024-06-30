@@ -5,6 +5,7 @@ import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그아웃됨
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그인됨
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`모든 토큰 유효성 검사 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사됨`
@@ -17,6 +18,7 @@ import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestUtil.extr
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.junit.jupiter.api.Test
 
 class AuthAcceptanceTest : AcceptanceTest() {
@@ -92,24 +94,21 @@ class AuthAcceptanceTest : AcceptanceTest() {
         `토큰 유효성 검사 실패`(validateTokenResponseAfterLogout)
 
         // given
-        val accessRefreshTokenPairs = (1..10).map {
-            val response = `로그인 요청`(loginRequest)
-            response.extractAccessToken() to response.extractRefreshToken()
-        }
+        val loginResponses = TestUtil.runSynchronously(10, { `로그인 요청`(loginRequest) })
 
         // when
-        val logoutAllResponse = `회원 전체 로그아웃 요청`(accessRefreshTokenPairs.first().first)
+        val logoutAllResponse = `회원 전체 로그아웃 요청`(loginResponses.first().extractAccessToken())
 
         // then
         `회원 전체 로그아웃됨`(logoutAllResponse)
 
-        accessRefreshTokenPairs.forEach {
-            // when
-            val validateTokenResponseAfterLogoutAll = `토큰 유효성 검사 요청`(it.first)
+        // when
+        val validateTokenResponses = TestUtil.runSynchronously(loginResponses.size, {
+            `토큰 유효성 검사 요청`(loginResponses[it].extractAccessToken())
+        })
 
-            // then
-            `토큰 유효성 검사 실패`(validateTokenResponseAfterLogoutAll)
-        }
+        // then
+        `모든 토큰 유효성 검사 실패`(validateTokenResponses)
     }
 
     @Test
