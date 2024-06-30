@@ -2,8 +2,13 @@ package com.minseoklim.toyproject2024.test.util
 
 import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
+import java.util.concurrent.Executors
 
 object TestUtil {
     fun ExtractableResponse<Response>.httpStatus(): HttpStatus {
@@ -12,6 +17,22 @@ object TestUtil {
 
     fun ExtractableResponse<Response>.extractId(): Int {
         return this.jsonPath()["id"]
+    }
+
+    fun ExtractableResponse<Response>.extractVersion(): Long {
+        return this.jsonPath()["version"]
+    }
+
+    fun <T> runConcurrently(times: Int, vararg actions: (Int) -> T): List<T> {
+        return runBlocking {
+            (1..times).flatMap {
+                actions.map { action ->
+                    async(Executors.newFixedThreadPool(times).asCoroutineDispatcher()) {
+                        action(it)
+                    }
+                }
+            }.awaitAll()
+        }
     }
 
     /**

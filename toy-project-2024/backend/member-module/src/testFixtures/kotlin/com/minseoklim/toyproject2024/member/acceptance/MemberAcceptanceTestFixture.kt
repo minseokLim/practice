@@ -45,6 +45,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
+    fun `회원 수정 요청 일부 실패`(responses: Collection<ExtractableResponse<Response>>) {
+        assertThat(responses).anyMatch { it.httpStatus() == HttpStatus.CONFLICT }
+    }
+
     fun `회원 탈퇴 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
         return RequestUtil.delete("/members/$id", accessToken)
     }

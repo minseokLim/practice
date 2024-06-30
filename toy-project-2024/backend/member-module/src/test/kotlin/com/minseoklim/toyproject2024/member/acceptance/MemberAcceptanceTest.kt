@@ -18,13 +18,16 @@ import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixtu
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정 요청`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정 요청 일부 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 탈퇴 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 탈퇴됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
+import com.minseoklim.toyproject2024.test.util.TestUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil.extractId
+import com.minseoklim.toyproject2024.test.util.TestUtil.extractVersion
 import org.junit.jupiter.api.Test
 
 class MemberAcceptanceTest : AcceptanceTest() {
@@ -64,7 +67,8 @@ class MemberAcceptanceTest : AcceptanceTest() {
         val memberUpdateRequest = mapOf(
             "password" to "newPassword",
             "name" to "newName",
-            "email" to "new@test.com"
+            "email" to "new@test.com",
+            "version" to memberResponse.extractVersion()
         )
 
         // when
@@ -114,7 +118,8 @@ class MemberAcceptanceTest : AcceptanceTest() {
         val myMemberUpdateRequest = mapOf(
             "password" to "newPassword",
             "name" to "newName",
-            "email" to "new@test.com"
+            "email" to "new@test.com",
+            "version" to myMemberResponse.extractVersion()
         )
 
         // when
@@ -146,6 +151,56 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
         // then
         `내 계정 탈퇴됨`(myMemberDeleteResponse)
+    }
+
+    @Test
+    fun `회원 정보 동시 수정`() {
+        // given
+        val memberRequest = mapOf(
+            "loginId" to MEMBER_ID,
+            "password" to PASSWORD,
+            "name" to "testName",
+            "email" to "test@test.com"
+        )
+        val memberJoinResponse = `회원 가입 요청`(memberRequest)
+        val memberId = memberJoinResponse.extractId()
+
+        // given
+        val loginRequest = mapOf(
+            "loginId" to MEMBER_ID,
+            "password" to PASSWORD
+        )
+        val loginResponse = `로그인 요청`(loginRequest)
+        val accessToken = loginResponse.extractAccessToken()
+
+        // when
+        val memberUpdateResponses = TestUtil.runConcurrently(20, {
+            val memberResponse = `회원 조회 요청`(NEVER_EXPIRED_ADMIN_ACCESS_TOKEN, memberId)
+            `회원 수정 요청`(
+                NEVER_EXPIRED_ADMIN_ACCESS_TOKEN,
+                memberId,
+                mapOf(
+                    "password" to "newPassword$it",
+                    "name" to "newName$it",
+                    "email" to "new$it@test.com",
+                    "version" to memberResponse.extractVersion()
+                )
+            )
+        }, {
+            val memberResponse = `내 계정 조회 요청`(accessToken)
+            `내 계정 수정 요청`(
+                accessToken,
+                mapOf(
+                    "password" to "newPassword$it",
+                    "name" to "newName$it",
+                    "email" to "new$it@test.com",
+                    "version" to memberResponse.extractVersion()
+                )
+            )
+        })
+
+        // then
+        `회원 수정 요청 일부 실패`(memberUpdateResponses)
     }
 
     companion object {
