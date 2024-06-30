@@ -17,6 +17,8 @@ import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixtu
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회됨`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정 요청`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 탈퇴 요청`
@@ -57,6 +59,19 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
         // then
         `회원 조회됨`(memberResponse)
+
+        // given
+        val memberUpdateRequest = mapOf(
+            "password" to "newPassword",
+            "name" to "newName",
+            "email" to "new@test.com"
+        )
+
+        // when
+        val memberUpdateResponse = `회원 수정 요청`(NEVER_EXPIRED_ADMIN_ACCESS_TOKEN, memberId, memberUpdateRequest)
+
+        // then
+        `회원 수정됨`(memberUpdateResponse)
 
         // when
         val memberDeleteResponse = `회원 탈퇴 요청`(NEVER_EXPIRED_ADMIN_ACCESS_TOKEN, memberId)

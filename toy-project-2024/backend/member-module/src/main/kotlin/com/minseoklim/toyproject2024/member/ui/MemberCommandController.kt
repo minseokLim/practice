@@ -29,6 +29,16 @@ class MemberCommandController(
         return ResponseEntity.created(uri).body(response)
     }
 
+    @PutMapping("/{id}")
+    @CheckAdminPermission
+    fun update(
+        @PathVariable id: Int,
+        @Valid @RequestBody request: MemberUpdateRequest
+    ): ResponseEntity<MemberResponse> {
+        val response = memberCommandService.update(id, request)
+        return ResponseEntity.ok(response)
+    }
+
     @DeleteMapping("/{id}")
     @CheckAdminPermission
     fun delete(@PathVariable id: Int): ResponseEntity<Unit> {

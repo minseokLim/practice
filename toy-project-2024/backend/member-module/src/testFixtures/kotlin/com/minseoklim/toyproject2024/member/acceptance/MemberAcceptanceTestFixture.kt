@@ -36,6 +36,15 @@ object MemberAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
+    fun `회원 수정 요청`(accessToken: String, id: Int, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.put("/members/$id", accessToken, request)
+    }
+
+    fun `회원 수정됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.extractId()).isNotNull
+    }
+
     fun `회원 탈퇴 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
         return RequestUtil.delete("/members/$id", accessToken)
     }
