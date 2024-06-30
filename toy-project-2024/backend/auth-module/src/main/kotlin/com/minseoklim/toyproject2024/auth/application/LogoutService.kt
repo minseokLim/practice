@@ -18,14 +18,12 @@ class LogoutService(
     private val accessTokenDbCheckInMilliseconds: Long
 ) {
     fun logout(request: TokenRequest) {
-        deleteTokenService.deleteAccessToken(request.accessToken)
-        deleteTokenService.deleteRefreshToken(request.refreshToken)
+        deleteTokenService.deleteToken(request.accessToken, request.refreshToken)
         turnOnAccessTokenDbCheckFlag(extractMemberId(request.accessToken))
     }
 
     fun logoutAll(memberId: Int) {
-        deleteTokenService.deleteAllAccessToken(memberId)
-        deleteTokenService.deleteAllRefreshToken(memberId)
+        deleteTokenService.deleteAllToken(memberId)
         turnOnAccessTokenDbCheckFlag(memberId)
     }
 

@@ -17,10 +17,7 @@ class RefreshTokenService(
 ) {
     fun refreshToken(request: TokenRequest): TokenResponse {
         refreshTokenValidator.validate(request.refreshToken)
-
-        deleteTokenService.deleteAccessToken(request.accessToken)
-        deleteTokenService.deleteRefreshToken(request.refreshToken)
-
+        deleteTokenService.deleteToken(request.accessToken, request.refreshToken)
         val authentication = tokenParser.extractAuthentication(request.accessToken)
         return createTokenService.createToken(authentication)
     }

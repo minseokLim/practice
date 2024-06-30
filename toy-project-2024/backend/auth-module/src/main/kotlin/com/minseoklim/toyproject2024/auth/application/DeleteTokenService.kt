@@ -14,27 +14,37 @@ class DeleteTokenService(
     private val accessTokenRepository: AccessTokenRepository,
     private val refreshTokenRepository: RefreshTokenRepository
 ) {
-    fun deleteAccessToken(accessToken: String) {
+    fun deleteToken(accessToken: String, refreshToken: String) {
+        deleteAccessToken(accessToken)
+        deleteRefreshToken(refreshToken)
+    }
+
+    fun deleteAllToken(memberId: Int) {
+        deleteAllAccessToken(memberId)
+        deleteAllRefreshToken(memberId)
+    }
+
+    private fun deleteAccessToken(accessToken: String) {
         val accessTokenId = tokenParser.extractId(accessToken)
         val accessTokenEntity = accessTokenRepository.findById(accessTokenId)
             .orElseThrow { throw BadCredentialsException("Invalid access token") }
         accessTokenEntity.delete()
     }
 
-    fun deleteRefreshToken(refreshToken: String) {
+    private fun deleteRefreshToken(refreshToken: String) {
         val refreshTokenId = tokenParser.extractId(refreshToken)
         val refreshTokenEntity = refreshTokenRepository.findById(refreshTokenId)
             .orElseThrow { throw BadCredentialsException("Invalid refresh token") }
         refreshTokenEntity.delete()
     }
 
-    fun deleteAllAccessToken(memberId: Int) {
+    private fun deleteAllAccessToken(memberId: Int) {
         accessTokenRepository.findAllByMemberId(memberId).forEach {
             it.delete()
         }
     }
 
-    fun deleteAllRefreshToken(memberId: Int) {
+    private fun deleteAllRefreshToken(memberId: Int) {
         refreshTokenRepository.findAllByMemberId(memberId).forEach {
             it.delete()
         }
