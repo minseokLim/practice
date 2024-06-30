@@ -8,6 +8,7 @@ import mu.KLogging
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -38,6 +39,11 @@ class WebControllerAdvice {
     @ExceptionHandler(OptimisticLockingFailureException::class)
     fun handleOptimisticLockingFailureException(e: OptimisticLockingFailureException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse("UPDATE_VERSION_CONFLICT", e.message), HttpStatus.CONFLICT)
+    }
+
+    @ExceptionHandler(AccessDeniedException::class)
+    fun handleAccessDeniedException(e: AccessDeniedException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(ErrorResponse("ACCESS_DENIED", e.message), HttpStatus.FORBIDDEN)
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
