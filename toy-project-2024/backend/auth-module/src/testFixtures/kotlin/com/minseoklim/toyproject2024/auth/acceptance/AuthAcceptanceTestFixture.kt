@@ -65,4 +65,30 @@ object AuthAcceptanceTestFixture {
     fun `회원 전체 로그아웃됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
+
+    fun `로그인 화면으로 이동`(queryParameter: String): ExtractableResponse<Response> {
+        return RequestUtil.get("/login$queryParameter", null)
+    }
+
+    fun `로그인 화면으로 이동됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.asString()).contains("login")
+        assertThat(response.contentType()).contains("text/html")
+    }
+
+    fun `회원 가입 화면으로 이동`(queryParameter: String): ExtractableResponse<Response> {
+        return RequestUtil.get("/join$queryParameter", null)
+    }
+
+    fun `회원 가입 화면으로 이동됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.asString()).contains("join")
+        assertThat(response.contentType()).contains("text/html")
+    }
+
+    fun `잘못된 접근 화면으로 이동됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.asString()).contains("잘못된 접근")
+        assertThat(response.contentType()).contains("text/html")
+    }
 }

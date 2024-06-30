@@ -4,13 +4,18 @@ import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그아웃 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그아웃됨
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 요청`
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 화면으로 이동`
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 화면으로 이동됨`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그인됨
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`모든 토큰 유효성 검사 실패`
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`잘못된 접근 화면으로 이동됨`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 유효성 검사됨`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 재발급 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`토큰 재발급됨`
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`회원 가입 화면으로 이동`
+import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`회원 가입 화면으로 이동됨`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`회원 전체 로그아웃 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`회원 전체 로그아웃됨`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestUtil.extractAccessToken
@@ -121,6 +126,36 @@ class AuthAcceptanceTest : AcceptanceTest() {
 
         // then
         `로그아웃 실패`(logoutResponse)
+    }
+
+    @Test
+    fun `화면 테스트`() {
+        // given
+        val queryParameter = "?redirectUrl=http://localhost:8080"
+
+        // when
+        val loginPageResponse1 = `로그인 화면으로 이동`(queryParameter)
+
+        // then
+        `로그인 화면으로 이동됨`(loginPageResponse1)
+
+        // when
+        val loginPageResponse2 = `로그인 화면으로 이동`("")
+
+        // then
+        `잘못된 접근 화면으로 이동됨`(loginPageResponse2)
+
+        // when
+        val joinPageResponse1 = `회원 가입 화면으로 이동`(queryParameter)
+
+        // then
+        `회원 가입 화면으로 이동됨`(joinPageResponse1)
+
+        // when
+        val joinPageResponse2 = `회원 가입 화면으로 이동`("")
+
+        // then
+        `잘못된 접근 화면으로 이동됨`(joinPageResponse2)
     }
 
     companion object {
