@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.infra
 
-import com.minseoklim.toyproject2024.auth.domain.TokenProvider
-import com.minseoklim.toyproject2024.auth.domain.TokenType
+import com.minseoklim.toyproject2024.auth.domain.model.TokenType
+import com.minseoklim.toyproject2024.auth.domain.service.TokenProvider
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value

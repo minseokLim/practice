@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.filter
 
-import com.minseoklim.toyproject2024.auth.domain.AccessTokenDbCheckFlagRepository
-import com.minseoklim.toyproject2024.auth.domain.AccessTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.TokenParser
+import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenDbCheckFlagRepository
+import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import jakarta.servlet.Filter
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletRequest

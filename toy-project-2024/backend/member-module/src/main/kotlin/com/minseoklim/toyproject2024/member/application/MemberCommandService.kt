@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
 import com.minseoklim.toyproject2024.auth.application.LogoutService
-import com.minseoklim.toyproject2024.member.domain.LoginIdValidator
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.service.LoginIdValidator
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import com.minseoklim.toyproject2024.member.dto.MemberUpdateRequest

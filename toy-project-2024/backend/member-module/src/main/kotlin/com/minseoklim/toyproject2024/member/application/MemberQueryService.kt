@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.application
 
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.MemberResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.application
 
-import com.minseoklim.toyproject2024.auth.domain.AccessTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.RefreshTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.TokenParser
+import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.repository.RefreshTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

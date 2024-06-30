@@ -1,9 +1,9 @@
 package com.minseoklim.toyproject2024.member.dto
 
-import com.minseoklim.toyproject2024.member.domain.Email
-import com.minseoklim.toyproject2024.member.domain.Member
-import com.minseoklim.toyproject2024.member.domain.Name
-import com.minseoklim.toyproject2024.member.domain.Password
+import com.minseoklim.toyproject2024.member.domain.model.Email
+import com.minseoklim.toyproject2024.member.domain.model.Member
+import com.minseoklim.toyproject2024.member.domain.model.Name
+import com.minseoklim.toyproject2024.member.domain.model.Password
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import org.springframework.security.crypto.password.PasswordEncoder

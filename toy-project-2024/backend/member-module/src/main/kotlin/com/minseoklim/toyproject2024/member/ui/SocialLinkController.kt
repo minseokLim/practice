@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.member.ui
 
 import com.minseoklim.toyproject2024.auth.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.SocialLinkService
-import com.minseoklim.toyproject2024.member.domain.SocialType
+import com.minseoklim.toyproject2024.member.domain.model.SocialType
 import com.minseoklim.toyproject2024.member.dto.SocialLinkCreateRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

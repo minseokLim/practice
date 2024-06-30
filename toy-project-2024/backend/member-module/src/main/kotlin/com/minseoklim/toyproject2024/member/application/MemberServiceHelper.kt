@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
 import com.minseoklim.toyproject2024.common.exception.NotFoundException
-import com.minseoklim.toyproject2024.member.domain.Member
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.model.Member
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 
 object MemberServiceHelper {
     fun getMember(memberRepository: MemberRepository, id: Int): Member {

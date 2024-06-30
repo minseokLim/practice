@@ -1,11 +1,11 @@
 package com.minseoklim.toyproject2024.auth.application
 
-import com.minseoklim.toyproject2024.auth.domain.AccessToken
-import com.minseoklim.toyproject2024.auth.domain.AccessTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.RefreshToken
-import com.minseoklim.toyproject2024.auth.domain.RefreshTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.TokenIdGenerator
-import com.minseoklim.toyproject2024.auth.domain.TokenProvider
+import com.minseoklim.toyproject2024.auth.domain.model.AccessToken
+import com.minseoklim.toyproject2024.auth.domain.model.RefreshToken
+import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.repository.RefreshTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.service.TokenIdGenerator
+import com.minseoklim.toyproject2024.auth.domain.service.TokenProvider
 import com.minseoklim.toyproject2024.auth.dto.TokenResponse
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service

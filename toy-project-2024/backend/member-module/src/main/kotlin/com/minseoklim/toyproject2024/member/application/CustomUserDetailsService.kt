@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.application
 
-import com.minseoklim.toyproject2024.member.domain.Member
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
+import com.minseoklim.toyproject2024.member.domain.model.Member
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService

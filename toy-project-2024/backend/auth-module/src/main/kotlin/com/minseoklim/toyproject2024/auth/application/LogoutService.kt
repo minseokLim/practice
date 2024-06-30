@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.application
 
-import com.minseoklim.toyproject2024.auth.domain.AccessTokenDbCheckFlagActivator
-import com.minseoklim.toyproject2024.auth.domain.TokenParser
+import com.minseoklim.toyproject2024.auth.domain.service.AccessTokenDbCheckFlagActivator
+import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import com.minseoklim.toyproject2024.auth.dto.TokenRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

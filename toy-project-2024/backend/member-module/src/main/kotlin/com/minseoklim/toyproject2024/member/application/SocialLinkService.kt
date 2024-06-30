@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.application
 
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
-import com.minseoklim.toyproject2024.member.domain.SocialType
+import com.minseoklim.toyproject2024.member.domain.model.SocialType
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.SocialLinkCreateRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

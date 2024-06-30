@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.dto
 
-import com.minseoklim.toyproject2024.auth.domain.Role
-import com.minseoklim.toyproject2024.member.domain.Member
-import com.minseoklim.toyproject2024.member.domain.SocialType
+import com.minseoklim.toyproject2024.auth.domain.model.Role
+import com.minseoklim.toyproject2024.member.domain.model.Member
+import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
 data class MemberResponse(
     val id: Int,

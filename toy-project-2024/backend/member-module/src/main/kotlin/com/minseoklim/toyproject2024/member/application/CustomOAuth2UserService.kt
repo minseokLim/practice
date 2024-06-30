@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
-import com.minseoklim.toyproject2024.auth.domain.Role
-import com.minseoklim.toyproject2024.member.domain.MemberRepository
-import com.minseoklim.toyproject2024.member.domain.SocialType
+import com.minseoklim.toyproject2024.auth.domain.model.Role
+import com.minseoklim.toyproject2024.member.domain.model.SocialType
+import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService
