@@ -3,7 +3,6 @@ package com.minseoklim.toyproject2024.common.ui
 import com.minseoklim.toyproject2024.common.dto.ErrorResponse
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.exception.NotFoundException
-import com.minseoklim.toyproject2024.common.exception.UnauthorizedException
 import mu.KLogging
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.HttpStatus
@@ -24,11 +23,6 @@ class WebControllerAdvice {
     @ExceptionHandler(BadRequestException::class)
     fun handleBadRequestException(e: BadRequestException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(ErrorResponse.of(e), HttpStatus.BAD_REQUEST)
-    }
-
-    @ExceptionHandler(UnauthorizedException::class)
-    fun handleUnauthorizedException(e: UnauthorizedException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse.of(e), HttpStatus.FORBIDDEN)
     }
 
     @ExceptionHandler(BadCredentialsException::class)
