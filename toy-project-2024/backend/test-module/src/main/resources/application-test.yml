@@ -14,7 +14,8 @@ spring:
         default_batch_fetch_size: 10
   data:
     redis:
-      url: redis://localhost:6379
+      host: localhost
+      port: 6370
       timeout: 1s
       connect-timeout: 3s
       client-type: lettuce
