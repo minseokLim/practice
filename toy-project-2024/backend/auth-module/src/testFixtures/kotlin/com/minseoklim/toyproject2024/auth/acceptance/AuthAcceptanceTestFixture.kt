@@ -20,6 +20,10 @@ object AuthAcceptanceTestFixture {
         assertThat(response.extractRefreshToken()).isNotNull
     }
 
+    fun `로그인 실패`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED)
+    }
+
     fun `토큰 유효성 검사 요청`(accessToken: String): ExtractableResponse<Response> {
         return RequestUtil.get("/validate-token", accessToken)
     }

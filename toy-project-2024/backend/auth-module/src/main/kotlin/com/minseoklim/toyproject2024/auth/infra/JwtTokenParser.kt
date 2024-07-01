@@ -19,7 +19,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
-import java.util.Date
 
 @Component
 class JwtTokenParser(
@@ -85,7 +84,7 @@ class JwtTokenParser(
             val claims = jwtParser.parseSignedClaims(token).payload
             val extractedType = TokenType.valueOf(claims[TOKEN_TYPE_KEY, String::class.java])
 
-            return !claims.expiration.before(Date()) && extractedType === tokenType
+            return extractedType === tokenType
         } catch (e: JwtException) {
             return false
         }

@@ -11,8 +11,11 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.security.authentication.BadCredentialsException
+import org.springframework.security.authentication.TestingAuthenticationToken
+import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
+@ActiveProfiles("test")
 class RefreshTokenValidatorTest {
 
     @Autowired
@@ -50,11 +53,14 @@ class RefreshTokenValidatorTest {
         }.isInstanceOf(BadCredentialsException::class.java)
 
         // given
-        val refreshToken3 = "invalidToken"
+        val accessTokenId = "accessTokenId"
+        val authentication = TestingAuthenticationToken("member", "password")
+        val accessToken = tokenProvider.createAccessToken(authentication, accessTokenId)
+        refreshTokenRepository.save(RefreshToken(accessTokenId, 1, accessToken))
 
         // when, then
         assertThatThrownBy {
-            refreshTokenValidator.validate(refreshToken3)
+            refreshTokenValidator.validate(accessToken)
         }.isInstanceOf(BadCredentialsException::class.java)
     }
 
