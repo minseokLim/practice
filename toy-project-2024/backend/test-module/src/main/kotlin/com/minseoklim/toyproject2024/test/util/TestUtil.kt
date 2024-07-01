@@ -46,12 +46,17 @@ object TestUtil {
     /**
      * obj1, obj2는 동등하고 obj3는 다른 객체인 경우를 테스트합니다.
      */
-    fun <T> testEqualsAndHashCode(obj1: T, obj2: T, obj3: T) {
+    inline fun <reified T : Any> testEqualsAndHashCode(obj1: T, obj2: T, obj3: T) {
         assertThat(obj1).isEqualTo(obj2)
         assertThat(obj1).isNotEqualTo(obj3)
         assertThat(obj1).isEqualTo(obj1)
         assertThat(obj1).isNotEqualTo(null)
         assertThat(obj1).isNotEqualTo(Any())
-        assertThat(hashSetOf(obj1, obj2, obj3)).hasSize(2)
+
+        val proxy = HibernateProxyUtil.createHibernateProxy(obj1)
+        assertThat(proxy).isEqualTo(obj1)
+        assertThat(obj1).isEqualTo(proxy)
+
+        assertThat(hashSetOf(proxy, obj2, obj3)).hasSize(2)
     }
 }

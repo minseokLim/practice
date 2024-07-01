@@ -17,7 +17,7 @@ class SocialLinks(
         joinColumns = [JoinColumn(name = "member_id")],
         uniqueConstraints = [UniqueConstraint(columnNames = ["social_id", "social_type"])]
     )
-    private val values: MutableSet<SocialLink> = mutableSetOf()
+    protected val values: MutableSet<SocialLink> = mutableSetOf()
 ) {
     fun addSocialLink(socialType: SocialType, socialId: String) {
         values.add(SocialLink(socialType, socialId))
