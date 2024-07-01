@@ -99,10 +99,7 @@ subprojects {
 }
 
 dependencies {
-    jacocoAggregation(project(":app-module"))
-    jacocoAggregation(project(":auth-module"))
-    jacocoAggregation(project(":common-module"))
-    jacocoAggregation(project(":member-module"))
+    getJacocoTargetProjects().forEach { jacocoAggregation(it) }
 }
 
 tasks.withType<Test> {
@@ -113,12 +110,7 @@ tasks.withType<Test> {
 tasks.testCodeCoverageReport {
     classDirectories.setFrom(
         files(
-            *listOf(
-                project(":app-module"),
-                project(":auth-module"),
-                project(":common-module"),
-                project(":member-module")
-            ).map {
+            *getJacocoTargetProjects().map {
                 it.fileTree(
                     mapOf(
                         "dir" to "${it.layout.buildDirectory.get()}/classes/kotlin/main", // QClass들을 제외시키기 위함
@@ -134,3 +126,5 @@ tasks.testCodeCoverageReport {
         )
     )
 }
+
+private fun getJacocoTargetProjects() = rootProject.subprojects.filter { it.name != "test-module" }
