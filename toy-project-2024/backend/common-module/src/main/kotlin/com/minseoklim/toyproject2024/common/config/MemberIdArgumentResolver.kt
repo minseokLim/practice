@@ -1,6 +1,6 @@
-package com.minseoklim.toyproject2024.auth.config
+package com.minseoklim.toyproject2024.common.config
 
-import com.minseoklim.toyproject2024.auth.annotation.MemberId
+import com.minseoklim.toyproject2024.common.annotation.MemberId
 import org.springframework.core.MethodParameter
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component

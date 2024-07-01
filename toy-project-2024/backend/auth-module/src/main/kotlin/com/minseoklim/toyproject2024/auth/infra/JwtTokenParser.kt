@@ -1,11 +1,11 @@
 package com.minseoklim.toyproject2024.auth.infra
 
-import com.minseoklim.toyproject2024.auth.domain.model.Role
 import com.minseoklim.toyproject2024.auth.domain.model.TokenType
 import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.AUTHORITIES_KEY
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.AUTHORITY_DELIMITER
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider.Companion.TOKEN_TYPE_KEY
+import com.minseoklim.toyproject2024.member.domain.model.Role
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException

@@ -1,4 +1,4 @@
-package com.minseoklim.toyproject2024.auth.config
+package com.minseoklim.toyproject2024.common.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodArgumentResolver

@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.auth.domain.model.Role
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.*

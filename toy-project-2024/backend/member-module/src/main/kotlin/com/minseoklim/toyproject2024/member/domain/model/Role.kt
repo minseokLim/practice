@@ -1,4 +1,4 @@
-package com.minseoklim.toyproject2024.auth.domain.model
+package com.minseoklim.toyproject2024.member.domain.model
 
 import org.springframework.security.core.GrantedAuthority
 

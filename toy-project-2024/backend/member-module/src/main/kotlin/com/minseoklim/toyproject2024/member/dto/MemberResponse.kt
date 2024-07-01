@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.dto
 
-import com.minseoklim.toyproject2024.auth.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.Member
+import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
 data class MemberResponse(

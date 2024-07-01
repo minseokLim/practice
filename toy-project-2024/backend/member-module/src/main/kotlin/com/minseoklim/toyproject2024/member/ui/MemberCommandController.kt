@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.ui
 
-import com.minseoklim.toyproject2024.auth.annotation.CheckAdminPermission
-import com.minseoklim.toyproject2024.auth.annotation.MemberId
+import com.minseoklim.toyproject2024.common.annotation.CheckAdminPermission
+import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.MemberCommandService
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
 import com.minseoklim.toyproject2024.member.dto.MemberResponse

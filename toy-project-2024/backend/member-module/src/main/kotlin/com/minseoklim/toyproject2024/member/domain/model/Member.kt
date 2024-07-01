@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.auth.domain.model.Role
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import jakarta.persistence.Entity

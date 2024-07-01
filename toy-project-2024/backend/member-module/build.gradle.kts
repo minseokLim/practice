@@ -5,7 +5,6 @@ bootJar.enabled = false
 
 dependencies {
     // module
-    implementation(project(":auth-module"))
     implementation(project(":common-module"))
 
     testImplementation(project(":test-module"))

@@ -1,4 +1,4 @@
-package com.minseoklim.toyproject2024.member.application
+package com.minseoklim.toyproject2024.auth.application
 
 import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository

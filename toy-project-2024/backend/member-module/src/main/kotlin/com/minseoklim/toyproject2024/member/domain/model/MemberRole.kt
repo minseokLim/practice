@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.auth.domain.model.Role
 import jakarta.persistence.Embeddable
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated

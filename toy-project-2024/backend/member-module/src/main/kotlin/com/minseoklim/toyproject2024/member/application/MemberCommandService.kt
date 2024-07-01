@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.application
 
-import com.minseoklim.toyproject2024.auth.application.LogoutService
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import com.minseoklim.toyproject2024.member.domain.service.LoginIdValidator
 import com.minseoklim.toyproject2024.member.dto.MemberJoinRequest
@@ -15,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class MemberCommandService(
     private val memberRepository: MemberRepository,
     private val loginIdValidator: LoginIdValidator,
-    private val passwordEncoder: PasswordEncoder,
-    private val logoutService: LogoutService
+    private val passwordEncoder: PasswordEncoder
 ) {
     fun join(request: MemberJoinRequest): MemberResponse {
         loginIdValidator.checkExistence(request.loginId)
@@ -34,6 +32,6 @@ class MemberCommandService(
     fun delete(id: Int) {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.delete()
-        logoutService.logoutAll(id)
+//        logoutService.logoutAll(id) TODO 이벤트 방식으로 로그아웃 처리
     }
 }
