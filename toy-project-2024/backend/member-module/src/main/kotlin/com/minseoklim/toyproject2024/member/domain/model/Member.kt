@@ -1,7 +1,9 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.event.EventPublisher
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.member.event.MemberDeletedEvent
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -101,6 +103,7 @@ class Member(
 
     fun delete() {
         isDeleted = true
+        EventPublisher.publish(MemberDeletedEvent(this, id!!))
     }
 
     fun validateVersion(version: Long) {

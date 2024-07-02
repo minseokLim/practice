@@ -161,6 +161,7 @@ class MemberTest {
             name = "testName",
             email = "test@test.com"
         )
+        ReflectionTestUtils.setField(member, "id", 1)
 
         // when
         member.delete()

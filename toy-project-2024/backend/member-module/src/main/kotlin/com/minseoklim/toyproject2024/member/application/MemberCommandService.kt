@@ -32,6 +32,5 @@ class MemberCommandService(
     fun delete(id: Int) {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.delete()
-//        logoutService.logoutAll(id) TODO 이벤트 방식으로 로그아웃 처리
     }
 }
