@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.auth.event
 
 import com.minseoklim.toyproject2024.auth.application.LogoutService
+import com.minseoklim.toyproject2024.common.util.EventActionLogger
 import com.minseoklim.toyproject2024.member.event.MemberDeletedEvent
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
@@ -14,6 +15,8 @@ class MemberDeletedEventHandler(
     @Async
     @TransactionalEventListener(classes = [MemberDeletedEvent::class], phase = TransactionPhase.AFTER_COMMIT)
     fun handle(event: MemberDeletedEvent) {
-        logoutService.logoutAll(event.memberId)
+        EventActionLogger.executeWithLogging(event) {
+            logoutService.logoutAll(event.memberId)
+        }
     }
 }
