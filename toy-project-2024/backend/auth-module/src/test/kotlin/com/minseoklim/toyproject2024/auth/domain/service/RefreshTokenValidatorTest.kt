@@ -30,6 +30,7 @@ class RefreshTokenValidatorTest {
             JwtTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
         tokenParser = JwtTokenParser(SECRET_KEY)
         refreshTokenValidator = RefreshTokenValidator(refreshTokenRepository, tokenParser)
+        refreshTokenRepository.deleteAll()
     }
 
     @Test

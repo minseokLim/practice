@@ -22,6 +22,7 @@ class LoginIdValidatorTest {
     @BeforeEach
     fun setUp() {
         loginIdValidator = LoginIdValidator(memberRepository)
+        memberRepository.deleteAll()
     }
 
     @Test
