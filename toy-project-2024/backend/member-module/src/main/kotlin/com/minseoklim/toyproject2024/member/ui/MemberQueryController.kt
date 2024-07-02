@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -19,8 +20,11 @@ class MemberQueryController(
 ) {
     @GetMapping
     @CheckAdminPermission
-    fun list(pageable: Pageable): ResponseEntity<Page<MemberResponse>> {
-        val responses = memberQueryService.list(pageable)
+    fun list(
+        @RequestParam(required = false) filter: String?,
+        pageable: Pageable
+    ): ResponseEntity<Page<MemberResponse>> {
+        val responses = memberQueryService.list(filter, pageable)
         return ResponseEntity.ok(responses)
     }
 

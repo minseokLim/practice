@@ -16,6 +16,8 @@ import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixtu
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입됨`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 검색 요청`
+import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 검색됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회됨`
@@ -56,6 +58,12 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
         // then
         `회원 목록 조회됨`(memberListResponse)
+
+        // when
+        val memberSearchResponse = `회원 목록 검색 요청`(NEVER_EXPIRED_ADMIN_ACCESS_TOKEN, "[loginId:$MEMBER_ID]")
+
+        // then
+        `회원 목록 검색됨`(memberSearchResponse)
 
         // given
         val memberId = memberJoinResponse.extractId()

@@ -35,6 +35,15 @@ object MemberAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.FORBIDDEN)
     }
 
+    fun `회원 목록 검색 요청`(accessToken: String, filter: String): ExtractableResponse<Response> {
+        return RequestUtil.get("/members?filter=$filter", accessToken)
+    }
+
+    fun `회원 목록 검색됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+        assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
+    }
+
     fun `회원 조회 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
         return RequestUtil.get("/members/$id", accessToken)
     }
