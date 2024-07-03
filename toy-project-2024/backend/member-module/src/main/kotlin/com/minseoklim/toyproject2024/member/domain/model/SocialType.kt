@@ -18,7 +18,7 @@ enum class SocialType {
     KAKAO {
         override fun toMemberEntity(attributes: Map<String, Any>): Member {
             return Member(
-                name = (attributes["properties"] as Map<*, *>)["nickname"] as String,
+                name = extractProperties(attributes)["nickname"] as String,
                 socialType = this,
                 socialId = extractSocialId(attributes)
             )
@@ -27,19 +27,27 @@ enum class SocialType {
         override fun extractSocialId(attributes: Map<String, Any>): String {
             return attributes["id"].toString()
         }
+
+        private fun extractProperties(attributes: Map<String, Any>): Map<*, *> {
+            return attributes["properties"] as Map<*, *>
+        }
     },
     NAVER {
         override fun toMemberEntity(attributes: Map<String, Any>): Member {
             return Member(
-                name = (attributes["response"] as Map<*, *>)["name"] as String,
-                email = (attributes["response"] as Map<*, *>)["email"] as String,
+                name = extractResponse(attributes)["name"] as String,
+                email = extractResponse(attributes)["email"] as String,
                 socialType = this,
                 socialId = extractSocialId(attributes)
             )
         }
 
         override fun extractSocialId(attributes: Map<String, Any>): String {
-            return (attributes["response"] as Map<*, *>)["id"] as String
+            return extractResponse(attributes)["id"] as String
+        }
+
+        private fun extractResponse(attributes: Map<String, Any>): Map<*, *> {
+            return attributes["response"] as Map<*, *>
         }
     };
 
