@@ -33,6 +33,23 @@ class SocialTypeTest {
 
         // then
         assertThat(kakaoMember).isNotNull
+
+        // given
+        val naverAttributes = mapOf(
+            "resultcode" to "00",
+            "message" to "success",
+            "response" to mapOf(
+                "id" to "1234",
+                "name" to "임민석",
+                "email" to "test@test.com"
+            )
+        )
+
+        // when
+        val naverMember = SocialType.NAVER.toMemberEntity(naverAttributes)
+
+        // then
+        assertThat(naverMember).isNotNull
     }
 
     @Test
@@ -63,5 +80,22 @@ class SocialTypeTest {
 
         // then
         assertThat(kakaoSocialId).isEqualTo("1234")
+
+        // given
+        val naverAttributes = mapOf(
+            "resultcode" to "00",
+            "message" to "success",
+            "response" to mapOf(
+                "id" to "1234",
+                "name" to "임민석",
+                "email" to "test@test.com"
+            )
+        )
+
+        // when
+        val naverSocialId = SocialType.NAVER.extractSocialId(naverAttributes)
+
+        // then
+        assertThat(naverSocialId).isEqualTo("1234")
     }
 }

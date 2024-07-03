@@ -27,6 +27,20 @@ enum class SocialType {
         override fun extractSocialId(attributes: Map<String, Any>): String {
             return attributes["id"].toString()
         }
+    },
+    NAVER {
+        override fun toMemberEntity(attributes: Map<String, Any>): Member {
+            return Member(
+                name = (attributes["response"] as Map<*, *>)["name"] as String,
+                email = (attributes["response"] as Map<*, *>)["email"] as String,
+                socialType = this,
+                socialId = extractSocialId(attributes)
+            )
+        }
+
+        override fun extractSocialId(attributes: Map<String, Any>): String {
+            return (attributes["response"] as Map<*, *>)["id"] as String
+        }
     };
 
     abstract fun toMemberEntity(attributes: Map<String, Any>): Member
