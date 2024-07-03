@@ -57,6 +57,7 @@ object TestUtil {
         assertThat(proxy).isEqualTo(obj1)
         assertThat(obj1).isEqualTo(proxy)
 
-        assertThat(hashSetOf(proxy, obj2, obj3)).hasSize(2)
+        assertThat(obj1).hasSameHashCodeAs(obj2)
+        assertThat(proxy).hasSameHashCodeAs(obj2)
     }
 }
