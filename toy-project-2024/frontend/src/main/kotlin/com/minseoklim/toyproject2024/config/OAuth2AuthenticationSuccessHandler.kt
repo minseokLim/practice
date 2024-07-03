@@ -18,7 +18,14 @@ class OAuth2AuthenticationSuccessHandler(
         authentication: Authentication
     ) {
         val socialType = (authentication as OAuth2AuthenticationToken).authorizedClientRegistrationId.uppercase()
-        val encryptedSocialId = textEncryptor.encrypt(authentication.name)
+        val encryptedSocialId = textEncryptor.encrypt(extractSocialId(socialType, authentication))
         response.sendRedirect("/social-link?socialId=$encryptedSocialId&socialType=$socialType")
+    }
+
+    private fun extractSocialId(socialType: String, authentication: OAuth2AuthenticationToken): String {
+        return when (socialType) {
+            "NAVER" -> (authentication.principal.attributes["response"] as Map<*, *>)["id"] as String
+            else -> authentication.name
+        }
     }
 }

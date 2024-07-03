@@ -27,6 +27,9 @@
                 <button id="kakao-link-button" style="display: none;" class="btn btn-primary">
                     <a href="/oauth2/authorization/kakao" style="color: white; text-decoration: none">카카오 연동</a>
                 </button>
+                <button id="naver-link-button" style="display: none;" class="btn btn-primary">
+                    <a href="/oauth2/authorization/naver" style="color: white; text-decoration: none">네이버 연동</a>
+                </button>
             </div>
         </div>
     </div>
@@ -52,6 +55,9 @@
             }
             if (!memberInfo.socialTypes.includes('KAKAO')) {
                 document.getElementById('kakao-link-button').style.display = 'inline';
+            }
+            if (!memberInfo.socialTypes.includes('NAVER')) {
+                document.getElementById('naver-link-button').style.display = 'inline';
             }
         }
 
