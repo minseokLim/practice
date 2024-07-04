@@ -32,10 +32,10 @@ object TestUtil {
     }
 
     fun <T> runConcurrently(times: Int, vararg actions: (Int) -> T): List<T> {
-        return runBlocking {
+        return runBlocking(Executors.newFixedThreadPool(times).asCoroutineDispatcher()) {
             (0 until times).flatMap {
                 actions.map { action ->
-                    async(Executors.newFixedThreadPool(times).asCoroutineDispatcher()) {
+                    async {
                         action(it)
                     }
                 }
