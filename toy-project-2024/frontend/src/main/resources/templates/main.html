@@ -31,6 +31,17 @@
                     <a href="/oauth2/authorization/naver" style="color: white; text-decoration: none">네이버 연동</a>
                 </button>
             </div>
+            <div class="col-md-4" style="margin-top: 100px;">
+                <button id="google-unlink-button" data-social-type="GOOGLE" style="display: none;"
+                        class="btn btn-warning">구글 연동 해제
+                </button>
+                <button id="kakao-unlink-button" data-social-type="KAKAO" style="display: none;"
+                        class="btn btn-warning">카카오 연동 해제
+                </button>
+                <button id="naver-unlink-button" data-social-type="NAVER" style="display: none;"
+                        class="btn btn-warning">네이버 연동 해제
+                </button>
+            </div>
         </div>
     </div>
     <section th:insert="~{layout/jsImport::jsImport}"></section>
@@ -40,10 +51,14 @@
                 .then(() => {
                     const memberInfo = getMemberInfo();
                     displayLinkButtons(memberInfo);
+                    displayUnlinkButtons(memberInfo);
                 });
         };
 
         document.getElementById('logout-button').addEventListener('click', logout);
+        document.querySelectorAll('[data-social-type]').forEach(button => {
+            button.addEventListener('click', deleteSocialLink);
+        });
 
         function setMemberInfoIntoLocalStorage() {
             return requestToApi('/members/me', 'GET', null, response => localStorage.setItem('memberInfo', JSON.stringify(response.data)));
@@ -58,6 +73,18 @@
             }
             if (!memberInfo.socialTypes.includes('NAVER')) {
                 document.getElementById('naver-link-button').style.display = 'inline';
+            }
+        }
+
+        function displayUnlinkButtons(memberInfo) {
+            if (memberInfo.socialTypes.includes('GOOGLE')) {
+                document.getElementById('google-unlink-button').style.display = 'inline';
+            }
+            if (memberInfo.socialTypes.includes('KAKAO')) {
+                document.getElementById('kakao-unlink-button').style.display = 'inline';
+            }
+            if (memberInfo.socialTypes.includes('NAVER')) {
+                document.getElementById('naver-unlink-button').style.display = 'inline';
             }
         }
 
@@ -82,6 +109,14 @@
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('memberInfo');
+        }
+
+        function deleteSocialLink(event) {
+            const socialType = event.target.getAttribute('data-social-type');
+            return requestToApi('/members/me/social-links/' + socialType, 'DELETE', null, response => {
+                alert('소셜 연동 해제가 완료되었습니다.')
+                location.reload();
+            });
         }
     </script>
 </body>
