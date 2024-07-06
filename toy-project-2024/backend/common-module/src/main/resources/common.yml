@@ -1,0 +1,3 @@
+encryptor:
+  password: ${ENCRYPTOR_PASSWORD}
+  salt: ${ENCRYPTOR_SALT}
