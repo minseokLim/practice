@@ -6,7 +6,6 @@ import com.minseoklim.toyproject2024.member.domain.model.Name
 import com.minseoklim.toyproject2024.member.domain.model.Password
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
-import org.springframework.security.crypto.password.PasswordEncoder
 
 data class MemberUpdateRequest(
     @get:NotBlank(message = Password.ERR_MSG)
@@ -20,7 +19,7 @@ data class MemberUpdateRequest(
 
     val version: Long
 ) {
-    fun toEntity(original: Member, passwordEncoder: PasswordEncoder): Member {
-        return Member(original.loginId?.value, passwordEncoder.encode(password), name, email)
+    fun toEntity(original: Member): Member {
+        return Member(original.loginId?.value, password, name, email)
     }
 }

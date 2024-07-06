@@ -7,7 +7,6 @@ import com.minseoklim.toyproject2024.member.domain.model.Name
 import com.minseoklim.toyproject2024.member.domain.model.Password
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
-import org.springframework.security.crypto.password.PasswordEncoder
 
 data class MemberJoinRequest(
     @get:Pattern(regexp = LoginId.REGEX_STR, message = LoginId.ERR_MSG)
@@ -22,7 +21,7 @@ data class MemberJoinRequest(
     @get:Pattern(regexp = Email.REGEX_STR, message = Email.ERR_MSG)
     val email: String
 ) {
-    fun toEntity(passwordEncoder: PasswordEncoder): Member {
-        return Member(loginId, passwordEncoder.encode(password), name, email)
+    fun toEntity(): Member {
+        return Member(loginId, password, name, email)
     }
 }

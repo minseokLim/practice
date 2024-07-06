@@ -1,11 +1,18 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
+import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 class PasswordTest {
+
+    @BeforeEach
+    fun setUp() {
+        PasswordEncodeUtil.init(BCryptPasswordEncoder())
+    }
 
     @Test
     fun constructor() {
@@ -18,16 +25,5 @@ class PasswordTest {
         assertThatIllegalArgumentException().isThrownBy {
             Password("")
         }
-    }
-
-    @Test
-    fun equalsAndHashCode() {
-        // given
-        val password1 = Password("test1234")
-        val password2 = Password("test1234")
-        val password3 = Password("other1234")
-
-        // when, then
-        TestUtil.testEqualsAndHashCode(password1, password2, password3)
     }
 }
