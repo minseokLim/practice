@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.member.dto
 
+import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
@@ -20,8 +21,8 @@ data class MemberResponse(
                 MemberResponse(
                     id = id!!,
                     loginId = loginId?.value,
-                    name = name.value,
-                    email = email?.value,
+                    name = TextEncryptUtil.decrypt(name.encryptedValue),
+                    email = email?.let { TextEncryptUtil.decrypt(email!!.encryptedValue) },
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted,

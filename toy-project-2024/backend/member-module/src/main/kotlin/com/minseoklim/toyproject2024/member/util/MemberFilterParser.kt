@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.member.util
 
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.common.util.ConsistentHashUtil
 import com.minseoklim.toyproject2024.common.util.FilterParser
 import com.minseoklim.toyproject2024.common.util.QuerydslUtil.equal
 import com.minseoklim.toyproject2024.member.domain.model.QMember.member
@@ -17,8 +18,8 @@ object MemberFilterParser : FilterParser() {
     override fun createBooleanExpression(key: String, value: String): BooleanExpression {
         return when (key) {
             "loginId" -> member.loginId.value equal value
-            "name" -> member.name.value equal value
-            "email" -> member.email.value equal value
+            "name" -> member.name.hashedValue equal ConsistentHashUtil.hash(value)
+            "email" -> member.email.hashedValue equal ConsistentHashUtil.hash(value)
             "role" -> {
                 member.id.`in`(
                     JPAExpressions.select(member.id)
