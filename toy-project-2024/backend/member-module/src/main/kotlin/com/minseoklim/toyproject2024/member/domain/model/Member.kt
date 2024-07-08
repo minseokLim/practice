@@ -76,6 +76,13 @@ class Member(
         memberRoles.addRole(role)
     }
 
+    fun deleteRole(role: Role) {
+        memberRoles.deleteRole(role)
+        if (memberRoles.getRoles().isEmpty()) {
+            throw BadRequestException("ROLE_REQUIRED", "최소 1개 이상의 권한은 필수입니다.")
+        }
+    }
+
     fun getRoles(): Set<Role> {
         return memberRoles.getRoles()
     }

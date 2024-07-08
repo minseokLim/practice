@@ -18,6 +18,10 @@ class MemberRoles(
         values.add(MemberRole(role))
     }
 
+    fun deleteRole(role: Role) {
+        values.removeIf { it.role == role }
+    }
+
     fun getRoles(): Set<Role> {
         return values.map { it.role }.toSet()
     }

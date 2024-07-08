@@ -19,6 +19,18 @@ class MemberRolesTest {
     }
 
     @Test
+    fun deleteRole() {
+        // given
+        val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+
+        // when
+        memberRoles.deleteRole(Role.MEMBER)
+
+        // then
+        assertThat(memberRoles.getRoles()).doesNotContain(Role.MEMBER)
+    }
+
+    @Test
     fun getRoles() {
         // given
         val memberRoles = MemberRoles()

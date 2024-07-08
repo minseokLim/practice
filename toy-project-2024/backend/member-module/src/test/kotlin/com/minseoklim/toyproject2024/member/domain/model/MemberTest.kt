@@ -43,6 +43,29 @@ class MemberTest {
     }
 
     @Test
+    fun deleteRole() {
+        // given
+        val member = Member(
+            loginId = "test1234",
+            password = "password",
+            name = "testName",
+            email = "test@test.com"
+        )
+        member.addRole(Role.ADMIN)
+
+        // when
+        member.deleteRole(Role.ADMIN)
+
+        // then
+        assertThat(member.getRoles()).doesNotContain(Role.ADMIN)
+
+        // when, then
+        assertThatThrownBy {
+            member.deleteRole(Role.MEMBER)
+        }.isInstanceOf(BadRequestException::class.java)
+    }
+
+    @Test
     fun getRoles() {
         // given
         val member = Member(
