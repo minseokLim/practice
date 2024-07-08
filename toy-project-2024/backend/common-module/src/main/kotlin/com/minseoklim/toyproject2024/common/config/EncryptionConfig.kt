@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.common.config
 
 import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
+import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -18,20 +19,16 @@ class EncryptionConfig(
     private val encryptorSalt: String
 ) {
     @Bean
-    fun passwordEncodeUtil(): PasswordEncodeUtil {
-        PasswordEncodeUtil.init(passwordEncoder())
-        return PasswordEncodeUtil
+    fun initUtils(): InitializingBean {
+        return InitializingBean {
+            PasswordEncodeUtil.init(passwordEncoder())
+            TextEncryptUtil.init(textEncryptor())
+        }
     }
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
-    }
-
-    @Bean
-    fun textEncryptUtil(): TextEncryptUtil {
-        TextEncryptUtil.init(textEncryptor())
-        return TextEncryptUtil
     }
 
     @Bean
