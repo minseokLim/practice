@@ -9,7 +9,7 @@ object PasswordEncodeUtil {
         PasswordEncodeUtil.passwordEncoder = passwordEncoder
     }
 
-    fun encodePassword(password: String): String {
+    fun encode(password: String): String {
         return passwordEncoder.encode(password)
     }
 }

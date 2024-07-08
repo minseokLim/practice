@@ -13,12 +13,12 @@ class PasswordEncodeUtilTest {
     }
 
     @Test
-    fun encodePassword() {
+    fun encode() {
         // given
         val password = "password"
 
         // when
-        val encodedPassword = PasswordEncodeUtil.encodePassword(password)
+        val encodedPassword = PasswordEncodeUtil.encode(password)
 
         // then
         assertThat(encodedPassword).isNotEqualTo(password)

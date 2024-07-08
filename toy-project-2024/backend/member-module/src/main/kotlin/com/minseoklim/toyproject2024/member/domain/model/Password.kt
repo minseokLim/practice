@@ -13,7 +13,7 @@ class Password(
     }
 
     @Column(name = "password")
-    val value: String = PasswordEncodeUtil.encodePassword(value)
+    val value: String = PasswordEncodeUtil.encode(value)
 
     companion object {
         const val ERR_MSG = "비밀번호는 공백일 수 없습니다."
