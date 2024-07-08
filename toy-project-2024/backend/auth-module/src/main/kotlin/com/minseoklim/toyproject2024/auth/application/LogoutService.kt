@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.auth.application
 
 import com.minseoklim.toyproject2024.auth.domain.service.AccessTokenDbCheckFlagActivator
 import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
-import com.minseoklim.toyproject2024.auth.dto.TokenRequest
+import com.minseoklim.toyproject2024.auth.dto.LogoutRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,7 +13,7 @@ class LogoutService(
     private val accessTokenDbCheckFlagActivator: AccessTokenDbCheckFlagActivator,
     private val tokenParser: TokenParser,
 ) {
-    fun logout(request: TokenRequest) {
+    fun logout(request: LogoutRequest) {
         deleteTokenService.deleteToken(request.accessToken, request.refreshToken)
         accessTokenDbCheckFlagActivator.activateAccessTokenDbCheckFlag(extractMemberId(request.accessToken))
     }

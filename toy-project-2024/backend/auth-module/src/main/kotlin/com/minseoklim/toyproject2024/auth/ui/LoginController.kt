@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.LoginService
 import com.minseoklim.toyproject2024.auth.dto.LoginRequest
-import com.minseoklim.toyproject2024.auth.dto.TokenResponse
+import com.minseoklim.toyproject2024.auth.dto.LoginResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,7 +14,7 @@ class LoginController(
     private val loginService: LoginService
 ) {
     @PostMapping("/login")
-    fun login(@Valid @RequestBody request: LoginRequest): ResponseEntity<TokenResponse> {
+    fun login(@Valid @RequestBody request: LoginRequest): ResponseEntity<LoginResponse> {
         val response = loginService.login(request)
         return ResponseEntity.ok(response)
     }

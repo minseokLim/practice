@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.LogoutService
-import com.minseoklim.toyproject2024.auth.dto.TokenRequest
+import com.minseoklim.toyproject2024.auth.dto.LogoutRequest
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -14,7 +14,7 @@ class LogoutController(
     private val logoutService: LogoutService
 ) {
     @PostMapping("/logout")
-    fun logout(@Valid @RequestBody request: TokenRequest): ResponseEntity<Unit> {
+    fun logout(@Valid @RequestBody request: LogoutRequest): ResponseEntity<Unit> {
         logoutService.logout(request)
         return ResponseEntity.ok().build()
     }
