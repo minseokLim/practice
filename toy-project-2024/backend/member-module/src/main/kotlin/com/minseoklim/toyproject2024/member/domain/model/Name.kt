@@ -1,10 +1,10 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
+import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
 import com.minseoklim.toyproject2024.common.util.ConsistentHashUtil
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
-import org.hibernate.proxy.HibernateProxy
 import java.util.Objects
 
 @Embeddable
@@ -22,16 +22,7 @@ class Name(
     val encryptedValue: String = TextEncryptUtil.encrypt(value)
 
     final override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null) return false
-        val oEffectiveClass =
-            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
-        val thisEffectiveClass =
-            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
-        if (thisEffectiveClass != oEffectiveClass) return false
-        other as Name
-
-        return hashedValue == other.hashedValue
+        return this.entityEmbeddableEquals(other) { x, y -> x.hashedValue == y.hashedValue }
     }
 
     final override fun hashCode(): Int = Objects.hash(hashedValue)

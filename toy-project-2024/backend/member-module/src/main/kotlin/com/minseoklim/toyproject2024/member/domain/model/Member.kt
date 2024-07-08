@@ -2,6 +2,8 @@ package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
+import com.minseoklim.toyproject2024.common.util.CommonUtil.entityHashCode
 import com.minseoklim.toyproject2024.common.util.EventPublisher
 import com.minseoklim.toyproject2024.member.event.MemberDeletedEvent
 import jakarta.persistence.Entity
@@ -11,7 +13,6 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
 import jakarta.persistence.Version
-import org.hibernate.proxy.HibernateProxy
 import org.springframework.dao.OptimisticLockingFailureException
 
 @Entity
@@ -123,18 +124,8 @@ class Member(
     }
 
     final override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null) return false
-        val oEffectiveClass =
-            if (other is HibernateProxy) other.hibernateLazyInitializer.persistentClass else other.javaClass
-        val thisEffectiveClass =
-            if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass else this.javaClass
-        if (thisEffectiveClass != oEffectiveClass) return false
-        other as Member
-
-        return id != null && id == other.id
+        return this.entityEmbeddableEquals(other) { x, y -> x.id != null && x.id == y.id }
     }
 
-    final override fun hashCode(): Int =
-        if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+    final override fun hashCode(): Int = this.entityHashCode()
 }
