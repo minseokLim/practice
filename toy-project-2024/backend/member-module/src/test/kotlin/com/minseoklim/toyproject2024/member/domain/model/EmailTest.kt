@@ -1,11 +1,19 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
+import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.springframework.security.crypto.encrypt.Encryptors
 
 class EmailTest {
+
+    @BeforeEach
+    fun setUp() {
+        TextEncryptUtil.init(Encryptors.noOpText())
+    }
 
     @Test
     fun constructor() {
