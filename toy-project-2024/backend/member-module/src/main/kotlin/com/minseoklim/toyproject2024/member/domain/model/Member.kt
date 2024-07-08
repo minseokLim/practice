@@ -70,6 +70,9 @@ class Member(
     )
 
     fun addRole(role: Role) {
+        if (memberRoles.getRoles().contains(role)) {
+            throw BadRequestException("ROLE_DUPLICATED", "이미 등록된 권한입니다.")
+        }
         memberRoles.addRole(role)
     }
 

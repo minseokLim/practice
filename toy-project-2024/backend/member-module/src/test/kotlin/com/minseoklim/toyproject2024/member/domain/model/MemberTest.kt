@@ -2,12 +2,14 @@ package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
+import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.util.ReflectionTestUtils
 
 class MemberTest {
@@ -15,6 +17,7 @@ class MemberTest {
     @BeforeEach
     fun setUp() {
         PasswordEncodeUtil.init(BCryptPasswordEncoder())
+        TextEncryptUtil.init(Encryptors.noOpText())
     }
 
     @Test
@@ -32,6 +35,11 @@ class MemberTest {
 
         // then
         assertThat(member.getRoles()).contains(Role.ADMIN)
+
+        // when, then
+        assertThatThrownBy {
+            member.addRole(Role.ADMIN)
+        }.isInstanceOf(BadRequestException::class.java)
     }
 
     @Test
