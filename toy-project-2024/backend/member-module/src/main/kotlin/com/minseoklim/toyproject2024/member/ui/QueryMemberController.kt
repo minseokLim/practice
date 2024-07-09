@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.member.ui
 
 import com.minseoklim.toyproject2024.common.annotation.CheckAdminPermission
 import com.minseoklim.toyproject2024.common.annotation.MemberId
-import com.minseoklim.toyproject2024.member.application.MemberQueryService
-import com.minseoklim.toyproject2024.member.dto.MemberResponse
+import com.minseoklim.toyproject2024.member.application.QueryMemberService
+import com.minseoklim.toyproject2024.member.dto.QueryMemberResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -15,29 +15,29 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/members")
-class MemberQueryController(
-    private val memberQueryService: MemberQueryService
+class QueryMemberController(
+    private val queryMemberService: QueryMemberService
 ) {
     @GetMapping
     @CheckAdminPermission
     fun list(
         @RequestParam(required = false) filter: String?,
         pageable: Pageable
-    ): ResponseEntity<Page<MemberResponse>> {
-        val responses = memberQueryService.list(filter, pageable)
+    ): ResponseEntity<Page<QueryMemberResponse>> {
+        val responses = queryMemberService.list(filter, pageable)
         return ResponseEntity.ok(responses)
     }
 
     @GetMapping("/{id}")
     @CheckAdminPermission
-    fun get(@PathVariable id: Int): ResponseEntity<MemberResponse> {
-        val response = memberQueryService.get(id)
+    fun get(@PathVariable id: Int): ResponseEntity<QueryMemberResponse> {
+        val response = queryMemberService.get(id)
         return ResponseEntity.ok(response)
     }
 
     @GetMapping("/me")
-    fun getMe(@MemberId id: Int): ResponseEntity<MemberResponse> {
-        val response = memberQueryService.get(id)
+    fun getMe(@MemberId id: Int): ResponseEntity<QueryMemberResponse> {
+        val response = queryMemberService.get(id)
         return ResponseEntity.ok(response)
     }
 }

@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.application
 
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
-import com.minseoklim.toyproject2024.member.dto.MemberResponse
+import com.minseoklim.toyproject2024.member.dto.QueryMemberResponse
 import com.minseoklim.toyproject2024.member.util.MemberFilterParser
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -10,17 +10,17 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class MemberQueryService(
+class QueryMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun list(filter: String?, pageable: Pageable): Page<MemberResponse> {
+    fun list(filter: String?, pageable: Pageable): Page<QueryMemberResponse> {
         val predicate = MemberFilterParser.parse(filter)
         val members = memberRepository.findAll(predicate, pageable)
-        return members.map { MemberResponse.of(it) }
+        return members.map { QueryMemberResponse.of(it) }
     }
 
-    fun get(id: Int): MemberResponse {
+    fun get(id: Int): QueryMemberResponse {
         val member = MemberServiceHelper.getMember(memberRepository, id)
-        return MemberResponse.of(member)
+        return QueryMemberResponse.of(member)
     }
 }

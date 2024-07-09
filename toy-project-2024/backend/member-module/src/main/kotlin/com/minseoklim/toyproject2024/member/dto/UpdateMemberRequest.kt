@@ -7,7 +7,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Password
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
-data class MemberUpdateRequest(
+data class UpdateMemberRequest(
     @get:NotBlank(message = Password.ERR_MSG)
     val password: String,
 

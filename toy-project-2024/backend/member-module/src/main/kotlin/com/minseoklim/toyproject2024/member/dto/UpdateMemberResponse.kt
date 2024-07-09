@@ -5,7 +5,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
-data class MemberResponse(
+data class UpdateMemberResponse(
     val id: Int,
     val loginId: String?,
     val name: String,
@@ -16,9 +16,9 @@ data class MemberResponse(
     val version: Long
 ) {
     companion object {
-        fun of(member: Member): MemberResponse {
+        fun of(member: Member): UpdateMemberResponse {
             return with(member) {
-                MemberResponse(
+                UpdateMemberResponse(
                     id = id!!,
                     loginId = loginId?.value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),

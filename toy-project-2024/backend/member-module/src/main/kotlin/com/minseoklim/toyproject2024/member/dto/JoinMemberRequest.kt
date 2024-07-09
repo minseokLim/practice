@@ -8,7 +8,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Password
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
-data class MemberJoinRequest(
+data class JoinMemberRequest(
     @get:Pattern(regexp = LoginId.REGEX_STR, message = LoginId.ERR_MSG)
     val loginId: String,
 

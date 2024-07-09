@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.member.domain.model.SocialId
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 import jakarta.validation.constraints.NotBlank
 
-data class SocialLinkCreateRequest(
+data class AddSocialLinkRequest(
     val socialType: SocialType,
 
     @get:NotBlank(message = SocialId.ERR_MSG)
