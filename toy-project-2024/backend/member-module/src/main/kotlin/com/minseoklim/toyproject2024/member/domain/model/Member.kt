@@ -107,6 +107,12 @@ class Member(
     }
 
     fun update(other: Member) {
+        if (loginId != null && other.password == null) {
+            throw BadRequestException("PASSWORD_REQUIRED", "로그인 ID가 있는 경우, 비밀번호는 필수입니다.")
+        }
+        if (loginId == null && other.password != null) {
+            throw BadRequestException("PASSWORD_NOT_ALLOWED", "로그인 ID가 없는 경우, 비밀번호는 허용되지 않습니다.")
+        }
         password = other.password
         name = other.name
         email = other.email

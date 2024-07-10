@@ -169,13 +169,13 @@ class MemberTest {
     @Test
     fun update() {
         // given
-        val member = Member(
+        val memberWithLoginId = Member(
             loginId = "test1234",
             password = "password",
             name = "testName",
             email = "test@test.com"
         )
-        val other = Member(
+        val otherWithLoginId = Member(
             loginId = "test1234",
             password = "newPassword",
             name = "newName",
@@ -183,12 +183,43 @@ class MemberTest {
         )
 
         // when
-        member.update(other)
+        memberWithLoginId.update(otherWithLoginId)
 
         // then
-        assertThat(member.password).isEqualTo(other.password)
-        assertThat(member.name).isEqualTo(other.name)
-        assertThat(member.email).isEqualTo(other.email)
+        assertThat(memberWithLoginId.password).isEqualTo(otherWithLoginId.password)
+        assertThat(memberWithLoginId.name).isEqualTo(otherWithLoginId.name)
+        assertThat(memberWithLoginId.email).isEqualTo(otherWithLoginId.email)
+
+        // given
+        val memberWithoutLoginId = Member(
+            name = "testName",
+            email = "test@test.com",
+            socialType = SocialType.GOOGLE,
+            socialId = "1234"
+        )
+        val otherWithoutLoginId = Member(
+            name = "newName",
+            email = "new@test.com",
+            socialType = SocialType.GOOGLE,
+            socialId = "1234"
+        )
+
+        // when
+        memberWithoutLoginId.update(otherWithoutLoginId)
+
+        // then
+        assertThat(memberWithoutLoginId.name).isEqualTo(otherWithoutLoginId.name)
+        assertThat(memberWithoutLoginId.email).isEqualTo(otherWithoutLoginId.email)
+
+        // when, then
+        assertThatThrownBy {
+            memberWithLoginId.update(otherWithoutLoginId)
+        }.isInstanceOf(BadRequestException::class.java)
+
+        // when, then
+        assertThatThrownBy {
+            otherWithoutLoginId.update(memberWithLoginId)
+        }.isInstanceOf(BadRequestException::class.java)
     }
 
     @Test
