@@ -19,8 +19,34 @@
             </ul>
         </nav>
         <div style="margin-top: 50px;">
-            <h1>메인 페이지</h1>
-            <div class="col-md-4" style="margin-top: 100px;">
+            <h3>내 정보</h3>
+            <div class="col-md-4" style="margin-top: 20px;">
+                <div class="mb-3">
+                    <label for="login-id" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="login-id" name="login-id" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password-check" class="form-label">비밀번호 확인</label>
+                    <input type="password" class="form-control" id="password-check" name="password-check" required>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <input type="hidden" id="version" name="version">
+                <button class="btn btn-primary" id="update-button">수정</button>
+            </div>
+            <br/>
+            <h3>소셜 연동</h3>
+            <div class="col-md-4" style="margin-top: 20px;">
                 <button id="google-link-button" style="display: none;" class="btn btn-primary">
                     <a href="/oauth2/authorization/google" style="color: white; text-decoration: none">구글 연동</a>
                 </button>
@@ -31,7 +57,7 @@
                     <a href="/oauth2/authorization/naver" style="color: white; text-decoration: none">네이버 연동</a>
                 </button>
             </div>
-            <div class="col-md-4" style="margin-top: 100px;">
+            <div class="col-md-4" style="margin-top: 20px;">
                 <button id="google-unlink-button" data-social-type="GOOGLE" style="display: none;"
                         class="btn btn-warning">구글 연동 해제
                 </button>
@@ -50,18 +76,32 @@
             setMemberInfoIntoLocalStorage()
                 .then(() => {
                     const memberInfo = getMemberInfo();
+                    setMemberInfoIntoForm(memberInfo);
                     displayLinkButtons(memberInfo);
                     displayUnlinkButtons(memberInfo);
                 });
         };
 
         document.getElementById('logout-button').addEventListener('click', logout);
+        document.getElementById('update-button').addEventListener('click', updateMemberInfo);
         document.querySelectorAll('[data-social-type]').forEach(button => {
             button.addEventListener('click', deleteSocialLink);
         });
 
         function setMemberInfoIntoLocalStorage() {
             return requestToApi('/members/me', 'GET', null, response => localStorage.setItem('memberInfo', JSON.stringify(response.data)));
+        }
+
+        function setMemberInfoIntoForm(memberInfo) {
+            document.getElementById('login-id').value = memberInfo.loginId;
+            if (memberInfo.loginId == null) {
+                document.getElementById('password').setAttribute('disabled', true);
+                document.getElementById('password-check').setAttribute('disabled', true);
+            }
+
+            document.getElementById('name').value = memberInfo.name;
+            document.getElementById('email').value = memberInfo.email;
+            document.getElementById('version').value = memberInfo.version;
         }
 
         function displayLinkButtons(memberInfo) {
@@ -109,6 +149,31 @@
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('memberInfo');
+        }
+
+        function updateMemberInfo() {
+            const loginId = document.getElementById('login-id').value;
+            const password = document.getElementById('password').value;
+            const passwordCheck = document.getElementById('password-check').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const version = document.getElementById('version').value;
+
+            if (password !== passwordCheck) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+
+            return requestToApi('/members/me', 'PUT', {
+                loginId: loginId,
+                password: document.getElementById('password').getAttribute('disabled') ? null : password,
+                name: name,
+                email: email,
+                version: version
+            }, response => {
+                alert('회원 정보 수정이 완료되었습니다.');
+                location.reload();
+            });
         }
 
         function deleteSocialLink(event) {
