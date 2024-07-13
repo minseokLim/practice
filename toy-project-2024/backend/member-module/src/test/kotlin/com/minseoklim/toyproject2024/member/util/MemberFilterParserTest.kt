@@ -1,6 +1,8 @@
 package com.minseoklim.toyproject2024.member.util
 
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
+import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
@@ -11,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
@@ -23,6 +27,9 @@ class MemberFilterParserTest {
     @BeforeEach
     fun setUp() {
         memberRepository.deleteAll()
+
+        PasswordEncodeUtil.init(BCryptPasswordEncoder())
+        TextEncryptUtil.init(Encryptors.noOpText())
     }
 
     @Test

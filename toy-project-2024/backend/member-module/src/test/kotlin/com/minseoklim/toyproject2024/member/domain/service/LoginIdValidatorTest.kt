@@ -1,6 +1,8 @@
 package com.minseoklim.toyproject2024.member.domain.service
 
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
+import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import org.assertj.core.api.Assertions.assertThatNoException
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
@@ -23,6 +27,9 @@ class LoginIdValidatorTest {
     fun setUp() {
         loginIdValidator = LoginIdValidator(memberRepository)
         memberRepository.deleteAll()
+
+        PasswordEncodeUtil.init(BCryptPasswordEncoder())
+        TextEncryptUtil.init(Encryptors.noOpText())
     }
 
     @Test
