@@ -10,26 +10,27 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.context.annotation.Import
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.TestingAuthenticationToken
 import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
+@Import(JwtTokenProvider::class, JwtTokenParser::class, RefreshTokenValidator::class)
 @ActiveProfiles("test")
 class RefreshTokenValidatorTest {
 
     @Autowired
     private lateinit var refreshTokenRepository: RefreshTokenRepository
+
+    @Autowired
     private lateinit var tokenProvider: TokenProvider
-    private lateinit var tokenParser: TokenParser
+
+    @Autowired
     private lateinit var refreshTokenValidator: RefreshTokenValidator
 
     @BeforeEach
     fun setUp() {
-        tokenProvider =
-            JwtTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
-        tokenParser = JwtTokenParser(SECRET_KEY)
-        refreshTokenValidator = RefreshTokenValidator(refreshTokenRepository, tokenParser)
         refreshTokenRepository.deleteAll()
     }
 
@@ -63,11 +64,5 @@ class RefreshTokenValidatorTest {
         assertThatThrownBy {
             refreshTokenValidator.validate(accessToken)
         }.isInstanceOf(BadCredentialsException::class.java)
-    }
-
-    companion object {
-        private const val SECRET_KEY = "01234567890123456789012345678901"
-        private const val ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS = 3600000L
-        private const val REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS = 86400000L
     }
 }

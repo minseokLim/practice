@@ -11,21 +11,24 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.context.annotation.Import
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
 @ActiveProfiles("test")
+@Import(LoginIdValidator::class)
 class LoginIdValidatorTest {
 
     @Autowired
     private lateinit var memberRepository: MemberRepository
+
+    @Autowired
     private lateinit var loginIdValidator: LoginIdValidator
 
     @BeforeEach
     fun setUp() {
-        loginIdValidator = LoginIdValidator(memberRepository)
         memberRepository.deleteAll()
 
         PasswordEncodeUtil.init(BCryptPasswordEncoder())
