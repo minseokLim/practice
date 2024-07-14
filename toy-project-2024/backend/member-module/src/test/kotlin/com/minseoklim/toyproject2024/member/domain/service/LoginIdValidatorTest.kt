@@ -29,8 +29,6 @@ class LoginIdValidatorTest {
 
     @BeforeEach
     fun setUp() {
-        memberRepository.deleteAll()
-
         PasswordEncodeUtil.init(BCryptPasswordEncoder())
         TextEncryptUtil.init(Encryptors.noOpText())
     }

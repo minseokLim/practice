@@ -29,11 +29,6 @@ class RefreshTokenValidatorTest {
     @Autowired
     private lateinit var refreshTokenValidator: RefreshTokenValidator
 
-    @BeforeEach
-    fun setUp() {
-        refreshTokenRepository.deleteAll()
-    }
-
     @Test
     fun validate() {
         // given

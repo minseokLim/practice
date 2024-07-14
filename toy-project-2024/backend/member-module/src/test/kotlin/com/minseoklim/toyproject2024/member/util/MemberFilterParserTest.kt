@@ -26,8 +26,6 @@ class MemberFilterParserTest {
 
     @BeforeEach
     fun setUp() {
-        memberRepository.deleteAll()
-
         PasswordEncodeUtil.init(BCryptPasswordEncoder())
         TextEncryptUtil.init(Encryptors.noOpText())
     }
