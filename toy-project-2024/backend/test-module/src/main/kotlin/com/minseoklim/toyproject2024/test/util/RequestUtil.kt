@@ -25,7 +25,7 @@ object RequestUtil {
     fun post(
         path: String,
         accessToken: String?,
-        bodyParam: Map<String, Any?>,
+        bodyParam: Map<String, Any?>? = null,
         vararg pathParams: Any
     ): ExtractableResponse<Response> {
         return RestAssured
@@ -35,7 +35,11 @@ object RequestUtil {
                     auth().oauth2(accessToken)
                 }
             }
-            .body(bodyParam)
+            .apply {
+                if (bodyParam != null) {
+                    body(bodyParam)
+                }
+            }
             .contentType(ContentType.JSON)
             .`when`().post(path, *pathParams)
             .then().log().all().extract()
