@@ -4,44 +4,48 @@ import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class RefreshTokenTest {
+class TokenTest {
 
     @Test
     fun delete() {
         // given
-        val refreshToken = RefreshToken(
+        val token = Token(
             id = "id",
             memberId = 1,
-            content = "content"
+            accessToken = "accessToken",
+            refreshToken = "refreshToken"
         )
 
         // when
-        refreshToken.delete()
+        token.delete()
 
         // then
-        assertThat(refreshToken.isDeleted).isTrue
+        assertThat(token.isDeleted).isTrue
     }
 
     @Test
     fun equalsAndHashCode() {
         // given
-        val refreshToken1 = RefreshToken(
+        val token1 = Token(
             id = "id",
             memberId = 1,
-            content = "content"
+            accessToken = "accessToken",
+            refreshToken = "refreshToken"
         )
-        val refreshToken2 = RefreshToken(
+        val token2 = Token(
             id = "id",
             memberId = 2,
-            content = "other content"
+            accessToken = "other accessToken",
+            refreshToken = "other refreshToken"
         )
-        val refreshToken3 = RefreshToken(
+        val token3 = Token(
             id = "other id",
             memberId = 3,
-            content = "other content"
+            accessToken = "other accessToken",
+            refreshToken = "other refreshToken"
         )
 
         // when, then
-        TestUtil.testEqualsAndHashCode(refreshToken1, refreshToken2, refreshToken3)
+        TestUtil.testEqualsAndHashCode(token1, token2, token3)
     }
 }

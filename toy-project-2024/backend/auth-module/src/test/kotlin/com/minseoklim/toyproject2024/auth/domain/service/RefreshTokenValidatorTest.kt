@@ -1,12 +1,11 @@
 package com.minseoklim.toyproject2024.auth.domain.service
 
-import com.minseoklim.toyproject2024.auth.domain.model.RefreshToken
-import com.minseoklim.toyproject2024.auth.domain.repository.RefreshTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.model.Token
+import com.minseoklim.toyproject2024.auth.domain.repository.TokenRepository
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenParser
 import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -21,7 +20,7 @@ import org.springframework.test.context.ActiveProfiles
 class RefreshTokenValidatorTest {
 
     @Autowired
-    private lateinit var refreshTokenRepository: RefreshTokenRepository
+    private lateinit var tokenRepository: TokenRepository
 
     @Autowired
     private lateinit var tokenProvider: TokenProvider
@@ -34,7 +33,7 @@ class RefreshTokenValidatorTest {
         // given
         val refreshTokenId = "refreshTokenId"
         val refreshToken1 = tokenProvider.createRefreshToken(refreshTokenId)
-        refreshTokenRepository.save(RefreshToken(refreshTokenId, 1, refreshToken1))
+        tokenRepository.save(Token(refreshTokenId, 1, "accessToken", refreshToken1))
 
         // when, then
         assertThatNoException().isThrownBy {
@@ -53,7 +52,7 @@ class RefreshTokenValidatorTest {
         val accessTokenId = "accessTokenId"
         val authentication = TestingAuthenticationToken("member", "password")
         val accessToken = tokenProvider.createAccessToken(authentication, accessTokenId)
-        refreshTokenRepository.save(RefreshToken(accessTokenId, 1, accessToken))
+        tokenRepository.save(Token(accessTokenId, 1, "accessToken", accessToken))
 
         // when, then
         assertThatThrownBy {

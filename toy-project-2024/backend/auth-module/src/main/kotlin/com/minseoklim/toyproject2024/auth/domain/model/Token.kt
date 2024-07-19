@@ -12,11 +12,12 @@ import org.hibernate.annotations.SQLRestriction
 @Entity
 @Table(indexes = [Index(columnList = "member_id")])
 @SQLRestriction("is_deleted = false")
-class AccessToken(
+class Token(
     @Id
     val id: String,
     val memberId: Int,
-    val content: String
+    val accessToken: String,
+    val refreshToken: String
 ) : BaseTimeEntity() {
     var isDeleted: Boolean = false
         protected set

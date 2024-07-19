@@ -1,7 +1,6 @@
 package com.minseoklim.toyproject2024.auth.application
 
-import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenRepository
-import com.minseoklim.toyproject2024.auth.domain.repository.RefreshTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.repository.TokenRepository
 import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.stereotype.Service
@@ -11,41 +10,21 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class DeleteTokenService(
     private val tokenParser: TokenParser,
-    private val accessTokenRepository: AccessTokenRepository,
-    private val refreshTokenRepository: RefreshTokenRepository
+    private val tokenRepository: TokenRepository
 ) {
     fun deleteToken(accessToken: String, refreshToken: String) {
-        deleteAccessToken(accessToken)
-        deleteRefreshToken(refreshToken)
+        val accessTokenId = tokenParser.extractId(accessToken)
+        val refreshTokenId = tokenParser.extractId(refreshToken)
+        if (accessTokenId != refreshTokenId) {
+            throw BadCredentialsException("Invalid token set")
+        }
+        val token = tokenRepository.findById(accessTokenId)
+            .orElseThrow { throw BadCredentialsException("Invalid token set") }
+        token.delete()
     }
 
     fun deleteAllToken(memberId: Int) {
-        deleteAllAccessToken(memberId)
-        deleteAllRefreshToken(memberId)
-    }
-
-    private fun deleteAccessToken(accessToken: String) {
-        val accessTokenId = tokenParser.extractId(accessToken)
-        val accessTokenEntity = accessTokenRepository.findById(accessTokenId)
-            .orElseThrow { throw BadCredentialsException("Invalid access token") }
-        accessTokenEntity.delete()
-    }
-
-    private fun deleteRefreshToken(refreshToken: String) {
-        val refreshTokenId = tokenParser.extractId(refreshToken)
-        val refreshTokenEntity = refreshTokenRepository.findById(refreshTokenId)
-            .orElseThrow { throw BadCredentialsException("Invalid refresh token") }
-        refreshTokenEntity.delete()
-    }
-
-    private fun deleteAllAccessToken(memberId: Int) {
-        accessTokenRepository.findAllByMemberId(memberId).forEach {
-            it.delete()
-        }
-    }
-
-    private fun deleteAllRefreshToken(memberId: Int) {
-        refreshTokenRepository.findAllByMemberId(memberId).forEach {
+        tokenRepository.findAllByMemberId(memberId).forEach {
             it.delete()
         }
     }

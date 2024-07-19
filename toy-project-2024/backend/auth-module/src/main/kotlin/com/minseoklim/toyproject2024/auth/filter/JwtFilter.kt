@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.filter
 
 import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenDbCheckFlagRepository
-import com.minseoklim.toyproject2024.auth.domain.repository.AccessTokenRepository
+import com.minseoklim.toyproject2024.auth.domain.repository.TokenRepository
 import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
 import jakarta.servlet.Filter
 import jakarta.servlet.FilterChain
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component
 class JwtFilter(
     private val tokenParser: TokenParser,
     private val accessTokenDbCheckFlagRepository: AccessTokenDbCheckFlagRepository,
-    private val accessTokenRepository: AccessTokenRepository
+    private val tokenRepository: TokenRepository
 ) : Filter {
     override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
         val accessToken = resolveAccessToken(request as HttpServletRequest)
@@ -44,7 +44,7 @@ class JwtFilter(
     private fun setAuthentication(authentication: Authentication, accessToken: String) {
         if (accessTokenDbCheckFlagRepository.existsById(authentication.name.toInt())) {
             val accessTokenId = tokenParser.extractId(accessToken)
-            if (accessTokenRepository.existsById(accessTokenId)) {
+            if (tokenRepository.existsById(accessTokenId)) {
                 SecurityContextHolder.getContext().authentication = authentication
             }
         } else {
