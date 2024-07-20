@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
+import java.net.URLEncoder
 
 @Configuration
 class OAuth2AuthenticationSuccessHandler(
@@ -17,8 +18,8 @@ class OAuth2AuthenticationSuccessHandler(
         authentication: Authentication
     ) {
         val tokenResponse = createTokenService.createToken(authentication)
-        val encodedAccessToken = tokenResponse.accessToken
-        val encodedRefreshToken = tokenResponse.refreshToken
+        val encodedAccessToken = URLEncoder.encode(tokenResponse.accessToken, Charsets.UTF_8)
+        val encodedRefreshToken = URLEncoder.encode(tokenResponse.refreshToken, Charsets.UTF_8)
 
         val redirectUrl = request.session.getAttribute("REDIRECT_URL") as String
 
