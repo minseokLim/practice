@@ -71,6 +71,8 @@
         </div>
     </div>
     <section th:insert="~{layout/jsImport::jsImport}"></section>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"
+            integrity="sha256-AOciuU28sfUgqBHuxFLWYRBH/fyKiX6sbolJQ7yt8J0=" crossorigin="anonymous"></script>
     <script th:inline="javascript">
         window.onload = function () {
             setMemberInfoIntoLocalStorage()
@@ -79,6 +81,7 @@
                     setMemberInfoIntoForm(memberInfo);
                     displayLinkButtons(memberInfo);
                     displayUnlinkButtons(memberInfo);
+                    setStompClient(memberInfo);
                 });
         };
 
@@ -182,6 +185,32 @@
                 alert('소셜 연동 해제가 완료되었습니다.')
                 location.reload();
             });
+        }
+
+        function setStompClient(memberInfo) {
+            const stompClient = new StompJs.Client({
+                brokerURL: convertToWebSocketURL(apiBaseUrl) + '/ws?memberId=' + memberInfo.id
+            });
+
+            stompClient.onConnect = (frame) => {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/user/topic/notify-login', (message) => {
+                    const loginNotification = JSON.parse(message.body);
+                    const alertMessage = '다른 기기에서 이 계정으로 로그인 되었습니다.' + '\n' + '- ip : ' + loginNotification.clientIp + '\n' + '- user-agent : ' + loginNotification.userAgent;
+                    alert(alertMessage);
+                });
+            };
+
+            stompClient.onWebSocketError = (error) => {
+                console.error('Error with websocket', error);
+            };
+
+            stompClient.onStompError = (frame) => {
+                console.error('Broker reported error: ' + frame.headers['message']);
+                console.error('Additional details: ' + frame.body);
+            };
+
+            stompClient.activate();
         }
     </script>
 </body>
