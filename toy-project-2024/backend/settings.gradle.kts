@@ -3,6 +3,7 @@ include("app-module")
 include("auth-module")
 include("common-module")
 include("member-module")
+include("payment-module")
 include("test-module")
 
 pluginManagement {

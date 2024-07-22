@@ -19,6 +19,10 @@ object TestUtil {
         return this.jsonPath()["id"]
     }
 
+    fun ExtractableResponse<Response>.extractIds(): List<Int> {
+        return this.jsonPath().getList("content.id")
+    }
+
     fun ExtractableResponse<Response>.extractVersion(): Long {
         return this.jsonPath()["version"]
     }
