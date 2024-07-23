@@ -1,6 +1,7 @@
 rootProject.name = "toy-project-2024-backend"
 include("app-module")
 include("auth-module")
+include("card-module")
 include("common-module")
 include("member-module")
 include("payment-module")

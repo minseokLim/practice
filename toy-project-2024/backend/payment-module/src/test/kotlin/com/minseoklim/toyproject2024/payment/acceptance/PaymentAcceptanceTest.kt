@@ -2,6 +2,8 @@ package com.minseoklim.toyproject2024.payment.acceptance
 
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestUtil.extractAccessToken
+import com.minseoklim.toyproject2024.card.acceptance.CardAcceptanceTestFixture.`카드 등록 요청`
+import com.minseoklim.toyproject2024.card.acceptance.CardAcceptanceTestFixture.`카드 목록 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회됨`
@@ -9,18 +11,9 @@ import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFix
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 취소 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 취소됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제됨`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 등록 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 등록됨`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 목록 조회 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 목록 조회됨`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 삭제 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 삭제됨`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 수정 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 수정됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
 import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
 import org.junit.jupiter.api.Test
-import java.util.UUID
 
 class PaymentAcceptanceTest : AcceptanceTest() {
 
@@ -50,30 +43,11 @@ class PaymentAcceptanceTest : AcceptanceTest() {
             "birth" to "990101",
             "pwd2digit" to "12"
         )
-
-        // when
-        val cardRegisterResponse = `카드 등록 요청`(accessToken, cardRegisterRequest)
-
-        // then
-        `카드 등록됨`(cardRegisterResponse)
-
-        // when
-        val cardListResponse = `카드 목록 조회 요청`(accessToken)
-
-        // then
-        `카드 목록 조회됨`(cardListResponse)
+        `카드 등록 요청`(accessToken, cardRegisterRequest)
 
         // given
+        val cardListResponse = `카드 목록 조회 요청`(accessToken)
         val cardId = cardListResponse.extractIds()[0]
-        val cardUpdateRequest = mapOf(
-            "pwd2digit" to "34"
-        )
-
-        // when
-        val cardUpdateResponse = `카드 수정 요청`(accessToken, cardId, cardUpdateRequest)
-
-        // then
-        `카드 수정됨`(cardUpdateResponse)
 
         // given
         val cardPaymentRequest = mapOf(
@@ -102,12 +76,6 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // then
         `카드 결제 취소됨`(cardPaymentCancelResponse)
-
-        // when
-        val cardDeleteResponse = `카드 삭제 요청`(accessToken, cardId)
-
-        // then
-        `카드 삭제됨`(cardDeleteResponse)
     }
 
     companion object {

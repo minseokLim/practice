@@ -9,7 +9,6 @@ dependencies {
 
     testImplementation(project(":test-module"))
     testImplementation(testFixtures(project(":auth-module")))
-    testImplementation(testFixtures(project(":card-module")))
     testImplementation(testFixtures(project(":member-module")))
 
     testFixturesImplementation(project(":test-module"))
