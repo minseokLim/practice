@@ -1,8 +1,9 @@
 package com.minseoklim.toyproject2024.card.domain.model
 
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.encrypt.Encryptors
@@ -13,6 +14,27 @@ class CardTest {
     @BeforeEach
     fun setUp() {
         TextEncryptUtil.init(Encryptors.noOpText())
+    }
+
+    @Test
+    fun checkAuthority() {
+        // given
+        val card = Card(
+            cardNumber = "1234-5678-1234-5678",
+            cardExpiry = "2025-12",
+            birth = "990101",
+            pwd2digit = "12",
+            issuerName = "삼성카드",
+            memberId = 1
+        )
+
+        // when, then
+        assertThatNoException().isThrownBy { card.checkAuthority(1) }
+
+        // when, then
+        assertThatThrownBy {
+            card.checkAuthority(2)
+        }.isInstanceOf(NoPermissionException::class.java)
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.card.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
 import com.minseoklim.toyproject2024.common.util.CommonUtil.entityHashCode
 import jakarta.persistence.Entity
@@ -38,6 +39,12 @@ class Card(
 
     var isDeleted: Boolean = false
         protected set
+
+    fun checkAuthority(memberId: Int) {
+        if (this.memberId != memberId) {
+            throw NoPermissionException("NO_CARD_PERMISSION", "카드에 대한 권한이 없습니다.")
+        }
+    }
 
     fun delete() {
         isDeleted = true
