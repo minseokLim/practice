@@ -1,9 +1,24 @@
 package com.minseoklim.toyproject2024.card.domain.model
 
 import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class IssuerNameTest {
+
+    @Test
+    fun constructor() {
+        // when, then
+        assertThatNoException().isThrownBy {
+            IssuerName("삼성카드")
+        }
+
+        // when, then
+        assertThatIllegalArgumentException().isThrownBy {
+            IssuerName("")
+        }
+    }
 
     @Test
     fun equalsAndHashCode() {
