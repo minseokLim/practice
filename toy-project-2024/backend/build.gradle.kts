@@ -73,11 +73,15 @@ subprojects {
         runtimeOnly("com.h2database:h2")
 
         // test
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(group = "com.vaadin.external.google", module = "android-json")
+        }
         testImplementation("io.rest-assured:rest-assured")
         testImplementation("io.mockk:mockk:${property("mockkVersion")}")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test")
+        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(group = "com.vaadin.external.google", module = "android-json")
+        }
         testFixturesImplementation("io.rest-assured:rest-assured")
     }
 
