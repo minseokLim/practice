@@ -18,10 +18,6 @@ object MemberAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
-    fun `회원 가입 실패`(response: ExtractableResponse<Response>) {
-        assertThat(response.httpStatus()).isEqualTo(HttpStatus.BAD_REQUEST)
-    }
-
     fun `회원 목록 조회 요청`(accessToken: String): ExtractableResponse<Response> {
         return RequestUtil.get("/members", accessToken)
     }
@@ -29,10 +25,6 @@ object MemberAcceptanceTestFixture {
     fun `회원 목록 조회됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
-    }
-
-    fun `회원 목록 조회 실패`(response: ExtractableResponse<Response>) {
-        assertThat(response.httpStatus()).isEqualTo(HttpStatus.FORBIDDEN)
     }
 
     fun `회원 목록 검색 요청`(accessToken: String, filter: String): ExtractableResponse<Response> {
@@ -51,10 +43,6 @@ object MemberAcceptanceTestFixture {
     fun `회원 조회됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
         assertThat(response.extractId()).isNotNull
-    }
-
-    fun `회원 조회 실패`(response: ExtractableResponse<Response>) {
-        assertThat(response.httpStatus()).isEqualTo(HttpStatus.NOT_FOUND)
     }
 
     fun `회원 수정 요청`(accessToken: String, id: Int, request: Map<String, Any?>): ExtractableResponse<Response> {

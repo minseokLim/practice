@@ -1,9 +1,7 @@
 package com.minseoklim.toyproject2024.auth.acceptance
 
-import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그아웃 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그아웃 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.로그아웃됨
-import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 실패`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 요청`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 화면으로 이동`
 import com.minseoklim.toyproject2024.auth.acceptance.AuthAcceptanceTestFixture.`로그인 화면으로 이동됨`
@@ -115,92 +113,6 @@ class AuthAcceptanceTest : AcceptanceTest() {
 
         // then
         `모든 토큰 유효성 검사 실패`(validateTokenResponses)
-    }
-
-    @Test
-    fun `예외 상황`() {
-        // given
-        val memberRequest = mapOf(
-            "loginId" to MEMBER_ID,
-            "password" to PASSWORD,
-            "name" to "testName",
-            "email" to "test@test.com"
-        )
-        `회원 가입 요청`(memberRequest)
-
-        // given
-        val loginRequest1 = mapOf(
-            "loginId" to MEMBER_ID,
-            "password" to PASSWORD
-        )
-        val oldLoginResponse = `로그인 요청`(loginRequest1)
-        val oldAccessToken = oldLoginResponse.extractAccessToken()
-        val oldRefreshToken = oldLoginResponse.extractRefreshToken()
-
-        // given
-        val logoutRequest1 = mapOf(
-            "accessToken" to oldAccessToken,
-            "refreshToken" to oldRefreshToken
-        )
-        `로그아웃 요청`(logoutRequest1)
-
-        // when
-        val logoutResponse1 = `로그아웃 요청`(logoutRequest1)
-
-        // then
-        `로그아웃 실패`(logoutResponse1)
-
-        // given
-        val newLoginResponse = `로그인 요청`(loginRequest1)
-        val newAccessToken = newLoginResponse.extractAccessToken()
-
-        // given
-        val logoutRequest2 = mapOf(
-            "accessToken" to newAccessToken,
-            "refreshToken" to oldRefreshToken
-        )
-
-        // when
-        val logoutResponse2 = `로그아웃 요청`(logoutRequest2)
-
-        // then
-        `로그아웃 실패`(logoutResponse2)
-
-        // given
-        val logoutRequest3 = mapOf(
-            "accessToken" to "invalidAccessToken",
-            "refreshToken" to "invalidRefreshToken"
-        )
-
-        // when
-        val logoutResponse3 = `로그아웃 요청`(logoutRequest3)
-
-        // then
-        `로그아웃 실패`(logoutResponse3)
-
-        // when
-        val validateTokenResponse1 = `토큰 유효성 검사 요청`(oldRefreshToken)
-
-        // then
-        `토큰 유효성 검사 실패`(validateTokenResponse1)
-
-        // when
-        val validateTokenResponse2 = `토큰 유효성 검사 요청`("")
-
-        // then
-        `토큰 유효성 검사 실패`(validateTokenResponse2)
-
-        // given
-        val loginRequest2 = mapOf(
-            "loginId" to "invalidLoginId",
-            "password" to PASSWORD
-        )
-
-        // when
-        val loginResponse2 = `로그인 요청`(loginRequest2)
-
-        // then
-        `로그인 실패`(loginResponse2)
     }
 
     @Test

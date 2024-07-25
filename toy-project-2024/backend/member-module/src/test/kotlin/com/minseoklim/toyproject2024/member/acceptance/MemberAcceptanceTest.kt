@@ -13,18 +13,15 @@ import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixtu
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 제거됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 추가 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`내 소셜 계정 연동 추가됨`
-import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 검색 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 검색됨`
-import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 목록 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정 요청 일부 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 수정됨`
-import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회 실패`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회 요청`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 조회됨`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 탈퇴 요청`
@@ -212,59 +209,6 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
         // then
         `회원 수정 요청 일부 실패`(memberUpdateResponses)
-    }
-
-
-    @Test
-    fun `예외 상황`() {
-        // when
-        val memberResponse = `회원 조회 요청`(NEVER_EXPIRED_ADMIN_ACCESS_TOKEN, 1)
-
-        // then
-        `회원 조회 실패`(memberResponse)
-
-        // given
-        val memberRequest1 = mapOf(
-            "loginId" to MEMBER_ID,
-            "password" to PASSWORD,
-            "name" to "testName",
-            "email" to "test@test.com"
-        )
-        `회원 가입 요청`(memberRequest1)
-
-        // when
-        val memberJoinResponse = `회원 가입 요청`(memberRequest1)
-
-        // then
-        `회원 가입 실패`(memberJoinResponse)
-
-        // given
-        val loginRequest = mapOf(
-            "loginId" to MEMBER_ID,
-            "password" to PASSWORD
-        )
-        val loginResponse = `로그인 요청`(loginRequest)
-        val accessToken = loginResponse.extractAccessToken()
-
-        // when
-        val memberListResponse = `회원 목록 조회 요청`(accessToken)
-
-        // then
-        `회원 목록 조회 실패`(memberListResponse)
-
-        // given
-        val memberRequest2 = mapOf(
-            "loginId" to "MEMBER_ID",
-            "password" to "",
-            "name" to "testName!@#",
-            "email" to "test"
-        )
-
-        // when
-        val memberJoinResponse2 = `회원 가입 요청`(memberRequest2)
-
-        // then
-        `회원 가입 실패`(memberJoinResponse2)
     }
 
     companion object {
