@@ -1,14 +1,17 @@
-package com.minseoklim.toyproject2024.test
+package com.minseoklim.toyproject2024
 
 import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
+import org.junit.jupiter.api.Test
 import org.springframework.transaction.annotation.Transactional
 
-abstract class ArchitectureTest {
-    protected fun test() {
+class ArchitectureTest {
+
+    @Test
+    fun test() {
         val classes = ClassFileImporter().withImportOption(DoNotIncludeTests()).importPackages(BASE_PACKAGE)
         checkNotEmpty(classes)
         checkPackageDependency(classes)

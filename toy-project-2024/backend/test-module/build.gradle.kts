@@ -10,5 +10,4 @@ dependencies {
     implementation("io.rest-assured:rest-assured")
     implementation("io.mockk:mockk:${property("mockkVersion")}")
     implementation("com.github.codemonstur:embedded-redis:${property("embeddedRedisVersion")}")
-    implementation("com.tngtech.archunit:archunit-junit5:${property("archunitJunit5Version")}")
 }
