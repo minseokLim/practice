@@ -41,7 +41,8 @@ class PaymentAcceptanceTest : AcceptanceTest() {
             "cardNumber" to "1234-5678-1234-5678",
             "cardExpiry" to "2025-12",
             "birth" to "990101",
-            "pwd2digit" to "12"
+            "pwd2digit" to "12",
+            "issuerName" to "삼성카드"
         )
         `카드 등록 요청`(accessToken, cardRegisterRequest)
 
