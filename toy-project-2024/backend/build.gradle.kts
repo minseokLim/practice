@@ -43,6 +43,12 @@ subprojects {
         mavenCentral()
     }
 
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+        }
+    }
+
     dependencies {
         // spring
         implementation("org.springframework.boot:spring-boot-starter-web")
@@ -53,6 +59,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
         implementation("org.springframework.boot:spring-boot-starter-websocket")
         implementation("org.springframework.session:spring-session-data-redis")
+        implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
         // kotlin
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
