@@ -33,6 +33,8 @@ abstract class Payment(
 
     val memberId: Int = memberId
 
+    val paymentUid: PaymentUid = PaymentUid()
+
     var isCanceled: Boolean = false
         protected set
 
