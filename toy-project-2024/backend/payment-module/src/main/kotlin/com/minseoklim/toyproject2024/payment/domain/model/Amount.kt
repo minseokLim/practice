@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.payment.domain.model
 
-import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
 import java.math.BigDecimal
@@ -18,7 +18,7 @@ class Amount(
     val value: BigDecimal = BigDecimal.valueOf(value)
 
     final override fun equals(other: Any?): Boolean {
-        return this.entityEmbeddableEquals(other) { x, y -> x.value == y.value }
+        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.value == y.value }
     }
 
     final override fun hashCode(): Int = Objects.hash(value)

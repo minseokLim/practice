@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
 import java.util.Objects
@@ -15,7 +15,7 @@ class LoginId(
     }
 
     final override fun equals(other: Any?): Boolean {
-        return this.entityEmbeddableEquals(other) { x, y -> x.value == y.value }
+        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.value == y.value }
     }
 
     final override fun hashCode(): Int = Objects.hash(value)

@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.payment.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
-import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
-import com.minseoklim.toyproject2024.common.util.CommonUtil.entityHashCode
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import jakarta.persistence.DiscriminatorColumn
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -49,8 +49,8 @@ abstract class Payment(
     }
 
     final override fun equals(other: Any?): Boolean {
-        return this.entityEmbeddableEquals(other) { x, y -> x.id != null && x.id == y.id }
+        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.id != null && x.id == y.id }
     }
 
-    final override fun hashCode(): Int = this.entityHashCode()
+    final override fun hashCode(): Int = this.hashCodeForEntity()
 }

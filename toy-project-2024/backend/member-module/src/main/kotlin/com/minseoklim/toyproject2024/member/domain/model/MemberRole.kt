@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.common.util.CommonUtil.entityEmbeddableEquals
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
 import jakarta.persistence.Embeddable
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -12,7 +12,7 @@ class MemberRole(
     val role: Role
 ) {
     final override fun equals(other: Any?): Boolean {
-        return this.entityEmbeddableEquals(other) { x, y -> x.role == y.role }
+        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.role == y.role }
     }
 
     final override fun hashCode(): Int = Objects.hash(role)
