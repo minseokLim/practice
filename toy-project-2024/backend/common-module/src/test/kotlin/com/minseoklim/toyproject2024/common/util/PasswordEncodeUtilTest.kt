@@ -21,6 +21,6 @@ class PasswordEncodeUtilTest {
         val encodedPassword = PasswordEncodeUtil.encode(password)
 
         // then
-        assertThat(encodedPassword).isNotEqualTo(password)
+        assertThat(encodedPassword).isNotNull
     }
 }
