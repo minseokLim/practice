@@ -5,6 +5,7 @@ bootJar.enabled = false
 
 dependencies {
     // module
+    implementation(project(":card-module"))
     implementation(project(":common-module"))
 
     testImplementation(project(":test-module"))

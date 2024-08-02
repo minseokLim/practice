@@ -1,0 +1,5 @@
+port-one:
+  base-url: https://api.iamport.kr
+  key: ${PORT_ONE_KEY}
+  secret: ${PORT_ONE_SECRET}
+  pg: ${PORT_ONE_PG}
