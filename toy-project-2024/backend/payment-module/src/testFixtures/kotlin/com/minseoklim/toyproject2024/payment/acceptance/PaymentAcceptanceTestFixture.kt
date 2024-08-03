@@ -25,11 +25,11 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `카드 결제 취소 요청`(accessToken: String, paymentId: Int): ExtractableResponse<Response> {
-        return RequestUtil.post("/cancel-card-payments/$paymentId", accessToken)
+    fun `결제 취소 요청`(accessToken: String, paymentId: Int): ExtractableResponse<Response> {
+        return RequestUtil.post("/cancel-payments/$paymentId", accessToken)
     }
 
-    fun `카드 결제 취소됨`(response: ExtractableResponse<Response>) {
+    fun `결제 취소됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 }

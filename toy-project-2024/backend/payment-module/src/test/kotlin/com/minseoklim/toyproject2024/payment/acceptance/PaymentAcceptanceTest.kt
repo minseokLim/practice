@@ -7,9 +7,9 @@ import com.minseoklim.toyproject2024.card.acceptance.CardAcceptanceTestFixture.`
 import com.minseoklim.toyproject2024.member.acceptance.MemberAcceptanceTestFixture.`회원 가입 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회됨`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소 요청`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 취소 요청`
-import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 취소됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
 import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
@@ -64,19 +64,19 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         `카드 결제됨`(cardPaymentResponse)
 
         // when
-        val cardPaymentListResponse = `결제 정보 목록 조회 요청`(accessToken)
+        val paymentListResponse = `결제 정보 목록 조회 요청`(accessToken)
 
         // then
-        `결제 정보 목록 조회됨`(cardPaymentListResponse)
+        `결제 정보 목록 조회됨`(paymentListResponse)
 
         // given
-        val paymentId = cardPaymentListResponse.extractIds()[0]
+        val paymentId = paymentListResponse.extractIds()[0]
 
         // when
-        val cardPaymentCancelResponse = `카드 결제 취소 요청`(accessToken, paymentId)
+        val paymentCancelResponse = `결제 취소 요청`(accessToken, paymentId)
 
         // then
-        `카드 결제 취소됨`(cardPaymentCancelResponse)
+        `결제 취소됨`(paymentCancelResponse)
     }
 
     companion object {
