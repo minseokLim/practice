@@ -50,46 +50,13 @@ subprojects {
     }
 
     dependencies {
-        // spring
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.boot:spring-boot-starter-security")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-data-redis")
-        implementation("org.springframework.boot:spring-boot-starter-validation")
-        implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-        implementation("org.springframework.boot:spring-boot-starter-websocket")
-        implementation("org.springframework.session:spring-session-data-redis")
-        implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-
         // kotlin
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
-        // swagger
-        implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("springdocOpenapiStarterWebmvcUiVersion")}")
-
-        // log
-        implementation("io.github.microutils:kotlin-logging-jvm:${property("kotlinLoggingJvmVersion")}")
-
-        // querydsl
-        implementation("com.querydsl:querydsl-jpa:${property("querydslVersion")}:jakarta")
-        kapt("com.querydsl:querydsl-apt:${property("querydslVersion")}:jakarta")
-
         // db
         runtimeOnly("com.h2database:h2")
-
-        // test
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(group = "com.vaadin.external.google", module = "android-json")
-        }
-        testImplementation("io.rest-assured:rest-assured")
-        testImplementation("io.mockk:mockk:${property("mockkVersion")}")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(group = "com.vaadin.external.google", module = "android-json")
-        }
-        testFixturesImplementation("io.rest-assured:rest-assured")
     }
 
     allOpen {
