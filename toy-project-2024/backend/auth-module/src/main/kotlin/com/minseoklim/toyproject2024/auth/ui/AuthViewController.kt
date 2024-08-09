@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import java.net.URLEncoder
 
 @Controller
-class ViewController {
+class AuthViewController {
 
     @GetMapping("/login")
     fun login(request: HttpServletRequest): String {
