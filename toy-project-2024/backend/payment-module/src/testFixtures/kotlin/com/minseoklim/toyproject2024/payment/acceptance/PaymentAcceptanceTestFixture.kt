@@ -32,4 +32,12 @@ object PaymentAcceptanceTestFixture {
     fun `결제 취소됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
+
+    fun `인증 결제 정보 생성 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/verified-payments", accessToken, request)
+    }
+
+    fun `인증 결제 정보 생성됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
+    }
 }

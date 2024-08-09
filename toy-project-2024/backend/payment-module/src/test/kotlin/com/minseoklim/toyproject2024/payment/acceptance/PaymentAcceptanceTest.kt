@@ -9,6 +9,8 @@ import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFix
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소됨`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 정보 생성 요청`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 정보 생성됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
@@ -77,6 +79,18 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // then
         `결제 취소됨`(paymentCancelResponse)
+
+        // given
+        val checkOutVerifiedPaymentRequest = mapOf(
+            "amount" to 100,
+            "productName" to "테스트 상품"
+        )
+
+        // when
+        val checkOutVerifiedPaymentResponse = `인증 결제 정보 생성 요청`(accessToken, checkOutVerifiedPaymentRequest)
+
+        // then
+        `인증 결제 정보 생성됨`(checkOutVerifiedPaymentResponse)
     }
 
     companion object {
