@@ -24,6 +24,7 @@ class CancelPaymentService(
                     amount = payment.amount.value.toLong()
                 )
             )
+            // TODO: 인증 결제 타입에 대한 처리
         }
     }
 }
