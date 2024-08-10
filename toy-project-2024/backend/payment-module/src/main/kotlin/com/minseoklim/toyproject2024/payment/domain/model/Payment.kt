@@ -13,9 +13,13 @@ import jakarta.persistence.Index
 import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
 import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 
 @Entity
-@Table(indexes = [Index(columnList = "member_id")])
+@Table(
+    indexes = [Index(columnList = "member_id")],
+    uniqueConstraints = [UniqueConstraint(columnNames = ["payment_uid"])]
+)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 abstract class Payment(

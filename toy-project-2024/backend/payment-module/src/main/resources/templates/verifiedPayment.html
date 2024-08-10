@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>결제</title>
+</head>
+<body>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    <script th:inline="javascript">
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentUid = /*[[${payment.paymentUid.value}]]*/ '';
+        const productName = /*[[${payment.productName.value}]]*/ '';
+        const amount = /*[[${payment.amount.value}]]*/ '';
+
+        requestPayment();
+
+        async function requestPayment() {
+            const response = await PortOne.requestPayment({
+                storeId: "store-fe187d9f-0018-4a45-a46d-8457dc20c76b",
+                channelKey: "channel-key-210b9030-bc3d-44fb-a600-edbb39a97d87",
+                paymentId: paymentUid,
+                orderName: productName,
+                totalAmount: amount,
+                currency: "CURRENCY_KRW",
+                payMethod: urlParams.get("payMethod")
+            });
+
+            // TODO : 서버로 결제 결과 전송
+            console.log(JSON.stringify(response));
+
+            window.location.href = urlParams.get("redirectUrl");
+        }
+    </script>
+</body>
+</html>

@@ -45,6 +45,7 @@ class SecurityConfig(
                 it
                     .requestMatchers(HttpMethod.POST, "/login", "/logout", "/refresh-token", "/members").permitAll()
                     .requestMatchers(HttpMethod.GET, "/", "/login", "/join").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/verified-payment").permitAll()
                     .requestMatchers("/ws/**").permitAll()
                     .requestMatchers(
                         "/h2-console/**",
