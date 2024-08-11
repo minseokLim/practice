@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.payment.dto
 import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPayment
 import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPaymentStatus
 
-data class CheckOutVerifiedPaymentResponse(
+data class CheckOutVerifiedPaymentResponse private constructor(
     val id: Int,
     val amount: Long,
     val productName: String,

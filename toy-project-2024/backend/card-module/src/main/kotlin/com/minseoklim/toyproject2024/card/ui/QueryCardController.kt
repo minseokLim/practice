@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.card.ui
 
 import com.minseoklim.toyproject2024.card.application.QueryCardService
-import com.minseoklim.toyproject2024.card.dto.RegisterCardResponse
+import com.minseoklim.toyproject2024.card.dto.QueryCardResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -16,7 +16,7 @@ class QueryCardController(
     private val queryCardService: QueryCardService
 ) {
     @GetMapping
-    fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<RegisterCardResponse>> {
+    fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryCardResponse>> {
         val responses = queryCardService.list(memberId, pageable)
         return ResponseEntity.ok(responses)
     }

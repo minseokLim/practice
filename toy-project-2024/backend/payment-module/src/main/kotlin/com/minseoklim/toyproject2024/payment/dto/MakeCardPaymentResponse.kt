@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.payment.dto
 
 import com.minseoklim.toyproject2024.payment.domain.model.CardPayment
 
-data class MakeCardPaymentResponse(
+data class MakeCardPaymentResponse private constructor(
     val id: Int,
     val cardId: Int,
     val amount: Long,

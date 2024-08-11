@@ -2,15 +2,15 @@ package com.minseoklim.toyproject2024.card.dto
 
 import com.minseoklim.toyproject2024.card.domain.model.Card
 
-data class QueryCardResponse(
+data class QueryCardResponse private constructor(
     val id: Int,
     val maskedCardNumber: String,
     val issuerName: String
 ) {
     companion object {
-        fun of(card: Card): RegisterCardResponse {
+        fun of(card: Card): QueryCardResponse {
             return with(card) {
-                RegisterCardResponse(
+                QueryCardResponse(
                     id = id!!,
                     maskedCardNumber = cardNumber.maskedValue,
                     issuerName = issuerName.value

@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.card.dto
 
 import com.minseoklim.toyproject2024.card.domain.model.Card
 
-data class RegisterCardResponse(
+data class RegisterCardResponse private constructor(
     val id: Int,
     val maskedCardNumber: String,
     val issuerName: String

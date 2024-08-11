@@ -5,7 +5,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
-data class UpdateMemberResponse(
+data class UpdateMemberResponse private constructor(
     val id: Int,
     val loginId: String?,
     val name: String,

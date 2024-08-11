@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.payment.dto
 
 import com.minseoklim.toyproject2024.payment.domain.model.Payment
 
-data class QueryPaymentResponse(
+data class QueryPaymentResponse private constructor(
     val id: Int,
     val amount: Long,
     val productName: String,
