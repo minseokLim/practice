@@ -7,6 +7,7 @@ data class CheckOutVerifiedPaymentResponse(
     val id: Int,
     val amount: Long,
     val productName: String,
+    val paymentUid: String,
     val status: VerifiedPaymentStatus
 ) {
     companion object {
@@ -16,6 +17,7 @@ data class CheckOutVerifiedPaymentResponse(
                     id = id!!,
                     amount = amount.value.toLong(),
                     productName = productName.value,
+                    paymentUid = paymentUid.value,
                     status = status
                 )
             }

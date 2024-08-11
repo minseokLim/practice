@@ -6,6 +6,7 @@
 </head>
 <body>
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:inline="javascript">
         const urlParams = new URLSearchParams(window.location.search);
         const paymentUid = /*[[${payment.paymentUid.value}]]*/ '';
@@ -25,10 +26,21 @@
                 payMethod: urlParams.get("payMethod")
             });
 
+            if (response.code != null) {
+                failPayment();
+                return alert(response.message);
+            }
+
             // TODO : 서버로 결제 결과 전송
             console.log(JSON.stringify(response));
 
             window.location.href = urlParams.get("redirectUrl");
+        }
+
+        function failPayment() {
+            axios.post('/fail-verified-payment', {
+                paymentUid: paymentUid
+            });
         }
     </script>
 </body>
