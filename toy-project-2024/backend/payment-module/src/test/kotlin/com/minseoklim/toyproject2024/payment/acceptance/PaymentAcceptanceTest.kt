@@ -9,6 +9,8 @@ import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFix
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 정보 목록 조회됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`결제 취소됨`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 성공 처리 요청`
+import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 성공 처리됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 실패 처리 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 실패 처리됨`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`인증 결제 정보 생성 요청`
@@ -95,8 +97,9 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         `인증 결제 정보 생성됨`(checkOutVerifiedPaymentResponse)
 
         // given
+        val paymentUid = checkOutVerifiedPaymentResponse.jsonPath().get<String>("paymentUid")
         val failVerifiedPaymentRequest = mapOf(
-            "paymentUid" to checkOutVerifiedPaymentResponse.jsonPath().get<String>("paymentUid")
+            "paymentUid" to paymentUid
         )
 
         // when
@@ -104,6 +107,17 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // then
         `인증 결제 실패 처리됨`(failVerifiedPaymentResponse)
+
+        // given
+        val succeedVerifiedPaymentRequest = mapOf(
+            "paymentUid" to paymentUid
+        )
+
+        // when
+        val succeedVerifiedPaymentResponse = `인증 결제 성공 처리 요청`(succeedVerifiedPaymentRequest)
+
+        // then
+        `인증 결제 성공 처리됨`(succeedVerifiedPaymentResponse)
     }
 
     companion object {
