@@ -10,4 +10,6 @@ class PortOneProperty {
     lateinit var key: String
     lateinit var secret: String
     lateinit var pg: String
+    lateinit var baseUrlV2: String
+    lateinit var secretV2: String
 }

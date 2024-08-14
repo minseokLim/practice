@@ -3,3 +3,5 @@ port-one:
   key: ${PORT_ONE_KEY}
   secret: ${PORT_ONE_SECRET}
   pg: ${PORT_ONE_PG}
+  base-url-v2: https://api.portone.io
+  secret-v2: ${PORT_ONE_SECRET_V2}
