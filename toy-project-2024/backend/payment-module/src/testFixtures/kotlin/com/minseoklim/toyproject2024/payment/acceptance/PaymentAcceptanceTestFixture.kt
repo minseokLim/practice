@@ -49,11 +49,11 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 성공 처리 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
-        return RequestUtil.post("/succeed-verified-payment", null, request)
+    fun `인증 결제 완료 처리 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/complete-verified-payment", null, request)
     }
 
-    fun `인증 결제 성공 처리됨`(response: ExtractableResponse<Response>) {
+    fun `인증 결제 완료 처리됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 }
