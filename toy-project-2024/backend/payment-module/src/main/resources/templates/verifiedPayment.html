@@ -31,10 +31,7 @@
                 return alert(response.message);
             }
 
-            // TODO : 서버로 결제 결과 전송
-            console.log(JSON.stringify(response));
-
-            window.location.href = urlParams.get("redirectUrl");
+            completePayment();
         }
 
         function failPayment() {
@@ -42,6 +39,20 @@
                 paymentUid: paymentUid
             });
         }
+
+        function completePayment() {
+            axios.post('/complete-verified-payment', {
+                paymentUid: paymentUid
+            }).then(response => {
+                if (response.data.status === 'COMPLETED') {
+                    window.location.href = urlParams.get("redirectUrl");
+                } else {
+                    alert('결제 위변조가 의심됩니다');
+                }
+            });
+        }
+
+        // TODO: 구현해놓고 보니 이 페이지는 프론트에 있는 게 맞는 거 같다는 생각이 든다. 옮기자
     </script>
 </body>
 </html>

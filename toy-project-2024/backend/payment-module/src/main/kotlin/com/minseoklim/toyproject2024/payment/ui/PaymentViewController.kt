@@ -16,7 +16,6 @@ class PaymentViewController(
     @GetMapping("/verified-payment")
     fun verifiedPayment(@RequestParam paymentId: Int, model: Model): String {
         val payment = PaymentServiceHelper.getPayment(paymentRepository, paymentId)
-//        val payment = VerifiedPayment(100, "테스트 상품", 1)
         if (payment !is VerifiedPayment) {
             throw BadRequestException("NOT_VERIFIED_PAYMENT", "인증 결제 정보가 아닙니다.")
         }
