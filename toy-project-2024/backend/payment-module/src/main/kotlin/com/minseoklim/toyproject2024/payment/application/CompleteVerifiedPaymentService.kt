@@ -15,7 +15,7 @@ class CompleteVerifiedPaymentService(
     fun completeVerifiedPayment(request: CompleteVerifiedPaymentRequest): CompleteVerifiedPaymentResponse {
         val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, request.paymentUid)
         val paidAmount = verifiedPaymentApi.getVerifiedPaymentAmount(request.paymentUid)
-        if (paidAmount == payment.amount.value.toLong()) {
+        if (payment.hasAmount(paidAmount)) {
             payment.complete()
         } else {
             payment.tamper()

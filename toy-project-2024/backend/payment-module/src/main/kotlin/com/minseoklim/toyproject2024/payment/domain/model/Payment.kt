@@ -52,6 +52,10 @@ abstract class Payment(
         isCanceled = true
     }
 
+    fun hasAmount(amount: Long): Boolean {
+        return this.amount.value.toLong() == amount
+    }
+
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntityAndEmbeddable(other) { x, y -> x.id != null && x.id == y.id }
     }

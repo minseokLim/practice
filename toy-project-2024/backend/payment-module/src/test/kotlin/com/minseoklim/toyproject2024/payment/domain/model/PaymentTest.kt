@@ -47,6 +47,28 @@ class PaymentTest {
     }
 
     @Test
+    fun hasAmount() {
+        // given
+        val verifiedPayment = VerifiedPayment(
+            amount = 1000L,
+            productName = "테스트 상품",
+            memberId = 1
+        )
+
+        // when
+        val result1 = verifiedPayment.hasAmount(1000L)
+
+        // then
+        assertThat(result1).isTrue
+
+        // when
+        val result2 = verifiedPayment.hasAmount(999L)
+
+        // then
+        assertThat(result2).isFalse
+    }
+
+    @Test
     fun equalsAndHashCode() {
         // given
         val cardPayment1 = CardPayment(
