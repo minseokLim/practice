@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.payment.application
 
 import com.minseoklim.toyproject2024.payment.application.CardPaymentApi.CardPaymentCancelRequest
 import com.minseoklim.toyproject2024.payment.domain.model.CardPayment
+import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPayment
 import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -10,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class CancelPaymentService(
     private val paymentRepository: PaymentRepository,
-    private val cardPaymentApi: CardPaymentApi
+    private val cardPaymentApi: CardPaymentApi,
+    private val verifiedPaymentApi: VerifiedPaymentApi
 ) {
     fun cancel(memberId: Int, paymentId: Int) {
         val payment = PaymentServiceHelper.getPayment(paymentRepository, paymentId)
@@ -24,7 +26,8 @@ class CancelPaymentService(
                     amount = payment.amount.value.toLong()
                 )
             )
-            // TODO: 인증 결제 타입에 대한 처리
+
+            is VerifiedPayment -> verifiedPaymentApi.cancelPayment(payment.paymentUid.value)
         }
     }
 }

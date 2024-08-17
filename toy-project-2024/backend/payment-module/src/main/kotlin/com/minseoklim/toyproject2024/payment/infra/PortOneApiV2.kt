@@ -10,7 +10,15 @@ class PortOneApiV2(
     private val portOneClientV2: PortOneClientV2
 ) : VerifiedPaymentApi {
     override fun getVerifiedPaymentAmount(paymentUid: String): Long {
-        val response = portOneClientV2.getPayment("PortOne ${portOneProperty.secretV2}", paymentUid)
+        val response = portOneClientV2.getPayment(ACCESS_TOKEN_PREFIX + portOneProperty.secretV2, paymentUid)
         return response.amount.total
+    }
+
+    override fun cancelPayment(paymentUid: String) {
+        portOneClientV2.cancelPayment(ACCESS_TOKEN_PREFIX + portOneProperty.secretV2, paymentUid)
+    }
+
+    companion object {
+        private const val ACCESS_TOKEN_PREFIX = "PortOne "
     }
 }
