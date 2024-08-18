@@ -2,6 +2,8 @@ package com.minseoklim.toyproject2024.payment.domain.model
 
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 
 @Entity
 @DiscriminatorValue("VERIFIED")
@@ -10,6 +12,7 @@ class VerifiedPayment(
     productName: String,
     memberId: Int
 ) : Payment(amount, productName, memberId) {
+    @Enumerated(EnumType.STRING)
     var status: VerifiedPaymentStatus = VerifiedPaymentStatus.CREATED
         protected set
 
