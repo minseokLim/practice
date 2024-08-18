@@ -13,6 +13,7 @@ class QueryPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
     fun list(memberId: Int, pageable: Pageable): Page<QueryPaymentResponse> {
-        return paymentRepository.findAllByMemberId(memberId, pageable).map { QueryPaymentResponse.of(it) }
+        return paymentRepository.findAllByMemberIdWithVerifiedCompleted(memberId, pageable)
+            .map { QueryPaymentResponse.of(it) }
     }
 }
