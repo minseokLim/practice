@@ -103,7 +103,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         )
 
         // when
-        val failVerifiedPaymentResponse = `인증 결제 실패 처리 요청`(failVerifiedPaymentRequest)
+        val failVerifiedPaymentResponse = `인증 결제 실패 처리 요청`(accessToken, failVerifiedPaymentRequest)
 
         // then
         `인증 결제 실패 처리됨`(failVerifiedPaymentResponse)
@@ -114,7 +114,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         )
 
         // when
-        val succeedVerifiedPaymentResponse = `인증 결제 완료 처리 요청`(succeedVerifiedPaymentRequest)
+        val succeedVerifiedPaymentResponse = `인증 결제 완료 처리 요청`(accessToken, succeedVerifiedPaymentRequest)
 
         // then
         `인증 결제 완료 처리됨`(succeedVerifiedPaymentResponse)

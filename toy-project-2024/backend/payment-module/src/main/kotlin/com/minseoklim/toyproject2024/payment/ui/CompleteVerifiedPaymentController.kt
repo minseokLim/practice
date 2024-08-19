@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.payment.ui
 
+import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.CompleteVerifiedPaymentService
 import com.minseoklim.toyproject2024.payment.dto.CompleteVerifiedPaymentRequest
 import com.minseoklim.toyproject2024.payment.dto.CompleteVerifiedPaymentResponse
@@ -14,8 +15,11 @@ class CompleteVerifiedPaymentController(
     private val completeVerifiedPaymentService: CompleteVerifiedPaymentService
 ) {
     @PostMapping("/complete-verified-payment")
-    fun completeVerifiedPayment(@Valid @RequestBody request: CompleteVerifiedPaymentRequest): ResponseEntity<CompleteVerifiedPaymentResponse> {
-        val response = completeVerifiedPaymentService.completeVerifiedPayment(request)
+    fun completeVerifiedPayment(
+        @MemberId memberId: Int,
+        @Valid @RequestBody request: CompleteVerifiedPaymentRequest
+    ): ResponseEntity<CompleteVerifiedPaymentResponse> {
+        val response = completeVerifiedPaymentService.completeVerifiedPayment(memberId, request)
         return ResponseEntity.ok(response)
     }
 }

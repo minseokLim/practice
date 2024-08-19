@@ -12,8 +12,13 @@ class CompleteVerifiedPaymentService(
     private val paymentRepository: PaymentRepository,
     private val verifiedPaymentApi: VerifiedPaymentApi
 ) {
-    fun completeVerifiedPayment(request: CompleteVerifiedPaymentRequest): CompleteVerifiedPaymentResponse {
+    fun completeVerifiedPayment(
+        memberId: Int,
+        request: CompleteVerifiedPaymentRequest
+    ): CompleteVerifiedPaymentResponse {
         val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, request.paymentUid)
+        payment.checkAuthority(memberId)
+
         val paidAmount = verifiedPaymentApi.getVerifiedPaymentAmount(request.paymentUid)
         if (payment.hasAmount(paidAmount)) {
             payment.complete()

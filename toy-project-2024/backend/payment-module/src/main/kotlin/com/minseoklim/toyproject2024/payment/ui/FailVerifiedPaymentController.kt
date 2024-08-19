@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.payment.ui
 
+import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.FailVerifiedPaymentService
 import com.minseoklim.toyproject2024.payment.dto.FailVerifiedPaymentRequest
 import jakarta.validation.Valid
@@ -12,7 +13,10 @@ class FailVerifiedPaymentController(
     private val failVerifiedPaymentService: FailVerifiedPaymentService
 ) {
     @PostMapping("/fail-verified-payment")
-    fun failVerifiedPayment(@Valid @RequestBody request: FailVerifiedPaymentRequest) {
-        failVerifiedPaymentService.failVerifiedPayment(request)
+    fun failVerifiedPayment(
+        @MemberId memberId: Int,
+        @Valid @RequestBody request: FailVerifiedPaymentRequest
+    ) {
+        failVerifiedPaymentService.failVerifiedPayment(memberId, request)
     }
 }

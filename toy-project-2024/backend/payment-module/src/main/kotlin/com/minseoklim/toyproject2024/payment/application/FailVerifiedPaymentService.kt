@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional
 class FailVerifiedPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
-    fun failVerifiedPayment(request: FailVerifiedPaymentRequest) {
+    fun failVerifiedPayment(memberId: Int, request: FailVerifiedPaymentRequest) {
         val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, request.paymentUid)
+        payment.checkAuthority(memberId)
         payment.fail()
     }
 }

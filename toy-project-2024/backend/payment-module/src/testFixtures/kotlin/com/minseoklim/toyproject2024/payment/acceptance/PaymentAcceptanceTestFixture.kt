@@ -41,16 +41,16 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 실패 처리 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
-        return RequestUtil.post("/fail-verified-payment", null, request)
+    fun `인증 결제 실패 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/fail-verified-payment", accessToken, request)
     }
 
     fun `인증 결제 실패 처리됨`(response: ExtractableResponse<Response>) {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 완료 처리 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
-        return RequestUtil.post("/complete-verified-payment", null, request)
+    fun `인증 결제 완료 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+        return RequestUtil.post("/complete-verified-payment", accessToken, request)
     }
 
     fun `인증 결제 완료 처리됨`(response: ExtractableResponse<Response>) {
