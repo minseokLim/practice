@@ -40,6 +40,11 @@ class ViewController(
         return "social-link"
     }
 
+    @GetMapping("/make-payment")
+    fun makePayment(): String {
+        return "make-payment"
+    }
+
     private fun getBaseUrl(request: HttpServletRequest): String {
         val scheme = request.scheme
         val serverName = request.serverName
