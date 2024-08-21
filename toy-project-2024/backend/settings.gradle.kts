@@ -5,6 +5,7 @@ include("card-module")
 include("common-module")
 include("member-module")
 include("payment-module")
+include("product-module")
 include("test-module")
 
 pluginManagement {

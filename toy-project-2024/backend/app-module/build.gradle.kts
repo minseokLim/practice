@@ -16,4 +16,5 @@ dependencies {
     implementation(project(":common-module"))
     implementation(project(":member-module"))
     implementation(project(":payment-module"))
+    implementation(project(":product-module"))
 }
