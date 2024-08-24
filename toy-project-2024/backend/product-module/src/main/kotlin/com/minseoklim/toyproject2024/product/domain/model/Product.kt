@@ -8,12 +8,16 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Index
+import jakarta.persistence.Table
 
 @Entity
+@Table(indexes = [Index(columnList = "member_id")])
 class Product(
     name: String,
     price: Long,
-    stockQuantity: Int
+    stockQuantity: Int,
+    memberId: Int
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +31,8 @@ class Product(
 
     var stockQuantity: StockQuantity = StockQuantity(stockQuantity)
         protected set
+
+    val memberId: Int = memberId
 
     var isDeleted: Boolean = false
         protected set

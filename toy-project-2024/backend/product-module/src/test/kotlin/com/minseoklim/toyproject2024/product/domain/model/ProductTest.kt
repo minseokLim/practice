@@ -13,12 +13,14 @@ class ProductTest {
         val product = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
         val other = Product(
             name = "other",
             price = 2000,
-            stockQuantity = 200
+            stockQuantity = 200,
+            memberId = 1
         )
 
         // when
@@ -35,7 +37,8 @@ class ProductTest {
         val product = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
 
         // when
@@ -51,7 +54,8 @@ class ProductTest {
         val product = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
 
         // when
@@ -67,7 +71,8 @@ class ProductTest {
         val product = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 0
+            stockQuantity = 0,
+            memberId = 1
         )
 
         // when
@@ -83,7 +88,8 @@ class ProductTest {
         val product = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
 
         // when
@@ -99,17 +105,20 @@ class ProductTest {
         val product1 = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
         val product2 = Product(
             name = "test",
             price = 1000,
-            stockQuantity = 100
+            stockQuantity = 100,
+            memberId = 1
         )
         val product3 = Product(
             name = "other",
             price = 2000,
-            stockQuantity = 200
+            stockQuantity = 200,
+            memberId = 1
         )
         ReflectionTestUtils.setField(product1, "id", 1)
         ReflectionTestUtils.setField(product2, "id", 1)
