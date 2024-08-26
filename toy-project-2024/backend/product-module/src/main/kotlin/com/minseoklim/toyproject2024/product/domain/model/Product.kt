@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.product.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import jakarta.persistence.Entity
@@ -61,6 +62,12 @@ class Product(
 
     fun isSoldOut(): Boolean {
         return this.stockQuantity.isSoldOut()
+    }
+
+    fun checkAuthority(memberId: Int) {
+        if (this.memberId != memberId) {
+            throw NoPermissionException("NO_PRODUCT_PERMISSION", "상품에 대한 권한이 없습니다.")
+        }
     }
 
     fun delete() {

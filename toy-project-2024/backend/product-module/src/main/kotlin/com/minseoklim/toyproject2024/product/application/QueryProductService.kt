@@ -16,4 +16,10 @@ class QueryProductService(
         val products = productRepository.findAllByMemberId(memberId, pageable)
         return products.map { QueryProductResponse.of(it) }
     }
+
+    fun get(memberId: Int, productId: Int): QueryProductResponse {
+        val product = ProductServiceHelper.getProduct(productRepository, productId)
+        product.checkAuthority(memberId)
+        return QueryProductResponse.of(product)
+    }
 }

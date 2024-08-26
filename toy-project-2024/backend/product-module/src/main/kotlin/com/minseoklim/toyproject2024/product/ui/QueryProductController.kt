@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,5 +20,11 @@ class QueryProductController(
     fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryProductResponse>> {
         val responses = queryProductService.list(memberId, pageable)
         return ResponseEntity.ok(responses)
+    }
+
+    @GetMapping("/{productId}")
+    fun get(@MemberId memberId: Int, @PathVariable productId: Int): ResponseEntity<QueryProductResponse> {
+        val response = queryProductService.get(memberId, productId)
+        return ResponseEntity.ok(response)
     }
 }

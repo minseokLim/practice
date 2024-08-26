@@ -1,7 +1,8 @@
 package com.minseoklim.toyproject2024.product.domain.model
 
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
@@ -80,6 +81,25 @@ class ProductTest {
 
         // then
         assertThat(result).isTrue
+    }
+
+    @Test
+    fun checkAuthority() {
+        // given
+        val product = Product(
+            name = "test",
+            price = 1000,
+            stockQuantity = 100,
+            memberId = 1
+        )
+
+        // when, then
+        assertThatNoException().isThrownBy { product.checkAuthority(1) }
+
+        // when, then
+        assertThatThrownBy {
+            product.checkAuthority(2)
+        }.isInstanceOf(NoPermissionException::class.java)
     }
 
     @Test
