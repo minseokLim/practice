@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.auth.application
 
 import com.minseoklim.toyproject2024.auth.domain.model.LoginHistory
 import com.minseoklim.toyproject2024.auth.domain.repository.LoginHistoryRepository
-import com.minseoklim.toyproject2024.auth.dto.LoginRequest
-import com.minseoklim.toyproject2024.auth.dto.LoginResponse
+import com.minseoklim.toyproject2024.auth.dto.application.LoginInput
+import com.minseoklim.toyproject2024.auth.dto.application.LoginOutput
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,9 +17,9 @@ class LoginService(
     private val loginHistoryRepository: LoginHistoryRepository,
     private val loginNotifier: LoginNotifier
 ) {
-    fun login(request: LoginRequest, clientIp: String, userAgent: String): LoginResponse {
+    fun login(input: LoginInput, clientIp: String, userAgent: String): LoginOutput {
         val authenticationManager = authenticationManagerBuilder.getObject()
-        val authentication = authenticationManager.authenticate(request.toAuthentication())
+        val authentication = authenticationManager.authenticate(input.toAuthentication())
         val token = createTokenService.createToken(authentication)
 
         val loginDateTime = LocalDateTime.now()
@@ -34,6 +34,6 @@ class LoginService(
         )
         loginNotifier.notifyLogin(authentication.name.toInt(), clientIp, userAgent, loginDateTime)
 
-        return LoginResponse(token.accessToken, token.refreshToken)
+        return LoginOutput(token.accessToken, token.refreshToken)
     }
 }

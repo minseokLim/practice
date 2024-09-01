@@ -29,7 +29,7 @@ class OAuth2AuthenticationSuccessHandler(
         response: HttpServletResponse,
         authentication: Authentication
     ) {
-        val tokenResponse = createTokenService.createToken(authentication)
+        val token = createTokenService.createToken(authentication)
 
         val loginDateTime = LocalDateTime.now()
         val clientIp = request.getClientIp()
@@ -37,7 +37,7 @@ class OAuth2AuthenticationSuccessHandler(
         loginHistoryRepository.save(
             LoginHistory(
                 memberId = authentication.name.toInt(),
-                tokenId = tokenResponse.id,
+                tokenId = token.id,
                 clientIp = clientIp,
                 userAgent = userAgent,
                 socialType = SocialType.valueOf((authentication as OAuth2AuthenticationToken).authorizedClientRegistrationId.uppercase()),
@@ -46,8 +46,8 @@ class OAuth2AuthenticationSuccessHandler(
         )
         loginNotifier.notifyLogin(authentication.name.toInt(), clientIp, userAgent, loginDateTime)
 
-        val encodedAccessToken = URLEncoder.encode(tokenResponse.accessToken, Charsets.UTF_8)
-        val encodedRefreshToken = URLEncoder.encode(tokenResponse.refreshToken, Charsets.UTF_8)
+        val encodedAccessToken = URLEncoder.encode(token.accessToken, Charsets.UTF_8)
+        val encodedRefreshToken = URLEncoder.encode(token.refreshToken, Charsets.UTF_8)
         val redirectUrl = request.session.getAttribute("REDIRECT_URL") as String
 
         response.sendRedirect("$redirectUrl?accessToken=$encodedAccessToken&refreshToken=$encodedRefreshToken")

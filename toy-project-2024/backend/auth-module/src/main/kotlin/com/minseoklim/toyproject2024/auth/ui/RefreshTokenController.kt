@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.RefreshTokenService
-import com.minseoklim.toyproject2024.auth.dto.RefreshTokenRequest
-import com.minseoklim.toyproject2024.auth.dto.RefreshTokenResponse
+import com.minseoklim.toyproject2024.auth.dto.ui.RefreshTokenRequest
+import com.minseoklim.toyproject2024.auth.dto.ui.RefreshTokenResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,7 +15,7 @@ class RefreshTokenController(
 ) {
     @PostMapping("/refresh-token")
     fun refreshToken(@Valid @RequestBody request: RefreshTokenRequest): ResponseEntity<RefreshTokenResponse> {
-        val response = refreshTokenService.refreshToken(request)
-        return ResponseEntity.ok(response)
+        val output = refreshTokenService.refreshToken(request.toInput())
+        return ResponseEntity.ok(RefreshTokenResponse.of(output))
     }
 }

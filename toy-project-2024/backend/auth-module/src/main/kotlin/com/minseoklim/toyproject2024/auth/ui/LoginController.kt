@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.LoginService
-import com.minseoklim.toyproject2024.auth.dto.LoginRequest
-import com.minseoklim.toyproject2024.auth.dto.LoginResponse
+import com.minseoklim.toyproject2024.auth.dto.ui.LoginRequest
+import com.minseoklim.toyproject2024.auth.dto.ui.LoginResponse
 import com.minseoklim.toyproject2024.common.util.ClientUtil.getClientIp
 import com.minseoklim.toyproject2024.common.util.ClientUtil.getUserAgent
 import jakarta.servlet.http.HttpServletRequest
@@ -21,7 +21,7 @@ class LoginController(
         @Valid @RequestBody request: LoginRequest,
         servletRequest: HttpServletRequest
     ): ResponseEntity<LoginResponse> {
-        val response = loginService.login(request, servletRequest.getClientIp(), servletRequest.getUserAgent())
-        return ResponseEntity.ok(response)
+        val output = loginService.login(request.toInput(), servletRequest.getClientIp(), servletRequest.getUserAgent())
+        return ResponseEntity.ok(LoginResponse.of(output))
     }
 }

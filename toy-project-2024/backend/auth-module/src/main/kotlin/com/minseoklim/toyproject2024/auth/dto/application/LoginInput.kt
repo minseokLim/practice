@@ -1,14 +1,10 @@
-package com.minseoklim.toyproject2024.auth.dto
+package com.minseoklim.toyproject2024.auth.dto.application
 
-import jakarta.validation.constraints.NotBlank
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 
-data class LoginRequest(
-    @get:NotBlank
+data class LoginInput(
     val loginId: String,
-
-    @get:NotBlank
     val password: String
 ) {
     fun toAuthentication(): Authentication {
