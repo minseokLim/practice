@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.card.ui
 
 import com.minseoklim.toyproject2024.card.application.RegisterCardService
-import com.minseoklim.toyproject2024.card.dto.RegisterCardRequest
-import com.minseoklim.toyproject2024.card.dto.RegisterCardResponse
+import com.minseoklim.toyproject2024.card.dto.ui.RegisterCardRequest
+import com.minseoklim.toyproject2024.card.dto.ui.RegisterCardResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -22,8 +22,8 @@ class RegisterCardController(
         @MemberId memberId: Int,
         @Valid @RequestBody request: RegisterCardRequest
     ): ResponseEntity<RegisterCardResponse> {
-        val response = registerCardService.register(memberId, request)
-        val uri = URI.create("/cards/${response.id}")
-        return ResponseEntity.created(uri).body(response)
+        val output = registerCardService.register(memberId, request.toInput())
+        val uri = URI.create("/cards/${output.id}")
+        return ResponseEntity.created(uri).body(RegisterCardResponse.of(output))
     }
 }
