@@ -1,10 +1,10 @@
-package com.minseoklim.toyproject2024.member.dto
+package com.minseoklim.toyproject2024.member.dto.ui
 
 import com.minseoklim.toyproject2024.member.domain.model.Email
 import com.minseoklim.toyproject2024.member.domain.model.LoginId
-import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Name
 import com.minseoklim.toyproject2024.member.domain.model.Password
+import com.minseoklim.toyproject2024.member.dto.application.JoinMemberInput
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
@@ -21,7 +21,12 @@ data class JoinMemberRequest(
     @get:Pattern(regexp = Email.REGEX_STR, message = Email.ERR_MSG)
     val email: String
 ) {
-    fun toEntity(): Member {
-        return Member(loginId, password, name, email)
+    fun toInput(): JoinMemberInput {
+        return JoinMemberInput(
+            loginId = loginId,
+            password = password,
+            name = name,
+            email = email
+        )
     }
 }

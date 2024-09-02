@@ -1,11 +1,11 @@
-package com.minseoklim.toyproject2024.member.dto
+package com.minseoklim.toyproject2024.member.dto.application
 
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
-data class UpdateMemberResponse private constructor(
+data class QueryMemberOutput private constructor(
     val id: Int,
     val loginId: String?,
     val name: String,
@@ -16,9 +16,9 @@ data class UpdateMemberResponse private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(member: Member): UpdateMemberResponse {
+        fun of(member: Member): QueryMemberOutput {
             return with(member) {
-                UpdateMemberResponse(
+                QueryMemberOutput(
                     id = id!!,
                     loginId = loginId?.value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),

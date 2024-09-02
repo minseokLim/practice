@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.ui
 
 import com.minseoklim.toyproject2024.member.application.JoinMemberService
-import com.minseoklim.toyproject2024.member.dto.JoinMemberRequest
-import com.minseoklim.toyproject2024.member.dto.JoinMemberResponse
+import com.minseoklim.toyproject2024.member.dto.ui.JoinMemberRequest
+import com.minseoklim.toyproject2024.member.dto.ui.JoinMemberResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -18,8 +18,8 @@ class JoinMemberController(
 ) {
     @PostMapping
     fun join(@Valid @RequestBody request: JoinMemberRequest): ResponseEntity<JoinMemberResponse> {
-        val response = joinMemberService.join(request)
-        val uri = URI.create("/members/${response.id}")
-        return ResponseEntity.created(uri).body(response)
+        val output = joinMemberService.join(request.toInput())
+        val uri = URI.create("/members/${output.id}")
+        return ResponseEntity.created(uri).body(JoinMemberResponse.of(output))
     }
 }

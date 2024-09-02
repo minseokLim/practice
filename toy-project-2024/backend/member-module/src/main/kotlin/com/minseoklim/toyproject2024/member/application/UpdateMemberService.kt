@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
-import com.minseoklim.toyproject2024.member.dto.UpdateMemberRequest
-import com.minseoklim.toyproject2024.member.dto.UpdateMemberResponse
+import com.minseoklim.toyproject2024.member.dto.application.UpdateMemberInput
+import com.minseoklim.toyproject2024.member.dto.application.UpdateMemberOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class UpdateMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun update(id: Int, request: UpdateMemberRequest): UpdateMemberResponse {
+    fun update(id: Int, input: UpdateMemberInput): UpdateMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)
-        member.validateVersion(request.version)
-        member.update(request.toEntity(member))
-        return UpdateMemberResponse.of(member)
+        member.validateVersion(input.version)
+        member.update(input.toEntity(member))
+        return UpdateMemberOutput.of(member)
     }
 }

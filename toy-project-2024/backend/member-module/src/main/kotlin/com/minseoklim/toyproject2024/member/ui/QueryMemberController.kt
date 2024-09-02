@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.member.ui
 import com.minseoklim.toyproject2024.common.annotation.CheckAdminPermission
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
-import com.minseoklim.toyproject2024.member.dto.QueryMemberResponse
+import com.minseoklim.toyproject2024.member.dto.ui.QueryMemberResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -24,20 +24,20 @@ class QueryMemberController(
         @RequestParam(required = false) filter: String?,
         pageable: Pageable
     ): ResponseEntity<Page<QueryMemberResponse>> {
-        val responses = queryMemberService.list(filter, pageable)
-        return ResponseEntity.ok(responses)
+        val outputs = queryMemberService.list(filter, pageable)
+        return ResponseEntity.ok(outputs.map { QueryMemberResponse.of(it) })
     }
 
     @GetMapping("/{id}")
     @CheckAdminPermission
     fun get(@PathVariable id: Int): ResponseEntity<QueryMemberResponse> {
-        val response = queryMemberService.get(id)
-        return ResponseEntity.ok(response)
+        val output = queryMemberService.get(id)
+        return ResponseEntity.ok(QueryMemberResponse.of(output))
     }
 
     @GetMapping("/me")
     fun getMe(@MemberId id: Int): ResponseEntity<QueryMemberResponse> {
-        val response = queryMemberService.get(id)
-        return ResponseEntity.ok(response)
+        val output = queryMemberService.get(id)
+        return ResponseEntity.ok(QueryMemberResponse.of(output))
     }
 }

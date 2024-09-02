@@ -1,9 +1,9 @@
-package com.minseoklim.toyproject2024.member.dto
+package com.minseoklim.toyproject2024.member.dto.ui
 
 import com.minseoklim.toyproject2024.member.domain.model.Email
-import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Name
 import com.minseoklim.toyproject2024.member.domain.model.Password
+import com.minseoklim.toyproject2024.member.dto.application.UpdateMemberInput
 import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 
@@ -19,7 +19,12 @@ data class UpdateMemberRequest(
 
     val version: Long
 ) {
-    fun toEntity(original: Member): Member {
-        return Member(original.loginId?.value, password, name, email)
+    fun toInput(): UpdateMemberInput {
+        return UpdateMemberInput(
+            password = password,
+            name = name,
+            email = email,
+            version = version
+        )
     }
 }
