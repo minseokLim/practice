@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.payment.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.MakeCardPaymentService
-import com.minseoklim.toyproject2024.payment.dto.MakeCardPaymentRequest
-import com.minseoklim.toyproject2024.payment.dto.MakeCardPaymentResponse
+import com.minseoklim.toyproject2024.payment.dto.ui.MakeCardPaymentRequest
+import com.minseoklim.toyproject2024.payment.dto.ui.MakeCardPaymentResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,7 +19,7 @@ class MakeCardPaymentController(
         @MemberId memberId: Int,
         @Valid @RequestBody request: MakeCardPaymentRequest
     ): ResponseEntity<MakeCardPaymentResponse> {
-        val response = makeCardPaymentService.make(memberId, request)
-        return ResponseEntity.ok(response)
+        val response = makeCardPaymentService.make(memberId, request.toInput())
+        return ResponseEntity.ok(MakeCardPaymentResponse.of(response))
     }
 }

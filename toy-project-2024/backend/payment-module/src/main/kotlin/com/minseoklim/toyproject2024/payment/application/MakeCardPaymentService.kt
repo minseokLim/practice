@@ -5,8 +5,8 @@ import com.minseoklim.toyproject2024.card.domain.repository.CardRepository
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.payment.application.CardPaymentApi.CardPaymentRequest
 import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
-import com.minseoklim.toyproject2024.payment.dto.MakeCardPaymentRequest
-import com.minseoklim.toyproject2024.payment.dto.MakeCardPaymentResponse
+import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentInput
+import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -17,24 +17,24 @@ class MakeCardPaymentService(
     private val paymentRepository: PaymentRepository,
     private val cardPaymentApi: CardPaymentApi
 ) {
-    fun make(memberId: Int, request: MakeCardPaymentRequest): MakeCardPaymentResponse {
-        val card = CardServiceHelper.getCard(cardRepository, request.cardId)
+    fun make(memberId: Int, input: MakeCardPaymentInput): MakeCardPaymentOutput {
+        val card = CardServiceHelper.getCard(cardRepository, input.cardId)
         card.checkAuthority(memberId)
 
-        val cardPayment = paymentRepository.save(request.toEntity(memberId))
+        val cardPayment = paymentRepository.save(input.toEntity(memberId))
 
         cardPaymentApi.requestPayment(
             CardPaymentRequest(
                 paymentUid = cardPayment.paymentUid.value,
-                amount = request.amount,
+                amount = input.amount,
                 cardNumber = TextEncryptUtil.decrypt(card.cardNumber.encryptedValue),
                 cardExpiry = TextEncryptUtil.decrypt(card.cardExpiry.encryptedValue),
                 birth = TextEncryptUtil.decrypt(card.birth.encryptedValue),
                 pwd2digit = TextEncryptUtil.decrypt(card.pwd2digit.encryptedValue),
-                productName = request.productName
+                productName = input.productName
             )
         )
 
-        return MakeCardPaymentResponse.of(cardPayment)
+        return MakeCardPaymentOutput.of(cardPayment)
     }
 }

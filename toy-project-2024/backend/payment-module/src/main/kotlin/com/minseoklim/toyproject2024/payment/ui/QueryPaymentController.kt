@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.payment.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.QueryPaymentService
-import com.minseoklim.toyproject2024.payment.dto.QueryPaymentResponse
+import com.minseoklim.toyproject2024.payment.dto.ui.QueryPaymentResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -16,6 +16,6 @@ class QueryPaymentController(
     @GetMapping("/payments")
     fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryPaymentResponse>> {
         val responses = queryPaymentService.list(memberId, pageable)
-        return ResponseEntity.ok(responses)
+        return ResponseEntity.ok(responses.map { QueryPaymentResponse.of(it) })
     }
 }

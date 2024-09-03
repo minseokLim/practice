@@ -1,6 +1,6 @@
-package com.minseoklim.toyproject2024.payment.dto
+package com.minseoklim.toyproject2024.payment.dto.ui
 
-import com.minseoklim.toyproject2024.payment.domain.model.CardPayment
+import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentOutput
 
 data class MakeCardPaymentResponse private constructor(
     val id: Int,
@@ -10,13 +10,13 @@ data class MakeCardPaymentResponse private constructor(
     val isCanceled: Boolean
 ) {
     companion object {
-        fun of(cardPayment: CardPayment): MakeCardPaymentResponse {
-            return with(cardPayment) {
+        fun of(output: MakeCardPaymentOutput): MakeCardPaymentResponse {
+            return with(output) {
                 MakeCardPaymentResponse(
-                    id = id!!,
+                    id = id,
                     cardId = cardId,
-                    amount = amount.value.toLong(),
-                    productName = productName.value,
+                    amount = amount,
+                    productName = productName,
                     isCanceled = isCanceled
                 )
             }

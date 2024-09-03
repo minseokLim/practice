@@ -1,8 +1,8 @@
-package com.minseoklim.toyproject2024.payment.dto
+package com.minseoklim.toyproject2024.payment.dto.ui
 
 import com.minseoklim.toyproject2024.payment.domain.model.Amount
 import com.minseoklim.toyproject2024.payment.domain.model.ProductName
-import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPayment
+import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentInput
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 
@@ -13,11 +13,10 @@ data class CheckOutVerifiedPaymentRequest(
     @get:NotBlank(message = ProductName.ERR_MSG)
     val productName: String
 ) {
-    fun toEntity(memberId: Int): VerifiedPayment {
-        return VerifiedPayment(
+    fun toInput(): CheckOutVerifiedPaymentInput {
+        return CheckOutVerifiedPaymentInput(
             amount = amount,
-            productName = productName,
-            memberId = memberId
+            productName = productName
         )
     }
 }

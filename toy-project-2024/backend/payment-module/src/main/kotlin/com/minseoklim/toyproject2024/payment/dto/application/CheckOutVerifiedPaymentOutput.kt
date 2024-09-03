@@ -1,9 +1,9 @@
-package com.minseoklim.toyproject2024.payment.dto
+package com.minseoklim.toyproject2024.payment.dto.application
 
 import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPayment
 import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPaymentStatus
 
-data class CheckOutVerifiedPaymentResponse private constructor(
+data class CheckOutVerifiedPaymentOutput private constructor(
     val id: Int,
     val amount: Long,
     val productName: String,
@@ -11,9 +11,9 @@ data class CheckOutVerifiedPaymentResponse private constructor(
     val status: VerifiedPaymentStatus
 ) {
     companion object {
-        fun of(verifiedPayment: VerifiedPayment): CheckOutVerifiedPaymentResponse {
+        fun of(verifiedPayment: VerifiedPayment): CheckOutVerifiedPaymentOutput {
             return with(verifiedPayment) {
-                CheckOutVerifiedPaymentResponse(
+                CheckOutVerifiedPaymentOutput(
                     id = id!!,
                     amount = amount.value.toLong(),
                     productName = productName.value,
