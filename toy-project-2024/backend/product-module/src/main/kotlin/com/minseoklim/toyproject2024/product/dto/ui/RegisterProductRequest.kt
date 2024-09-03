@@ -1,9 +1,9 @@
-package com.minseoklim.toyproject2024.product.dto
+package com.minseoklim.toyproject2024.product.dto.ui
 
 import com.minseoklim.toyproject2024.product.domain.model.Name
 import com.minseoklim.toyproject2024.product.domain.model.Price
-import com.minseoklim.toyproject2024.product.domain.model.Product
 import com.minseoklim.toyproject2024.product.domain.model.StockQuantity
+import com.minseoklim.toyproject2024.product.dto.application.RegisterProductInput
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.PositiveOrZero
 
@@ -17,12 +17,11 @@ data class RegisterProductRequest(
     @get:PositiveOrZero(message = StockQuantity.ERR_MSG)
     val stockQuantity: Int
 ) {
-    fun toEntity(memberId: Int): Product {
-        return Product(
+    fun toInput(): RegisterProductInput {
+        return RegisterProductInput(
             name = name,
             price = price,
-            stockQuantity = stockQuantity,
-            memberId = memberId
+            stockQuantity = stockQuantity
         )
     }
 }

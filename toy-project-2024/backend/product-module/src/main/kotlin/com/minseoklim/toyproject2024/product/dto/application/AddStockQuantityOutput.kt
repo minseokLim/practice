@@ -1,17 +1,17 @@
-package com.minseoklim.toyproject2024.product.dto
+package com.minseoklim.toyproject2024.product.dto.application
 
 import com.minseoklim.toyproject2024.product.domain.model.Product
 
-data class RemoveStockQuantityResponse private constructor(
+data class AddStockQuantityOutput private constructor(
     val id: Int,
     val name: String,
     val price: Long,
     val stockQuantity: Int
 ) {
     companion object {
-        fun of(product: Product): RemoveStockQuantityResponse {
+        fun of(product: Product): AddStockQuantityOutput {
             return with(product) {
-                RemoveStockQuantityResponse(
+                AddStockQuantityOutput(
                     id = id!!,
                     name = name.value,
                     price = price.value.toLong(),
@@ -21,4 +21,3 @@ data class RemoveStockQuantityResponse private constructor(
         }
     }
 }
-

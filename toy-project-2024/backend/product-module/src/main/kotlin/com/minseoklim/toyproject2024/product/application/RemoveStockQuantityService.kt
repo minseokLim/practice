@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.product.application
 
 import com.minseoklim.toyproject2024.product.domain.repository.ProductRepository
-import com.minseoklim.toyproject2024.product.dto.RemoveStockQuantityRequest
-import com.minseoklim.toyproject2024.product.dto.RemoveStockQuantityResponse
+import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityInput
+import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,11 +14,11 @@ class RemoveStockQuantityService(
     fun removeStockQuantity(
         memberId: Int,
         productId: Int,
-        request: RemoveStockQuantityRequest
-    ): RemoveStockQuantityResponse {
+        input: RemoveStockQuantityInput
+    ): RemoveStockQuantityOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
-        product.removeStockQuantity(request.decrement)
-        return RemoveStockQuantityResponse.of(product)
+        product.removeStockQuantity(input.decrement)
+        return RemoveStockQuantityOutput.of(product)
     }
 }

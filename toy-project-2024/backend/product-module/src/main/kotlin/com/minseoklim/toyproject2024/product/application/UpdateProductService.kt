@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.product.application
 
 import com.minseoklim.toyproject2024.product.domain.repository.ProductRepository
-import com.minseoklim.toyproject2024.product.dto.UpdateProductRequest
-import com.minseoklim.toyproject2024.product.dto.UpdateProductResponse
+import com.minseoklim.toyproject2024.product.dto.application.UpdateProductInput
+import com.minseoklim.toyproject2024.product.dto.application.UpdateProductOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class UpdateProductService(
     private val productRepository: ProductRepository
 ) {
-    fun update(memberId: Int, productId: Int, request: UpdateProductRequest): UpdateProductResponse {
+    fun update(memberId: Int, productId: Int, input: UpdateProductInput): UpdateProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
-        product.update(request.toEntity(product))
-        return UpdateProductResponse.of(product)
+        product.update(input.toEntity(product))
+        return UpdateProductOutput.of(product)
     }
 }

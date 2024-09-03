@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.UpdateProductService
-import com.minseoklim.toyproject2024.product.dto.UpdateProductRequest
-import com.minseoklim.toyproject2024.product.dto.UpdateProductResponse
+import com.minseoklim.toyproject2024.product.dto.ui.UpdateProductRequest
+import com.minseoklim.toyproject2024.product.dto.ui.UpdateProductResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,7 +23,7 @@ class UpdateProductController(
         @PathVariable productId: Int,
         @Valid @RequestBody request: UpdateProductRequest
     ): ResponseEntity<UpdateProductResponse> {
-        val response = updateProductService.update(memberId, productId, request)
-        return ResponseEntity.ok(response)
+        val response = updateProductService.update(memberId, productId, request.toInput())
+        return ResponseEntity.ok(UpdateProductResponse.of(response))
     }
 }

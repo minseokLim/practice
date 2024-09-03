@@ -1,8 +1,8 @@
-package com.minseoklim.toyproject2024.product.dto
+package com.minseoklim.toyproject2024.product.dto.ui
 
 import com.minseoklim.toyproject2024.product.domain.model.Name
 import com.minseoklim.toyproject2024.product.domain.model.Price
-import com.minseoklim.toyproject2024.product.domain.model.Product
+import com.minseoklim.toyproject2024.product.dto.application.UpdateProductInput
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.PositiveOrZero
 
@@ -13,12 +13,10 @@ data class UpdateProductRequest(
     @get:PositiveOrZero(message = Price.ERR_MSG)
     val price: Long
 ) {
-    fun toEntity(original: Product): Product {
-        return Product(
+    fun toInput(): UpdateProductInput {
+        return UpdateProductInput(
             name = name,
-            price = price,
-            stockQuantity = original.stockQuantity.value,
-            memberId = original.memberId
+            price = price
         )
     }
 }

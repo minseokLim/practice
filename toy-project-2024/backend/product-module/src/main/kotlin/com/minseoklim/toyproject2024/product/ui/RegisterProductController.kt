@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.RegisterProductService
-import com.minseoklim.toyproject2024.product.dto.RegisterProductRequest
-import com.minseoklim.toyproject2024.product.dto.RegisterProductResponse
+import com.minseoklim.toyproject2024.product.dto.ui.RegisterProductRequest
+import com.minseoklim.toyproject2024.product.dto.ui.RegisterProductResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,8 +22,8 @@ class RegisterProductController(
         @MemberId memberId: Int,
         @Valid @RequestBody request: RegisterProductRequest
     ): ResponseEntity<RegisterProductResponse> {
-        val response = registerProductService.register(memberId, request)
+        val response = registerProductService.register(memberId, request.toInput())
         val uri = URI.create("/products/${response.id}")
-        return ResponseEntity.created(uri).body(response)
+        return ResponseEntity.created(uri).body(RegisterProductResponse.of(response))
     }
 }

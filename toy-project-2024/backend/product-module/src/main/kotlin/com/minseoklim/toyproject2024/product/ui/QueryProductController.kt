@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.QueryProductService
-import com.minseoklim.toyproject2024.product.dto.QueryProductResponse
+import com.minseoklim.toyproject2024.product.dto.ui.QueryProductResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -18,13 +18,13 @@ class QueryProductController(
 ) {
     @GetMapping
     fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryProductResponse>> {
-        val responses = queryProductService.list(memberId, pageable)
-        return ResponseEntity.ok(responses)
+        val outputs = queryProductService.list(memberId, pageable)
+        return ResponseEntity.ok(outputs.map { QueryProductResponse.of(it) })
     }
 
     @GetMapping("/{productId}")
     fun get(@MemberId memberId: Int, @PathVariable productId: Int): ResponseEntity<QueryProductResponse> {
-        val response = queryProductService.get(memberId, productId)
-        return ResponseEntity.ok(response)
+        val output = queryProductService.get(memberId, productId)
+        return ResponseEntity.ok(QueryProductResponse.of(output))
     }
 }
