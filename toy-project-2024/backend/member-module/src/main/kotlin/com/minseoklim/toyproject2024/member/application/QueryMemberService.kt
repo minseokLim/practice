@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.member.application
 
+import com.minseoklim.toyproject2024.member.domain.model.SocialType
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
 import com.minseoklim.toyproject2024.member.util.MemberFilterParser
@@ -22,5 +23,15 @@ class QueryMemberService(
     fun get(id: Int): QueryMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         return QueryMemberOutput.of(member)
+    }
+
+    fun findByLoginId(loginId: String): QueryMemberOutput? {
+        val member = memberRepository.findByLoginIdValue(loginId)
+        return member?.let { QueryMemberOutput.of(it) }
+    }
+
+    fun findBySocialTypeAndSocialId(socialType: SocialType, socialId: String): QueryMemberOutput? {
+        val member = memberRepository.findBySocialTypeAndSocialId(socialType, socialId)
+        return member?.let { QueryMemberOutput.of(it) }
     }
 }

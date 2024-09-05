@@ -8,6 +8,7 @@ import com.minseoklim.toyproject2024.member.domain.model.SocialType
 data class QueryMemberOutput private constructor(
     val id: Int,
     val loginId: String?,
+    val password: String?,
     val name: String,
     val email: String?,
     val roles: Set<Role>,
@@ -21,6 +22,7 @@ data class QueryMemberOutput private constructor(
                 QueryMemberOutput(
                     id = id!!,
                     loginId = loginId?.value,
+                    password = password?.value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),
                     email = email?.let { TextEncryptUtil.decrypt(email!!.encryptedValue) },
                     roles = getRoles(),
