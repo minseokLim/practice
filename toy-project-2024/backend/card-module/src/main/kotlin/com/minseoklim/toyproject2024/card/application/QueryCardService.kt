@@ -16,4 +16,10 @@ class QueryCardService(
         val cards = cardRepository.findAllByMemberId(memberId, pageable)
         return cards.map { QueryCardOutput.of(it) }
     }
+
+    fun get(memberId: Int, cardId: Int): QueryCardOutput {
+        val card = CardServiceHelper.getCard(cardRepository, cardId)
+        card.checkAuthority(memberId)
+        return QueryCardOutput.of(card)
+    }
 }
