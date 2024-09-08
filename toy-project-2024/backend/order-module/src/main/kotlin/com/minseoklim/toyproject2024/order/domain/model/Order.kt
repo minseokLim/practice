@@ -20,12 +20,7 @@ import jakarta.persistence.Table
 class Order(
     orderName: String,
     orderProducts: List<OrderProduct>,
-    shippingMessage: String?,
-    address: String,
-    addressDetail: String,
-    zipCode: String,
-    receiverName: String,
-    receiverPhone: String,
+    shippingInfo: ShippingInfo,
     orderStatus: OrderStatus = OrderStatus.PAYMENT_WAITING,
     memberId: Int
 ) : BaseTimeEntity() {
@@ -40,14 +35,7 @@ class Order(
     @OrderColumn(name = "order_product_idx")
     val orderProducts: List<OrderProduct> = orderProducts
 
-    val shippingInfo: ShippingInfo = ShippingInfo(
-        shippingMessage,
-        address,
-        addressDetail,
-        zipCode,
-        receiverName,
-        receiverPhone
-    )
+    val shippingInfo: ShippingInfo = shippingInfo
 
     var orderStatus: OrderStatus = orderStatus
         protected set

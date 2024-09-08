@@ -5,15 +5,12 @@ import jakarta.persistence.Embeddable
 @Embeddable
 class ShippingInfo(
     shippingMessage: String?,
-    address: String,
-    addressDetail: String,
-    zipCode: String,
-    receiverName: String,
-    receiverPhone: String
+    address: Address,
+    receiver: Receiver
 ) {
     val shippingMessage: ShippingMessage? = shippingMessage?.let { ShippingMessage(it) }
 
-    val address: Address = Address(address, addressDetail, zipCode)
+    val address: Address = address
 
-    val receiver: Receiver = Receiver(receiverName, receiverPhone)
+    val receiver: Receiver = receiver
 }
