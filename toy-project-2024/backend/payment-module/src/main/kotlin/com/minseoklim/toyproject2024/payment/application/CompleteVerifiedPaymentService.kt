@@ -16,10 +16,10 @@ class CompleteVerifiedPaymentService(
         memberId: Int,
         input: CompleteVerifiedPaymentInput
     ): CompleteVerifiedPaymentOutput {
-        val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, input.paymentUid)
+        val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, input.paymentId)
         payment.checkAuthority(memberId)
 
-        val paidAmount = verifiedPaymentApi.getVerifiedPaymentAmount(input.paymentUid)
+        val paidAmount = verifiedPaymentApi.getVerifiedPaymentAmount(payment.paymentUid.value)
         if (payment.hasAmount(paidAmount)) {
             payment.complete()
         } else {

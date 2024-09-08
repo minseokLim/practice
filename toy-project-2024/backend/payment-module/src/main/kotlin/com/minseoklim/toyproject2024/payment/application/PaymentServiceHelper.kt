@@ -12,9 +12,8 @@ object PaymentServiceHelper {
             .orElseThrow { throw NotFoundException("PAYMENT_NOT_FOUND", "찾을 수 없는 결제 정보입니다.") }
     }
 
-    fun getVerifiedPayment(paymentRepository: PaymentRepository, paymentUid: String): VerifiedPayment {
-        val payment = paymentRepository.findByPaymentUidValue(paymentUid)
-            ?: throw NotFoundException("PAYMENT_NOT_FOUND", "찾을 수 없는 결제 정보입니다.")
+    fun getVerifiedPayment(paymentRepository: PaymentRepository, paymentId: Int): VerifiedPayment {
+        val payment = getPayment(paymentRepository, paymentId)
         if (payment !is VerifiedPayment) {
             throw BadRequestException("NOT_VERIFIED_PAYMENT", "인증 결제 정보가 아닙니다.")
         }

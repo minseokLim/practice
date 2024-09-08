@@ -98,9 +98,9 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         `인증 결제 정보 생성됨`(checkOutVerifiedPaymentResponse)
 
         // given
-        val paymentUid = checkOutVerifiedPaymentResponse.jsonPath().get<String>("paymentUid")
+        val verifiedPaymentId = checkOutVerifiedPaymentResponse.extractId()
         val failVerifiedPaymentRequest = mapOf(
-            "paymentUid" to paymentUid
+            "paymentId" to verifiedPaymentId
         )
 
         // when
@@ -111,7 +111,7 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // given
         val succeedVerifiedPaymentRequest = mapOf(
-            "paymentUid" to paymentUid
+            "paymentId" to verifiedPaymentId
         )
 
         // when
@@ -119,9 +119,6 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // then
         `인증 결제 완료 처리됨`(succeedVerifiedPaymentResponse)
-
-        // given
-        val verifiedPaymentId = checkOutVerifiedPaymentResponse.extractId()
 
         // when
         val verifiedPaymentCancelResponse = `결제 취소 요청`(accessToken, verifiedPaymentId)

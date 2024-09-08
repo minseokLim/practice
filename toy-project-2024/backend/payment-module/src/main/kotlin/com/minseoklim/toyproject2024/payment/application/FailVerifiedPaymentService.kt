@@ -11,7 +11,7 @@ class FailVerifiedPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
     fun failVerifiedPayment(memberId: Int, input: FailVerifiedPaymentInput) {
-        val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, input.paymentUid)
+        val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, input.paymentId)
         payment.checkAuthority(memberId)
         payment.fail()
     }
