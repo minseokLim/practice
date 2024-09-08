@@ -18,13 +18,14 @@ import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFix
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제 요청`
 import com.minseoklim.toyproject2024.payment.acceptance.PaymentAcceptanceTestFixture.`카드 결제됨`
 import com.minseoklim.toyproject2024.test.AcceptanceTest
+import com.minseoklim.toyproject2024.test.util.TestUtil.extractId
 import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
 import org.junit.jupiter.api.Test
 
 class PaymentAcceptanceTest : AcceptanceTest() {
 
     @Test
-    fun `카드 결제 서비스`() {
+    fun `결제 서비스`() {
         // given
         val memberJoinRequest = mapOf(
             "loginId" to MEMBER_ID,
@@ -76,13 +77,13 @@ class PaymentAcceptanceTest : AcceptanceTest() {
         `결제 정보 목록 조회됨`(paymentListResponse)
 
         // given
-        val paymentId = paymentListResponse.extractIds()[0]
+        val cardPaymentId = paymentListResponse.extractIds()[0]
 
         // when
-        val paymentCancelResponse = `결제 취소 요청`(accessToken, paymentId)
+        val cardPaymentCancelResponse = `결제 취소 요청`(accessToken, cardPaymentId)
 
         // then
-        `결제 취소됨`(paymentCancelResponse)
+        `결제 취소됨`(cardPaymentCancelResponse)
 
         // given
         val checkOutVerifiedPaymentRequest = mapOf(
@@ -118,6 +119,15 @@ class PaymentAcceptanceTest : AcceptanceTest() {
 
         // then
         `인증 결제 완료 처리됨`(succeedVerifiedPaymentResponse)
+
+        // given
+        val verifiedPaymentId = checkOutVerifiedPaymentResponse.extractId()
+
+        // when
+        val verifiedPaymentCancelResponse = `결제 취소 요청`(accessToken, verifiedPaymentId)
+
+        // then
+        `결제 취소됨`(verifiedPaymentCancelResponse)
     }
 
     companion object {
