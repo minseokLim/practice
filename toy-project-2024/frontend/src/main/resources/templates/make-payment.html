@@ -38,11 +38,11 @@
                 productName: productName,
                 amount: amount
             }, response => {
-                requestPayment(response.data.paymentUid, productName, amount);
+                requestPayment(response.data.id, response.data.paymentUid, productName, amount);
             });
         }
 
-        async function requestPayment(paymentUid, productName, amount) {
+        async function requestPayment(paymentId, paymentUid, productName, amount) {
             const response = await PortOne.requestPayment({
                 storeId: "store-fe187d9f-0018-4a45-a46d-8457dc20c76b",
                 channelKey: "channel-key-210b9030-bc3d-44fb-a600-edbb39a97d87",
@@ -54,24 +54,24 @@
             });
 
             if (response.code != null) {
-                failPayment(paymentUid);
+                failPayment(paymentId);
                 alert(response.message);
             } else {
-                completePayment(paymentUid);
+                completePayment(paymentId);
             }
 
             window.location.href = '/main';
         }
 
-        function failPayment(paymentUid) {
+        function failPayment(paymentId) {
             requestToApi('/fail-verified-payment', 'POST', {
-                paymentUid: paymentUid
+                paymentId: paymentId
             });
         }
 
-        function completePayment(paymentUid) {
+        function completePayment(paymentId) {
             requestToApi('/complete-verified-payment', 'POST', {
-                paymentUid: paymentUid
+                paymentId: paymentId
             }, response => {
                 if (response.data.status === 'COMPLETED') {
                     alert('결제가 완료되었습니다.');
