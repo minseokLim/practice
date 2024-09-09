@@ -22,6 +22,7 @@ class Order(
     orderProducts: List<OrderProduct>,
     shippingInfo: ShippingInfo,
     orderStatus: OrderStatus = OrderStatus.PAYMENT_WAITING,
+    paymentId: Int,
     memberId: Int
 ) : BaseTimeEntity() {
     @Id
@@ -40,10 +41,9 @@ class Order(
     var orderStatus: OrderStatus = orderStatus
         protected set
 
-    val memberId: Int = memberId
+    val paymentId: Int = paymentId
 
-    var paymentId: Int? = null
-        protected set
+    val memberId: Int = memberId
 
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntityAndEmbeddable(other) { x, y -> x.id != null && x.id == y.id }

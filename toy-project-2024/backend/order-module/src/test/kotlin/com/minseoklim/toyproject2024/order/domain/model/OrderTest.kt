@@ -32,6 +32,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
+            paymentId = 1,
             memberId = 1
         )
         val order2 = Order(
@@ -49,6 +50,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
+            paymentId = 1,
             memberId = 1
         )
         val order3 = Order(
@@ -66,6 +68,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
+            paymentId = 1,
             memberId = 1
         )
         ReflectionTestUtils.setField(order1, "id", 1)
