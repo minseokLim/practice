@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.order.domain.model
 
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.encrypt.Encryptors
@@ -12,6 +13,35 @@ class OrderTest {
     @BeforeEach
     fun setUp() {
         TextEncryptUtil.init(Encryptors.noOpText())
+    }
+
+    @Test
+    fun applyPaymentId() {
+        // given
+        val order = Order(
+            orderName = "주문명",
+            orderProducts = listOf(OrderProduct(1, 1)),
+            shippingInfo = ShippingInfo(
+                shippingMessage = "배송 메시지",
+                address = Address(
+                    value = "서울시 강남구 역삼동",
+                    detail = "테헤란로 427",
+                    zipCode = "06236"
+                ),
+                receiver = Receiver(
+                    name = "홍길동",
+                    phone = "010-1234-5678"
+                )
+            ),
+            paymentId = null,
+            memberId = 1
+        )
+
+        // when
+        order.applyPaymentId(1)
+
+        // then
+        assertThat(order.paymentId).isEqualTo(1)
     }
 
     @Test
