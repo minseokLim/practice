@@ -30,6 +30,8 @@ dependencies {
 
     // module
     implementation(project(":common-module"))
+    implementation(project(":payment-module"))
+    implementation(project(":product-module"))
 
     testImplementation(project(":test-module"))
     testImplementation(testFixtures(project(":auth-module")))

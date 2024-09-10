@@ -12,12 +12,12 @@ class RemoveStockQuantityService(
     private val productRepository: ProductRepository
 ) {
     fun removeStockQuantity(
-        memberId: Int,
+        memberId: Int? = null,
         productId: Int,
         input: RemoveStockQuantityInput
     ): RemoveStockQuantityOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
-        product.checkAuthority(memberId)
+        memberId?.let { product.checkAuthority(memberId) }
         product.removeStockQuantity(input.decrement)
         return RemoveStockQuantityOutput.of(product)
     }
