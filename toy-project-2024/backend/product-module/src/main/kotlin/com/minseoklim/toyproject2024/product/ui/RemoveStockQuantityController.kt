@@ -23,7 +23,7 @@ class RemoveStockQuantityController(
         @PathVariable productId: Int,
         @Valid @RequestBody request: RemoveStockQuantityRequest
     ): ResponseEntity<RemoveStockQuantityResponse> {
-        val response = removeStockQuantityService.removeStockQuantity(memberId, productId, request.toInput())
-        return ResponseEntity.ok(RemoveStockQuantityResponse.of(response))
+        val output = removeStockQuantityService.removeStockQuantity(memberId, productId, request.toInput())
+        return ResponseEntity.ok(RemoveStockQuantityResponse.of(output))
     }
 }
