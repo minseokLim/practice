@@ -20,15 +20,15 @@ data class QueryMemberOutput private constructor(
         fun of(member: Member): QueryMemberOutput {
             return with(member) {
                 QueryMemberOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     loginId = loginId?.value,
                     password = password?.value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),
-                    email = email?.let { TextEncryptUtil.decrypt(email!!.encryptedValue) },
+                    email = email?.let { TextEncryptUtil.decrypt(checkNotNull(email).encryptedValue) },
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted,
-                    version = version!!
+                    version = checkNotNull(version)
                 )
             }
         }

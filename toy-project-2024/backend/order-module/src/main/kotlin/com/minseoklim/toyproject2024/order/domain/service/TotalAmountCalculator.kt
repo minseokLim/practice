@@ -9,6 +9,6 @@ object TotalAmountCalculator {
         require(products.map { it.id }.containsAll(orderProducts.map { it.productId })) { "product is not exist" }
 
         val productMap = products.associateBy { it.id }
-        return orderProducts.sumOf { productMap[it.productId]!!.price * it.quantity }
+        return orderProducts.sumOf { requireNotNull(productMap[it.productId]).price * it.quantity }
     }
 }

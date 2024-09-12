@@ -7,9 +7,9 @@ import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
 data class JoinMemberOutput private constructor(
     val id: Int,
-    val loginId: String?,
+    val loginId: String,
     val name: String,
-    val email: String?,
+    val email: String,
     val roles: Set<Role>,
     val socialTypes: Set<SocialType>,
     val isDeleted: Boolean,
@@ -19,14 +19,14 @@ data class JoinMemberOutput private constructor(
         fun of(member: Member): JoinMemberOutput {
             return with(member) {
                 JoinMemberOutput(
-                    id = id!!,
-                    loginId = loginId?.value,
+                    id = checkNotNull(id),
+                    loginId = checkNotNull(loginId).value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),
-                    email = email?.let { TextEncryptUtil.decrypt(email!!.encryptedValue) },
+                    email = TextEncryptUtil.decrypt(checkNotNull(email).encryptedValue),
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted,
-                    version = version!!
+                    version = checkNotNull(version)
                 )
             }
         }

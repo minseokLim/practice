@@ -12,7 +12,7 @@ data class RemoveStockQuantityOutput private constructor(
         fun of(product: Product): RemoveStockQuantityOutput {
             return with(product) {
                 RemoveStockQuantityOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     name = name.value,
                     price = price.value.toLong(),
                     stockQuantity = stockQuantity.value

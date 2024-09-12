@@ -16,7 +16,7 @@ data class MakeCardOrderOutput private constructor(
         fun of(order: Order): MakeCardOrderOutput {
             return with(order) {
                 MakeCardOrderOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     orderProducts = orderProducts.map { OrderProductOutput.of(it) },
                     shippingInfo = ShippingInfoOutput.of(shippingInfo)
                 )

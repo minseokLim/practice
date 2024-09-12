@@ -12,7 +12,7 @@ data class RegisterProductOutput private constructor(
         fun of(product: Product): RegisterProductOutput {
             return with(product) {
                 RegisterProductOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     name = name.value,
                     price = price.value.toLong(),
                     stockQuantity = stockQuantity.value

@@ -11,7 +11,7 @@ data class RegisterCardOutput private constructor(
         fun of(card: Card): RegisterCardOutput {
             return with(card) {
                 RegisterCardOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     maskedCardNumber = cardNumber.maskedValue,
                     issuerName = issuerName.value
                 )

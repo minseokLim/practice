@@ -6,9 +6,9 @@ import com.minseoklim.toyproject2024.member.dto.application.JoinMemberOutput
 
 data class JoinMemberResponse private constructor(
     val id: Int,
-    val loginId: String?,
+    val loginId: String,
     val name: String,
-    val email: String?,
+    val email: String,
     val roles: Set<Role>,
     val socialTypes: Set<SocialType>,
     val isDeleted: Boolean,

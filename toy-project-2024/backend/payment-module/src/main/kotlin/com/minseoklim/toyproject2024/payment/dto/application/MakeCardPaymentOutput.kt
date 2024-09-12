@@ -13,7 +13,7 @@ data class MakeCardPaymentOutput private constructor(
         fun of(cardPayment: CardPayment): MakeCardPaymentOutput {
             return with(cardPayment) {
                 MakeCardPaymentOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     cardId = cardId,
                     amount = amount.value.toLong(),
                     productName = productName.value,

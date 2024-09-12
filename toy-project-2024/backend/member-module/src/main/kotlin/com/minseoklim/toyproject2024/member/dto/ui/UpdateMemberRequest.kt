@@ -15,7 +15,7 @@ data class UpdateMemberRequest(
     val name: String,
 
     @get:Pattern(regexp = Email.REGEX_STR, message = Email.ERR_MSG)
-    val email: String,
+    val email: String?,
 
     val version: Long
 ) {

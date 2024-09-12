@@ -66,7 +66,7 @@ class PortOneApi(
 
     private fun getAccessToken(): String {
         if (redisTemplate.opsForValue()[ACCESS_TOKEN_KEY] != null) {
-            return redisTemplate.opsForValue()[ACCESS_TOKEN_KEY]!!
+            return checkNotNull(redisTemplate.opsForValue()[ACCESS_TOKEN_KEY])
         }
 
         val response = requestAccessToken()

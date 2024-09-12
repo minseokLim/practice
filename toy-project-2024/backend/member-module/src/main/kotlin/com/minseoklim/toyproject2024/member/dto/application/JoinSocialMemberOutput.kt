@@ -11,7 +11,7 @@ data class JoinSocialMemberOutput private constructor(
         fun of(member: Member): JoinSocialMemberOutput {
             return with(member) {
                 JoinSocialMemberOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     roles = getRoles()
                 )
             }

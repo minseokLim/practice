@@ -19,14 +19,14 @@ data class UpdateMemberOutput private constructor(
         fun of(member: Member): UpdateMemberOutput {
             return with(member) {
                 UpdateMemberOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     loginId = loginId?.value,
                     name = TextEncryptUtil.decrypt(name.encryptedValue),
-                    email = email?.let { TextEncryptUtil.decrypt(email!!.encryptedValue) },
+                    email = email?.let { TextEncryptUtil.decrypt(checkNotNull(email).encryptedValue) },
                     roles = getRoles(),
                     socialTypes = getSocialLinks().map { it.socialType }.toSet(),
                     isDeleted = isDeleted,
-                    version = version!!
+                    version = checkNotNull(version)
                 )
             }
         }

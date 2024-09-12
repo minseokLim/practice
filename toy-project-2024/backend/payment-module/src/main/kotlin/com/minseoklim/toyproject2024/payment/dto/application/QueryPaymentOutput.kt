@@ -12,7 +12,7 @@ data class QueryPaymentOutput private constructor(
         fun of(payment: Payment): QueryPaymentOutput {
             return with(payment) {
                 QueryPaymentOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     amount = amount.value.toLong(),
                     productName = productName.value,
                     isCanceled = isCanceled

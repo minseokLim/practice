@@ -20,7 +20,7 @@ abstract class CustomEnvironmentPostProcessor(
 
     private fun load(profiles: Array<String>): PropertySource<Any> {
         return CompositePropertySource(propertyName).apply {
-            addFirstPropertySource(getYmlProperty("$propertyName.yml")!!)
+            addFirstPropertySource(checkNotNull(getYmlProperty("$propertyName.yml")))
 
             profiles.forEach { profile ->
                 getYmlProperty("$propertyName-$profile.yml")?.let {

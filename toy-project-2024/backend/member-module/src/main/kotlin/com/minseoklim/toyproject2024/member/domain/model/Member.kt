@@ -120,7 +120,7 @@ class Member(
 
     fun delete() {
         isDeleted = true
-        EventPublisher.publish(MemberDeletedEvent(this, id!!))
+        EventPublisher.publish(MemberDeletedEvent(this, checkNotNull(id)))
     }
 
     fun validateVersion(version: Long) {

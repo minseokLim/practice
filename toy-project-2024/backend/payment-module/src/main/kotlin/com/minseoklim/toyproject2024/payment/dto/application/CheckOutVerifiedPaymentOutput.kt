@@ -14,7 +14,7 @@ data class CheckOutVerifiedPaymentOutput private constructor(
         fun of(verifiedPayment: VerifiedPayment): CheckOutVerifiedPaymentOutput {
             return with(verifiedPayment) {
                 CheckOutVerifiedPaymentOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     amount = amount.value.toLong(),
                     productName = productName.value,
                     paymentUid = paymentUid.value,

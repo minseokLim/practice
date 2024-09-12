@@ -12,7 +12,7 @@ data class UpdateProductOutput private constructor(
         fun of(product: Product): UpdateProductOutput {
             return with(product) {
                 UpdateProductOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     name = name.value,
                     price = price.value.toLong(),
                     stockQuantity = stockQuantity.value

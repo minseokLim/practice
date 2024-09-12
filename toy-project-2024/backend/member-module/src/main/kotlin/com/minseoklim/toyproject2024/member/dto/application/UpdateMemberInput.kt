@@ -5,7 +5,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Member
 data class UpdateMemberInput(
     val password: String?,
     val name: String,
-    val email: String,
+    val email: String?,
     val version: Long
 ) {
     fun toEntity(original: Member): Member {

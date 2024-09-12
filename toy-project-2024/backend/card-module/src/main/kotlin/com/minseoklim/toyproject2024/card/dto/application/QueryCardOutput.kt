@@ -16,7 +16,7 @@ data class QueryCardOutput private constructor(
         fun of(card: Card): QueryCardOutput {
             return with(card) {
                 QueryCardOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     maskedCardNumber = cardNumber.maskedValue,
                     cardNumber = TextEncryptUtil.decrypt(card.cardNumber.encryptedValue),
                     cardExpiry = TextEncryptUtil.decrypt(card.cardExpiry.encryptedValue),

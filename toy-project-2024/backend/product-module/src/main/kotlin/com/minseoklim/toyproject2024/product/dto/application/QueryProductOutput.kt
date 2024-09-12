@@ -13,7 +13,7 @@ data class QueryProductOutput private constructor(
         fun of(product: Product): QueryProductOutput {
             return with(product) {
                 QueryProductOutput(
-                    id = id!!,
+                    id = checkNotNull(id),
                     name = name.value,
                     price = price.value.toLong(),
                     stockQuantity = stockQuantity.value,
