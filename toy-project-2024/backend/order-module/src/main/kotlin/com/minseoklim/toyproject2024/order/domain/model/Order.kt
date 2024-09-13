@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.order.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import jakarta.persistence.CollectionTable
@@ -48,6 +49,12 @@ class Order(
 
     fun applyPaymentId(paymentId: Int) {
         this.paymentId = paymentId
+    }
+
+    fun checkAuthority(memberId: Int) {
+        if (this.memberId != memberId) {
+            throw NoPermissionException("NO_ORDER_PERMISSION", "주문에 대한 권한이 없습니다.")
+        }
     }
 
     final override fun equals(other: Any?): Boolean {

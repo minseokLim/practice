@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -17,5 +18,11 @@ class QueryOrderController(
     fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryOrderResponse>> {
         val outputs = queryOrderService.list(memberId, pageable)
         return ResponseEntity.ok(outputs.map { QueryOrderResponse.of(it) })
+    }
+
+    @GetMapping("/orders/{orderId}")
+    fun get(@MemberId memberId: Int, @PathVariable orderId: Int): ResponseEntity<QueryOrderResponse> {
+        val output = queryOrderService.get(memberId, orderId)
+        return ResponseEntity.ok(QueryOrderResponse.of(output))
     }
 }
