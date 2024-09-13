@@ -48,9 +48,9 @@ class SocialLinksTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val socialLinks1 = SocialLinks().apply { addSocialLink(SocialType.GOOGLE, "1234") }
-        val socialLinks2 = SocialLinks().apply { addSocialLink(SocialType.GOOGLE, "1234") }
-        val socialLinks3 = SocialLinks().apply { addSocialLink(SocialType.KAKAO, "1234") }
+        val socialLinks1 = SocialLinks().apply { this.addSocialLink(SocialType.GOOGLE, "1234") }
+        val socialLinks2 = SocialLinks().apply { this.addSocialLink(SocialType.GOOGLE, "1234") }
+        val socialLinks3 = SocialLinks().apply { this.addSocialLink(SocialType.KAKAO, "1234") }
 
         // when, then
         TestUtil.testEqualsAndHashCode(socialLinks1, socialLinks2, socialLinks3)

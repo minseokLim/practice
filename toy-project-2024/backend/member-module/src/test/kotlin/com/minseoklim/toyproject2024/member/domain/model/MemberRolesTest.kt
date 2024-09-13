@@ -21,7 +21,7 @@ class MemberRolesTest {
     @Test
     fun deleteRole() {
         // given
-        val memberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+        val memberRoles = MemberRoles().apply { this.addRole(Role.MEMBER) }
 
         // when
         memberRoles.deleteRole(Role.MEMBER)
@@ -47,9 +47,9 @@ class MemberRolesTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val memberRoles1 = MemberRoles().apply { addRole(Role.MEMBER) }
-        val memberRoles2 = MemberRoles().apply { addRole(Role.MEMBER) }
-        val memberRoles3 = MemberRoles().apply { addRole(Role.ADMIN) }
+        val memberRoles1 = MemberRoles().apply { this.addRole(Role.MEMBER) }
+        val memberRoles2 = MemberRoles().apply { this.addRole(Role.MEMBER) }
+        val memberRoles3 = MemberRoles().apply { this.addRole(Role.ADMIN) }
 
         // when, then
         TestUtil.testEqualsAndHashCode(memberRoles1, memberRoles2, memberRoles3)

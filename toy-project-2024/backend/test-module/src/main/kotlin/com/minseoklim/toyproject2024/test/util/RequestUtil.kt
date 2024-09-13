@@ -15,7 +15,7 @@ object RequestUtil {
             .given().log().all()
             .apply {
                 if (accessToken != null) {
-                    auth().oauth2(accessToken)
+                    this.auth().oauth2(accessToken)
                 }
             }
             .`when`().get(path, *pathParams)
@@ -32,12 +32,12 @@ object RequestUtil {
             .given().log().all()
             .apply {
                 if (accessToken != null) {
-                    auth().oauth2(accessToken)
+                    this.auth().oauth2(accessToken)
                 }
             }
             .apply {
                 if (bodyParam != null) {
-                    body(bodyParam)
+                    this.body(bodyParam)
                 }
             }
             .contentType(ContentType.JSON)
@@ -55,7 +55,7 @@ object RequestUtil {
             .given().log().all()
             .apply {
                 if (accessToken != null) {
-                    auth().oauth2(accessToken)
+                    this.auth().oauth2(accessToken)
                 }
             }
             .body(bodyParam)
@@ -74,7 +74,7 @@ object RequestUtil {
             .given().log().all()
             .apply {
                 if (accessToken != null) {
-                    auth().oauth2(accessToken)
+                    this.auth().oauth2(accessToken)
                 }
             }
             .body(bodyParam)
@@ -92,7 +92,7 @@ object RequestUtil {
             .given().log().all()
             .apply {
                 if (accessToken != null) {
-                    auth().oauth2(accessToken)
+                    this.auth().oauth2(accessToken)
                 }
             }
             .`when`().delete(path, *pathParams)

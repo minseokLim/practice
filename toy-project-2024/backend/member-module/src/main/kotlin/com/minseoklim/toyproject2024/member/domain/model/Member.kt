@@ -40,12 +40,12 @@ class Member(
     var email: Email? = email?.let { Email(email) }
         protected set
 
-    val memberRoles: MemberRoles = MemberRoles().apply { addRole(Role.MEMBER) }
+    val memberRoles: MemberRoles = MemberRoles().apply { this.addRole(Role.MEMBER) }
 
     val socialLinks: SocialLinks = SocialLinks().apply {
         socialType?.let { socialType ->
             socialId?.let { socialId ->
-                addSocialLink(socialType, socialId)
+                this.addSocialLink(socialType, socialId)
             }
         }
     }
