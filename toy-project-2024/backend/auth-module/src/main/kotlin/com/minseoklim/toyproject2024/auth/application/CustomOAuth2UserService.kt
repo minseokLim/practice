@@ -24,10 +24,12 @@ class CustomOAuth2UserService(
         val socialType = SocialType.valueOf(userRequest.clientRegistration.registrationId.uppercase())
         val socialId = socialType.extractSocialId(attributes)
 
-        return queryMemberService.findBySocialTypeAndSocialId(socialType, socialId)?.let {
-            CustomOAuth2User(it.id, attributes, it.roles)
-        } ?: joinSocialMemberService.join(socialType, attributes).let {
-            CustomOAuth2User(it.id, attributes, it.roles)
+        val foundMember = queryMemberService.findBySocialTypeAndSocialId(socialType, socialId)
+        return if (foundMember != null) {
+            CustomOAuth2User(foundMember.id, attributes, foundMember.roles)
+        } else {
+            val joinedMember = joinSocialMemberService.join(socialType, attributes)
+            CustomOAuth2User(joinedMember.id, attributes, joinedMember.roles)
         }
     }
 
