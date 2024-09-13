@@ -43,10 +43,8 @@ class Member(
     val memberRoles: MemberRoles = MemberRoles().apply { this.addRole(Role.MEMBER) }
 
     val socialLinks: SocialLinks = SocialLinks().apply {
-        socialType?.let { socialType ->
-            socialId?.let { socialId ->
-                this.addSocialLink(socialType, socialId)
-            }
+        if (socialType != null && socialId != null) {
+            this.addSocialLink(socialType, socialId)
         }
     }
 
