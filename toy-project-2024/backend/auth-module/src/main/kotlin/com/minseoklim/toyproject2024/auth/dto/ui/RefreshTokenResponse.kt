@@ -8,12 +8,10 @@ data class RefreshTokenResponse(
 ) {
     companion object {
         fun of(output: RefreshTokenOutput): RefreshTokenResponse {
-            return with(output) {
-                RefreshTokenResponse(
-                    accessToken = accessToken,
-                    refreshToken = refreshToken
-                )
-            }
+            return RefreshTokenResponse(
+                accessToken = output.accessToken,
+                refreshToken = output.refreshToken
+            )
         }
     }
 }

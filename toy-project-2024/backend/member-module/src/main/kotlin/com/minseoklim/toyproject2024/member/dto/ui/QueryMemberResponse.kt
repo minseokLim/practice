@@ -16,18 +16,16 @@ data class QueryMemberResponse private constructor(
 ) {
     companion object {
         fun of(output: QueryMemberOutput): QueryMemberResponse {
-            return with(output) {
-                QueryMemberResponse(
-                    id = id,
-                    loginId = loginId,
-                    name = name,
-                    email = email,
-                    roles = roles,
-                    socialTypes = socialTypes,
-                    isDeleted = isDeleted,
-                    version = version
-                )
-            }
+            return QueryMemberResponse(
+                id = output.id,
+                loginId = output.loginId,
+                name = output.name,
+                email = output.email,
+                roles = output.roles,
+                socialTypes = output.socialTypes,
+                isDeleted = output.isDeleted,
+                version = output.version
+            )
         }
     }
 }

@@ -11,15 +11,13 @@ data class MakeCardPaymentOutput private constructor(
 ) {
     companion object {
         fun of(cardPayment: CardPayment): MakeCardPaymentOutput {
-            return with(cardPayment) {
-                MakeCardPaymentOutput(
-                    id = checkNotNull(id),
-                    cardId = cardId,
-                    amount = amount.value.toLong(),
-                    productName = productName.value,
-                    isCanceled = isCanceled
-                )
-            }
+            return MakeCardPaymentOutput(
+                id = checkNotNull(cardPayment.id),
+                cardId = cardPayment.cardId,
+                amount = cardPayment.amount.value.toLong(),
+                productName = cardPayment.productName.value,
+                isCanceled = cardPayment.isCanceled
+            )
         }
     }
 }

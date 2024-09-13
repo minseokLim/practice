@@ -9,13 +9,11 @@ data class RegisterCardResponse private constructor(
 ) {
     companion object {
         fun of(output: RegisterCardOutput): RegisterCardResponse {
-            return with(output) {
-                RegisterCardResponse(
-                    id = id,
-                    maskedCardNumber = maskedCardNumber,
-                    issuerName = issuerName
-                )
-            }
+            return RegisterCardResponse(
+                id = output.id,
+                maskedCardNumber = output.maskedCardNumber,
+                issuerName = output.issuerName
+            )
         }
     }
 }

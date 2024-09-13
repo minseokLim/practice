@@ -16,18 +16,16 @@ data class JoinMemberResponse private constructor(
 ) {
     companion object {
         fun of(output: JoinMemberOutput): JoinMemberResponse {
-            return with(output) {
-                JoinMemberResponse(
-                    id = id,
-                    loginId = loginId,
-                    name = name,
-                    email = email,
-                    roles = roles,
-                    socialTypes = socialTypes,
-                    isDeleted = isDeleted,
-                    version = version
-                )
-            }
+            return JoinMemberResponse(
+                id = output.id,
+                loginId = output.loginId,
+                name = output.name,
+                email = output.email,
+                roles = output.roles,
+                socialTypes = output.socialTypes,
+                isDeleted = output.isDeleted,
+                version = output.version
+            )
         }
     }
 }

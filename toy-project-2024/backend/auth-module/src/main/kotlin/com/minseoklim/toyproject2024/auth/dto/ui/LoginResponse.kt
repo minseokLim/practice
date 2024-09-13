@@ -8,12 +8,10 @@ data class LoginResponse private constructor(
 ) {
     companion object {
         fun of(output: LoginOutput): LoginResponse {
-            return with(output) {
-                LoginResponse(
-                    accessToken = accessToken,
-                    refreshToken = refreshToken
-                )
-            }
+            return LoginResponse(
+                accessToken = output.accessToken,
+                refreshToken = output.refreshToken
+            )
         }
     }
 }

@@ -10,14 +10,12 @@ data class AddStockQuantityOutput private constructor(
 ) {
     companion object {
         fun of(product: Product): AddStockQuantityOutput {
-            return with(product) {
-                AddStockQuantityOutput(
-                    id = checkNotNull(id),
-                    name = name.value,
-                    price = price.value.toLong(),
-                    stockQuantity = stockQuantity.value
-                )
-            }
+            return AddStockQuantityOutput(
+                id = checkNotNull(product.id),
+                name = product.name.value,
+                price = product.price.value.toLong(),
+                stockQuantity = product.stockQuantity.value
+            )
         }
     }
 }

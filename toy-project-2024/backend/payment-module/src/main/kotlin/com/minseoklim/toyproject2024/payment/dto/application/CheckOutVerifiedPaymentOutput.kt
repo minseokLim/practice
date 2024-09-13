@@ -12,15 +12,13 @@ data class CheckOutVerifiedPaymentOutput private constructor(
 ) {
     companion object {
         fun of(verifiedPayment: VerifiedPayment): CheckOutVerifiedPaymentOutput {
-            return with(verifiedPayment) {
-                CheckOutVerifiedPaymentOutput(
-                    id = checkNotNull(id),
-                    amount = amount.value.toLong(),
-                    productName = productName.value,
-                    paymentUid = paymentUid.value,
-                    status = status
-                )
-            }
+            return CheckOutVerifiedPaymentOutput(
+                id = checkNotNull(verifiedPayment.id),
+                amount = verifiedPayment.amount.value.toLong(),
+                productName = verifiedPayment.productName.value,
+                paymentUid = verifiedPayment.paymentUid.value,
+                status = verifiedPayment.status
+            )
         }
     }
 }

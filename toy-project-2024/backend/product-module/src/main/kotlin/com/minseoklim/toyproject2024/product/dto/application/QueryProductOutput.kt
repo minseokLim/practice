@@ -11,15 +11,13 @@ data class QueryProductOutput private constructor(
 ) {
     companion object {
         fun of(product: Product): QueryProductOutput {
-            return with(product) {
-                QueryProductOutput(
-                    id = checkNotNull(id),
-                    name = name.value,
-                    price = price.value.toLong(),
-                    stockQuantity = stockQuantity.value,
-                    isDeleted = isDeleted
-                )
-            }
+            return QueryProductOutput(
+                id = checkNotNull(product.id),
+                name = product.name.value,
+                price = product.price.value.toLong(),
+                stockQuantity = product.stockQuantity.value,
+                isDeleted = product.isDeleted
+            )
         }
     }
 }

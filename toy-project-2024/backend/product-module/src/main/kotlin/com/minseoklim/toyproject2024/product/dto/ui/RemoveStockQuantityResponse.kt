@@ -10,14 +10,12 @@ data class RemoveStockQuantityResponse private constructor(
 ) {
     companion object {
         fun of(output: RemoveStockQuantityOutput): RemoveStockQuantityResponse {
-            return with(output) {
-                RemoveStockQuantityResponse(
-                    id = id,
-                    name = name,
-                    price = price,
-                    stockQuantity = stockQuantity
-                )
-            }
+            return RemoveStockQuantityResponse(
+                id = output.id,
+                name = output.name,
+                price = output.price,
+                stockQuantity = output.stockQuantity
+            )
         }
     }
 }

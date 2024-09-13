@@ -10,14 +10,12 @@ data class RemoveStockQuantityOutput private constructor(
 ) {
     companion object {
         fun of(product: Product): RemoveStockQuantityOutput {
-            return with(product) {
-                RemoveStockQuantityOutput(
-                    id = checkNotNull(id),
-                    name = name.value,
-                    price = price.value.toLong(),
-                    stockQuantity = stockQuantity.value
-                )
-            }
+            return RemoveStockQuantityOutput(
+                id = checkNotNull(product.id),
+                name = product.name.value,
+                price = product.price.value.toLong(),
+                stockQuantity = product.stockQuantity.value
+            )
         }
     }
 }

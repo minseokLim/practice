@@ -10,14 +10,12 @@ data class RegisterProductOutput private constructor(
 ) {
     companion object {
         fun of(product: Product): RegisterProductOutput {
-            return with(product) {
-                RegisterProductOutput(
-                    id = checkNotNull(id),
-                    name = name.value,
-                    price = price.value.toLong(),
-                    stockQuantity = stockQuantity.value
-                )
-            }
+            return RegisterProductOutput(
+                id = checkNotNull(product.id),
+                name = product.name.value,
+                price = product.price.value.toLong(),
+                stockQuantity = product.stockQuantity.value
+            )
         }
     }
 }

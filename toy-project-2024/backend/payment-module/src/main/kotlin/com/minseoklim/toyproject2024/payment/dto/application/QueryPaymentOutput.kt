@@ -10,14 +10,12 @@ data class QueryPaymentOutput private constructor(
 ) {
     companion object {
         fun of(payment: Payment): QueryPaymentOutput {
-            return with(payment) {
-                QueryPaymentOutput(
-                    id = checkNotNull(id),
-                    amount = amount.value.toLong(),
-                    productName = productName.value,
-                    isCanceled = isCanceled
-                )
-            }
+            return QueryPaymentOutput(
+                id = checkNotNull(payment.id),
+                amount = payment.amount.value.toLong(),
+                productName = payment.productName.value,
+                isCanceled = payment.isCanceled
+            )
         }
     }
 }

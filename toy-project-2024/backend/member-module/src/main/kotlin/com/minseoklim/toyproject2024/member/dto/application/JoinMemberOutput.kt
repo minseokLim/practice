@@ -17,18 +17,16 @@ data class JoinMemberOutput private constructor(
 ) {
     companion object {
         fun of(member: Member): JoinMemberOutput {
-            return with(member) {
-                JoinMemberOutput(
-                    id = checkNotNull(id),
-                    loginId = checkNotNull(loginId).value,
-                    name = TextEncryptUtil.decrypt(name.encryptedValue),
-                    email = TextEncryptUtil.decrypt(checkNotNull(email).encryptedValue),
-                    roles = getRoles(),
-                    socialTypes = getSocialLinks().map { it.socialType }.toSet(),
-                    isDeleted = isDeleted,
-                    version = checkNotNull(version)
-                )
-            }
+            return JoinMemberOutput(
+                id = checkNotNull(member.id),
+                loginId = checkNotNull(member.loginId).value,
+                name = TextEncryptUtil.decrypt(member.name.encryptedValue),
+                email = TextEncryptUtil.decrypt(checkNotNull(member.email).encryptedValue),
+                roles = member.getRoles(),
+                socialTypes = member.getSocialLinks().map { it.socialType }.toSet(),
+                isDeleted = member.isDeleted,
+                version = checkNotNull(member.version)
+            )
         }
     }
 }

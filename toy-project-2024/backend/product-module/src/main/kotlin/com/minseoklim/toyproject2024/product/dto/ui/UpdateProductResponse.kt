@@ -10,14 +10,12 @@ data class UpdateProductResponse private constructor(
 ) {
     companion object {
         fun of(output: UpdateProductOutput): UpdateProductResponse {
-            return with(output) {
-                UpdateProductResponse(
-                    id = id,
-                    name = name,
-                    price = price,
-                    stockQuantity = stockQuantity
-                )
-            }
+            return UpdateProductResponse(
+                id = output.id,
+                name = output.name,
+                price = output.price,
+                stockQuantity = output.stockQuantity
+            )
         }
     }
 }

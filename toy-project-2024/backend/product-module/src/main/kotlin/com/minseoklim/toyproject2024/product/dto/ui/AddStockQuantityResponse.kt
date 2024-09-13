@@ -10,14 +10,12 @@ data class AddStockQuantityResponse private constructor(
 ) {
     companion object {
         fun of(output: AddStockQuantityOutput): AddStockQuantityResponse {
-            return with(output) {
-                AddStockQuantityResponse(
-                    id = id,
-                    name = name,
-                    price = price,
-                    stockQuantity = stockQuantity
-                )
-            }
+            return AddStockQuantityResponse(
+                id = output.id,
+                name = output.name,
+                price = output.price,
+                stockQuantity = output.stockQuantity
+            )
         }
     }
 }

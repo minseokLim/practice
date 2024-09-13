@@ -12,15 +12,13 @@ data class CheckOutVerifiedPaymentResponse private constructor(
 ) {
     companion object {
         fun of(output: CheckOutVerifiedPaymentOutput): CheckOutVerifiedPaymentResponse {
-            return with(output) {
-                CheckOutVerifiedPaymentResponse(
-                    id = id,
-                    amount = amount,
-                    productName = productName,
-                    paymentUid = paymentUid,
-                    status = status
-                )
-            }
+            return CheckOutVerifiedPaymentResponse(
+                id = output.id,
+                amount = output.amount,
+                productName = output.productName,
+                paymentUid = output.paymentUid,
+                status = output.status
+            )
         }
     }
 }

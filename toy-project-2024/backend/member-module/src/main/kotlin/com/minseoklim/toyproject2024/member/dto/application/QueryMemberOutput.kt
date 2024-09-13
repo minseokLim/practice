@@ -18,19 +18,17 @@ data class QueryMemberOutput private constructor(
 ) {
     companion object {
         fun of(member: Member): QueryMemberOutput {
-            return with(member) {
-                QueryMemberOutput(
-                    id = checkNotNull(id),
-                    loginId = loginId?.value,
-                    password = password?.value,
-                    name = TextEncryptUtil.decrypt(name.encryptedValue),
-                    email = email?.let { TextEncryptUtil.decrypt(checkNotNull(email).encryptedValue) },
-                    roles = getRoles(),
-                    socialTypes = getSocialLinks().map { it.socialType }.toSet(),
-                    isDeleted = isDeleted,
-                    version = checkNotNull(version)
-                )
-            }
+            return QueryMemberOutput(
+                id = checkNotNull(member.id),
+                loginId = member.loginId?.value,
+                password = member.password?.value,
+                name = TextEncryptUtil.decrypt(member.name.encryptedValue),
+                email = member.email?.let { TextEncryptUtil.decrypt(checkNotNull(member.email).encryptedValue) },
+                roles = member.getRoles(),
+                socialTypes = member.getSocialLinks().map { it.socialType }.toSet(),
+                isDeleted = member.isDeleted,
+                version = checkNotNull(member.version)
+            )
         }
     }
 }

@@ -10,14 +10,12 @@ data class RegisterProductResponse private constructor(
 ) {
     companion object {
         fun of(output: RegisterProductOutput): RegisterProductResponse {
-            return with(output) {
-                RegisterProductResponse(
-                    id = id,
-                    name = name,
-                    price = price,
-                    stockQuantity = stockQuantity
-                )
-            }
+            return RegisterProductResponse(
+                id = output.id,
+                name = output.name,
+                price = output.price,
+                stockQuantity = output.stockQuantity
+            )
         }
     }
 }

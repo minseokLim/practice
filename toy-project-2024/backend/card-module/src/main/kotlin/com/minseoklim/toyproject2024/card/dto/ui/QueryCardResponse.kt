@@ -9,13 +9,11 @@ data class QueryCardResponse private constructor(
 ) {
     companion object {
         fun of(output: QueryCardOutput): QueryCardResponse {
-            return with(output) {
-                QueryCardResponse(
-                    id = id,
-                    maskedCardNumber = maskedCardNumber,
-                    issuerName = issuerName
-                )
-            }
+            return QueryCardResponse(
+                id = output.id,
+                maskedCardNumber = output.maskedCardNumber,
+                issuerName = output.issuerName
+            )
         }
     }
 }

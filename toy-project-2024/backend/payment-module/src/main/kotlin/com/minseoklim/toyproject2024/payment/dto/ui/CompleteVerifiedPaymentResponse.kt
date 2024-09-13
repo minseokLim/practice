@@ -8,11 +8,9 @@ data class CompleteVerifiedPaymentResponse(
 ) {
     companion object {
         fun of(output: CompleteVerifiedPaymentOutput): CompleteVerifiedPaymentResponse {
-            return with(output) {
-                CompleteVerifiedPaymentResponse(
-                    status = status
-                )
-            }
+            return CompleteVerifiedPaymentResponse(
+                status = output.status
+            )
         }
     }
 }

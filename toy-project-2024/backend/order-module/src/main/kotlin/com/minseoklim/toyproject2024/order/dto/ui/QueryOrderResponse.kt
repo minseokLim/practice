@@ -9,13 +9,11 @@ data class QueryOrderResponse private constructor(
 ) {
     companion object {
         fun of(output: QueryOrderOutput): QueryOrderResponse {
-            return with(output) {
-                QueryOrderResponse(
-                    id = id,
-                    orderProducts = orderProducts.map { OrderProductResponse.of(it) },
-                    shippingInfo = ShippingInfoResponse.of(shippingInfo)
-                )
-            }
+            return QueryOrderResponse(
+                id = output.id,
+                orderProducts = output.orderProducts.map { OrderProductResponse.of(it) },
+                shippingInfo = ShippingInfoResponse.of(output.shippingInfo)
+            )
         }
     }
 
@@ -25,12 +23,10 @@ data class QueryOrderResponse private constructor(
     ) {
         companion object {
             fun of(output: QueryOrderOutput.OrderProductOutput): OrderProductResponse {
-                return with(output) {
-                    OrderProductResponse(
-                        productId = productId,
-                        quantity = quantity
-                    )
-                }
+                return OrderProductResponse(
+                    productId = output.productId,
+                    quantity = output.quantity
+                )
             }
         }
     }
@@ -42,13 +38,11 @@ data class QueryOrderResponse private constructor(
     ) {
         companion object {
             fun of(output: QueryOrderOutput.ShippingInfoOutput): ShippingInfoResponse {
-                return with(output) {
-                    ShippingInfoResponse(
-                        shippingMessage = shippingMessage,
-                        address = AddressResponse.of(address),
-                        receiver = ReceiverResponse.of(receiver)
-                    )
-                }
+                return ShippingInfoResponse(
+                    shippingMessage = output.shippingMessage,
+                    address = AddressResponse.of(output.address),
+                    receiver = ReceiverResponse.of(output.receiver)
+                )
             }
         }
     }
@@ -60,13 +54,11 @@ data class QueryOrderResponse private constructor(
     ) {
         companion object {
             fun of(output: QueryOrderOutput.AddressOutput): AddressResponse {
-                return with(output) {
-                    AddressResponse(
-                        value = value,
-                        detail = detail,
-                        zipCode = zipCode
-                    )
-                }
+                return AddressResponse(
+                    value = output.value,
+                    detail = output.detail,
+                    zipCode = output.zipCode
+                )
             }
         }
     }
@@ -77,12 +69,10 @@ data class QueryOrderResponse private constructor(
     ) {
         companion object {
             fun of(output: QueryOrderOutput.ReceiverOutput): ReceiverResponse {
-                return with(output) {
-                    ReceiverResponse(
-                        name = name,
-                        phone = phone
-                    )
-                }
+                return ReceiverResponse(
+                    name = output.name,
+                    phone = output.phone
+                )
             }
         }
     }

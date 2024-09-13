@@ -8,9 +8,7 @@ data class ErrorResponse(
 ) {
     companion object {
         fun of(e: CommonException): ErrorResponse {
-            return with(e) {
-                ErrorResponse(code, message)
-            }
+            return ErrorResponse(e.code, e.message)
         }
     }
 }

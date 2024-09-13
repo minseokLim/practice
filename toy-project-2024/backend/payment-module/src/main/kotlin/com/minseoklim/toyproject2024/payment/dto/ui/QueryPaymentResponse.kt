@@ -10,14 +10,12 @@ data class QueryPaymentResponse private constructor(
 ) {
     companion object {
         fun of(output: QueryPaymentOutput): QueryPaymentResponse {
-            return with(output) {
-                QueryPaymentResponse(
-                    id = id,
-                    amount = amount,
-                    productName = productName,
-                    isCanceled = isCanceled
-                )
-            }
+            return QueryPaymentResponse(
+                id = output.id,
+                amount = output.amount,
+                productName = output.productName,
+                isCanceled = output.isCanceled
+            )
         }
     }
 }

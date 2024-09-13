@@ -11,15 +11,13 @@ data class MakeCardPaymentResponse private constructor(
 ) {
     companion object {
         fun of(output: MakeCardPaymentOutput): MakeCardPaymentResponse {
-            return with(output) {
-                MakeCardPaymentResponse(
-                    id = id,
-                    cardId = cardId,
-                    amount = amount,
-                    productName = productName,
-                    isCanceled = isCanceled
-                )
-            }
+            return MakeCardPaymentResponse(
+                id = output.id,
+                cardId = output.cardId,
+                amount = output.amount,
+                productName = output.productName,
+                isCanceled = output.isCanceled
+            )
         }
     }
 }

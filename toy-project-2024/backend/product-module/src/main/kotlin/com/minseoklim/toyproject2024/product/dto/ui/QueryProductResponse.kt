@@ -11,15 +11,13 @@ data class QueryProductResponse private constructor(
 ) {
     companion object {
         fun of(output: QueryProductOutput): QueryProductResponse {
-            return with(output) {
-                QueryProductResponse(
-                    id = id,
-                    name = name,
-                    price = price,
-                    stockQuantity = stockQuantity,
-                    isDeleted = isDeleted
-                )
-            }
+            return QueryProductResponse(
+                id = output.id,
+                name = output.name,
+                price = output.price,
+                stockQuantity = output.stockQuantity,
+                isDeleted = output.isDeleted
+            )
         }
     }
 }

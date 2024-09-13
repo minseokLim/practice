@@ -9,13 +9,11 @@ data class RegisterCardOutput private constructor(
 ) {
     companion object {
         fun of(card: Card): RegisterCardOutput {
-            return with(card) {
-                RegisterCardOutput(
-                    id = checkNotNull(id),
-                    maskedCardNumber = cardNumber.maskedValue,
-                    issuerName = issuerName.value
-                )
-            }
+            return RegisterCardOutput(
+                id = checkNotNull(card.id),
+                maskedCardNumber = card.cardNumber.maskedValue,
+                issuerName = card.issuerName.value
+            )
         }
     }
 }

@@ -9,12 +9,10 @@ data class JoinSocialMemberOutput private constructor(
 ) {
     companion object {
         fun of(member: Member): JoinSocialMemberOutput {
-            return with(member) {
-                JoinSocialMemberOutput(
-                    id = checkNotNull(id),
-                    roles = getRoles()
-                )
-            }
+            return JoinSocialMemberOutput(
+                id = checkNotNull(member.id),
+                roles = member.getRoles()
+            )
         }
     }
 }

@@ -14,17 +14,15 @@ data class QueryCardOutput private constructor(
 ) {
     companion object {
         fun of(card: Card): QueryCardOutput {
-            return with(card) {
-                QueryCardOutput(
-                    id = checkNotNull(id),
-                    maskedCardNumber = cardNumber.maskedValue,
-                    cardNumber = TextEncryptUtil.decrypt(card.cardNumber.encryptedValue),
-                    cardExpiry = TextEncryptUtil.decrypt(card.cardExpiry.encryptedValue),
-                    birth = TextEncryptUtil.decrypt(card.birth.encryptedValue),
-                    pwd2digit = TextEncryptUtil.decrypt(card.pwd2digit.encryptedValue),
-                    issuerName = issuerName.value
-                )
-            }
+            return QueryCardOutput(
+                id = checkNotNull(card.id),
+                maskedCardNumber = card.cardNumber.maskedValue,
+                cardNumber = TextEncryptUtil.decrypt(card.cardNumber.encryptedValue),
+                cardExpiry = TextEncryptUtil.decrypt(card.cardExpiry.encryptedValue),
+                birth = TextEncryptUtil.decrypt(card.birth.encryptedValue),
+                pwd2digit = TextEncryptUtil.decrypt(card.pwd2digit.encryptedValue),
+                issuerName = card.issuerName.value
+            )
         }
     }
 }

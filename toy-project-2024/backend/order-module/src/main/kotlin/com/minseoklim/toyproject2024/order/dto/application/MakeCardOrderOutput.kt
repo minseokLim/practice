@@ -14,13 +14,11 @@ data class MakeCardOrderOutput private constructor(
 ) {
     companion object {
         fun of(order: Order): MakeCardOrderOutput {
-            return with(order) {
-                MakeCardOrderOutput(
-                    id = checkNotNull(id),
-                    orderProducts = orderProducts.map { OrderProductOutput.of(it) },
-                    shippingInfo = ShippingInfoOutput.of(shippingInfo)
-                )
-            }
+            return MakeCardOrderOutput(
+                id = checkNotNull(order.id),
+                orderProducts = order.orderProducts.map { OrderProductOutput.of(it) },
+                shippingInfo = ShippingInfoOutput.of(order.shippingInfo)
+            )
         }
     }
 
@@ -30,12 +28,10 @@ data class MakeCardOrderOutput private constructor(
     ) {
         companion object {
             fun of(orderProduct: OrderProduct): OrderProductOutput {
-                return with(orderProduct) {
-                    OrderProductOutput(
-                        productId = productId,
-                        quantity = quantity
-                    )
-                }
+                return OrderProductOutput(
+                    productId = orderProduct.productId,
+                    quantity = orderProduct.quantity
+                )
             }
         }
     }
@@ -47,13 +43,11 @@ data class MakeCardOrderOutput private constructor(
     ) {
         companion object {
             fun of(shippingInfo: ShippingInfo): ShippingInfoOutput {
-                return with(shippingInfo) {
-                    ShippingInfoOutput(
-                        shippingMessage = shippingMessage?.value,
-                        address = AddressOutput.of(address),
-                        receiver = ReceiverOutput.of(receiver)
-                    )
-                }
+                return ShippingInfoOutput(
+                    shippingMessage = shippingInfo.shippingMessage?.value,
+                    address = AddressOutput.of(shippingInfo.address),
+                    receiver = ReceiverOutput.of(shippingInfo.receiver)
+                )
             }
         }
     }
@@ -65,13 +59,11 @@ data class MakeCardOrderOutput private constructor(
     ) {
         companion object {
             fun of(address: Address): AddressOutput {
-                return with(address) {
-                    AddressOutput(
-                        value = TextEncryptUtil.decrypt(encryptedValue),
-                        detail = TextEncryptUtil.decrypt(encryptedDetail),
-                        zipCode = TextEncryptUtil.decrypt(encryptedZipCode)
-                    )
-                }
+                return AddressOutput(
+                    value = TextEncryptUtil.decrypt(address.encryptedValue),
+                    detail = TextEncryptUtil.decrypt(address.encryptedDetail),
+                    zipCode = TextEncryptUtil.decrypt(address.encryptedZipCode)
+                )
             }
         }
     }
@@ -82,12 +74,10 @@ data class MakeCardOrderOutput private constructor(
     ) {
         companion object {
             fun of(receiver: Receiver): ReceiverOutput {
-                return with(receiver) {
-                    ReceiverOutput(
-                        name = TextEncryptUtil.decrypt(encryptedName),
-                        phone = TextEncryptUtil.decrypt(encryptedPhone)
-                    )
-                }
+                return ReceiverOutput(
+                    name = TextEncryptUtil.decrypt(receiver.encryptedName),
+                    phone = TextEncryptUtil.decrypt(receiver.encryptedPhone)
+                )
             }
         }
     }
