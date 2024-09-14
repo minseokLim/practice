@@ -6,5 +6,8 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface OrderRepository : JpaRepository<Order, Int> {
-    fun findAllByMemberId(memberId: Int, pageable: Pageable): Page<Order>
+    fun findAllByMemberId(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<Order>
 }

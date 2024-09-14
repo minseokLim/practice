@@ -24,7 +24,10 @@ abstract class FilterParser {
         }
     }
 
-    protected abstract fun createBooleanExpression(key: String, value: String): BooleanExpression
+    protected abstract fun createBooleanExpression(
+        key: String,
+        value: String
+    ): BooleanExpression
 
     companion object {
         private val filterRegex = "\\[.+:.+(,.+:.+)*]".toRegex()

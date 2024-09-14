@@ -4,7 +4,9 @@ import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.dao.OptimisticLockingFailureException
@@ -13,7 +15,6 @@ import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.util.ReflectionTestUtils
 
 class MemberTest {
-
     @BeforeEach
     fun setUp() {
         PasswordEncodeUtil.init(BCryptPasswordEncoder())

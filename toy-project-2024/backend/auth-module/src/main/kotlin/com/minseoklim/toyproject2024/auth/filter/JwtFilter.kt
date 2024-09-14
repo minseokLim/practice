@@ -19,7 +19,11 @@ class JwtFilter(
     private val accessTokenDbCheckFlagRepository: AccessTokenDbCheckFlagRepository,
     private val tokenRepository: TokenRepository
 ) : Filter {
-    override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
+    override fun doFilter(
+        request: ServletRequest,
+        response: ServletResponse,
+        chain: FilterChain
+    ) {
         val accessToken = resolveAccessToken(request as HttpServletRequest)
 
         if (accessToken.isNotBlank() && tokenParser.isValidAccessToken(accessToken)) {
@@ -41,7 +45,10 @@ class JwtFilter(
         return ""
     }
 
-    private fun setAuthentication(authentication: Authentication, accessToken: String) {
+    private fun setAuthentication(
+        authentication: Authentication,
+        accessToken: String
+    ) {
         if (accessTokenDbCheckFlagRepository.existsById(authentication.name.toInt())) {
             val accessTokenId = tokenParser.extractId(accessToken)
             if (tokenRepository.existsById(accessTokenId)) {

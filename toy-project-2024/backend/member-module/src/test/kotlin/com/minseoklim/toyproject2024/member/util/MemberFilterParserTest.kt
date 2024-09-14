@@ -20,7 +20,6 @@ import org.springframework.test.context.ActiveProfiles
 @DataJpaTest
 @ActiveProfiles("test")
 class MemberFilterParserTest {
-
     @Autowired
     private lateinit var memberRepository: MemberRepository
 

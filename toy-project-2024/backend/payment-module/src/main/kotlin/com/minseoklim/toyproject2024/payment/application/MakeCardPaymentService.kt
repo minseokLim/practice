@@ -15,7 +15,10 @@ class MakeCardPaymentService(
     private val paymentRepository: PaymentRepository,
     private val cardPaymentApi: CardPaymentApi
 ) {
-    fun make(memberId: Int, input: MakeCardPaymentInput): MakeCardPaymentOutput {
+    fun make(
+        memberId: Int,
+        input: MakeCardPaymentInput
+    ): MakeCardPaymentOutput {
         val card = queryCardService.get(memberId, input.cardId)
         val cardPayment = paymentRepository.save(input.toEntity(memberId))
 

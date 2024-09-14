@@ -28,7 +28,10 @@ class PortOneApi(
         }
     }
 
-    private fun requestCardPayment(accessToken: String, request: CardPaymentRequest): PortOneResponse {
+    private fun requestCardPayment(
+        accessToken: String,
+        request: CardPaymentRequest
+    ): PortOneResponse {
         val param = mapOf(
             "merchant_uid" to request.paymentUid,
             "amount" to request.amount,
@@ -56,7 +59,10 @@ class PortOneApi(
         }
     }
 
-    private fun cancelCardPayment(accessToken: String, request: CardPaymentCancelRequest): PortOneResponse {
+    private fun cancelCardPayment(
+        accessToken: String,
+        request: CardPaymentCancelRequest
+    ): PortOneResponse {
         val param = mapOf(
             "merchant_uid" to request.paymentUid,
             "amount" to request.amount
@@ -91,8 +97,8 @@ class PortOneApi(
     }
 
     private fun extractAccessToken(response: PortOneResponse): String {
-        return (response.response?.getValue("access_token")?.toString()
-            ?: throw IllegalStateException("액세스 토큰을 발급에 실패하였습니다"))
+        return response.response?.getValue("access_token")?.toString()
+            ?: throw IllegalStateException("액세스 토큰을 발급에 실패하였습니다")
     }
 
     companion object : KLogging() {

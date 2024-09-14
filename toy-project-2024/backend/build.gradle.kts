@@ -120,7 +120,8 @@ tasks.testCodeCoverageReport {
             *getJacocoTargetProjects().map {
                 it.fileTree(
                     mapOf(
-                        "dir" to "${it.layout.buildDirectory.get()}/classes/kotlin/main", // QClass들을 제외시키기 위함
+                        // QClass들을 제외시키기 위함
+                        "dir" to "${it.layout.buildDirectory.get()}/classes/kotlin/main",
                         "exclude" to listOf(
                             "**/config/*",
                             "**/support/*",

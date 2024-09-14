@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.encrypt.Encryptors
 
 class NameTest {
-
     @BeforeEach
     fun setUp() {
         TextEncryptUtil.init(Encryptors.noOpText())

@@ -16,13 +16,17 @@ class DeleteMemberController(
 ) {
     @DeleteMapping("/{id}")
     @CheckAdminPermission
-    fun delete(@PathVariable id: Int): ResponseEntity<Unit> {
+    fun delete(
+        @PathVariable id: Int
+    ): ResponseEntity<Unit> {
         deleteMemberService.delete(id)
         return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("/me")
-    fun deleteMe(@MemberId id: Int): ResponseEntity<Unit> {
+    fun deleteMe(
+        @MemberId id: Int
+    ): ResponseEntity<Unit> {
         deleteMemberService.delete(id)
         return ResponseEntity.noContent().build()
     }

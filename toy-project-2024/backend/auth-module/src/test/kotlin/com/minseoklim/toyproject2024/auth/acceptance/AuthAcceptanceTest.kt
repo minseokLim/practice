@@ -26,7 +26,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.junit.jupiter.api.Test
 
 class AuthAcceptanceTest : AcceptanceTest() {
-
     @Test
     fun `회원 인증 서비스`() {
         // given

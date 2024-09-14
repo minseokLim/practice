@@ -26,7 +26,12 @@ object HibernateProxyUtil {
         private val target: T,
         private val lazyInitializer: LazyInitializer
     ) : MethodInterceptor {
-        override fun intercept(obj: Any, method: Method, args: Array<Any>?, proxy: MethodProxy): Any {
+        override fun intercept(
+            obj: Any,
+            method: Method,
+            args: Array<Any>?,
+            proxy: MethodProxy
+        ): Any {
             return if (method.declaringClass == HibernateProxy::class.java && method.name == "getHibernateLazyInitializer") {
                 lazyInitializer
             } else {

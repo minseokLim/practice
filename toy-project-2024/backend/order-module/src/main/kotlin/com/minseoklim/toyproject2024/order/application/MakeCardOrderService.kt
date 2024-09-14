@@ -22,7 +22,10 @@ class MakeCardOrderService(
     private val orderRepository: OrderRepository,
     private val makeCardPaymentService: MakeCardPaymentService
 ) {
-    fun order(memberId: Int, input: MakeCardOrderInput): MakeCardOrderOutput {
+    fun order(
+        memberId: Int,
+        input: MakeCardOrderInput
+    ): MakeCardOrderOutput {
         val productIds = input.orderProducts.map { it.productId }
         val products = pessimisticQueryProductService.findAllByIds(productIds).map { ProductConverter.of(it) }
         removeStockQuantity(input.orderProducts)

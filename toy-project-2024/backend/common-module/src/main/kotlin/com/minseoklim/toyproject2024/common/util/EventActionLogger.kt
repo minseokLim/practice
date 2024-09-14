@@ -4,7 +4,10 @@ import com.minseoklim.toyproject2024.common.event.DomainEvent
 import mu.KLogging
 
 object EventActionLogger : KLogging() {
-    fun executeWithLogging(event: DomainEvent, action: () -> Unit) {
+    fun executeWithLogging(
+        event: DomainEvent,
+        action: () -> Unit
+    ) {
         try {
             action()
         } catch (e: Exception) {

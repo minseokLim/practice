@@ -20,7 +20,6 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 @Import(LoginIdValidator::class)
 class LoginIdValidatorTest {
-
     @Autowired
     private lateinit var memberRepository: MemberRepository
 

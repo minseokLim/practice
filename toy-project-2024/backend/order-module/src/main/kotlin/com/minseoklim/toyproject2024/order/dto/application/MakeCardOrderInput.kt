@@ -11,7 +11,11 @@ data class MakeCardOrderInput(
     val shippingInfo: ShippingInfoInput,
     val cardId: Int
 ) {
-    fun toEntity(memberId: Int, paymentId: Int? = null, orderName: String): Order {
+    fun toEntity(
+        memberId: Int,
+        paymentId: Int? = null,
+        orderName: String
+    ): Order {
         return Order(
             orderName = orderName,
             orderProducts = orderProducts.map { it.toEmbeddable() },

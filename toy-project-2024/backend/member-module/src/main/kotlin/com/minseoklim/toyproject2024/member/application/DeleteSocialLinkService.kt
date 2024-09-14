@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional
 class DeleteSocialLinkService(
     private val memberRepository: MemberRepository
 ) {
-    fun deleteSocialLink(id: Int, socialType: SocialType) {
+    fun deleteSocialLink(
+        id: Int,
+        socialType: SocialType
+    ) {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.deleteSocialLink(socialType)
     }

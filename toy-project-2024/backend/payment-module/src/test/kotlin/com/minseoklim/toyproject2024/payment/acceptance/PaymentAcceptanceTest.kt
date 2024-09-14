@@ -23,7 +23,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
 import org.junit.jupiter.api.Test
 
 class PaymentAcceptanceTest : AcceptanceTest() {
-
     @Test
     fun `결제 서비스`() {
         // given

@@ -14,13 +14,17 @@ class LogoutController(
     private val logoutService: LogoutService
 ) {
     @PostMapping("/logout")
-    fun logout(@Valid @RequestBody request: LogoutRequest): ResponseEntity<Unit> {
+    fun logout(
+        @Valid @RequestBody request: LogoutRequest
+    ): ResponseEntity<Unit> {
         logoutService.logout(request.toInput())
         return ResponseEntity.ok().build()
     }
 
     @PostMapping("/logout-all")
-    fun logoutAll(@MemberId memberId: Int): ResponseEntity<Unit> {
+    fun logoutAll(
+        @MemberId memberId: Int
+    ): ResponseEntity<Unit> {
         logoutService.logoutAll(memberId)
         return ResponseEntity.ok().build()
     }

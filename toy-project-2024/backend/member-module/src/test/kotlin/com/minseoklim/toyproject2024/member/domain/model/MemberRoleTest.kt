@@ -4,7 +4,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.junit.jupiter.api.Test
 
 class MemberRoleTest {
-
     @Test
     fun equalsAndHashCode() {
         // given

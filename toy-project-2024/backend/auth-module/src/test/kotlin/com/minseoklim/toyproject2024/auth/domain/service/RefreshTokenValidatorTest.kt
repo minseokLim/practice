@@ -18,7 +18,6 @@ import org.springframework.test.context.ActiveProfiles
 @Import(JwtTokenProvider::class, JwtTokenParser::class, RefreshTokenValidator::class)
 @ActiveProfiles("test")
 class RefreshTokenValidatorTest {
-
     @Autowired
     private lateinit var tokenRepository: TokenRepository
 

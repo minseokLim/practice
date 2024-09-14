@@ -6,7 +6,6 @@ import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class NameTest {
-
     @Test
     fun constructor() {
         // when, then

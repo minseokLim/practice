@@ -16,7 +16,10 @@ class AddSocialLinkController(
     private val addSocialLinkService: AddSocialLinkService
 ) {
     @PostMapping("/me/social-links")
-    fun addSocialLink(@MemberId id: Int, @Valid @RequestBody request: AddSocialLinkRequest): ResponseEntity<Unit> {
+    fun addSocialLink(
+        @MemberId id: Int,
+        @Valid @RequestBody request: AddSocialLinkRequest
+    ): ResponseEntity<Unit> {
         addSocialLinkService.addSocialLink(id, request.toInput())
         return ResponseEntity.ok().build()
     }

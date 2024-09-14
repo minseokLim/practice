@@ -14,7 +14,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
 import org.junit.jupiter.api.Test
 
 class CardAcceptanceTest : AcceptanceTest() {
-
     @Test
     fun `카드 등록 서비스`() {
         // given

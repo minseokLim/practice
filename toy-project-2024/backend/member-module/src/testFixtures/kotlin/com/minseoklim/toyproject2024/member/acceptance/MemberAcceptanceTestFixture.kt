@@ -8,6 +8,7 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object MemberAcceptanceTestFixture {
     fun `회원 가입 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
         return RequestUtil.post("/members", null, request)
@@ -27,7 +28,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `회원 목록 검색 요청`(accessToken: String, filter: String): ExtractableResponse<Response> {
+    fun `회원 목록 검색 요청`(
+        accessToken: String,
+        filter: String
+    ): ExtractableResponse<Response> {
         return RequestUtil.get("/members?filter=$filter", accessToken)
     }
 
@@ -36,7 +40,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `회원 조회 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
+    fun `회원 조회 요청`(
+        accessToken: String,
+        id: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.get("/members/$id", accessToken)
     }
 
@@ -45,7 +52,11 @@ object MemberAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
-    fun `회원 수정 요청`(accessToken: String, id: Int, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `회원 수정 요청`(
+        accessToken: String,
+        id: Int,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.put("/members/$id", accessToken, request)
     }
 
@@ -58,7 +69,10 @@ object MemberAcceptanceTestFixture {
         assertThat(responses).anyMatch { it.httpStatus() == HttpStatus.CONFLICT }
     }
 
-    fun `회원 탈퇴 요청`(accessToken: String, id: Int): ExtractableResponse<Response> {
+    fun `회원 탈퇴 요청`(
+        accessToken: String,
+        id: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.delete("/members/$id", accessToken)
     }
 
@@ -75,7 +89,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
-    fun `내 계정 수정 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `내 계정 수정 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.put("/members/me", accessToken, request)
     }
 
@@ -92,7 +109,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.NO_CONTENT)
     }
 
-    fun `내 소셜 계정 연동 추가 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `내 소셜 계정 연동 추가 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/members/me/social-links", accessToken, request)
     }
 
@@ -100,7 +120,10 @@ object MemberAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `내 소셜 계정 연동 제거 요청`(accessToken: String, socialType: String): ExtractableResponse<Response> {
+    fun `내 소셜 계정 연동 제거 요청`(
+        accessToken: String,
+        socialType: String
+    ): ExtractableResponse<Response> {
         return RequestUtil.delete("/members/me/social-links/$socialType", accessToken)
     }
 

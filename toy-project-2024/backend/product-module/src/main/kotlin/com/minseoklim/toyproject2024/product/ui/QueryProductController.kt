@@ -17,13 +17,19 @@ class QueryProductController(
     private val queryProductService: QueryProductService
 ) {
     @GetMapping
-    fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryProductResponse>> {
+    fun list(
+        @MemberId memberId: Int,
+        pageable: Pageable
+    ): ResponseEntity<Page<QueryProductResponse>> {
         val outputs = queryProductService.list(memberId, pageable)
         return ResponseEntity.ok(outputs.map { QueryProductResponse.of(it) })
     }
 
     @GetMapping("/{productId}")
-    fun get(@MemberId memberId: Int, @PathVariable productId: Int): ResponseEntity<QueryProductResponse> {
+    fun get(
+        @MemberId memberId: Int,
+        @PathVariable productId: Int
+    ): ResponseEntity<QueryProductResponse> {
         val output = queryProductService.get(memberId, productId)
         return ResponseEntity.ok(QueryProductResponse.of(output))
     }

@@ -13,7 +13,10 @@ abstract class CustomEnvironmentPostProcessor(
 ) : EnvironmentPostProcessor {
     private val yamlLoader = YamlPropertySourceLoader()
 
-    override fun postProcessEnvironment(environment: ConfigurableEnvironment, application: SpringApplication) {
+    override fun postProcessEnvironment(
+        environment: ConfigurableEnvironment,
+        application: SpringApplication
+    ) {
         val propertySource = load(environment.activeProfiles)
         environment.propertySources.addLast(propertySource)
     }

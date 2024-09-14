@@ -16,7 +16,10 @@ class QueryCardController(
     private val queryCardService: QueryCardService
 ) {
     @GetMapping
-    fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryCardResponse>> {
+    fun list(
+        @MemberId memberId: Int,
+        pageable: Pageable
+    ): ResponseEntity<Page<QueryCardResponse>> {
         val outputs = queryCardService.list(memberId, pageable)
         return ResponseEntity.ok(outputs.map { QueryCardResponse.of(it) })
     }

@@ -15,7 +15,10 @@ class DeleteSocialLinkController(
     private val deleteSocialLinkService: DeleteSocialLinkService
 ) {
     @DeleteMapping("/me/social-links/{socialType}")
-    fun deleteSocialLink(@MemberId id: Int, @PathVariable socialType: SocialType): ResponseEntity<Unit> {
+    fun deleteSocialLink(
+        @MemberId id: Int,
+        @PathVariable socialType: SocialType
+    ): ResponseEntity<Unit> {
         deleteSocialLinkService.deleteSocialLink(id, socialType)
         return ResponseEntity.noContent().build()
     }

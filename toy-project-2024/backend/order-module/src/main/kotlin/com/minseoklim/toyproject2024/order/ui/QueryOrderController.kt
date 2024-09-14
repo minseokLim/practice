@@ -15,13 +15,19 @@ class QueryOrderController(
     private val queryOrderService: QueryOrderService
 ) {
     @GetMapping("/orders")
-    fun list(@MemberId memberId: Int, pageable: Pageable): ResponseEntity<Page<QueryOrderResponse>> {
+    fun list(
+        @MemberId memberId: Int,
+        pageable: Pageable
+    ): ResponseEntity<Page<QueryOrderResponse>> {
         val outputs = queryOrderService.list(memberId, pageable)
         return ResponseEntity.ok(outputs.map { QueryOrderResponse.of(it) })
     }
 
     @GetMapping("/orders/{orderId}")
-    fun get(@MemberId memberId: Int, @PathVariable orderId: Int): ResponseEntity<QueryOrderResponse> {
+    fun get(
+        @MemberId memberId: Int,
+        @PathVariable orderId: Int
+    ): ResponseEntity<QueryOrderResponse> {
         val output = queryOrderService.get(memberId, orderId)
         return ResponseEntity.ok(QueryOrderResponse.of(output))
     }

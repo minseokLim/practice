@@ -12,11 +12,17 @@ import org.springframework.transaction.annotation.Transactional
 class QueryOrderService(
     private val orderRepository: OrderRepository
 ) {
-    fun list(memberId: Int, pageable: Pageable): Page<QueryOrderOutput> {
+    fun list(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<QueryOrderOutput> {
         return orderRepository.findAllByMemberId(memberId, pageable).map { QueryOrderOutput.of(it) }
     }
 
-    fun get(memberId: Int, orderId: Int): QueryOrderOutput {
+    fun get(
+        memberId: Int,
+        orderId: Int
+    ): QueryOrderOutput {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)
         return QueryOrderOutput.of(order)

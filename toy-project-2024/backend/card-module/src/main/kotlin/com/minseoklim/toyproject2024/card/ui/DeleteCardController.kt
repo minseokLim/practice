@@ -14,7 +14,10 @@ class DeleteCardController(
     private val deleteCardService: DeleteCardService
 ) {
     @DeleteMapping("/{cardId}")
-    fun delete(@MemberId memberId: Int, @PathVariable cardId: Int): ResponseEntity<Unit> {
+    fun delete(
+        @MemberId memberId: Int,
+        @PathVariable cardId: Int
+    ): ResponseEntity<Unit> {
         deleteCardService.delete(memberId, cardId)
         return ResponseEntity.noContent().build()
     }

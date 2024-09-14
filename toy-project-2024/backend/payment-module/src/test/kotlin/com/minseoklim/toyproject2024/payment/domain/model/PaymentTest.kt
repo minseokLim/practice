@@ -2,12 +2,13 @@ package com.minseoklim.toyproject2024.payment.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
 class PaymentTest {
-
     @Test
     fun checkAuthority() {
         // given

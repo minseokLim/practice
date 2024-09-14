@@ -3,14 +3,15 @@ package com.minseoklim.toyproject2024.card.domain.model
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.test.util.ReflectionTestUtils
 
 class CardTest {
-
     @BeforeEach
     fun setUp() {
         TextEncryptUtil.init(Encryptors.noOpText())

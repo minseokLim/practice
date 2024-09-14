@@ -6,7 +6,6 @@ import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class AmountTest {
-
     @Test
     fun constructor() {
         // when, then

@@ -37,10 +37,10 @@ class TestRedisConfiguration(
         val reader = BufferedReader(InputStreamReader(process.inputStream))
         reader.use {
             val lines = it.readLines()
-            if (lines.size > 1) {  // Skip the header line
+            if (lines.size > 1) { // Skip the header line
                 val parts = lines[1].split("\\s+".toRegex())
                 if (parts[0].startsWith("redis")) {
-                    return parts[1]  // The PID is usually the second part
+                    return parts[1] // The PID is usually the second part
                 }
             }
         }

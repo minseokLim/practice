@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
 class PaymentUidTest {
-
     @Test
     fun equalsAndHashCode() {
         // given

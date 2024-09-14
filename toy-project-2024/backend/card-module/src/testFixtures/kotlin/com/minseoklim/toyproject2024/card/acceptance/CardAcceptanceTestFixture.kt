@@ -7,8 +7,12 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object CardAcceptanceTestFixture {
-    fun `카드 등록 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `카드 등록 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/cards", accessToken, request)
     }
 
@@ -25,7 +29,10 @@ object CardAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `카드 삭제 요청`(accessToken: String, cardId: Int): ExtractableResponse<Response> {
+    fun `카드 삭제 요청`(
+        accessToken: String,
+        cardId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.delete("/cards/$cardId", accessToken)
     }
 

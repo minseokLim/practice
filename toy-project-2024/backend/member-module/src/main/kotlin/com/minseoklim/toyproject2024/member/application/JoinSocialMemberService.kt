@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class JoinSocialMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun join(socialType: SocialType, attributes: Map<String, Any>): JoinSocialMemberOutput {
+    fun join(
+        socialType: SocialType,
+        attributes: Map<String, Any>
+    ): JoinSocialMemberOutput {
         val member = memberRepository.save(socialType.toMemberEntity(attributes))
         return JoinSocialMemberOutput.of(member)
     }

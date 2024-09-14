@@ -8,8 +8,12 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object ProductAcceptanceTestFixture {
-    fun `상품 등록 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `상품 등록 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/products", accessToken, request)
     }
 
@@ -27,7 +31,10 @@ object ProductAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `상품 조회 요청`(accessToken: String, productId: Int): ExtractableResponse<Response> {
+    fun `상품 조회 요청`(
+        accessToken: String,
+        productId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.get("/products/$productId", accessToken)
     }
 
@@ -36,7 +43,11 @@ object ProductAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
-    fun `상품 수정 요청`(accessToken: String, productId: Int, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `상품 수정 요청`(
+        accessToken: String,
+        productId: Int,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.put("/products/$productId", accessToken, request)
     }
 
@@ -45,7 +56,11 @@ object ProductAcceptanceTestFixture {
         assertThat(response.extractId()).isNotNull
     }
 
-    fun `상품 재고 추가 요청`(accessToken: String, productId: Int, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `상품 재고 추가 요청`(
+        accessToken: String,
+        productId: Int,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/products/$productId/add-stock-quantity", accessToken, request)
     }
 
@@ -53,7 +68,11 @@ object ProductAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `상품 재고 감소 요청`(accessToken: String, productId: Int, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `상품 재고 감소 요청`(
+        accessToken: String,
+        productId: Int,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/products/$productId/remove-stock-quantity", accessToken, request)
     }
 
@@ -61,7 +80,10 @@ object ProductAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `상품 삭제 요청`(accessToken: String, productId: Int): ExtractableResponse<Response> {
+    fun `상품 삭제 요청`(
+        accessToken: String,
+        productId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.delete("/products/$productId", accessToken)
     }
 

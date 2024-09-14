@@ -7,8 +7,12 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object OrderAcceptanceTestFixture {
-    fun `카드 주문 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `카드 주문 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/card-orders", accessToken, request)
     }
 
@@ -25,7 +29,10 @@ object OrderAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `주문 조회 요청`(accessToken: String, orderId: Int): ExtractableResponse<Response> {
+    fun `주문 조회 요청`(
+        accessToken: String,
+        orderId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.get("/orders/$orderId", accessToken)
     }
 
@@ -33,7 +40,10 @@ object OrderAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `주문 취소 요청`(accessToken: String, orderId: Int): ExtractableResponse<Response> {
+    fun `주문 취소 요청`(
+        accessToken: String,
+        orderId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/cancel-orders/$orderId", accessToken)
     }
 
@@ -41,7 +51,10 @@ object OrderAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 주문 생성 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 주문 생성 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/verified-orders", accessToken, request)
     }
 
@@ -49,7 +62,10 @@ object OrderAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 주문 실패 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 주문 실패 처리 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/fail-verified-order", accessToken, request)
     }
 
@@ -57,7 +73,10 @@ object OrderAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 주문 완료 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 주문 완료 처리 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/complete-verified-order", accessToken, request)
     }
 

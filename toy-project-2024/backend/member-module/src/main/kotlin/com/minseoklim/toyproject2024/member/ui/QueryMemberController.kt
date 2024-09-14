@@ -30,13 +30,17 @@ class QueryMemberController(
 
     @GetMapping("/{id}")
     @CheckAdminPermission
-    fun get(@PathVariable id: Int): ResponseEntity<QueryMemberResponse> {
+    fun get(
+        @PathVariable id: Int
+    ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
         return ResponseEntity.ok(QueryMemberResponse.of(output))
     }
 
     @GetMapping("/me")
-    fun getMe(@MemberId id: Int): ResponseEntity<QueryMemberResponse> {
+    fun getMe(
+        @MemberId id: Int
+    ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
         return ResponseEntity.ok(QueryMemberResponse.of(output))
     }

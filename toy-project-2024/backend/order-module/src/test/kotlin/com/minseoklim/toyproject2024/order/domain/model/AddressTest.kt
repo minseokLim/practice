@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.security.crypto.encrypt.Encryptors
 
 class AddressTest {
-
     @BeforeEach
     fun setUp() {
         TextEncryptUtil.init(Encryptors.noOpText())

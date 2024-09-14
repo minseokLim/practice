@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class RegisterCardService(
     private val cardRepository: CardRepository
 ) {
-    fun register(memberId: Int, input: RegisterCardInput): RegisterCardOutput {
+    fun register(
+        memberId: Int,
+        input: RegisterCardInput
+    ): RegisterCardOutput {
         val card = cardRepository.save(input.toEntity(memberId))
         return RegisterCardOutput.of(card)
     }

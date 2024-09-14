@@ -14,7 +14,9 @@ class RefreshTokenController(
     private val refreshTokenService: RefreshTokenService
 ) {
     @PostMapping("/refresh-token")
-    fun refreshToken(@Valid @RequestBody request: RefreshTokenRequest): ResponseEntity<RefreshTokenResponse> {
+    fun refreshToken(
+        @Valid @RequestBody request: RefreshTokenRequest
+    ): ResponseEntity<RefreshTokenResponse> {
         val output = refreshTokenService.refreshToken(request.toInput())
         return ResponseEntity.ok(RefreshTokenResponse.of(output))
     }

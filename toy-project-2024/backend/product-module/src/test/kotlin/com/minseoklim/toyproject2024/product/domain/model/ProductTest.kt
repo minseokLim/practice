@@ -2,12 +2,13 @@ package com.minseoklim.toyproject2024.product.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
 class ProductTest {
-
     @Test
     fun update() {
         // given

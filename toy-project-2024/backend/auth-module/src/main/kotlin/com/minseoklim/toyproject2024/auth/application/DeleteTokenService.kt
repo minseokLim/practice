@@ -12,7 +12,10 @@ class DeleteTokenService(
     private val tokenParser: TokenParser,
     private val tokenRepository: TokenRepository
 ) {
-    fun deleteToken(accessToken: String, refreshToken: String) {
+    fun deleteToken(
+        accessToken: String,
+        refreshToken: String
+    ) {
         val accessTokenId = tokenParser.extractId(accessToken)
         val refreshTokenId = tokenParser.extractId(refreshToken)
         if (accessTokenId != refreshTokenId) {

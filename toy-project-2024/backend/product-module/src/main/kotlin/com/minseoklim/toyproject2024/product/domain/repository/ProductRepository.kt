@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Lock
 
 interface ProductRepository : JpaRepository<Product, Int> {
-    fun findAllByMemberId(memberId: Int, pageable: Pageable): Page<Product>
+    fun findAllByMemberId(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<Product>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     fun findAllByIdIn(ids: Collection<Int>): List<Product>

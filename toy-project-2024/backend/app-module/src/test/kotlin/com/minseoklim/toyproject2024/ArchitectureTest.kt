@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.transaction.annotation.Transactional
 
 class ArchitectureTest {
-
     @Test
     fun test() {
         val classes = ClassFileImporter().withImportOption(DoNotIncludeTests()).importPackages(BASE_PACKAGE)

@@ -19,7 +19,10 @@ class SocialLinks(
     )
     protected val values: MutableSet<SocialLink> = mutableSetOf()
 ) {
-    fun addSocialLink(socialType: SocialType, socialId: String) {
+    fun addSocialLink(
+        socialType: SocialType,
+        socialId: String
+    ) {
         values.add(SocialLink(socialType, socialId))
     }
 

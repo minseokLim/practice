@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 abstract class AcceptanceTest {
-
     @LocalServerPort
     private var port = 0
 

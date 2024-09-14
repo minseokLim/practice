@@ -20,7 +20,10 @@ class JwtTokenProvider(
 ) : TokenProvider {
     private val secretKey: Key = Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8))
 
-    override fun createAccessToken(authentication: Authentication, id: String): String {
+    override fun createAccessToken(
+        authentication: Authentication,
+        id: String
+    ): String {
         val now = Date()
         val validity = Date(now.time + accessTokenValidityInMilliseconds)
 

@@ -9,6 +9,7 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object AuthAcceptanceTestFixture {
     fun `로그인 요청`(request: Map<String, Any?>): ExtractableResponse<Response> {
         return RequestUtil.post("/login", null, request)

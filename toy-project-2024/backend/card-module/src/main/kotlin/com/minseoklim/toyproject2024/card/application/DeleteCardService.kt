@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.Transactional
 class DeleteCardService(
     private val cardRepository: CardRepository
 ) {
-    fun delete(memberId: Int, cardId: Int) {
+    fun delete(
+        memberId: Int,
+        cardId: Int
+    ) {
         val card = CardServiceHelper.getCard(cardRepository, cardId)
         card.checkAuthority(memberId)
         card.delete()

@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class CheckOutVerifiedPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
-    fun checkOut(memberId: Int, input: CheckOutVerifiedPaymentInput): CheckOutVerifiedPaymentOutput {
+    fun checkOut(
+        memberId: Int,
+        input: CheckOutVerifiedPaymentInput
+    ): CheckOutVerifiedPaymentOutput {
         val verifiedPayment = paymentRepository.save(input.toEntity(memberId))
         return CheckOutVerifiedPaymentOutput.of(verifiedPayment)
     }

@@ -9,7 +9,12 @@ import java.time.LocalDateTime
 class WebsocketLoginNotifier(
     private val messagingTemplate: SimpMessagingTemplate
 ) : LoginNotifier {
-    override fun notifyLogin(memberId: Int, clientIp: String, userAgent: String, loginDateTime: LocalDateTime) {
+    override fun notifyLogin(
+        memberId: Int,
+        clientIp: String,
+        userAgent: String,
+        loginDateTime: LocalDateTime
+    ) {
         messagingTemplate.convertAndSendToUser(
             memberId.toString(),
             "/topic/notify-login",

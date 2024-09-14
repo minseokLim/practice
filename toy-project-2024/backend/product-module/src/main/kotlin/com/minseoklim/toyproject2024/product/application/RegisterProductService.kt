@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class RegisterProductService(
     private val productRepository: ProductRepository
 ) {
-    fun register(memberId: Int, input: RegisterProductInput): RegisterProductOutput {
+    fun register(
+        memberId: Int,
+        input: RegisterProductInput
+    ): RegisterProductOutput {
         val product = productRepository.save(input.toEntity(memberId))
         return RegisterProductOutput.of(product)
     }

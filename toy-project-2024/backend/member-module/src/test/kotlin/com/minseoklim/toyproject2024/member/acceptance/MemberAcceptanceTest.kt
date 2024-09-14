@@ -33,7 +33,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil.extractVersion
 import org.junit.jupiter.api.Test
 
 class MemberAcceptanceTest : AcceptanceTest() {
-
     @Test
     fun `회원 관리 서비스`() {
         // given

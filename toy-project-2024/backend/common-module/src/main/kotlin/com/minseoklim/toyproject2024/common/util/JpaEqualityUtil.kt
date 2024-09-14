@@ -6,7 +6,10 @@ object JpaEqualityUtil {
     /**
      * Entity와 Embeddable 클래스에 대한 equals 메서드 처리
      */
-    fun <T : Any> T.equalsForEntityAndEmbeddable(other: Any?, finalPredicate: (x: T, y: T) -> Boolean): Boolean {
+    fun <T : Any> T.equalsForEntityAndEmbeddable(
+        other: Any?,
+        finalPredicate: (x: T, y: T) -> Boolean
+    ): Boolean {
         if (this === other) return true
         if (other == null) return false
         val oEffectiveClass =

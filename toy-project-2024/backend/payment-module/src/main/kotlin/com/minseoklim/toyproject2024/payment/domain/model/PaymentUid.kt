@@ -8,7 +8,6 @@ import java.util.UUID
 
 @Embeddable
 class PaymentUid {
-
     @Column(name = "payment_uid")
     val value: String = generatePaymentUid()
 

@@ -52,5 +52,6 @@ enum class SocialType {
     };
 
     abstract fun toMemberEntity(attributes: Map<String, Any>): Member
+
     abstract fun extractSocialId(attributes: Map<String, Any>): String
 }

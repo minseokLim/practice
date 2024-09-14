@@ -11,7 +11,11 @@ import org.springframework.transaction.annotation.Transactional
 class AddStockQuantityService(
     private val productRepository: ProductRepository
 ) {
-    fun addStockQuantity(memberId: Int, productId: Int, input: AddStockQuantityInput): AddStockQuantityOutput {
+    fun addStockQuantity(
+        memberId: Int,
+        productId: Int,
+        input: AddStockQuantityInput
+    ): AddStockQuantityOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
         product.addStockQuantity(input.increment)

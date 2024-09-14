@@ -7,7 +7,6 @@ import java.net.URLEncoder
 
 @Controller
 class AuthViewController {
-
     @GetMapping("/login")
     fun login(request: HttpServletRequest): String {
         val redirectUrl =
@@ -22,7 +21,10 @@ class AuthViewController {
         return "join"
     }
 
-    private fun redirectWithRedirectUrlParameter(request: HttpServletRequest, originalPath: String): String {
+    private fun redirectWithRedirectUrlParameter(
+        request: HttpServletRequest,
+        originalPath: String
+    ): String {
         val savedRedirectUrl = request.session.getAttribute("REDIRECT_URL") as String? ?: return "invalidApproach"
         return "redirect:$originalPath?redirectUrl=${URLEncoder.encode(savedRedirectUrl, "UTF-8")}"
     }

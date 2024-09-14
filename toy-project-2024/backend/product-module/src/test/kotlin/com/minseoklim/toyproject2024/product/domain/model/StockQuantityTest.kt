@@ -1,11 +1,12 @@
 package com.minseoklim.toyproject2024.product.domain.model
 
 import com.minseoklim.toyproject2024.test.util.TestUtil
-import org.assertj.core.api.Assertions.*
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
+import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
 
 class StockQuantityTest {
-
     @Test
     fun constructor() {
         // when, then

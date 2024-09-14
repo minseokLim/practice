@@ -12,12 +12,18 @@ import org.springframework.transaction.annotation.Transactional
 class QueryProductService(
     private val productRepository: ProductRepository
 ) {
-    fun list(memberId: Int, pageable: Pageable): Page<QueryProductOutput> {
+    fun list(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<QueryProductOutput> {
         val products = productRepository.findAllByMemberId(memberId, pageable)
         return products.map { QueryProductOutput.of(it) }
     }
 
-    fun get(memberId: Int, productId: Int): QueryProductOutput {
+    fun get(
+        memberId: Int,
+        productId: Int
+    ): QueryProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
         return QueryProductOutput.of(product)

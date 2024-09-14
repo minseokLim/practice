@@ -12,7 +12,10 @@ class CancelPaymentController(
     private val cancelPaymentService: CancelPaymentService
 ) {
     @PostMapping("/cancel-payments/{paymentId}")
-    fun cancel(@MemberId memberId: Int, @PathVariable paymentId: Int): ResponseEntity<Unit> {
+    fun cancel(
+        @MemberId memberId: Int,
+        @PathVariable paymentId: Int
+    ): ResponseEntity<Unit> {
         cancelPaymentService.cancel(memberId, paymentId)
         return ResponseEntity.ok().build()
     }

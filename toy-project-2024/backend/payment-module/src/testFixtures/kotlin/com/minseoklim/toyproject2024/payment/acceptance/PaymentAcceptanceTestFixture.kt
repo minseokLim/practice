@@ -7,8 +7,12 @@ import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
 
+@Suppress("ktlint:standard:function-naming")
 object PaymentAcceptanceTestFixture {
-    fun `카드 결제 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `카드 결제 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/card-payments", accessToken, request)
     }
 
@@ -25,7 +29,10 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.jsonPath().getList<Any>("content")).isNotEmpty
     }
 
-    fun `결제 취소 요청`(accessToken: String, paymentId: Int): ExtractableResponse<Response> {
+    fun `결제 취소 요청`(
+        accessToken: String,
+        paymentId: Int
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/cancel-payments/$paymentId", accessToken)
     }
 
@@ -33,7 +40,10 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 정보 생성 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 정보 생성 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/verified-payments", accessToken, request)
     }
 
@@ -41,7 +51,10 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 실패 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 실패 처리 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/fail-verified-payment", accessToken, request)
     }
 
@@ -49,7 +62,10 @@ object PaymentAcceptanceTestFixture {
         assertThat(response.httpStatus()).isEqualTo(HttpStatus.OK)
     }
 
-    fun `인증 결제 완료 처리 요청`(accessToken: String, request: Map<String, Any?>): ExtractableResponse<Response> {
+    fun `인증 결제 완료 처리 요청`(
+        accessToken: String,
+        request: Map<String, Any?>
+    ): ExtractableResponse<Response> {
         return RequestUtil.post("/complete-verified-payment", accessToken, request)
     }
 

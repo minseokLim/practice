@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional
 class QueryPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
-    fun list(memberId: Int, pageable: Pageable): Page<QueryPaymentOutput> {
+    fun list(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<QueryPaymentOutput> {
         return paymentRepository.findAllByMemberIdWithVerifiedCompleted(memberId, pageable)
             .map { QueryPaymentOutput.of(it) }
     }

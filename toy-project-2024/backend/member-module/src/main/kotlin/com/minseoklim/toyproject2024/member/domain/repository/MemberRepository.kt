@@ -8,13 +8,17 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor
 
 interface MemberRepository : JpaRepository<Member, Int>, QuerydslPredicateExecutor<Member> {
     fun findByLoginIdValue(loginId: String): Member?
+
     fun countByLoginIdValue(loginId: String): Int
 
     @Query(
         """
-        SELECT m FROM Member m JOIN m.socialLinks.values s
-        WHERE s.socialType = :socialType AND s.socialId.value = :socialId
-    """
+            SELECT m FROM Member m JOIN m.socialLinks.values s
+            WHERE s.socialType = :socialType AND s.socialId.value = :socialId
+        """
     )
-    fun findBySocialTypeAndSocialId(socialType: SocialType, socialId: String): Member?
+    fun findBySocialTypeAndSocialId(
+        socialType: SocialType,
+        socialId: String
+    ): Member?
 }

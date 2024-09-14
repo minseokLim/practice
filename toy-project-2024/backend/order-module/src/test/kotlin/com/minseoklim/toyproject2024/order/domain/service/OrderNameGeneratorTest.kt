@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class OrderNameGeneratorTest {
-
     @Test
     fun generate() {
         // when, then

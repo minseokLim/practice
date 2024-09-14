@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional
 class UpdateMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun update(id: Int, input: UpdateMemberInput): UpdateMemberOutput {
+    fun update(
+        id: Int,
+        input: UpdateMemberInput
+    ): UpdateMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.validateVersion(input.version)
         member.update(input.toEntity(member))

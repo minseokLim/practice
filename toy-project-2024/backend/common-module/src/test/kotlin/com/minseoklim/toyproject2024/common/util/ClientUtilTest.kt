@@ -9,7 +9,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ClientUtilTest {
-
     @Test
     fun getClientIp() {
         // given

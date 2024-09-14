@@ -17,7 +17,11 @@ class LoginService(
     private val loginHistoryRepository: LoginHistoryRepository,
     private val loginNotifier: LoginNotifier
 ) {
-    fun login(input: LoginInput, clientIp: String, userAgent: String): LoginOutput {
+    fun login(
+        input: LoginInput,
+        clientIp: String,
+        userAgent: String
+    ): LoginOutput {
         val authenticationManager = authenticationManagerBuilder.getObject()
         val authentication = authenticationManager.authenticate(input.toAuthentication())
         val token = createTokenService.createToken(authentication)

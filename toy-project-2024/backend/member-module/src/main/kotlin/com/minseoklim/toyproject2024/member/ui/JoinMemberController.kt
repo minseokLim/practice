@@ -17,7 +17,9 @@ class JoinMemberController(
     private val joinMemberService: JoinMemberService
 ) {
     @PostMapping
-    fun join(@Valid @RequestBody request: JoinMemberRequest): ResponseEntity<JoinMemberResponse> {
+    fun join(
+        @Valid @RequestBody request: JoinMemberRequest
+    ): ResponseEntity<JoinMemberResponse> {
         val output = joinMemberService.join(request.toInput())
         val uri = URI.create("/members/${output.id}")
         return ResponseEntity.created(uri).body(JoinMemberResponse.of(output))

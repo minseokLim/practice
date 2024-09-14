@@ -79,7 +79,10 @@ class JwtTokenParser(
             .toSet()
     }
 
-    private fun isValidToken(token: String, tokenType: TokenType): Boolean {
+    private fun isValidToken(
+        token: String,
+        tokenType: TokenType
+    ): Boolean {
         try {
             val claims = jwtParser.parseSignedClaims(token).payload
             val extractedType = TokenType.valueOf(claims[TOKEN_TYPE_KEY, String::class.java])

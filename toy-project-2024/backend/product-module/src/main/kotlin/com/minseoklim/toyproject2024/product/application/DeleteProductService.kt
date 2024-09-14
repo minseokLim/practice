@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.Transactional
 class DeleteProductService(
     private val productRepository: ProductRepository
 ) {
-    fun delete(memberId: Int, productId: Int) {
+    fun delete(
+        memberId: Int,
+        productId: Int
+    ) {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
         productRepository.delete(product)

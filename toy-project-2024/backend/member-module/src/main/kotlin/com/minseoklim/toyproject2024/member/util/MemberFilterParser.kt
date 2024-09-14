@@ -15,7 +15,10 @@ import com.querydsl.jpa.JPAExpressions
 // 컬럼마다 인덱스가 있지 않기 때문에 DB에 부하가 갈 수 있는 구현이다.
 // 일단 그냥 연습삼아 이렇게 구현하도록 한다.
 object MemberFilterParser : FilterParser() {
-    override fun createBooleanExpression(key: String, value: String): BooleanExpression {
+    override fun createBooleanExpression(
+        key: String,
+        value: String
+    ): BooleanExpression {
         return when (key) {
             "loginId" -> member.loginId.value equal value
             "name" -> member.name.hashedValue equal ConsistentHashUtil.hash(value)

@@ -14,7 +14,10 @@ class CancelPaymentService(
     private val cardPaymentApi: CardPaymentApi,
     private val verifiedPaymentApi: VerifiedPaymentApi
 ) {
-    fun cancel(memberId: Int, paymentId: Int) {
+    fun cancel(
+        memberId: Int,
+        paymentId: Int
+    ) {
         val payment = PaymentServiceHelper.getPayment(paymentRepository, paymentId)
         payment.checkAuthority(memberId)
         payment.cancel()

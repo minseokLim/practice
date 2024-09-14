@@ -86,7 +86,10 @@ class Member(
         return memberRoles.getRoles()
     }
 
-    fun addSocialLink(socialType: SocialType, socialId: String) {
+    fun addSocialLink(
+        socialType: SocialType,
+        socialId: String
+    ) {
         if (socialLinks.getSocialLinks().map { it.socialType }.contains(socialType)) {
             throw BadRequestException("SOCIAL_LINK_DUPLICATED", "이미 연동된 소셜 계정입니다.")
         }

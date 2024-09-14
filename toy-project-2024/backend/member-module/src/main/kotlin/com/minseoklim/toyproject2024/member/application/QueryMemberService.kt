@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional
 class QueryMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun list(filter: String?, pageable: Pageable): Page<QueryMemberOutput> {
+    fun list(
+        filter: String?,
+        pageable: Pageable
+    ): Page<QueryMemberOutput> {
         val predicate = MemberFilterParser.parse(filter)
         val members = memberRepository.findAll(predicate, pageable)
         return members.map { QueryMemberOutput.of(it) }
@@ -30,7 +33,10 @@ class QueryMemberService(
         return member?.let { QueryMemberOutput.of(it) }
     }
 
-    fun findBySocialTypeAndSocialId(socialType: SocialType, socialId: String): QueryMemberOutput? {
+    fun findBySocialTypeAndSocialId(
+        socialType: SocialType,
+        socialId: String
+    ): QueryMemberOutput? {
         val member = memberRepository.findBySocialTypeAndSocialId(socialType, socialId)
         return member?.let { QueryMemberOutput.of(it) }
     }

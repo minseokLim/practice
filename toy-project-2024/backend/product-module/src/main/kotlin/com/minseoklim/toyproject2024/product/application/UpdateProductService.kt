@@ -11,7 +11,11 @@ import org.springframework.transaction.annotation.Transactional
 class UpdateProductService(
     private val productRepository: ProductRepository
 ) {
-    fun update(memberId: Int, productId: Int, input: UpdateProductInput): UpdateProductOutput {
+    fun update(
+        memberId: Int,
+        productId: Int,
+        input: UpdateProductInput
+    ): UpdateProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
         product.update(input.toEntity(product))

@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional
 class AddSocialLinkService(
     private val memberRepository: MemberRepository
 ) {
-    fun addSocialLink(id: Int, input: AddSocialLinkInput) {
+    fun addSocialLink(
+        id: Int,
+        input: AddSocialLinkInput
+    ) {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.addSocialLink(input.socialType, input.socialId)
     }

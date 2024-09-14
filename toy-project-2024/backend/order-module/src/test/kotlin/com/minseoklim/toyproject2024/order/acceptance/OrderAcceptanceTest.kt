@@ -25,7 +25,6 @@ import com.minseoklim.toyproject2024.test.util.TestUtil.extractIds
 import org.junit.jupiter.api.Test
 
 class OrderAcceptanceTest : AcceptanceTest() {
-
     @Test
     fun `주문 서비스`() {
         // given

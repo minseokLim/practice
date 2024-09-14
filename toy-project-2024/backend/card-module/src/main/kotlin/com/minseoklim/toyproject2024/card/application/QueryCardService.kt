@@ -12,12 +12,18 @@ import org.springframework.transaction.annotation.Transactional
 class QueryCardService(
     private val cardRepository: CardRepository
 ) {
-    fun list(memberId: Int, pageable: Pageable): Page<QueryCardOutput> {
+    fun list(
+        memberId: Int,
+        pageable: Pageable
+    ): Page<QueryCardOutput> {
         val cards = cardRepository.findAllByMemberId(memberId, pageable)
         return cards.map { QueryCardOutput.of(it) }
     }
 
-    fun get(memberId: Int, cardId: Int): QueryCardOutput {
+    fun get(
+        memberId: Int,
+        cardId: Int
+    ): QueryCardOutput {
         val card = CardServiceHelper.getCard(cardRepository, cardId)
         card.checkAuthority(memberId)
         return QueryCardOutput.of(card)
