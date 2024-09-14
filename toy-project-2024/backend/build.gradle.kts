@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
 
 plugins {
     id("org.springframework.boot")
@@ -13,10 +15,30 @@ plugins {
     id("jacoco-report-aggregation")
 
     id("java-test-fixtures")
+
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 repositories {
     mavenCentral()
+}
+
+allprojects {
+    apply {
+        plugin("org.jlleitschuh.gradle.ktlint")
+    }
+
+    ktlint {
+        reporters {
+            reporter(ReporterType.JSON)
+        }
+    }
+
+    tasks.withType<GenerateReportsTask> {
+        reportsOutputDirectory.set(
+            rootProject.layout.buildDirectory.dir("reports/ktlint/${project.name}")
+        )
+    }
 }
 
 subprojects {
