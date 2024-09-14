@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     id("org.springframework.boot")
@@ -6,6 +7,8 @@ plugins {
 
     kotlin("jvm")
     kotlin("plugin.spring")
+
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 group = "com.minseoklim"
@@ -36,6 +39,12 @@ dependencies {
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+ktlint {
+    reporters {
+        reporter(ReporterType.JSON)
+    }
 }
 
 tasks.withType<KotlinCompile> {
