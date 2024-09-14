@@ -30,7 +30,10 @@ class ViewController(
     }
 
     @GetMapping("/social-link")
-    fun socialLink(request: HttpServletRequest, model: Model): String {
+    fun socialLink(
+        request: HttpServletRequest,
+        model: Model
+    ): String {
         val socialId = textEncryptor.decrypt(request.getParameter("socialId"))
         val socialType = request.getParameter("socialType")
 
