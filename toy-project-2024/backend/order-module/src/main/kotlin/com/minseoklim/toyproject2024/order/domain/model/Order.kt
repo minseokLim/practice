@@ -23,7 +23,6 @@ class Order(
     orderProducts: List<OrderProduct>,
     shippingInfo: ShippingInfo,
     orderStatus: OrderStatus = OrderStatus.PAYMENT_WAITING,
-    paymentId: Int?,
     memberId: Int
 ) : BaseTimeEntity() {
     @Id
@@ -42,7 +41,7 @@ class Order(
     var orderStatus: OrderStatus = orderStatus
         protected set
 
-    var paymentId: Int? = paymentId
+    var paymentId: Int? = null
         protected set
 
     val memberId: Int = memberId

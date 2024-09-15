@@ -13,14 +13,12 @@ data class MakeCardOrderInput(
 ) {
     fun toEntity(
         memberId: Int,
-        paymentId: Int? = null,
         orderName: String
     ): Order {
         return Order(
             orderName = orderName,
             orderProducts = orderProducts.map { it.toEmbeddable() },
             shippingInfo = shippingInfo.toEmbeddable(),
-            paymentId = paymentId,
             memberId = memberId
         )
     }
