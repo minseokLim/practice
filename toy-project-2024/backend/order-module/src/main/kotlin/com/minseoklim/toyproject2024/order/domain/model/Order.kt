@@ -23,6 +23,7 @@ class Order(
     orderProducts: List<OrderProduct>,
     shippingInfo: ShippingInfo,
     orderStatus: OrderStatus = OrderStatus.PAYMENT_WAITING,
+    paymentId: Int? = null,
     memberId: Int
 ) : BaseTimeEntity() {
     @Id
@@ -41,7 +42,7 @@ class Order(
     var orderStatus: OrderStatus = orderStatus
         protected set
 
-    var paymentId: Int? = null
+    var paymentId: Int? = paymentId
         protected set
 
     val memberId: Int = memberId
@@ -52,11 +53,12 @@ class Order(
     val isPaymentWaiting: Boolean
         get() = this.orderStatus == OrderStatus.PAYMENT_WAITING
 
-    fun applyPayment(paymentId: Int) {
+    fun applyPaymentId(paymentId: Int) {
         this.paymentId = paymentId
-        if (this.orderStatus == OrderStatus.PAYMENT_WAITING) {
-            this.orderStatus = OrderStatus.PREPARING
-        }
+    }
+
+    fun changeToPreparing() {
+        this.orderStatus = OrderStatus.PREPARING
     }
 
     fun checkAuthority(memberId: Int) {
