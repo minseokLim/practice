@@ -47,8 +47,11 @@ class Order(
 
     val memberId: Int = memberId
 
-    fun applyPaymentId(paymentId: Int) {
+    fun applyPayment(paymentId: Int) {
         this.paymentId = paymentId
+        if (this.orderStatus == OrderStatus.PAYMENT_WAITING) {
+            this.orderStatus = OrderStatus.PREPARING
+        }
     }
 
     fun checkAuthority(memberId: Int) {

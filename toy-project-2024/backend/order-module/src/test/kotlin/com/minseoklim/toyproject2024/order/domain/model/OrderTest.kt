@@ -18,7 +18,7 @@ class OrderTest {
     }
 
     @Test
-    fun applyPaymentId() {
+    fun applyPayment() {
         // given
         val order = Order(
             orderName = "주문명",
@@ -40,10 +40,11 @@ class OrderTest {
         )
 
         // when
-        order.applyPaymentId(1)
+        order.applyPayment(1)
 
         // then
         assertThat(order.paymentId).isEqualTo(1)
+        assertThat(order.orderStatus).isEqualTo(OrderStatus.PREPARING)
     }
 
     @Test

@@ -36,7 +36,7 @@ class MakeCardOrderService(
         val totalAmount = TotalAmountCalculator.calculate(order.orderProducts, products)
         val payment = makeCardPaymentService.make(memberId, MakeCardPaymentInput(input.cardId, totalAmount, orderName))
 
-        order.applyPaymentId(payment.id)
+        order.applyPayment(payment.id)
         return MakeCardOrderOutput.of(order)
     }
 
