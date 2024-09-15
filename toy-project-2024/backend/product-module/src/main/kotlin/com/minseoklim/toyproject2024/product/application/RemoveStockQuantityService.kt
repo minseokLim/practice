@@ -16,7 +16,7 @@ class RemoveStockQuantityService(
         productId: Int,
         input: RemoveStockQuantityInput
     ): RemoveStockQuantityOutput {
-        val product = ProductServiceHelper.getProduct(productRepository, productId)
+        val product = ProductServiceHelper.getProductForUpdate(productRepository, productId)
         memberId?.let { product.checkAuthority(memberId) }
         product.removeStockQuantity(input.decrement)
         return RemoveStockQuantityOutput.of(product)

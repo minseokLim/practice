@@ -12,4 +12,12 @@ object ProductServiceHelper {
         return productRepository.findById(productId)
             .orElseThrow { NotFoundException("PRODUCT_NOT_FOUND", "찾을 수 없는 상품입니다.") }
     }
+
+    fun getProductForUpdate(
+        productRepository: ProductRepository,
+        productId: Int
+    ): Product {
+        return productRepository.findByIdForUpdate(productId)
+            ?: throw NotFoundException("PRODUCT_NOT_FOUND", "찾을 수 없는 상품입니다.")
+    }
 }
