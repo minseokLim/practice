@@ -81,6 +81,35 @@ class OrderTest {
     }
 
     @Test
+    fun cancel() {
+        // given
+        val order = Order(
+            orderName = "주문명",
+            orderProducts = listOf(OrderProduct(1, 1)),
+            shippingInfo = ShippingInfo(
+                shippingMessage = "배송 메시지",
+                address = Address(
+                    value = "서울시 강남구 역삼동",
+                    detail = "테헤란로 427",
+                    zipCode = "06236"
+                ),
+                receiver = Receiver(
+                    name = "홍길동",
+                    phone = "010-1234-5678"
+                )
+            ),
+            paymentId = null,
+            memberId = 1
+        )
+
+        // when
+        order.cancel()
+
+        // then
+        assertThat(order.isCanceled).isTrue
+    }
+
+    @Test
     fun equalsAndHashCode() {
         // given
         val order1 = Order(

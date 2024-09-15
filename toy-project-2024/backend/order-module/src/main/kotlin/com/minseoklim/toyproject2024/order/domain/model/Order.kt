@@ -47,6 +47,12 @@ class Order(
 
     val memberId: Int = memberId
 
+    var isCanceled: Boolean = false
+        protected set
+
+    val isPaymentWaiting: Boolean
+        get() = this.orderStatus == OrderStatus.PAYMENT_WAITING
+
     fun applyPayment(paymentId: Int) {
         this.paymentId = paymentId
         if (this.orderStatus == OrderStatus.PAYMENT_WAITING) {
@@ -58,6 +64,10 @@ class Order(
         if (this.memberId != memberId) {
             throw NoPermissionException("NO_ORDER_PERMISSION", "주문에 대한 권한이 없습니다.")
         }
+    }
+
+    fun cancel() {
+        this.isCanceled = true
     }
 
     final override fun equals(other: Any?): Boolean {
