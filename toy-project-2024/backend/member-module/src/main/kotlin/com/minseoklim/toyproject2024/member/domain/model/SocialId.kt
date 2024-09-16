@@ -7,12 +7,14 @@ import java.util.Objects
 
 @Embeddable
 class SocialId(
-    @Column(name = "social_id")
-    val value: String
+    value: String
 ) {
     init {
         require(value.isNotBlank()) { ERR_MSG }
     }
+
+    @Column(name = "social_id")
+    val value: String = value
 
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntityAndEmbeddable(other) { x, y -> x.value == y.value }

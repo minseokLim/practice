@@ -7,12 +7,14 @@ import java.util.Objects
 
 @Embeddable
 class LoginId(
-    @Column(name = "login_id")
-    val value: String
+    value: String
 ) {
     init {
         require(REGEX.matches(value)) { ERR_MSG }
     }
+
+    @Column(name = "login_id")
+    val value: String = value
 
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntityAndEmbeddable(other) { x, y -> x.value == y.value }
