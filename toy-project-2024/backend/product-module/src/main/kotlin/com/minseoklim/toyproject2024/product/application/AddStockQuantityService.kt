@@ -12,12 +12,12 @@ class AddStockQuantityService(
     private val productRepository: ProductRepository
 ) {
     fun addStockQuantity(
-        memberId: Int,
+        memberId: Int? = null,
         productId: Int,
         input: AddStockQuantityInput
     ): AddStockQuantityOutput {
         val product = ProductServiceHelper.getProductForUpdate(productRepository, productId)
-        product.checkAuthority(memberId)
+        memberId?.let { product.checkAuthority(memberId) }
         product.addStockQuantity(input.increment)
         return AddStockQuantityOutput.of(product)
     }

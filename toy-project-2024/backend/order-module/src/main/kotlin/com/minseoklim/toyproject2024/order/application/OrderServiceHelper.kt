@@ -4,7 +4,9 @@ import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.order.domain.model.Order
 import com.minseoklim.toyproject2024.order.domain.model.OrderProduct
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
+import com.minseoklim.toyproject2024.product.application.AddStockQuantityService
 import com.minseoklim.toyproject2024.product.application.RemoveStockQuantityService
+import com.minseoklim.toyproject2024.product.dto.application.AddStockQuantityInput
 import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityInput
 
 object OrderServiceHelper {
@@ -24,6 +26,18 @@ object OrderServiceHelper {
             removeStockQuantityService.removeStockQuantity(
                 productId = it.productId,
                 input = RemoveStockQuantityInput(it.quantity)
+            )
+        }
+    }
+
+    fun recoverStockQuantity(
+        addStockQuantityService: AddStockQuantityService,
+        orderProducts: List<OrderProduct>
+    ) {
+        orderProducts.forEach {
+            addStockQuantityService.addStockQuantity(
+                productId = it.productId,
+                input = AddStockQuantityInput(it.quantity)
             )
         }
     }
