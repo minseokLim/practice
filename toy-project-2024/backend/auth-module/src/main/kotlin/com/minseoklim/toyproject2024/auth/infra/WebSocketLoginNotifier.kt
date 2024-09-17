@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
 @Component
-class WebsocketLoginNotifier(
+class WebSocketLoginNotifier(
     private val messagingTemplate: SimpMessagingTemplate
 ) : LoginNotifier {
     override fun notifyLogin(
