@@ -4,9 +4,9 @@ import org.hibernate.proxy.HibernateProxy
 
 object JpaEqualityUtil {
     /**
-     * Entity와 Embeddable 클래스에 대한 equals 메서드 처리
+     * Entity 클래스에 대한 equals 메서드 처리
      */
-    fun <T : Any> T.equalsForEntityAndEmbeddable(
+    fun <T : Any> T.equalsForEntity(
         other: Any?,
         finalPredicate: (x: T, y: T) -> Boolean
     ): Boolean {
@@ -27,5 +27,19 @@ object JpaEqualityUtil {
      */
     fun <T : Any> T.hashCodeForEntity(): Int {
         return if (this is HibernateProxy) this.hibernateLazyInitializer.persistentClass.hashCode() else javaClass.hashCode()
+    }
+
+    /**
+     * Embeddable 클래스에 대한 equals 메서드 처리
+     */
+    fun <T : Any> T.equalsForEmbeddable(
+        other: Any?,
+        finalPredicate: (x: T, y: T) -> Boolean
+    ): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as T
+
+        return finalPredicate(this, other)
     }
 }

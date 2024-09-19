@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.util.ConsistentHashUtil
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEmbeddable
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
@@ -22,7 +22,7 @@ class Email(
     val encryptedValue: String = TextEncryptUtil.encrypt(value)
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.hashedValue == y.hashedValue }
+        return this.equalsForEmbeddable(other) { x, y -> x.hashedValue == y.hashedValue }
     }
 
     final override fun hashCode(): Int = Objects.hash(hashedValue)

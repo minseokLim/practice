@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.card.domain.model
 
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEmbeddable
 import jakarta.persistence.Column
 import jakarta.persistence.Embeddable
 import java.util.Objects
@@ -17,7 +17,7 @@ class IssuerName(
     val value: String = value
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.value == y.value }
+        return this.equalsForEmbeddable(other) { x, y -> x.value == y.value }
     }
 
     final override fun hashCode(): Int = Objects.hash(value)

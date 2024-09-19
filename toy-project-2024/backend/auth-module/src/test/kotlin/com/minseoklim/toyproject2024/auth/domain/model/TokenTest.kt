@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.auth.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -45,6 +44,6 @@ class TokenTest {
         )
 
         // when, then
-        TestUtil.testEqualsAndHashCode(token1, token2, token3)
+        assertThat(setOf(token1, token2, token3)).hasSize(2)
     }
 }

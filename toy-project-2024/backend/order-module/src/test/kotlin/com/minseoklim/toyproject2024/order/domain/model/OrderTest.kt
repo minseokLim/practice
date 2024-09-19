@@ -2,7 +2,6 @@ package com.minseoklim.toyproject2024.order.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -191,6 +190,6 @@ class OrderTest {
         ReflectionTestUtils.setField(order2, "id", 1)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(order1, order2, order3)
+        assertThat(setOf(order1, order2, order3)).hasSize(2)
     }
 }

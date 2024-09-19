@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -52,6 +51,6 @@ class SocialLinksTest {
         val socialLinks3 = SocialLinks().apply { this.addSocialLink(SocialType.KAKAO, "1234") }
 
         // when, then
-        TestUtil.testEqualsAndHashCode(socialLinks1, socialLinks2, socialLinks3)
+        assertThat(setOf(socialLinks1, socialLinks2, socialLinks3)).hasSize(2)
     }
 }

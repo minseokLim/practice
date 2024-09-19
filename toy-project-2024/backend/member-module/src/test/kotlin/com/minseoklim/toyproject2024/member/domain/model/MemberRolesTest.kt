@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -51,6 +50,6 @@ class MemberRolesTest {
         val memberRoles3 = MemberRoles().apply { this.addRole(Role.ADMIN) }
 
         // when, then
-        TestUtil.testEqualsAndHashCode(memberRoles1, memberRoles2, memberRoles3)
+        assertThat(setOf(memberRoles1, memberRoles2, memberRoles3)).hasSize(2)
     }
 }

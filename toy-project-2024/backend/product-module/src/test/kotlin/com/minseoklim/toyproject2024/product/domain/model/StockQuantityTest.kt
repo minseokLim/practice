@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.product.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
@@ -28,7 +27,7 @@ class StockQuantityTest {
         val stockQuantity3 = StockQuantity(200)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(stockQuantity1, stockQuantity2, stockQuantity3)
+        assertThat(setOf(stockQuantity1, stockQuantity2, stockQuantity3)).hasSize(2)
     }
 
     @Test

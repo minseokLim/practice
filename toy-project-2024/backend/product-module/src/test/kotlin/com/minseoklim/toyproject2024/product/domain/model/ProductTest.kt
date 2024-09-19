@@ -1,7 +1,6 @@
 package com.minseoklim.toyproject2024.product.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -145,6 +144,6 @@ class ProductTest {
         ReflectionTestUtils.setField(product2, "id", 1)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(product1, product2, product3)
+        assertThat(setOf(product1, product2, product3)).hasSize(2)
     }
 }

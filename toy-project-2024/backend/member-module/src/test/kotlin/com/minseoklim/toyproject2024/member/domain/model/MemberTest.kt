@@ -3,7 +3,6 @@ package com.minseoklim.toyproject2024.member.domain.model
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -289,6 +288,6 @@ class MemberTest {
         ReflectionTestUtils.setField(member2, "id", 1)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(member1, member2, member3)
+        assertThat(setOf(member1, member2, member3)).hasSize(2)
     }
 }

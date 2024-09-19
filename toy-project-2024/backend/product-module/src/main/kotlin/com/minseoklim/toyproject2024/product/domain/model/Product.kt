@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.product.domain.model
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -75,7 +75,7 @@ class Product(
     }
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.id != null && x.id == y.id }
+        return this.equalsForEntity(other) { x, y -> x.id != null && x.id == y.id }
     }
 
     final override fun hashCode(): Int = this.hashCodeForEntity()

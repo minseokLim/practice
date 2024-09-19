@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.payment.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
@@ -14,6 +14,6 @@ class PaymentUidTest {
         ReflectionTestUtils.setField(paymentUid2, "value", paymentUid1.value)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(paymentUid1, paymentUid2, paymentUid3)
+        assertThat(setOf(paymentUid1, paymentUid2, paymentUid3)).hasSize(2)
     }
 }

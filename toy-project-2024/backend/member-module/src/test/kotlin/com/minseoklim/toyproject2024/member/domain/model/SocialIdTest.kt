@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
@@ -27,6 +27,6 @@ class SocialIdTest {
         val socialId3 = SocialId("other1234")
 
         // when, then
-        TestUtil.testEqualsAndHashCode(socialId1, socialId2, socialId3)
+        assertThat(setOf(socialId1, socialId2, socialId3)).hasSize(2)
     }
 }

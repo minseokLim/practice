@@ -1,7 +1,6 @@
 package com.minseoklim.toyproject2024.payment.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -94,6 +93,6 @@ class PaymentTest {
         ReflectionTestUtils.setField(cardPayment2, "id", 1)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(cardPayment1, cardPayment2, cardPayment3)
+        assertThat(setOf(cardPayment1, cardPayment2, cardPayment3)).hasSize(2)
     }
 }

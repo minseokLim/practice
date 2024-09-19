@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.order.domain.model
 
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEmbeddable
 import jakarta.persistence.Embeddable
 import java.util.Objects
 
@@ -17,7 +17,7 @@ class OrderProduct(
     val quantity: Int = quantity
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.productId == y.productId && x.quantity == y.quantity }
+        return this.equalsForEmbeddable(other) { x, y -> x.productId == y.productId && x.quantity == y.quantity }
     }
 
     final override fun hashCode(): Int = Objects.hash(productId, quantity)

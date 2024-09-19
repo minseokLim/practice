@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
-import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.BeforeEach
@@ -35,6 +35,6 @@ class EmailTest {
         val email3 = Email("other@other.com")
 
         // when, then
-        TestUtil.testEqualsAndHashCode(email1, email2, email3)
+        assertThat(setOf(email1, email2, email3)).hasSize(2)
     }
 }

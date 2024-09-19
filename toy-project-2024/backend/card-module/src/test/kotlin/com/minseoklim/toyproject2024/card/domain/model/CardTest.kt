@@ -2,7 +2,6 @@ package com.minseoklim.toyproject2024.card.domain.model
 
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
-import com.minseoklim.toyproject2024.test.util.TestUtil
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -88,6 +87,6 @@ class CardTest {
         ReflectionTestUtils.setField(card2, "id", 1)
 
         // when, then
-        TestUtil.testEqualsAndHashCode(card1, card2, card3)
+        assertThat(setOf(card1, card2, card3)).hasSize(2)
     }
 }

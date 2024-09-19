@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEmbeddable
 import jakarta.persistence.CollectionTable
 import jakarta.persistence.ElementCollection
 import jakarta.persistence.Embeddable
@@ -35,7 +35,7 @@ class SocialLinks(
     }
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.values == y.values }
+        return this.equalsForEmbeddable(other) { x, y -> x.values == y.values }
     }
 
     final override fun hashCode(): Int = Objects.hash(values)

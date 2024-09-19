@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.member.domain.model
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.EventPublisher
-import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntityAndEmbeddable
+import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import com.minseoklim.toyproject2024.member.event.MemberDeletedEvent
 import jakarta.persistence.Entity
@@ -131,7 +131,7 @@ class Member(
     }
 
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEntityAndEmbeddable(other) { x, y -> x.id != null && x.id == y.id }
+        return this.equalsForEntity(other) { x, y -> x.id != null && x.id == y.id }
     }
 
     final override fun hashCode(): Int = this.hashCodeForEntity()

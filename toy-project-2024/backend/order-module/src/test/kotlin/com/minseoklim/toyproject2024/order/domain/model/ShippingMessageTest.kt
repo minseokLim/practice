@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.order.domain.model
 
-import com.minseoklim.toyproject2024.test.util.TestUtil
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.jupiter.api.Test
@@ -27,6 +27,6 @@ class ShippingMessageTest {
         val shippingMessage3 = ShippingMessage("다른 배송 메시지")
 
         // when, then
-        TestUtil.testEqualsAndHashCode(shippingMessage1, shippingMessage2, shippingMessage3)
+        assertThat(setOf(shippingMessage1, shippingMessage2, shippingMessage3)).hasSize(2)
     }
 }
