@@ -15,6 +15,11 @@ dependencies {
     // log
     implementation("io.github.microutils:kotlin-logging-jvm:${property("kotlinLoggingJvmVersion")}")
 
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:${property("jjwtVersion")}")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:${property("jjwtVersion")}")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:${property("jjwtVersion")}")
+
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "com.vaadin.external.google", module = "android-json")
