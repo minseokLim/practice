@@ -9,6 +9,7 @@ include("order-module")
 include("payment-module")
 include("product-module")
 include("test-module")
+include("websocket-module")
 
 pluginManagement {
     repositories {

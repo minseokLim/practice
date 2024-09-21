@@ -1,4 +1,4 @@
-package com.minseoklim.toyproject2024.common.config
+package com.minseoklim.toyproject2024.websocket.config
 
 import com.sun.security.auth.UserPrincipal
 import org.springframework.context.annotation.Configuration

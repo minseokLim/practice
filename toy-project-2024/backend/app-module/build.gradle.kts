@@ -19,4 +19,5 @@ dependencies {
     implementation(project(":order-module"))
     implementation(project(":payment-module"))
     implementation(project(":product-module"))
+    implementation(project(":websocket-module"))
 }
