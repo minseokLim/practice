@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets
 
 @Component
 class JwtTokenParser(
-    @Value("\${jwt.secret-key}") secretKey: String
+    @Value("\${auth.secret-key}") secretKey: String
 ) : TokenParser {
     private val jwtParser = Jwts.parser()
         .verifyWith(Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8)))

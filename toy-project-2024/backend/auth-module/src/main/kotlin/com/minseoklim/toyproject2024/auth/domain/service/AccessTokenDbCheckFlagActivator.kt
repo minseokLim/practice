@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class AccessTokenDbCheckFlagActivator(
     private val accessTokenDbCheckFlagRepository: AccessTokenDbCheckFlagRepository,
-    @Value("\${jwt.access-token-db-check-in-milliseconds}")
+    @Value("\${auth.access-token-db-check-in-milliseconds}")
     private val accessTokenDbCheckInMilliseconds: Long
 ) {
     fun activateAccessTokenDbCheckFlag(memberId: Int) {

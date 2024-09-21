@@ -14,9 +14,9 @@ import java.util.Date
 
 @Component
 class JwtTokenProvider(
-    @Value("\${jwt.secret-key}") secretKey: String,
-    @Value("\${jwt.access-token-validity-in-milliseconds}") private val accessTokenValidityInMilliseconds: Long,
-    @Value("\${jwt.refresh-token-validity-in-milliseconds}") private val refreshTokenValidityInMilliseconds: Long
+    @Value("\${auth.secret-key}") secretKey: String,
+    @Value("\${auth.access-token-validity-in-milliseconds}") private val accessTokenValidityInMilliseconds: Long,
+    @Value("\${auth.refresh-token-validity-in-milliseconds}") private val refreshTokenValidityInMilliseconds: Long
 ) : TokenProvider {
     private val secretKey: Key = Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8))
 
