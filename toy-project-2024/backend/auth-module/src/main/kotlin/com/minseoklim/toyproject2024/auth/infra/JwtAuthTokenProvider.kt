@@ -13,7 +13,7 @@ import java.security.Key
 import java.util.Date
 
 @Component
-class JwtTokenProvider(
+class JwtAuthTokenProvider(
     @Value("\${auth.secret-key}") secretKey: String,
     @Value("\${auth.access-token-validity-in-milliseconds}") private val accessTokenValidityInMilliseconds: Long,
     @Value("\${auth.refresh-token-validity-in-milliseconds}") private val refreshTokenValidityInMilliseconds: Long

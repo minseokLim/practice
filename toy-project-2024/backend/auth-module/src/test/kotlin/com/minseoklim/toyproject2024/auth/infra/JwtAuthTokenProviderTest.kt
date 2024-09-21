@@ -4,9 +4,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.security.authentication.TestingAuthenticationToken
 
-class JwtTokenProviderTest {
+class JwtAuthTokenProviderTest {
     private val tokenProvider =
-        JwtTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
+        JwtAuthTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
 
     @Test
     fun createAccessToken() {

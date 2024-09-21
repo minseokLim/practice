@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.auth.domain.service
 
 import com.minseoklim.toyproject2024.auth.domain.model.Token
 import com.minseoklim.toyproject2024.auth.domain.repository.TokenRepository
-import com.minseoklim.toyproject2024.auth.infra.JwtTokenParser
-import com.minseoklim.toyproject2024.auth.infra.JwtTokenProvider
+import com.minseoklim.toyproject2024.auth.infra.JwtAuthTokenParser
+import com.minseoklim.toyproject2024.auth.infra.JwtAuthTokenProvider
 import org.assertj.core.api.Assertions.assertThatNoException
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -15,7 +15,7 @@ import org.springframework.security.authentication.TestingAuthenticationToken
 import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
-@Import(JwtTokenProvider::class, JwtTokenParser::class, RefreshTokenValidator::class)
+@Import(JwtAuthTokenProvider::class, JwtAuthTokenParser::class, RefreshTokenValidator::class)
 @ActiveProfiles("test")
 class RefreshTokenValidatorTest {
     @Autowired

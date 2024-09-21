@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.TestingAuthenticationToken
 
-class JwtTokenParserTest {
-    private val tokenParser = JwtTokenParser(SECRET_KEY)
+class JwtAuthTokenParserTest {
+    private val tokenParser = JwtAuthTokenParser(SECRET_KEY)
     private val tokenProvider =
-        JwtTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
+        JwtAuthTokenProvider(SECRET_KEY, ACCESS_TOKEN_VALIDITY_IN_MILLISECONDS, REFRESH_TOKEN_VALIDITY_IN_MILLISECONDS)
 
     @Test
     fun extractAuthentication() {
@@ -24,7 +24,7 @@ class JwtTokenParserTest {
         assertThat(extractedAuthentication1).isNotNull
 
         // given
-        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val shortTermTokenProvider = JwtAuthTokenProvider(SECRET_KEY, 1, 1)
         val accessToken2 = shortTermTokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
@@ -53,7 +53,7 @@ class JwtTokenParserTest {
         assertThat(extractedId1).isEqualTo(id)
 
         // given
-        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val shortTermTokenProvider = JwtAuthTokenProvider(SECRET_KEY, 1, 1)
         val accessToken2 = shortTermTokenProvider.createAccessToken(authentication, id)
 
         // when
@@ -81,7 +81,7 @@ class JwtTokenParserTest {
         assertThat(validated1).isTrue
 
         // given
-        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val shortTermTokenProvider = JwtAuthTokenProvider(SECRET_KEY, 1, 1)
         val shortTermAccessToken = shortTermTokenProvider.createAccessToken(authentication, "accessTokenId")
 
         // when
@@ -118,7 +118,7 @@ class JwtTokenParserTest {
         assertThat(validated1).isTrue
 
         // given
-        val shortTermTokenProvider = JwtTokenProvider(SECRET_KEY, 1, 1)
+        val shortTermTokenProvider = JwtAuthTokenProvider(SECRET_KEY, 1, 1)
         val shortTermRefreshToken = shortTermTokenProvider.createRefreshToken("refreshTokenId")
 
         // when
