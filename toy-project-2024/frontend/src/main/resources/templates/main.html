@@ -84,7 +84,7 @@
                     setMemberInfoIntoForm(memberInfo);
                     displayLinkButtons(memberInfo);
                     displayUnlinkButtons(memberInfo);
-                    setStompClient(memberInfo);
+                    setStompClient();
                 });
         };
 
@@ -190,30 +190,32 @@
             });
         }
 
-        function setStompClient(memberInfo) {
-            const stompClient = new StompJs.Client({
-                brokerURL: convertToWebSocketURL(apiBaseUrl) + '/ws?memberId=' + memberInfo.id
-            });
-
-            stompClient.onConnect = (frame) => {
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/user/topic/notify-login', (message) => {
-                    const loginNotification = JSON.parse(message.body);
-                    const alertMessage = '다른 기기에서 이 계정으로 로그인 되었습니다.' + '\n' + '- ip : ' + loginNotification.clientIp + '\n' + '- user-agent : ' + loginNotification.userAgent;
-                    alert(alertMessage);
+        function setStompClient() {
+            return requestToApi('/websocket/token', 'POST', null, response => {
+                const stompClient = new StompJs.Client({
+                    brokerURL: convertToWebSocketURL(apiBaseUrl) + '/ws?token=' + response.data.token
                 });
-            };
 
-            stompClient.onWebSocketError = (error) => {
-                console.error('Error with websocket', error);
-            };
+                stompClient.onConnect = (frame) => {
+                    console.log('Connected: ' + frame);
+                    stompClient.subscribe('/user/topic/notify-login', (message) => {
+                        const loginNotification = JSON.parse(message.body);
+                        const alertMessage = '다른 기기에서 이 계정으로 로그인 되었습니다.' + '\n' + '- ip : ' + loginNotification.clientIp + '\n' + '- user-agent : ' + loginNotification.userAgent;
+                        alert(alertMessage);
+                    });
+                };
 
-            stompClient.onStompError = (frame) => {
-                console.error('Broker reported error: ' + frame.headers['message']);
-                console.error('Additional details: ' + frame.body);
-            };
+                stompClient.onWebSocketError = (error) => {
+                    console.error('Error with websocket', error);
+                };
 
-            stompClient.activate();
+                stompClient.onStompError = (frame) => {
+                    console.error('Broker reported error: ' + frame.headers['message']);
+                    console.error('Additional details: ' + frame.body);
+                };
+
+                stompClient.activate();
+            });
         }
     </script>
 </body>
