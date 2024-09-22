@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles
 @ActiveProfiles("test")
 abstract class AcceptanceTest {
     @LocalServerPort
-    private var port = 0
+    protected var port = 0
 
     @Autowired
     private lateinit var databaseCleanup: DatabaseCleanup
