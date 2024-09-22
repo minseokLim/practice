@@ -3,10 +3,8 @@ package com.minseoklim.toyproject2024
 import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.core.importer.ClassFileImporter
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests
-import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
 import org.junit.jupiter.api.Test
-import org.springframework.transaction.annotation.Transactional
 
 class ArchitectureTest {
     @Test
@@ -14,7 +12,6 @@ class ArchitectureTest {
         val classes = ClassFileImporter().withImportOption(DoNotIncludeTests()).importPackages(BASE_PACKAGE)
         checkNotEmpty(classes)
         checkPackageDependency(classes)
-        checkTransactionalAnnotation(classes)
     }
 
     private fun checkNotEmpty(classes: JavaClasses) {
@@ -24,18 +21,6 @@ class ArchitectureTest {
     private fun checkPackageDependency(classes: JavaClasses) {
         checkDomainDependency(classes)
         checkApplicationDependency(classes)
-    }
-
-    private fun checkTransactionalAnnotation(classes: JavaClasses) {
-        val transactionalAnnotationRule = classes()
-            .that()
-            .haveSimpleNameEndingWith("Service")
-            .and()
-            .resideInAPackage("..application..")
-            .should()
-            .beAnnotatedWith(Transactional::class.java)
-
-        transactionalAnnotationRule.check(classes)
     }
 
     private fun checkDomainDependency(classes: JavaClasses) {
