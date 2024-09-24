@@ -7,7 +7,7 @@ import com.minseoklim.toyproject2024.order.domain.model.OrderProduct
 import com.minseoklim.toyproject2024.order.domain.model.Receiver
 import com.minseoklim.toyproject2024.order.domain.model.ShippingInfo
 
-data class QueryOrderOutput(
+data class QueryOrderOutput private constructor(
     val id: Int,
     val orderProducts: List<OrderProductOutput>,
     val shippingInfo: ShippingInfoOutput

@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.order.dto.ui
 import com.minseoklim.toyproject2024.order.dto.application.CompleteVerifiedOrderOutput
 import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPaymentStatus
 
-data class CompleteVerifiedOrderResponse(
+data class CompleteVerifiedOrderResponse private constructor(
     val paymentStatus: VerifiedPaymentStatus
 ) {
     companion object {
