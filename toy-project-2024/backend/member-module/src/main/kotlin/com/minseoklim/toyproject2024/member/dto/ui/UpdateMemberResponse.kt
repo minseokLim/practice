@@ -15,7 +15,7 @@ data class UpdateMemberResponse private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(output: UpdateMemberOutput): UpdateMemberResponse {
+        fun from(output: UpdateMemberOutput): UpdateMemberResponse {
             return UpdateMemberResponse(
                 id = output.id,
                 loginId = output.loginId,

@@ -19,6 +19,6 @@ class AddStockQuantityService(
         val product = ProductServiceHelper.getProductForUpdate(productRepository, productId)
         memberId?.let { product.checkAuthority(memberId) }
         product.addStockQuantity(input.increment)
-        return AddStockQuantityOutput.of(product)
+        return AddStockQuantityOutput.from(product)
     }
 }

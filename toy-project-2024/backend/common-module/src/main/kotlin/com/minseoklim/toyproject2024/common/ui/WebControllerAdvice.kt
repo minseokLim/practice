@@ -18,17 +18,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class WebControllerAdvice {
     @ExceptionHandler(NotFoundException::class)
     fun handleNotFoundException(e: NotFoundException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse.of(e), HttpStatus.NOT_FOUND)
+        return ResponseEntity(ErrorResponse.from(e), HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler(BadRequestException::class)
     fun handleBadRequestException(e: BadRequestException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse.of(e), HttpStatus.BAD_REQUEST)
+        return ResponseEntity(ErrorResponse.from(e), HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(NoPermissionException::class)
     fun handleNoPermissionException(e: NoPermissionException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse.of(e), HttpStatus.FORBIDDEN)
+        return ResponseEntity(ErrorResponse.from(e), HttpStatus.FORBIDDEN)
     }
 
     @ExceptionHandler(BadCredentialsException::class)

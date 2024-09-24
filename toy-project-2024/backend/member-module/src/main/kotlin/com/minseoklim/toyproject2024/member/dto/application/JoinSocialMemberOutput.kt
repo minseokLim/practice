@@ -8,7 +8,7 @@ data class JoinSocialMemberOutput private constructor(
     val roles: Set<Role>
 ) {
     companion object {
-        fun of(member: Member): JoinSocialMemberOutput {
+        fun from(member: Member): JoinSocialMemberOutput {
             return JoinSocialMemberOutput(
                 id = checkNotNull(member.id),
                 roles = member.getRoles()

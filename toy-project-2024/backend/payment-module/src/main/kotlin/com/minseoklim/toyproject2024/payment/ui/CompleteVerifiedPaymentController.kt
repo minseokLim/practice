@@ -20,6 +20,6 @@ class CompleteVerifiedPaymentController(
         @Valid @RequestBody request: CompleteVerifiedPaymentRequest
     ): ResponseEntity<CompleteVerifiedPaymentResponse> {
         val output = completeVerifiedPaymentService.completeVerifiedPayment(memberId, request.toInput())
-        return ResponseEntity.ok(CompleteVerifiedPaymentResponse.of(output))
+        return ResponseEntity.ok(CompleteVerifiedPaymentResponse.from(output))
     }
 }

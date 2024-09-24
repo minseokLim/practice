@@ -22,6 +22,6 @@ class LoginController(
         servletRequest: HttpServletRequest
     ): ResponseEntity<LoginResponse> {
         val output = loginService.login(request.toInput(), servletRequest.getClientIp(), servletRequest.getUserAgent())
-        return ResponseEntity.ok(LoginResponse.of(output))
+        return ResponseEntity.ok(LoginResponse.from(output))
     }
 }

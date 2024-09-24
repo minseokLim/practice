@@ -9,7 +9,7 @@ data class QueryPaymentOutput private constructor(
     val isCanceled: Boolean
 ) {
     companion object {
-        fun of(payment: Payment): QueryPaymentOutput {
+        fun from(payment: Payment): QueryPaymentOutput {
             return QueryPaymentOutput(
                 id = checkNotNull(payment.id),
                 amount = payment.amount.value.toLong(),

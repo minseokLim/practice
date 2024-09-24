@@ -17,6 +17,6 @@ class QueryPaymentService(
         pageable: Pageable
     ): Page<QueryPaymentOutput> {
         return paymentRepository.findAllByMemberIdWithVerifiedCompleted(memberId, pageable)
-            .map { QueryPaymentOutput.of(it) }
+            .map { QueryPaymentOutput.from(it) }
     }
 }

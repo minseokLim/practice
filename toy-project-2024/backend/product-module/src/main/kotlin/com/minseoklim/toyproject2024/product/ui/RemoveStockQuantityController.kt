@@ -24,6 +24,6 @@ class RemoveStockQuantityController(
         @Valid @RequestBody request: RemoveStockQuantityRequest
     ): ResponseEntity<RemoveStockQuantityResponse> {
         val output = removeStockQuantityService.removeStockQuantity(memberId, productId, request.toInput())
-        return ResponseEntity.ok(RemoveStockQuantityResponse.of(output))
+        return ResponseEntity.ok(RemoveStockQuantityResponse.from(output))
     }
 }

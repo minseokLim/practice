@@ -23,9 +23,9 @@ data class CheckOutVerifiedOrderOutput private constructor(
             return CheckOutVerifiedOrderOutput(
                 id = checkNotNull(order.id),
                 orderName = order.orderName.value,
-                payment = PaymentOutput.of(paymentOutput),
-                orderProducts = order.orderProducts.map { OrderProductOutput.of(it) },
-                shippingInfo = ShippingInfoOutput.of(order.shippingInfo)
+                payment = PaymentOutput.from(paymentOutput),
+                orderProducts = order.orderProducts.map { OrderProductOutput.from(it) },
+                shippingInfo = ShippingInfoOutput.from(order.shippingInfo)
             )
         }
     }
@@ -36,7 +36,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
         val paymentUid: String
     ) {
         companion object {
-            fun of(payment: CheckOutVerifiedPaymentOutput): PaymentOutput {
+            fun from(payment: CheckOutVerifiedPaymentOutput): PaymentOutput {
                 return PaymentOutput(
                     id = payment.id,
                     amount = payment.amount,
@@ -51,7 +51,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
         val quantity: Int
     ) {
         companion object {
-            fun of(orderProduct: OrderProduct): OrderProductOutput {
+            fun from(orderProduct: OrderProduct): OrderProductOutput {
                 return OrderProductOutput(
                     productId = orderProduct.productId,
                     quantity = orderProduct.quantity
@@ -66,11 +66,11 @@ data class CheckOutVerifiedOrderOutput private constructor(
         val receiver: ReceiverOutput
     ) {
         companion object {
-            fun of(shippingInfo: ShippingInfo): ShippingInfoOutput {
+            fun from(shippingInfo: ShippingInfo): ShippingInfoOutput {
                 return ShippingInfoOutput(
                     shippingMessage = shippingInfo.shippingMessage?.value,
-                    address = AddressOutput.of(shippingInfo.address),
-                    receiver = ReceiverOutput.of(shippingInfo.receiver)
+                    address = AddressOutput.from(shippingInfo.address),
+                    receiver = ReceiverOutput.from(shippingInfo.receiver)
                 )
             }
         }
@@ -82,7 +82,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
         val zipCode: String
     ) {
         companion object {
-            fun of(address: Address): AddressOutput {
+            fun from(address: Address): AddressOutput {
                 return AddressOutput(
                     value = TextEncryptUtil.decrypt(address.encryptedValue),
                     detail = TextEncryptUtil.decrypt(address.encryptedDetail),
@@ -97,7 +97,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
         val phone: String
     ) {
         companion object {
-            fun of(receiver: Receiver): ReceiverOutput {
+            fun from(receiver: Receiver): ReceiverOutput {
                 return ReceiverOutput(
                     name = TextEncryptUtil.decrypt(receiver.encryptedName),
                     phone = TextEncryptUtil.decrypt(receiver.encryptedPhone)

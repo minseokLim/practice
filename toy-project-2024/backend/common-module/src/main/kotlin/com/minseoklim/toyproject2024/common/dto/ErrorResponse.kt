@@ -7,7 +7,7 @@ data class ErrorResponse(
     val message: String? = null
 ) {
     companion object {
-        fun of(e: CommonException): ErrorResponse {
+        fun from(e: CommonException): ErrorResponse {
             return ErrorResponse(e.code, e.message)
         }
     }

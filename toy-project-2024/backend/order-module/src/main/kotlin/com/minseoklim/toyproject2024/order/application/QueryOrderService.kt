@@ -16,7 +16,7 @@ class QueryOrderService(
         memberId: Int,
         pageable: Pageable
     ): Page<QueryOrderOutput> {
-        return orderRepository.findAllByMemberId(memberId, pageable).map { QueryOrderOutput.of(it) }
+        return orderRepository.findAllByMemberId(memberId, pageable).map { QueryOrderOutput.from(it) }
     }
 
     fun get(
@@ -25,6 +25,6 @@ class QueryOrderService(
     ): QueryOrderOutput {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)
-        return QueryOrderOutput.of(order)
+        return QueryOrderOutput.from(order)
     }
 }

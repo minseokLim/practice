@@ -8,7 +8,7 @@ data class RegisterCardOutput private constructor(
     val issuerName: String
 ) {
     companion object {
-        fun of(card: Card): RegisterCardOutput {
+        fun from(card: Card): RegisterCardOutput {
             return RegisterCardOutput(
                 id = checkNotNull(card.id),
                 maskedCardNumber = card.cardNumber.maskedValue,

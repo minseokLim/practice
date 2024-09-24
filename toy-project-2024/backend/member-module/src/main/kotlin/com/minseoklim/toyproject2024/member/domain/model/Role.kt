@@ -13,7 +13,7 @@ enum class Role : GrantedAuthority {
     companion object {
         const val ROLE_PREFIX = "ROLE_"
 
-        fun of(role: String): Role {
+        fun from(role: String): Role {
             return valueOf(role.substring(ROLE_PREFIX.length))
         }
     }

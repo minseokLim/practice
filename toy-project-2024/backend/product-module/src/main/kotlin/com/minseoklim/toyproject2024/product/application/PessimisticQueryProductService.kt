@@ -11,6 +11,6 @@ class PessimisticQueryProductService(
     private val productRepository: ProductRepository
 ) {
     fun findAllByIds(ids: Collection<Int>): List<QueryProductOutput> {
-        return productRepository.findAllByIdIn(ids).map { QueryProductOutput.of(it) }
+        return productRepository.findAllByIdIn(ids).map { QueryProductOutput.from(it) }
     }
 }

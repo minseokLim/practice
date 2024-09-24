@@ -75,7 +75,7 @@ class JwtAuthTokenParser(
             .toString()
             .split(AUTHORITY_DELIMITER)
             .filter { it.isNotBlank() }
-            .map { Role.of(it) }
+            .map { Role.from(it) }
             .toSet()
     }
 

@@ -10,7 +10,7 @@ data class QueryProductOutput private constructor(
     val isDeleted: Boolean
 ) {
     companion object {
-        fun of(product: Product): QueryProductOutput {
+        fun from(product: Product): QueryProductOutput {
             return QueryProductOutput(
                 id = checkNotNull(product.id),
                 name = product.name.value,

@@ -16,6 +16,6 @@ class JoinMemberService(
     fun join(input: JoinMemberInput): JoinMemberOutput {
         loginIdValidator.checkExistence(input.loginId)
         val member = memberRepository.save(input.toEntity())
-        return JoinMemberOutput.of(member)
+        return JoinMemberOutput.from(member)
     }
 }

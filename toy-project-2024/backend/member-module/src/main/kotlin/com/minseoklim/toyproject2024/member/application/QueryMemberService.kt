@@ -20,17 +20,17 @@ class QueryMemberService(
     ): Page<QueryMemberOutput> {
         val predicate = MemberFilterParser.parse(filter)
         val members = memberRepository.findAll(predicate, pageable)
-        return members.map { QueryMemberOutput.of(it) }
+        return members.map { QueryMemberOutput.from(it) }
     }
 
     fun get(id: Int): QueryMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)
-        return QueryMemberOutput.of(member)
+        return QueryMemberOutput.from(member)
     }
 
     fun findByLoginId(loginId: String): QueryMemberOutput? {
         val member = memberRepository.findByLoginIdValue(loginId)
-        return member?.let { QueryMemberOutput.of(it) }
+        return member?.let { QueryMemberOutput.from(it) }
     }
 
     fun findBySocialTypeAndSocialId(
@@ -38,6 +38,6 @@ class QueryMemberService(
         socialId: String
     ): QueryMemberOutput? {
         val member = memberRepository.findBySocialTypeAndSocialId(socialType, socialId)
-        return member?.let { QueryMemberOutput.of(it) }
+        return member?.let { QueryMemberOutput.from(it) }
     }
 }

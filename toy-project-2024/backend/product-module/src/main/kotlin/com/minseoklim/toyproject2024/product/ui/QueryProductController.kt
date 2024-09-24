@@ -22,7 +22,7 @@ class QueryProductController(
         pageable: Pageable
     ): ResponseEntity<Page<QueryProductResponse>> {
         val outputs = queryProductService.list(memberId, pageable)
-        return ResponseEntity.ok(outputs.map { QueryProductResponse.of(it) })
+        return ResponseEntity.ok(outputs.map { QueryProductResponse.from(it) })
     }
 
     @GetMapping("/{productId}")
@@ -31,6 +31,6 @@ class QueryProductController(
         @PathVariable productId: Int
     ): ResponseEntity<QueryProductResponse> {
         val output = queryProductService.get(memberId, productId)
-        return ResponseEntity.ok(QueryProductResponse.of(output))
+        return ResponseEntity.ok(QueryProductResponse.from(output))
     }
 }

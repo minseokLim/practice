@@ -17,7 +17,7 @@ data class QueryMemberOutput private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(member: Member): QueryMemberOutput {
+        fun from(member: Member): QueryMemberOutput {
             return QueryMemberOutput(
                 id = checkNotNull(member.id),
                 loginId = member.loginId?.value,

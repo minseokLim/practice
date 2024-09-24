@@ -15,7 +15,7 @@ data class JoinMemberResponse private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(output: JoinMemberOutput): JoinMemberResponse {
+        fun from(output: JoinMemberOutput): JoinMemberResponse {
             return JoinMemberResponse(
                 id = output.id,
                 loginId = output.loginId,

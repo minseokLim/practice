@@ -26,7 +26,7 @@ class CheckOutVerifiedOrderService(
         input: CheckOutVerifiedOrderInput
     ): CheckOutVerifiedOrderOutput {
         val productIds = input.orderProducts.map { it.productId }
-        val products = pessimisticQueryProductService.findAllByIds(productIds).map { ProductConverter.of(it) }
+        val products = pessimisticQueryProductService.findAllByIds(productIds).map { ProductConverter.from(it) }
 
         val orderName = OrderNameGenerator.generate(products)
         val order = orderRepository.save(input.toEntity(memberId = memberId, orderName = orderName))

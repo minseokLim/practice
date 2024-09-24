@@ -16,6 +16,6 @@ class RegisterProductService(
         input: RegisterProductInput
     ): RegisterProductOutput {
         val product = productRepository.save(input.toEntity(memberId))
-        return RegisterProductOutput.of(product)
+        return RegisterProductOutput.from(product)
     }
 }

@@ -17,7 +17,7 @@ class QueryCardService(
         pageable: Pageable
     ): Page<QueryCardOutput> {
         val cards = cardRepository.findAllByMemberId(memberId, pageable)
-        return cards.map { QueryCardOutput.of(it) }
+        return cards.map { QueryCardOutput.from(it) }
     }
 
     fun get(
@@ -26,6 +26,6 @@ class QueryCardService(
     ): QueryCardOutput {
         val card = CardServiceHelper.getCard(cardRepository, cardId)
         card.checkAuthority(memberId)
-        return QueryCardOutput.of(card)
+        return QueryCardOutput.from(card)
     }
 }

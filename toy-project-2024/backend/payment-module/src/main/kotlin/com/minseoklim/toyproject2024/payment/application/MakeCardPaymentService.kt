@@ -34,6 +34,6 @@ class MakeCardPaymentService(
             )
         )
 
-        return MakeCardPaymentOutput.of(cardPayment)
+        return MakeCardPaymentOutput.from(cardPayment)
     }
 }

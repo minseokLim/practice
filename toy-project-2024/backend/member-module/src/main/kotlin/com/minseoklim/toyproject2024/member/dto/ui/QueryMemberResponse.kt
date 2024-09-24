@@ -15,7 +15,7 @@ data class QueryMemberResponse private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(output: QueryMemberOutput): QueryMemberResponse {
+        fun from(output: QueryMemberOutput): QueryMemberResponse {
             return QueryMemberResponse(
                 id = output.id,
                 loginId = output.loginId,

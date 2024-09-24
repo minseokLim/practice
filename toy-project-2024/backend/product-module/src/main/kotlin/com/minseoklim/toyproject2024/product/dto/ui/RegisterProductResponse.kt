@@ -9,7 +9,7 @@ data class RegisterProductResponse private constructor(
     val stockQuantity: Int
 ) {
     companion object {
-        fun of(output: RegisterProductOutput): RegisterProductResponse {
+        fun from(output: RegisterProductOutput): RegisterProductResponse {
             return RegisterProductResponse(
                 id = output.id,
                 name = output.name,

@@ -20,7 +20,7 @@ class QueryOrderController(
         pageable: Pageable
     ): ResponseEntity<Page<QueryOrderResponse>> {
         val outputs = queryOrderService.list(memberId, pageable)
-        return ResponseEntity.ok(outputs.map { QueryOrderResponse.of(it) })
+        return ResponseEntity.ok(outputs.map { QueryOrderResponse.from(it) })
     }
 
     @GetMapping("/orders/{orderId}")
@@ -29,6 +29,6 @@ class QueryOrderController(
         @PathVariable orderId: Int
     ): ResponseEntity<QueryOrderResponse> {
         val output = queryOrderService.get(memberId, orderId)
-        return ResponseEntity.ok(QueryOrderResponse.of(output))
+        return ResponseEntity.ok(QueryOrderResponse.from(output))
     }
 }

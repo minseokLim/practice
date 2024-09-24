@@ -7,7 +7,7 @@ data class CompleteVerifiedPaymentResponse(
     val status: VerifiedPaymentStatus
 ) {
     companion object {
-        fun of(output: CompleteVerifiedPaymentOutput): CompleteVerifiedPaymentResponse {
+        fun from(output: CompleteVerifiedPaymentOutput): CompleteVerifiedPaymentResponse {
             return CompleteVerifiedPaymentResponse(
                 status = output.status
             )

@@ -25,7 +25,7 @@ class QueryMemberController(
         pageable: Pageable
     ): ResponseEntity<Page<QueryMemberResponse>> {
         val outputs = queryMemberService.list(filter, pageable)
-        return ResponseEntity.ok(outputs.map { QueryMemberResponse.of(it) })
+        return ResponseEntity.ok(outputs.map { QueryMemberResponse.from(it) })
     }
 
     @GetMapping("/{id}")
@@ -34,7 +34,7 @@ class QueryMemberController(
         @PathVariable id: Int
     ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
-        return ResponseEntity.ok(QueryMemberResponse.of(output))
+        return ResponseEntity.ok(QueryMemberResponse.from(output))
     }
 
     @GetMapping("/me")
@@ -42,6 +42,6 @@ class QueryMemberController(
         @MemberId id: Int
     ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
-        return ResponseEntity.ok(QueryMemberResponse.of(output))
+        return ResponseEntity.ok(QueryMemberResponse.from(output))
     }
 }

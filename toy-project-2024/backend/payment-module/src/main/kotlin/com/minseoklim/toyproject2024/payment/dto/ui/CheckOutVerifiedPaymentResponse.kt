@@ -11,7 +11,7 @@ data class CheckOutVerifiedPaymentResponse private constructor(
     val status: VerifiedPaymentStatus
 ) {
     companion object {
-        fun of(output: CheckOutVerifiedPaymentOutput): CheckOutVerifiedPaymentResponse {
+        fun from(output: CheckOutVerifiedPaymentOutput): CheckOutVerifiedPaymentResponse {
             return CheckOutVerifiedPaymentResponse(
                 id = output.id,
                 amount = output.amount,

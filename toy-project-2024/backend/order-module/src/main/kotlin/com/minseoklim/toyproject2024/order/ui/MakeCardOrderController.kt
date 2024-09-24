@@ -20,6 +20,6 @@ class MakeCardOrderController(
         @Valid @RequestBody request: MakeCardOrderRequest
     ): ResponseEntity<MakeCardOrderResponse> {
         val output = makeCardOrderService.order(memberId, request.toInput())
-        return ResponseEntity.ok(MakeCardOrderResponse.of(output))
+        return ResponseEntity.ok(MakeCardOrderResponse.from(output))
     }
 }

@@ -22,6 +22,6 @@ class JoinMemberController(
     ): ResponseEntity<JoinMemberResponse> {
         val output = joinMemberService.join(request.toInput())
         val uri = URI.create("/members/${output.id}")
-        return ResponseEntity.created(uri).body(JoinMemberResponse.of(output))
+        return ResponseEntity.created(uri).body(JoinMemberResponse.from(output))
     }
 }

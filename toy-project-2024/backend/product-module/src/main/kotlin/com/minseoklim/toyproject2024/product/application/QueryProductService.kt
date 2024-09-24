@@ -17,7 +17,7 @@ class QueryProductService(
         pageable: Pageable
     ): Page<QueryProductOutput> {
         val products = productRepository.findAllByMemberId(memberId, pageable)
-        return products.map { QueryProductOutput.of(it) }
+        return products.map { QueryProductOutput.from(it) }
     }
 
     fun get(
@@ -26,6 +26,6 @@ class QueryProductService(
     ): QueryProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
-        return QueryProductOutput.of(product)
+        return QueryProductOutput.from(product)
     }
 }

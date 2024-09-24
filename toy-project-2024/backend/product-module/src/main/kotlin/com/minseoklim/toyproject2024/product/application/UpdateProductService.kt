@@ -19,6 +19,6 @@ class UpdateProductService(
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)
         product.update(input.toEntity(product))
-        return UpdateProductOutput.of(product)
+        return UpdateProductOutput.from(product)
     }
 }

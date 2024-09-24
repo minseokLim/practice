@@ -20,6 +20,6 @@ class CheckOutVerifiedPaymentController(
         @Valid @RequestBody request: CheckOutVerifiedPaymentRequest
     ): ResponseEntity<CheckOutVerifiedPaymentResponse> {
         val output = checkOutVerifiedPaymentService.checkOut(memberId, request.toInput())
-        return ResponseEntity.ok(CheckOutVerifiedPaymentResponse.of(output))
+        return ResponseEntity.ok(CheckOutVerifiedPaymentResponse.from(output))
     }
 }

@@ -24,6 +24,6 @@ class UpdateProductController(
         @Valid @RequestBody request: UpdateProductRequest
     ): ResponseEntity<UpdateProductResponse> {
         val output = updateProductService.update(memberId, productId, request.toInput())
-        return ResponseEntity.ok(UpdateProductResponse.of(output))
+        return ResponseEntity.ok(UpdateProductResponse.from(output))
     }
 }

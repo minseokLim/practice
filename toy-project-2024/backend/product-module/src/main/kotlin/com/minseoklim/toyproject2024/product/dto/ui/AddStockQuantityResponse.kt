@@ -9,7 +9,7 @@ data class AddStockQuantityResponse private constructor(
     val stockQuantity: Int
 ) {
     companion object {
-        fun of(output: AddStockQuantityOutput): AddStockQuantityResponse {
+        fun from(output: AddStockQuantityOutput): AddStockQuantityResponse {
             return AddStockQuantityResponse(
                 id = output.id,
                 name = output.name,

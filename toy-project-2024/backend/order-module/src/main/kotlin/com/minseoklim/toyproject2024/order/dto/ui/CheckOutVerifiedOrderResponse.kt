@@ -10,13 +10,13 @@ data class CheckOutVerifiedOrderResponse private constructor(
     val shippingInfo: ShippingInfoResponse
 ) {
     companion object {
-        fun of(output: CheckOutVerifiedOrderOutput): CheckOutVerifiedOrderResponse {
+        fun from(output: CheckOutVerifiedOrderOutput): CheckOutVerifiedOrderResponse {
             return CheckOutVerifiedOrderResponse(
                 id = output.id,
                 orderName = output.orderName,
-                payment = PaymentResponse.of(output.payment),
-                orderProducts = output.orderProducts.map { OrderProductResponse.of(it) },
-                shippingInfo = ShippingInfoResponse.of(output.shippingInfo)
+                payment = PaymentResponse.from(output.payment),
+                orderProducts = output.orderProducts.map { OrderProductResponse.from(it) },
+                shippingInfo = ShippingInfoResponse.from(output.shippingInfo)
             )
         }
     }
@@ -27,7 +27,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
         val paymentUid: String
     ) {
         companion object {
-            fun of(output: CheckOutVerifiedOrderOutput.PaymentOutput): PaymentResponse {
+            fun from(output: CheckOutVerifiedOrderOutput.PaymentOutput): PaymentResponse {
                 return PaymentResponse(
                     id = output.id,
                     amount = output.amount,
@@ -42,7 +42,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
         val quantity: Int
     ) {
         companion object {
-            fun of(output: CheckOutVerifiedOrderOutput.OrderProductOutput): OrderProductResponse {
+            fun from(output: CheckOutVerifiedOrderOutput.OrderProductOutput): OrderProductResponse {
                 return OrderProductResponse(
                     productId = output.productId,
                     quantity = output.quantity
@@ -57,11 +57,11 @@ data class CheckOutVerifiedOrderResponse private constructor(
         val receiver: ReceiverResponse
     ) {
         companion object {
-            fun of(output: CheckOutVerifiedOrderOutput.ShippingInfoOutput): ShippingInfoResponse {
+            fun from(output: CheckOutVerifiedOrderOutput.ShippingInfoOutput): ShippingInfoResponse {
                 return ShippingInfoResponse(
                     shippingMessage = output.shippingMessage,
-                    address = AddressResponse.of(output.address),
-                    receiver = ReceiverResponse.of(output.receiver)
+                    address = AddressResponse.from(output.address),
+                    receiver = ReceiverResponse.from(output.receiver)
                 )
             }
         }
@@ -73,7 +73,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
         val zipCode: String
     ) {
         companion object {
-            fun of(output: CheckOutVerifiedOrderOutput.AddressOutput): AddressResponse {
+            fun from(output: CheckOutVerifiedOrderOutput.AddressOutput): AddressResponse {
                 return AddressResponse(
                     value = output.value,
                     detail = output.detail,
@@ -88,7 +88,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
         val phone: String
     ) {
         companion object {
-            fun of(output: CheckOutVerifiedOrderOutput.ReceiverOutput): ReceiverResponse {
+            fun from(output: CheckOutVerifiedOrderOutput.ReceiverOutput): ReceiverResponse {
                 return ReceiverResponse(
                     name = output.name,
                     phone = output.phone

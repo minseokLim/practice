@@ -25,7 +25,7 @@ class UpdateMemberController(
         @Valid @RequestBody request: UpdateMemberRequest
     ): ResponseEntity<UpdateMemberResponse> {
         val output = updateMemberService.update(id, request.toInput())
-        return ResponseEntity.ok(UpdateMemberResponse.of(output))
+        return ResponseEntity.ok(UpdateMemberResponse.from(output))
     }
 
     @PutMapping("/me")
@@ -34,6 +34,6 @@ class UpdateMemberController(
         @Valid @RequestBody request: UpdateMemberRequest
     ): ResponseEntity<UpdateMemberResponse> {
         val output = updateMemberService.update(id, request.toInput())
-        return ResponseEntity.ok(UpdateMemberResponse.of(output))
+        return ResponseEntity.ok(UpdateMemberResponse.from(output))
     }
 }

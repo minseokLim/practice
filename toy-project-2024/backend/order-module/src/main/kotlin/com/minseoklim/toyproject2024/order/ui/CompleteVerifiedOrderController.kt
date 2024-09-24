@@ -20,6 +20,6 @@ class CompleteVerifiedOrderController(
         @Valid @RequestBody request: CompleteVerifiedOrderRequest
     ): ResponseEntity<CompleteVerifiedOrderResponse> {
         val output = completeVerifiedOrderService.complete(memberId, request.orderId)
-        return ResponseEntity.ok(CompleteVerifiedOrderResponse.of(output))
+        return ResponseEntity.ok(CompleteVerifiedOrderResponse.from(output))
     }
 }

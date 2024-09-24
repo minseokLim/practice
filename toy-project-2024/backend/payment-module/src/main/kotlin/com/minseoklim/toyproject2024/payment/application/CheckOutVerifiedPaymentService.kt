@@ -16,6 +16,6 @@ class CheckOutVerifiedPaymentService(
         input: CheckOutVerifiedPaymentInput
     ): CheckOutVerifiedPaymentOutput {
         val verifiedPayment = paymentRepository.save(input.toEntity(memberId))
-        return CheckOutVerifiedPaymentOutput.of(verifiedPayment)
+        return CheckOutVerifiedPaymentOutput.from(verifiedPayment)
     }
 }

@@ -8,7 +8,7 @@ data class RegisterCardResponse private constructor(
     val issuerName: String
 ) {
     companion object {
-        fun of(output: RegisterCardOutput): RegisterCardResponse {
+        fun from(output: RegisterCardOutput): RegisterCardResponse {
             return RegisterCardResponse(
                 id = output.id,
                 maskedCardNumber = output.maskedCardNumber,

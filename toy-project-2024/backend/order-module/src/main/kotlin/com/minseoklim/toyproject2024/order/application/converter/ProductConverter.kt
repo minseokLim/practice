@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.order.domain.model.Product
 import com.minseoklim.toyproject2024.product.dto.application.QueryProductOutput
 
 object ProductConverter {
-    fun of(output: QueryProductOutput): Product {
+    fun from(output: QueryProductOutput): Product {
         return Product(
             id = output.id,
             name = output.name,

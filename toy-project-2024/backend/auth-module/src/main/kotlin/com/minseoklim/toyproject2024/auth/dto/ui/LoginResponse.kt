@@ -7,7 +7,7 @@ data class LoginResponse private constructor(
     val refreshToken: String
 ) {
     companion object {
-        fun of(output: LoginOutput): LoginResponse {
+        fun from(output: LoginOutput): LoginResponse {
             return LoginResponse(
                 accessToken = output.accessToken,
                 refreshToken = output.refreshToken

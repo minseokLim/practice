@@ -9,7 +9,7 @@ data class QueryPaymentResponse private constructor(
     val isCanceled: Boolean
 ) {
     companion object {
-        fun of(output: QueryPaymentOutput): QueryPaymentResponse {
+        fun from(output: QueryPaymentOutput): QueryPaymentResponse {
             return QueryPaymentResponse(
                 id = output.id,
                 amount = output.amount,

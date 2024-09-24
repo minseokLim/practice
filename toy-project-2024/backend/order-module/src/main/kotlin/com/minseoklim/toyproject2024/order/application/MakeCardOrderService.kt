@@ -26,7 +26,7 @@ class MakeCardOrderService(
         input: MakeCardOrderInput
     ): MakeCardOrderOutput {
         val productIds = input.orderProducts.map { it.productId }
-        val products = pessimisticQueryProductService.findAllByIds(productIds).map { ProductConverter.of(it) }
+        val products = pessimisticQueryProductService.findAllByIds(productIds).map { ProductConverter.from(it) }
 
         val orderName = OrderNameGenerator.generate(products)
         val order = orderRepository.save(input.toEntity(memberId = memberId, orderName = orderName))
@@ -39,6 +39,6 @@ class MakeCardOrderService(
         order.applyPaymentId(payment.id)
         order.changeToPreparing()
 
-        return MakeCardOrderOutput.of(order)
+        return MakeCardOrderOutput.from(order)
     }
 }

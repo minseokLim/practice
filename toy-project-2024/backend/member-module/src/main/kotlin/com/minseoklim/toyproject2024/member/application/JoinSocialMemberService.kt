@@ -16,6 +16,6 @@ class JoinSocialMemberService(
         attributes: Map<String, Any>
     ): JoinSocialMemberOutput {
         val member = memberRepository.save(socialType.toMemberEntity(attributes))
-        return JoinSocialMemberOutput.of(member)
+        return JoinSocialMemberOutput.from(member)
     }
 }

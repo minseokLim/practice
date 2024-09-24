@@ -17,12 +17,12 @@ class RoleTest {
     }
 
     @Test
-    fun of() {
+    fun from() {
         // given
         val role = Role.ADMIN
 
         // when
-        val result = Role.of(role.authority)
+        val result = Role.from(role.authority)
 
         // then
         assertThat(result).isEqualTo(role)

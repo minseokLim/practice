@@ -8,11 +8,11 @@ data class MakeCardOrderResponse private constructor(
     val shippingInfo: ShippingInfoResponse
 ) {
     companion object {
-        fun of(output: MakeCardOrderOutput): MakeCardOrderResponse {
+        fun from(output: MakeCardOrderOutput): MakeCardOrderResponse {
             return MakeCardOrderResponse(
                 id = output.id,
-                orderProducts = output.orderProducts.map { OrderProductResponse.of(it) },
-                shippingInfo = ShippingInfoResponse.of(output.shippingInfo)
+                orderProducts = output.orderProducts.map { OrderProductResponse.from(it) },
+                shippingInfo = ShippingInfoResponse.from(output.shippingInfo)
             )
         }
     }
@@ -22,7 +22,7 @@ data class MakeCardOrderResponse private constructor(
         val quantity: Int
     ) {
         companion object {
-            fun of(output: MakeCardOrderOutput.OrderProductOutput): OrderProductResponse {
+            fun from(output: MakeCardOrderOutput.OrderProductOutput): OrderProductResponse {
                 return OrderProductResponse(
                     productId = output.productId,
                     quantity = output.quantity
@@ -37,11 +37,11 @@ data class MakeCardOrderResponse private constructor(
         val receiver: ReceiverResponse
     ) {
         companion object {
-            fun of(output: MakeCardOrderOutput.ShippingInfoOutput): ShippingInfoResponse {
+            fun from(output: MakeCardOrderOutput.ShippingInfoOutput): ShippingInfoResponse {
                 return ShippingInfoResponse(
                     shippingMessage = output.shippingMessage,
-                    address = AddressResponse.of(output.address),
-                    receiver = ReceiverResponse.of(output.receiver)
+                    address = AddressResponse.from(output.address),
+                    receiver = ReceiverResponse.from(output.receiver)
                 )
             }
         }
@@ -53,7 +53,7 @@ data class MakeCardOrderResponse private constructor(
         val zipCode: String
     ) {
         companion object {
-            fun of(output: MakeCardOrderOutput.AddressOutput): AddressResponse {
+            fun from(output: MakeCardOrderOutput.AddressOutput): AddressResponse {
                 return AddressResponse(
                     value = output.value,
                     detail = output.detail,
@@ -68,7 +68,7 @@ data class MakeCardOrderResponse private constructor(
         val phone: String
     ) {
         companion object {
-            fun of(output: MakeCardOrderOutput.ReceiverOutput): ReceiverResponse {
+            fun from(output: MakeCardOrderOutput.ReceiverOutput): ReceiverResponse {
                 return ReceiverResponse(
                     name = output.name,
                     phone = output.phone

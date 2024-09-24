@@ -21,6 +21,6 @@ class QueryCardController(
         pageable: Pageable
     ): ResponseEntity<Page<QueryCardResponse>> {
         val outputs = queryCardService.list(memberId, pageable)
-        return ResponseEntity.ok(outputs.map { QueryCardResponse.of(it) })
+        return ResponseEntity.ok(outputs.map { QueryCardResponse.from(it) })
     }
 }

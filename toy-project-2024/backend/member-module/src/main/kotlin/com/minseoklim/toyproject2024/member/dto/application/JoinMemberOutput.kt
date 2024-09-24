@@ -16,7 +16,7 @@ data class JoinMemberOutput private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(member: Member): JoinMemberOutput {
+        fun from(member: Member): JoinMemberOutput {
             return JoinMemberOutput(
                 id = checkNotNull(member.id),
                 loginId = checkNotNull(member.loginId).value,

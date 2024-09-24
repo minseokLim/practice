@@ -16,6 +16,6 @@ class RegisterCardService(
         input: RegisterCardInput
     ): RegisterCardOutput {
         val card = cardRepository.save(input.toEntity(memberId))
-        return RegisterCardOutput.of(card)
+        return RegisterCardOutput.from(card)
     }
 }

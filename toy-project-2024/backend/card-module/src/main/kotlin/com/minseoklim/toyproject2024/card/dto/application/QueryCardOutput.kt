@@ -13,7 +13,7 @@ data class QueryCardOutput private constructor(
     val issuerName: String
 ) {
     companion object {
-        fun of(card: Card): QueryCardOutput {
+        fun from(card: Card): QueryCardOutput {
             return QueryCardOutput(
                 id = checkNotNull(card.id),
                 maskedCardNumber = card.cardNumber.maskedValue,

@@ -24,6 +24,6 @@ class RegisterProductController(
     ): ResponseEntity<RegisterProductResponse> {
         val output = registerProductService.register(memberId, request.toInput())
         val uri = URI.create("/products/${output.id}")
-        return ResponseEntity.created(uri).body(RegisterProductResponse.of(output))
+        return ResponseEntity.created(uri).body(RegisterProductResponse.from(output))
     }
 }

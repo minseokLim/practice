@@ -16,7 +16,7 @@ data class UpdateMemberOutput private constructor(
     val version: Long
 ) {
     companion object {
-        fun of(member: Member): UpdateMemberOutput {
+        fun from(member: Member): UpdateMemberOutput {
             return UpdateMemberOutput(
                 id = checkNotNull(member.id),
                 loginId = member.loginId?.value,

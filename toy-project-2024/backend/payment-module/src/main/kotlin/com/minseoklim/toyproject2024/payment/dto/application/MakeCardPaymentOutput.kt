@@ -10,7 +10,7 @@ data class MakeCardPaymentOutput private constructor(
     val isCanceled: Boolean
 ) {
     companion object {
-        fun of(cardPayment: CardPayment): MakeCardPaymentOutput {
+        fun from(cardPayment: CardPayment): MakeCardPaymentOutput {
             return MakeCardPaymentOutput(
                 id = checkNotNull(cardPayment.id),
                 cardId = cardPayment.cardId,

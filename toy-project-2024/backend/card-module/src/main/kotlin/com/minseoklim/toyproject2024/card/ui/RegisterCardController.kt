@@ -24,6 +24,6 @@ class RegisterCardController(
     ): ResponseEntity<RegisterCardResponse> {
         val output = registerCardService.register(memberId, request.toInput())
         val uri = URI.create("/cards/${output.id}")
-        return ResponseEntity.created(uri).body(RegisterCardResponse.of(output))
+        return ResponseEntity.created(uri).body(RegisterCardResponse.from(output))
     }
 }

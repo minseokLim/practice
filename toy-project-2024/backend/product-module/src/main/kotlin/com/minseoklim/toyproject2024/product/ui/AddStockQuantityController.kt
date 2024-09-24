@@ -24,6 +24,6 @@ class AddStockQuantityController(
         @Valid @RequestBody request: AddStockQuantityRequest
     ): ResponseEntity<AddStockQuantityResponse> {
         val output = addStockQuantityService.addStockQuantity(memberId, productId, request.toInput())
-        return ResponseEntity.ok(AddStockQuantityResponse.of(output))
+        return ResponseEntity.ok(AddStockQuantityResponse.from(output))
     }
 }

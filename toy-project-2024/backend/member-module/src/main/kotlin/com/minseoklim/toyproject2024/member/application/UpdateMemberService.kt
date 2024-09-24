@@ -18,6 +18,6 @@ class UpdateMemberService(
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.validateVersion(input.version)
         member.update(input.toEntity(member))
-        return UpdateMemberOutput.of(member)
+        return UpdateMemberOutput.from(member)
     }
 }

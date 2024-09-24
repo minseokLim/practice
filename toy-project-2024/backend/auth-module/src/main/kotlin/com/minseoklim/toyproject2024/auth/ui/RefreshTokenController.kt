@@ -18,6 +18,6 @@ class RefreshTokenController(
         @Valid @RequestBody request: RefreshTokenRequest
     ): ResponseEntity<RefreshTokenResponse> {
         val output = refreshTokenService.refreshToken(request.toInput())
-        return ResponseEntity.ok(RefreshTokenResponse.of(output))
+        return ResponseEntity.ok(RefreshTokenResponse.from(output))
     }
 }

@@ -13,11 +13,11 @@ data class QueryOrderOutput(
     val shippingInfo: ShippingInfoOutput
 ) {
     companion object {
-        fun of(order: Order): QueryOrderOutput {
+        fun from(order: Order): QueryOrderOutput {
             return QueryOrderOutput(
                 id = checkNotNull(order.id),
-                orderProducts = order.orderProducts.map { OrderProductOutput.of(it) },
-                shippingInfo = ShippingInfoOutput.of(order.shippingInfo)
+                orderProducts = order.orderProducts.map { OrderProductOutput.from(it) },
+                shippingInfo = ShippingInfoOutput.from(order.shippingInfo)
             )
         }
     }
@@ -27,7 +27,7 @@ data class QueryOrderOutput(
         val quantity: Int
     ) {
         companion object {
-            fun of(orderProduct: OrderProduct): OrderProductOutput {
+            fun from(orderProduct: OrderProduct): OrderProductOutput {
                 return OrderProductOutput(
                     productId = orderProduct.productId,
                     quantity = orderProduct.quantity
@@ -42,11 +42,11 @@ data class QueryOrderOutput(
         val receiver: ReceiverOutput
     ) {
         companion object {
-            fun of(shippingInfo: ShippingInfo): ShippingInfoOutput {
+            fun from(shippingInfo: ShippingInfo): ShippingInfoOutput {
                 return ShippingInfoOutput(
                     shippingMessage = shippingInfo.shippingMessage?.value,
-                    address = AddressOutput.of(shippingInfo.address),
-                    receiver = ReceiverOutput.of(shippingInfo.receiver)
+                    address = AddressOutput.from(shippingInfo.address),
+                    receiver = ReceiverOutput.from(shippingInfo.receiver)
                 )
             }
         }
@@ -58,7 +58,7 @@ data class QueryOrderOutput(
         val zipCode: String
     ) {
         companion object {
-            fun of(address: Address): AddressOutput {
+            fun from(address: Address): AddressOutput {
                 return AddressOutput(
                     value = TextEncryptUtil.decrypt(address.encryptedValue),
                     detail = TextEncryptUtil.decrypt(address.encryptedDetail),
@@ -73,7 +73,7 @@ data class QueryOrderOutput(
         val phone: String
     ) {
         companion object {
-            fun of(receiver: Receiver): ReceiverOutput {
+            fun from(receiver: Receiver): ReceiverOutput {
                 return ReceiverOutput(
                     name = TextEncryptUtil.decrypt(receiver.encryptedName),
                     phone = TextEncryptUtil.decrypt(receiver.encryptedPhone)

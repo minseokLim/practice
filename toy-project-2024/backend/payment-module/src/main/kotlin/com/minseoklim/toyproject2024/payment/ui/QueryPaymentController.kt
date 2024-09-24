@@ -19,6 +19,6 @@ class QueryPaymentController(
         pageable: Pageable
     ): ResponseEntity<Page<QueryPaymentResponse>> {
         val outputs = queryPaymentService.list(memberId, pageable)
-        return ResponseEntity.ok(outputs.map { QueryPaymentResponse.of(it) })
+        return ResponseEntity.ok(outputs.map { QueryPaymentResponse.from(it) })
     }
 }

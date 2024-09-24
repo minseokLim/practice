@@ -20,6 +20,6 @@ class MakeCardPaymentController(
         @Valid @RequestBody request: MakeCardPaymentRequest
     ): ResponseEntity<MakeCardPaymentResponse> {
         val output = makeCardPaymentService.make(memberId, request.toInput())
-        return ResponseEntity.ok(MakeCardPaymentResponse.of(output))
+        return ResponseEntity.ok(MakeCardPaymentResponse.from(output))
     }
 }

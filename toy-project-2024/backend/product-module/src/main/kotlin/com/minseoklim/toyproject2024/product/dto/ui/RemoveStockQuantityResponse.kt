@@ -9,7 +9,7 @@ data class RemoveStockQuantityResponse private constructor(
     val stockQuantity: Int
 ) {
     companion object {
-        fun of(output: RemoveStockQuantityOutput): RemoveStockQuantityResponse {
+        fun from(output: RemoveStockQuantityOutput): RemoveStockQuantityResponse {
             return RemoveStockQuantityResponse(
                 id = output.id,
                 name = output.name,
