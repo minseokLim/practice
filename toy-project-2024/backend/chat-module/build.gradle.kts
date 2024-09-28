@@ -31,6 +31,7 @@ dependencies {
 
     // module
     implementation(project(":common-module"))
+    implementation(project(":member-module"))
 
     testImplementation(project(":test-module"))
     testImplementation(testFixtures(project(":auth-module")))

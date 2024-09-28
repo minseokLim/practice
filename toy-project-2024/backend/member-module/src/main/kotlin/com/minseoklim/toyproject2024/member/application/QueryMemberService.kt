@@ -40,4 +40,9 @@ class QueryMemberService(
         val member = memberRepository.findBySocialTypeAndSocialId(socialType, socialId)
         return member?.let { QueryMemberOutput.from(it) }
     }
+
+    fun findAllByIds(ids: Collection<Int>): List<QueryMemberOutput> {
+        val members = memberRepository.findAllById(ids)
+        return members.map { QueryMemberOutput.from(it) }
+    }
 }
