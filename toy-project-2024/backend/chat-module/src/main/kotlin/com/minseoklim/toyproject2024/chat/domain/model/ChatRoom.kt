@@ -21,6 +21,9 @@ class ChatRoom(
 
     val creatorId: Int = creatorId
 
+    var lastMessageId: Long? = null
+        protected set
+
     fun inviteMember(memberId: Int) {
         chatRoomMembers.addMember(memberId)
     }
@@ -31,6 +34,12 @@ class ChatRoom(
 
     fun getMemberIds(): List<Int> {
         return chatRoomMembers.getMemberIds()
+    }
+
+    fun updateLastMessageId(messageId: Long) {
+        if (lastMessageId == null || checkNotNull(lastMessageId) < messageId) {
+            lastMessageId = messageId
+        }
     }
 
     final override fun equals(other: Any?): Boolean {

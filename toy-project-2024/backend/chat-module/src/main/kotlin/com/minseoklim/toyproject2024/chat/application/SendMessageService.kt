@@ -20,6 +20,7 @@ class SendMessageService(
     ) {
         val message = messageRepository.save(input.toEntity(memberId))
         val chatRoom = ChatServiceHelper.getChatRoom(chatRoomRepository, message.chatRoomId)
+        chatRoom.updateLastMessageId(checkNotNull(message.id))
 
         messageNotifier.notify(chatRoom.getMemberIds(), MessageDto.from(message))
     }

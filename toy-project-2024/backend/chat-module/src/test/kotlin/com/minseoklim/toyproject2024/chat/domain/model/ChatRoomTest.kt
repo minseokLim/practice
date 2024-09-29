@@ -42,6 +42,30 @@ class ChatRoomTest {
     }
 
     @Test
+    fun updateLastMessageId() {
+        // given
+        val chatRoom = ChatRoom(listOf(1, 2, 3), 1)
+
+        // when
+        chatRoom.updateLastMessageId(1L)
+
+        // then
+        assertThat(chatRoom.lastMessageId).isEqualTo(1L)
+
+        // when
+        chatRoom.updateLastMessageId(2L)
+
+        // then
+        assertThat(chatRoom.lastMessageId).isEqualTo(2L)
+
+        // when
+        chatRoom.updateLastMessageId(1L)
+
+        // then
+        assertThat(chatRoom.lastMessageId).isEqualTo(2L)
+    }
+
+    @Test
     fun equalsAndHashCode() {
         // given
         val chatRoom1 = ChatRoom(listOf(1, 2, 3), 1)
