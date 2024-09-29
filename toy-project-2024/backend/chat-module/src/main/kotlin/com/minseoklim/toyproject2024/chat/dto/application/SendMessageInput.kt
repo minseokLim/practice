@@ -4,12 +4,12 @@ import com.minseoklim.toyproject2024.chat.domain.model.Message
 
 data class SendMessageInput(
     val content: String,
-    val roomId: Long
+    val chatRoomId: Long
 ) {
     fun toEntity(memberId: Int): Message {
         return Message(
             content = content,
-            roomId = roomId,
+            chatRoomId = chatRoomId,
             memberId = memberId
         )
     }

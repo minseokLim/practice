@@ -5,7 +5,7 @@ import jakarta.persistence.Embeddable
 import java.util.Objects
 
 @Embeddable
-class RoomMember(
+class ChatRoomMember(
     val memberId: Int
 ) {
     final override fun equals(other: Any?): Boolean {

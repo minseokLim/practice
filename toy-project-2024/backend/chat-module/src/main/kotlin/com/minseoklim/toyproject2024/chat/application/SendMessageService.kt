@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
 import com.minseoklim.toyproject2024.chat.domain.repository.MessageRepository
-import com.minseoklim.toyproject2024.chat.domain.repository.RoomRepository
 import com.minseoklim.toyproject2024.chat.dto.application.MessageDto
 import com.minseoklim.toyproject2024.chat.dto.application.SendMessageInput
 import org.springframework.stereotype.Service
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SendMessageService(
     private val messageRepository: MessageRepository,
-    private val roomRepository: RoomRepository,
+    private val chatRoomRepository: ChatRoomRepository,
     private val messageNotifier: MessageNotifier
 ) {
     fun send(
@@ -19,8 +19,8 @@ class SendMessageService(
         input: SendMessageInput
     ) {
         val message = messageRepository.save(input.toEntity(memberId))
-        val room = ChatServiceHelper.getRoom(roomRepository, message.roomId)
+        val chatRoom = ChatServiceHelper.getChatRoom(chatRoomRepository, message.chatRoomId)
 
-        messageNotifier.notify(room.getMemberIds(), MessageDto.from(message))
+        messageNotifier.notify(chatRoom.getMemberIds(), MessageDto.from(message))
     }
 }

@@ -11,20 +11,20 @@ import jakarta.persistence.OrderColumn
 import java.util.Objects
 
 @Embeddable
-class RoomMembers(
+class ChatRoomMembers(
     memberIds: List<Int>
 ) {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-        name = "room_member",
-        joinColumns = [JoinColumn(name = "room_id")],
+        name = "chat_room_member",
+        joinColumns = [JoinColumn(name = "chat_room_id")],
         indexes = [Index(columnList = "member_id")]
     )
-    @OrderColumn(name = "room_member_idx")
-    private val values: MutableList<RoomMember> = memberIds.map { RoomMember(it) }.toMutableList()
+    @OrderColumn(name = "chat_room_member_idx")
+    private val values: MutableList<ChatRoomMember> = memberIds.map { ChatRoomMember(it) }.toMutableList()
 
     fun addMember(memberId: Int) {
-        values.add(RoomMember(memberId))
+        values.add(ChatRoomMember(memberId))
     }
 
     fun deleteMember(memberId: Int) {

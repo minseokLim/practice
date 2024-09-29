@@ -7,12 +7,12 @@ data class SendMessageRequest(
     @get:NotEmpty
     val content: String,
 
-    val roomId: Long
+    val chatRoomId: Long
 ) {
     fun toInput(): SendMessageInput {
         return SendMessageInput(
             content = content,
-            roomId = roomId
+            chatRoomId = chatRoomId
         )
     }
 }

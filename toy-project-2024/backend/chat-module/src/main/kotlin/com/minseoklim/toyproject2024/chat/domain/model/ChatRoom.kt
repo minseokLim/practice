@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class Room(
+class ChatRoom(
     memberIds: List<Int>,
     creatorId: Int
 ) : BaseTimeEntity() {
@@ -17,20 +17,20 @@ class Room(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    val roomMembers: RoomMembers = RoomMembers(memberIds)
+    val chatRoomMembers: ChatRoomMembers = ChatRoomMembers(memberIds)
 
     val creatorId: Int = creatorId
 
     fun inviteMember(memberId: Int) {
-        roomMembers.addMember(memberId)
+        chatRoomMembers.addMember(memberId)
     }
 
     fun leaveMember(memberId: Int) {
-        roomMembers.deleteMember(memberId)
+        chatRoomMembers.deleteMember(memberId)
     }
 
     fun getMemberIds(): List<Int> {
-        return roomMembers.getMemberIds()
+        return chatRoomMembers.getMemberIds()
     }
 
     final override fun equals(other: Any?): Boolean {

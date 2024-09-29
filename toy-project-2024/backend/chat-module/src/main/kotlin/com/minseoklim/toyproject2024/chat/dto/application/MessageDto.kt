@@ -6,7 +6,7 @@ import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 data class MessageDto private constructor(
     val id: Long,
     val content: String,
-    val roomId: Long,
+    val chatRoomId: Long,
     val memberId: Int,
     val isDeleted: Boolean
 ) {
@@ -15,7 +15,7 @@ data class MessageDto private constructor(
             return MessageDto(
                 id = checkNotNull(message.id),
                 content = TextEncryptUtil.decrypt(message.encryptedContent),
-                roomId = message.roomId,
+                chatRoomId = message.chatRoomId,
                 memberId = message.memberId,
                 isDeleted = message.isDeleted
             )

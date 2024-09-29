@@ -13,10 +13,10 @@ import jakarta.persistence.Index
 import jakarta.persistence.Table
 
 @Entity
-@Table(indexes = [Index(columnList = "room_id")])
+@Table(indexes = [Index(columnList = "chat_room_id")])
 class Message(
     content: String,
-    roomId: Long,
+    chatRoomId: Long,
     memberId: Int,
 ) : BaseTimeEntity() {
     @Id
@@ -25,7 +25,7 @@ class Message(
 
     val encryptedContent: String = TextEncryptUtil.encrypt(content)
 
-    val roomId: Long = roomId
+    val chatRoomId: Long = chatRoomId
 
     val memberId: Int = memberId
 

@@ -21,7 +21,7 @@ class MessageTest {
         // given
         val message = Message(
             content = "Hello, World!",
-            roomId = 1,
+            chatRoomId = 1,
             memberId = 1
         )
 
@@ -39,7 +39,7 @@ class MessageTest {
         // given
         val message = Message(
             content = "Hello, World!",
-            roomId = 1,
+            chatRoomId = 1,
             memberId = 1
         )
 
@@ -55,17 +55,17 @@ class MessageTest {
         // given
         val message1 = Message(
             content = "Hello, World!",
-            roomId = 1,
+            chatRoomId = 1,
             memberId = 1
         )
         val message2 = Message(
             content = "Hello, World!",
-            roomId = 1,
+            chatRoomId = 1,
             memberId = 1
         )
         val message3 = Message(
             content = "Hello, World!",
-            roomId = 1,
+            chatRoomId = 1,
             memberId = 2
         )
         ReflectionTestUtils.setField(message1, "id", 1L)

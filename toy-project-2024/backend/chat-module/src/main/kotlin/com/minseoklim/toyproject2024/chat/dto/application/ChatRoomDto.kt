@@ -1,23 +1,23 @@
 package com.minseoklim.toyproject2024.chat.dto.application
 
-import com.minseoklim.toyproject2024.chat.domain.model.Room
+import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
 
-data class RoomDto private constructor(
+data class ChatRoomDto private constructor(
     val id: Long,
     val members: List<MemberDto>,
     val creator: MemberDto
 ) {
     companion object {
         fun of(
-            room: Room,
+            chatRoom: ChatRoom,
             members: Collection<QueryMemberOutput>
-        ): RoomDto {
+        ): ChatRoomDto {
             val memberIdToName = members.associate { it.id to it.name }
-            return RoomDto(
-                id = checkNotNull(room.id),
-                members = room.getMemberIds().map { MemberDto(it, memberIdToName.getValue(it)) },
-                creator = MemberDto(room.creatorId, memberIdToName.getValue(room.creatorId))
+            return ChatRoomDto(
+                id = checkNotNull(chatRoom.id),
+                members = chatRoom.getMemberIds().map { MemberDto(it, memberIdToName.getValue(it)) },
+                creator = MemberDto(chatRoom.creatorId, memberIdToName.getValue(chatRoom.creatorId))
             )
         }
     }
