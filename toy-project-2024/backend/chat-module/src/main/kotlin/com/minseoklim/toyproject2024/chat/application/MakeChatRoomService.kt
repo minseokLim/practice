@@ -23,6 +23,6 @@ class MakeChatRoomService(
         val members = queryMemberService.findAllByIds(chatRoom.getMemberIds())
         chatRoomNotifier.notify(chatRoom.getMemberIds(), ChatRoomDto.of(chatRoom, members))
 
-        return MakeChatRoomOutput.from(chatRoom)
+        return MakeChatRoomOutput.of(chatRoom, members)
     }
 }
