@@ -7,9 +7,9 @@ class ChatRoomMemberTest {
     @Test
     fun equalsAndHashCode() {
         // given
-        val chatRoomMember1 = ChatRoomMember(1)
-        val chatRoomMember2 = ChatRoomMember(1)
-        val chatRoomMember3 = ChatRoomMember(2)
+        val chatRoomMember1 = ChatRoomMember(1, 1)
+        val chatRoomMember2 = ChatRoomMember(1, 1)
+        val chatRoomMember3 = ChatRoomMember(2, 1)
 
         // when, then
         assertThat(setOf(chatRoomMember1, chatRoomMember2, chatRoomMember3)).hasSize(2)

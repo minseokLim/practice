@@ -6,11 +6,12 @@ import java.util.Objects
 
 @Embeddable
 class ChatRoomMember(
-    val memberId: Int
+    val memberId: Int,
+    val lastReadMessageId: Long? = null
 ) {
     final override fun equals(other: Any?): Boolean {
-        return this.equalsForEmbeddable(other) { x, y -> x.memberId == y.memberId }
+        return this.equalsForEmbeddable(other) { x, y -> x.memberId == y.memberId && x.lastReadMessageId == y.lastReadMessageId }
     }
 
-    final override fun hashCode(): Int = Objects.hash(memberId)
+    final override fun hashCode(): Int = Objects.hash(memberId, lastReadMessageId)
 }

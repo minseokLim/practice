@@ -5,9 +5,9 @@ import jakarta.persistence.CollectionTable
 import jakarta.persistence.ElementCollection
 import jakarta.persistence.Embeddable
 import jakarta.persistence.FetchType
-import jakarta.persistence.Index
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.OrderColumn
+import jakarta.persistence.UniqueConstraint
 import java.util.Objects
 
 @Embeddable
@@ -18,7 +18,7 @@ class ChatRoomMembers(
     @CollectionTable(
         name = "chat_room_member",
         joinColumns = [JoinColumn(name = "chat_room_id")],
-        indexes = [Index(columnList = "member_id")]
+        uniqueConstraints = [UniqueConstraint(columnNames = ["member_id", "chat_room_id"])]
     )
     @OrderColumn(name = "chat_room_member_idx")
     private val values: MutableList<ChatRoomMember> = memberIds.map { ChatRoomMember(it) }.toMutableList()
@@ -29,6 +29,10 @@ class ChatRoomMembers(
 
     fun deleteMember(memberId: Int) {
         values.removeIf { it.memberId == memberId }
+    }
+
+    fun getChatRoomMembers(): List<ChatRoomMember> {
+        return values.toList()
     }
 
     fun getMemberIds(): List<Int> {

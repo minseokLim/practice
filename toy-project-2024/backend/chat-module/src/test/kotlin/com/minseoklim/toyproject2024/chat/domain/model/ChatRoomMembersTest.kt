@@ -29,6 +29,18 @@ class ChatRoomMembersTest {
     }
 
     @Test
+    fun getChatRoomMembers() {
+        // given
+        val chatRoomMembers = ChatRoomMembers(listOf(1, 2, 3))
+
+        // when
+        val members = chatRoomMembers.getChatRoomMembers()
+
+        // then
+        assertThat(members).contains(ChatRoomMember(1), ChatRoomMember(2), ChatRoomMember(3))
+    }
+
+    @Test
     fun getMemberIds() {
         // given
         val chatRoomMembers = ChatRoomMembers(listOf(1, 2, 3))
