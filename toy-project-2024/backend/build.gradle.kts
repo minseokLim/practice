@@ -78,7 +78,8 @@ subprojects {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
         // db
-        runtimeOnly("com.h2database:h2")
+        runtimeOnly("com.mysql:mysql-connector-j")
+        testRuntimeOnly("com.h2database:h2")
     }
 
     allOpen {
