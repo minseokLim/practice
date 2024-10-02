@@ -1,5 +1,7 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.domain.mapper.ChatMapper
+import com.minseoklim.toyproject2024.chat.domain.mapper.UnreadMessageCount
 import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.chat.domain.model.Message
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
@@ -15,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional
 class QueryChatRoomService(
     private val chatRoomRepository: ChatRoomRepository,
     private val queryMemberService: QueryMemberService,
-    private val messageRepository: MessageRepository
+    private val messageRepository: MessageRepository,
+    private val chatMapper: ChatMapper
 ) {
     fun list(memberId: Int): List<QueryChatRoomOutput> {
         val chatRooms = chatRoomRepository.findAllByMemberId(memberId)
@@ -25,8 +28,9 @@ class QueryChatRoomService(
 
         val members = getMembers(chatRooms)
         val lastMessages = getLastMessages(chatRooms)
+        val unreadMessageCounts = getUnreadMessageCounts(chatRooms, memberId)
 
-        return chatRooms.map { QueryChatRoomOutput.of(it, members, lastMessages) }
+        return chatRooms.map { QueryChatRoomOutput.of(it, members, lastMessages, unreadMessageCounts) }
     }
 
     private fun getMembers(chatRooms: List<ChatRoom>): List<QueryMemberOutput> {
@@ -41,5 +45,19 @@ class QueryChatRoomService(
         } else {
             messageRepository.findAllById(lastMessageIds)
         }
+    }
+
+    private fun getUnreadMessageCounts(
+        chatRooms: List<ChatRoom>,
+        memberId: Int
+    ): List<UnreadMessageCount> {
+        val params = chatRooms.map { chatRoom ->
+            mapOf(
+                "chatRoomId" to chatRoom.id,
+                "lastReadMessageId" to chatRoom.chatRoomMembers.getChatRoomMembers()
+                    .first { it.memberId == memberId }.lastReadMessageId
+            )
+        }
+        return chatMapper.selectUnreadMessageCounts(params)
     }
 }

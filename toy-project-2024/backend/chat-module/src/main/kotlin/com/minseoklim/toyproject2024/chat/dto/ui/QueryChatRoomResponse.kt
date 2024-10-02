@@ -7,7 +7,8 @@ data class QueryChatRoomResponse private constructor(
     val id: Long,
     val members: List<MemberResponse>,
     val creator: MemberResponse,
-    val lastMessage: MessageResponse?
+    val lastMessage: MessageResponse?,
+    val unreadMessageCount: Int
 ) {
     companion object {
         fun from(output: QueryChatRoomOutput): QueryChatRoomResponse {
@@ -15,7 +16,8 @@ data class QueryChatRoomResponse private constructor(
                 id = output.id,
                 members = output.members.map { MemberResponse.from(it) },
                 creator = MemberResponse.from(output.creator),
-                lastMessage = output.lastMessage?.let { MessageResponse.from(it) }
+                lastMessage = output.lastMessage?.let { MessageResponse.from(it) },
+                unreadMessageCount = output.unreadMessageCount
             )
         }
     }

@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.chat.dto.application
 
+import com.minseoklim.toyproject2024.chat.domain.mapper.UnreadMessageCount
 import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.chat.domain.model.Message
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
@@ -10,23 +11,29 @@ data class QueryChatRoomOutput private constructor(
     val id: Long,
     val members: List<MemberOutput>,
     val creator: MemberOutput,
-    val lastMessage: MessageOutput?
+    val lastMessage: MessageOutput?,
+    val unreadMessageCount: Int
 ) {
     companion object {
         fun of(
             chatRoom: ChatRoom,
             members: Collection<QueryMemberOutput>,
-            lastMessages: Collection<Message>
+            lastMessages: Collection<Message>,
+            unreadMessageCounts: Collection<UnreadMessageCount>
         ): QueryChatRoomOutput {
             val memberIdToName = members.associate { it.id to it.name }
             val messageIdToMessage = lastMessages.associateBy { it.id }
+            val chatRoomIdToUnreadMessageCount =
+                unreadMessageCounts.associate { it.chatRoomId to it.unreadMessageCount }
+
             val lastMessage = chatRoom.lastMessageId?.let { messageIdToMessage.getValue(it) }
 
             return QueryChatRoomOutput(
                 id = checkNotNull(chatRoom.id),
                 members = chatRoom.getMemberIds().map { MemberOutput(it, memberIdToName.getValue(it)) },
                 creator = MemberOutput(chatRoom.creatorId, memberIdToName.getValue(chatRoom.creatorId)),
-                lastMessage = lastMessage?.let { MessageOutput.from(it) }
+                lastMessage = lastMessage?.let { MessageOutput.from(it) },
+                unreadMessageCount = chatRoomIdToUnreadMessageCount[chatRoom.id] ?: 0
             )
         }
     }
