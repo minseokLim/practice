@@ -24,16 +24,23 @@
             COUNT(*) AS unread_message_count
         FROM
             message
-        <foreach collection="params" item="chatRoomMember" open="WHERE" separator=" OR ">
-            <choose>
-                <when test="chatRoomMember.lastReadMessageId != null">
-                    (chat_room_id = #{chatRoomMember.chatRoomId} AND id > #{chatRoomMember.lastReadMessageId})
-                </when>
-                <otherwise>
-                    chat_room_id = #{chatRoomMember.chatRoomId}
-                </otherwise>
-            </choose>
-        </foreach>
+        <choose>
+            <when test="params == null or params.isEmpty">
+                WHERE 1 != 1
+            </when>
+            <otherwise>
+                <foreach collection="params" item="chatRoomMember" open="WHERE" separator=" OR ">
+                    <choose>
+                        <when test="chatRoomMember.lastReadMessageId != null">
+                            (chat_room_id = #{chatRoomMember.chatRoomId} AND id > #{chatRoomMember.lastReadMessageId})
+                        </when>
+                        <otherwise>
+                            chat_room_id = #{chatRoomMember.chatRoomId}
+                        </otherwise>
+                    </choose>
+                </foreach>
+            </otherwise>
+        </choose>
         GROUP BY
             chat_room_id
     </select>
