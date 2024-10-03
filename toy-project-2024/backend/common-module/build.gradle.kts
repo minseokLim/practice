@@ -11,6 +11,9 @@ dependencies {
     implementation("org.springframework.session:spring-session-data-redis")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
+    // swagger
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("springdocOpenapiStarterWebmvcUiVersion")}")
+
     // log
     implementation("io.github.microutils:kotlin-logging-jvm:${property("kotlinLoggingJvmVersion")}")
 
