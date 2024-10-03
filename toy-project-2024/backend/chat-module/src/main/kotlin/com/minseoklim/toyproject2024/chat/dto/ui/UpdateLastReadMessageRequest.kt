@@ -4,10 +4,9 @@ import com.minseoklim.toyproject2024.chat.dto.application.UpdateLastReadMessageI
 
 data class UpdateLastReadMessageRequest(
     val chatRoomId: Long,
-    val memberId: Int,
     val lastReadMessageId: Long
 ) {
-    fun toInput(): UpdateLastReadMessageInput {
+    fun toInput(memberId: Int): UpdateLastReadMessageInput {
         return UpdateLastReadMessageInput(
             chatRoomId = chatRoomId,
             memberId = memberId,
