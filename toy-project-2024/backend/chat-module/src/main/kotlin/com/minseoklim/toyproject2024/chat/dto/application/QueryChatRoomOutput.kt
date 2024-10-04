@@ -10,7 +10,6 @@ import java.time.LocalDateTime
 data class QueryChatRoomOutput private constructor(
     val id: Long,
     val members: List<MemberOutput>,
-    val creator: MemberOutput,
     val lastMessage: MessageOutput?,
     val unreadMessageCount: Int
 ) {
@@ -27,11 +26,13 @@ data class QueryChatRoomOutput private constructor(
                 unreadMessageCounts.associate { it.chatRoomId to it.unreadMessageCount }
 
             val lastMessage = chatRoom.lastMessageId?.let { messageIdToMessage.getValue(it) }
+            val chatRoomMembers = chatRoom.chatRoomMembers.getChatRoomMembers().map {
+                MemberOutput(it.memberId, memberIdToName.getValue(it.memberId), it.lastReadMessageId)
+            }
 
             return QueryChatRoomOutput(
                 id = checkNotNull(chatRoom.id),
-                members = chatRoom.getMemberIds().map { MemberOutput(it, memberIdToName.getValue(it)) },
-                creator = MemberOutput(chatRoom.creatorId, memberIdToName.getValue(chatRoom.creatorId)),
+                members = chatRoomMembers,
                 lastMessage = lastMessage?.let { MessageOutput.from(it) },
                 unreadMessageCount = chatRoomIdToUnreadMessageCount[chatRoom.id] ?: 0
             )
@@ -40,7 +41,8 @@ data class QueryChatRoomOutput private constructor(
 
     data class MemberOutput(
         val id: Int,
-        val name: String
+        val name: String,
+        val lastReadMessageId: Long?
     )
 
     data class MessageOutput private constructor(

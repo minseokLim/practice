@@ -6,7 +6,6 @@ import java.time.LocalDateTime
 data class QueryChatRoomResponse private constructor(
     val id: Long,
     val members: List<MemberResponse>,
-    val creator: MemberResponse,
     val lastMessage: MessageResponse?,
     val unreadMessageCount: Int
 ) {
@@ -15,7 +14,6 @@ data class QueryChatRoomResponse private constructor(
             return QueryChatRoomResponse(
                 id = output.id,
                 members = output.members.map { MemberResponse.from(it) },
-                creator = MemberResponse.from(output.creator),
                 lastMessage = output.lastMessage?.let { MessageResponse.from(it) },
                 unreadMessageCount = output.unreadMessageCount
             )
@@ -24,13 +22,15 @@ data class QueryChatRoomResponse private constructor(
 
     data class MemberResponse private constructor(
         val id: Int,
-        val name: String
+        val name: String,
+        val lastReadMessageId: Long?
     ) {
         companion object {
             fun from(output: QueryChatRoomOutput.MemberOutput): MemberResponse {
                 return MemberResponse(
                     id = output.id,
-                    name = output.name
+                    name = output.name,
+                    lastReadMessageId = output.lastReadMessageId
                 )
             }
         }
