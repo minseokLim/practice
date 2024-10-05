@@ -32,7 +32,7 @@ class ChatRoomMembers(
     }
 
     fun getChatRoomMembers(): List<ChatRoomMember> {
-        return values.toList()
+        return values
     }
 
     fun getMemberIds(): List<Int> {

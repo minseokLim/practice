@@ -7,17 +7,6 @@
         <result property="unreadMessageCount" column="unread_message_count"/>
     </resultMap>
 
-    <update id="updateLastReadMessageId" parameterType="map">
-        UPDATE
-            chat_room_member
-        SET
-            last_read_message_id = #{lastReadMessageId}
-        WHERE
-            chat_room_id = #{chatRoomId}
-        AND
-            member_id = #{memberId}
-    </update>
-
     <select id="selectUnreadMessageCounts" parameterType="map" resultMap="UnreadMessageCount">
         SELECT
             chat_room_id,
