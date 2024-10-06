@@ -1,12 +1,12 @@
 package com.minseoklim.toyproject2024.common.config
 
 import com.minseoklim.toyproject2024.common.util.PasswordEncodeUtil
+import com.minseoklim.toyproject2024.common.util.Sha512PasswordEncoder
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.encrypt.Encryptors
 import org.springframework.security.crypto.encrypt.TextEncryptor
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -28,7 +28,7 @@ class EncryptionConfig(
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
+        return Sha512PasswordEncoder()
     }
 
     @Bean
