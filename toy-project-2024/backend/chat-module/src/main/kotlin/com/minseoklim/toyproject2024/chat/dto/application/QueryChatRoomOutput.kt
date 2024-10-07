@@ -1,10 +1,8 @@
 package com.minseoklim.toyproject2024.chat.dto.application
 
-import com.minseoklim.toyproject2024.chat.domain.mapper.UnreadMessageCount
 import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.chat.domain.model.Message
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
-import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
 import java.time.LocalDateTime
 
 data class QueryChatRoomOutput private constructor(
@@ -16,15 +14,10 @@ data class QueryChatRoomOutput private constructor(
     companion object {
         fun of(
             chatRoom: ChatRoom,
-            members: Collection<QueryMemberOutput>,
-            lastMessages: Collection<Message>,
-            unreadMessageCounts: Collection<UnreadMessageCount>
+            memberIdToName: Map<Int, String>,
+            messageIdToMessage: Map<Long, Message>,
+            chatRoomIdToUnreadMessageCount: Map<Long, Int>
         ): QueryChatRoomOutput {
-            val memberIdToName = members.associate { it.id to it.name }
-            val messageIdToMessage = lastMessages.associateBy { it.id }
-            val chatRoomIdToUnreadMessageCount =
-                unreadMessageCounts.associate { it.chatRoomId to it.unreadMessageCount }
-
             val lastMessage = chatRoom.lastMessageId?.let { messageIdToMessage.getValue(it) }
             val chatRoomMembers = chatRoom.chatRoomMembers.getChatRoomMembers().map {
                 MemberOutput(it.memberId, memberIdToName.getValue(it.memberId), it.lastReadMessageId)

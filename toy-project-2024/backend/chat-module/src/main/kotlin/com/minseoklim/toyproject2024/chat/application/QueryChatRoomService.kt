@@ -30,7 +30,18 @@ class QueryChatRoomService(
         val lastMessages = getLastMessages(chatRooms)
         val unreadMessageCounts = getUnreadMessageCounts(chatRooms, memberId)
 
-        return chatRooms.map { QueryChatRoomOutput.of(it, members, lastMessages, unreadMessageCounts) }
+        val memberIdToName = members.associate { it.id to it.name }
+        val messageIdToMessage = lastMessages.associateBy { checkNotNull(it.id) }
+        val chatRoomIdToUnreadMessageCount = unreadMessageCounts.associate { it.chatRoomId to it.unreadMessageCount }
+
+        return chatRooms.map {
+            QueryChatRoomOutput.of(
+                it,
+                memberIdToName,
+                messageIdToMessage,
+                chatRoomIdToUnreadMessageCount
+            )
+        }
     }
 
     private fun getMembers(chatRooms: List<ChatRoom>): List<QueryMemberOutput> {
