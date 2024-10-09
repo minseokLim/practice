@@ -21,7 +21,7 @@ class MakeChatRoomService(
     ): MakeChatRoomOutput {
         val chatRoom = chatRoomRepository.save(ChatRoom(memberIds = memberIds, creatorId = creatorId))
         val members = queryMemberService.findAllByIds(chatRoom.getMemberIds())
-        chatRoomNotifier.notify(chatRoom.getMemberIds(), ChatRoomDto.of(chatRoom, members))
+        chatRoomNotifier.notify(chatRoom.getMemberIds().filter { it != creatorId }, ChatRoomDto.of(chatRoom, members))
 
         return MakeChatRoomOutput.of(chatRoom, members)
     }
