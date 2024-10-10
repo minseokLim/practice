@@ -1,6 +1,9 @@
 package com.minseoklim.toyproject2024.chat.domain.model
 
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatNoException
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.springframework.test.util.ReflectionTestUtils
 
@@ -63,6 +66,22 @@ class ChatRoomTest {
 
         // then
         assertThat(chatRoom.lastMessageId).isEqualTo(2L)
+    }
+
+    @Test
+    fun checkAuthority() {
+        // given
+        val chatRoom = ChatRoom(listOf(1, 2, 3), 1)
+
+        // when, then
+        assertThatNoException().isThrownBy {
+            chatRoom.checkAuthority(1)
+        }
+
+        // when, then
+        assertThatThrownBy {
+            chatRoom.checkAuthority(4)
+        }.isInstanceOf(NoPermissionException::class.java)
     }
 
     @Test

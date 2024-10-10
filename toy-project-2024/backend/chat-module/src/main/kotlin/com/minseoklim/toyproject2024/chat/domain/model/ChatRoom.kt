@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.chat.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
 import jakarta.persistence.Entity
@@ -39,6 +40,12 @@ class ChatRoom(
     fun updateLastMessageId(messageId: Long) {
         if (lastMessageId == null || checkNotNull(lastMessageId) < messageId) {
             lastMessageId = messageId
+        }
+    }
+
+    fun checkAuthority(memberId: Int) {
+        if (memberId !in this.chatRoomMembers.getMemberIds()) {
+            throw NoPermissionException("NO_CHAT_ROOM_PERMISSION", "채팅방에 대한 권한이 없습니다.")
         }
     }
 
