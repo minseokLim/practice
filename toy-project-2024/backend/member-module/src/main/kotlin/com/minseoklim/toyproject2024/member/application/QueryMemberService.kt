@@ -45,4 +45,9 @@ class QueryMemberService(
         val members = memberRepository.findAllById(ids)
         return members.map { QueryMemberOutput.from(it) }
     }
+
+    fun findAllNotDeletedExceptId(id: Int): List<QueryMemberOutput> {
+        val members = memberRepository.findAllByIdIsNotAndIsDeleted(id, false)
+        return members.map { QueryMemberOutput.from(it) }
+    }
 }

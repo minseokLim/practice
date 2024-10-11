@@ -21,4 +21,9 @@ interface MemberRepository : JpaRepository<Member, Int>, QuerydslPredicateExecut
         socialType: SocialType,
         socialId: String
     ): Member?
+
+    fun findAllByIdIsNotAndIsDeleted(
+        id: Int,
+        isDeleted: Boolean
+    ): List<Member>
 }
