@@ -48,6 +48,16 @@ class ViewController(
         return "make-payment"
     }
 
+    @GetMapping("/chat-rooms")
+    fun chatRooms(): String {
+        return "chat-rooms"
+    }
+
+    @GetMapping("/make-chatting")
+    fun makeChatting(): String {
+        return "make-chatting"
+    }
+
     private fun getBaseUrl(request: HttpServletRequest): String {
         val scheme = request.scheme
         val serverName = request.serverName

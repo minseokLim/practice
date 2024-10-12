@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>채팅</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .chat-room-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .add-chat-room-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .add-chat-room-btn:hover {
+            background-color: #45a049;
+        }
+
+        .chat-room-list {
+            margin: 0;
+        }
+
+        .chat-room {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .chat-room:last-child {
+            border-bottom: none;
+        }
+
+        .chat-room-info {
+            flex-grow: 1;
+        }
+
+        .chat-room-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        .last-message {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .message-info {
+            text-align: right;
+        }
+
+        .unread-count {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: #fff;
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .unread-count:empty {
+            display: none;
+        }
+
+        .message-date {
+            display: block;
+            color: #999;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="chat-room-container">
+            <button id="add-chat-room-btn" class="add-chat-room-btn">Add Chat Room</button>
+            <div id="chat-room-list" class="chat-room-list">
+            </div>
+        </div>
+    </div>
+    <section th:insert="~{layout/jsImport::jsImport}"></section>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"
+            integrity="sha256-AOciuU28sfUgqBHuxFLWYRBH/fyKiX6sbolJQ7yt8J0=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        document.getElementById('add-chat-room-btn').addEventListener('click', openAddChatRoomWindow);
+
+        function openAddChatRoomWindow() {
+            window.open('/make-chatting', '채팅방 생성', 'width=500,height=600')
+        }
+
+        window.onload = function () {
+            getChatRoomList();
+            setStompClient();
+        };
+
+        function getChatRoomList() {
+            return requestToApi('/chat-rooms', 'GET', null, response => {
+                const memberInfo = getMemberInfo();
+
+                const chatRoomList = response.data;
+                const chatRoomListElement = document.getElementById('chat-room-list');
+                chatRoomListElement.innerHTML = '';
+                chatRoomList.forEach(chatRoom => {
+                    const chatRoomElement = document.createElement('div');
+                    chatRoomElement.classList.add('chat-room');
+
+                    const chatRoomName = chatRoom.members.filter(member => member.id !== memberInfo.id).map(member => member.name).join(', ');
+                    const lastMessage = chatRoom.lastMessage ? chatRoom.lastMessage.content : 'No message';
+                    const lastMessageDate = chatRoom.lastMessage ? chatRoom.lastMessage.createdDateTime : '';
+
+                    chatRoomElement.innerHTML = `
+                        <div class="chat-room-info">
+                            <h3 class="chat-room-name">${chatRoomName}</h3>
+                            <p class="last-message">${lastMessage}</p>
+                        </div>
+                        <div class="message-info">
+                            <span class="unread-count">${chatRoom.unreadMessageCount} unread</span>
+                            <span class="message-date">${lastMessageDate}</span>
+                        </div>
+                    `;
+                    chatRoomListElement.appendChild(chatRoomElement);
+                });
+            });
+        }
+
+        function setStompClient() {
+            return requestToApi('/websocket/token', 'POST', null, response => {
+                const stompClient = new StompJs.Client({
+                    brokerURL: convertToWebSocketURL(apiBaseUrl) + '/ws?token=' + response.data.token
+                });
+
+                stompClient.onConnect = (frame) => {
+                    console.log('Connected: ' + frame);
+                    stompClient.subscribe('/user/topic/notify-chat-room', (message) => {
+                        getChatRoomList();
+                    });
+                };
+
+                stompClient.onWebSocketError = (error) => {
+                    console.error('Error with websocket', error);
+                };
+
+                stompClient.onStompError = (frame) => {
+                    console.error('Broker reported error: ' + frame.headers['message']);
+                    console.error('Additional details: ' + frame.body);
+                };
+
+                stompClient.activate();
+            });
+        }
+    </script>
+</body>
+</html>
