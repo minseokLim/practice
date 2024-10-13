@@ -30,7 +30,7 @@ class QueryMessageService(
             limit = PageRequest.of(0, size)
         )
 
-        val members = queryMemberService.findAllByIds(chatRoom.chatRoomMembers.getMemberIds())
+        val members = queryMemberService.findAllByIds(chatRoom.getMemberIds())
         val memberIdToName = members.associate { it.id to it.name }
 
         return messages.map { QueryMessageOutput.of(it, memberIdToName) }

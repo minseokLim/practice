@@ -45,7 +45,7 @@ class QueryChatRoomService(
     }
 
     private fun getMembers(chatRooms: List<ChatRoom>): List<QueryMemberOutput> {
-        val memberIds = chatRooms.flatMap { it.chatRoomMembers.getMemberIds() }.toSet()
+        val memberIds = chatRooms.flatMap { it.getMemberIds() }.toSet()
         return queryMemberService.findAllByIds(memberIds)
     }
 

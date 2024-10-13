@@ -29,7 +29,7 @@ class SendMessageService(
         val memberIdToName = members.associate { it.id to it.name }
 
         messageNotifier.notify(
-            chatRoom.getMemberIds().filter { it != memberId },
+            chatRoom.getMemberIds(),
             MessageDto.of(message, memberIdToName)
         )
 

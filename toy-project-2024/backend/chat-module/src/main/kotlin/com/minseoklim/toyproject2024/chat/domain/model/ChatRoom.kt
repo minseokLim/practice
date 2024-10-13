@@ -44,7 +44,7 @@ class ChatRoom(
     }
 
     fun checkAuthority(memberId: Int) {
-        if (memberId !in this.chatRoomMembers.getMemberIds()) {
+        if (memberId !in this.getMemberIds()) {
             throw NoPermissionException("NO_CHAT_ROOM_PERMISSION", "채팅방에 대한 권한이 없습니다.")
         }
     }

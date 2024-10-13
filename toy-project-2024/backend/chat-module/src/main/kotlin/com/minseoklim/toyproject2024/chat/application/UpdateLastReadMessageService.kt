@@ -17,9 +17,8 @@ class UpdateLastReadMessageService(
         val chatRoomMember = chatRoom.chatRoomMembers.getChatRoomMembers().first { it.memberId == input.memberId }
         chatRoomMember.updateLastReadMessageId(input.lastReadMessageId)
 
-        val notifyTargetMemberIds = chatRoom.chatRoomMembers.getMemberIds().filter { it != input.memberId }
         lastReadMessageNotifier.notify(
-            notifyTargetMemberIds,
+            chatRoom.getMemberIds(),
             LastReadMessageDto(input.chatRoomId, input.memberId, input.lastReadMessageId)
         )
     }

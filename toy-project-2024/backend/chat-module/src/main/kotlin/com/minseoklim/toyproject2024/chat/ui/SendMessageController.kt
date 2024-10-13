@@ -13,7 +13,7 @@ import java.security.Principal
 class SendMessageController(
     private val sendMessageService: SendMessageService
 ) {
-    @MessageMapping("/chat-rooms/{chatRoomId}/send-message")
+    @MessageMapping("/chat-rooms/{chatRoomId}/messages")
     fun send(
         principal: Principal,
         @DestinationVariable chatRoomId: Long,

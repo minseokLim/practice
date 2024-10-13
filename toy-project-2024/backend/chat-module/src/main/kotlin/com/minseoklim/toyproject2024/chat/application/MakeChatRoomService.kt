@@ -24,7 +24,7 @@ class MakeChatRoomService(
         val memberIdToName = members.associate { it.id to it.name }
 
         chatRoomNotifier.notify(
-            chatRoom.getMemberIds().filter { it != creatorId },
+            chatRoom.getMemberIds(),
             ChatRoomDto.of(chatRoom, memberIdToName)
         )
 
