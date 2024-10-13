@@ -5,6 +5,7 @@ import com.minseoklim.toyproject2024.chat.dto.ui.QueryMessageResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController
 class QueryMessageController(
     private val queryMessageService: QueryMessageService
 ) {
-    @GetMapping("/messages")
+    @GetMapping("/chat-rooms/{chatRoomId}/messages")
     fun list(
         @MemberId memberId: Int,
-        @RequestParam chatRoomId: Long,
+        @PathVariable chatRoomId: Long,
         @RequestParam(required = false, defaultValue = Long.MAX_VALUE.toString()) cursorId: Long,
         @RequestParam size: Int
     ): ResponseEntity<List<QueryMessageResponse>> {

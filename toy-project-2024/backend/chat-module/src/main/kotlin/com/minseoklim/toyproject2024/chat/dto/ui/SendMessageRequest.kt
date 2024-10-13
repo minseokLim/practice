@@ -5,11 +5,9 @@ import jakarta.validation.constraints.NotEmpty
 
 data class SendMessageRequest(
     @get:NotEmpty
-    val content: String,
-
-    val chatRoomId: Long
+    val content: String
 ) {
-    fun toInput(): SendMessageInput {
+    fun toInput(chatRoomId: Long): SendMessageInput {
         return SendMessageInput(
             content = content,
             chatRoomId = chatRoomId
