@@ -5,6 +5,7 @@ import com.minseoklim.toyproject2024.chat.domain.repository.MessageRepository
 import com.minseoklim.toyproject2024.chat.dto.application.MessageDto
 import com.minseoklim.toyproject2024.chat.dto.application.SendMessageInput
 import com.minseoklim.toyproject2024.chat.dto.application.SendMessageOutput
+import com.minseoklim.toyproject2024.member.application.QueryMemberService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 class SendMessageService(
     private val messageRepository: MessageRepository,
     private val chatRoomRepository: ChatRoomRepository,
+    private val queryMemberService: QueryMemberService,
     private val messageNotifier: MessageNotifier
 ) {
     fun send(
@@ -23,8 +25,14 @@ class SendMessageService(
         val chatRoom = ChatServiceHelper.getChatRoom(chatRoomRepository, message.chatRoomId)
         chatRoom.updateLastMessageId(checkNotNull(message.id))
 
-        messageNotifier.notify(chatRoom.getMemberIds().filter { it != memberId }, MessageDto.from(message))
+        val members = queryMemberService.findAllByIds(chatRoom.getMemberIds())
+        val memberIdToName = members.associate { it.id to it.name }
 
-        return SendMessageOutput.from(message)
+        messageNotifier.notify(
+            chatRoom.getMemberIds().filter { it != memberId },
+            MessageDto.of(message, memberIdToName)
+        )
+
+        return SendMessageOutput.of(message, memberIdToName)
     }
 }
