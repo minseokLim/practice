@@ -33,6 +33,7 @@ subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -47,5 +48,33 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+}
+
+project(":catalogs") {
+    dependencies {
+        implementation(project(":commons"))
+    }
+}
+
+project(":orders") {
+    dependencies {
+        implementation(project(":commons"))
+    }
+}
+
+project(":shipments") {
+    dependencies {
+        implementation(project(":commons"))
+    }
+}
+
+project(":modular-monoliths") {
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
+
+        implementation(project(":catalogs"))
+        implementation(project(":orders"))
+        implementation(project(":shipments"))
     }
 }
