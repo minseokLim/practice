@@ -138,6 +138,10 @@
                 chatRoomList.forEach(chatRoom => {
                     const chatRoomElement = document.createElement('div');
                     chatRoomElement.classList.add('chat-room');
+                    chatRoomElement.style.cursor = 'pointer';
+                    chatRoomElement.addEventListener('click', () => {
+                        window.location.href = '/chat-rooms/' + chatRoom.id;
+                    });
 
                     const chatRoomName = chatRoom.members.filter(member => member.id !== memberInfo.id).map(member => member.name).join(', ');
                     const lastMessage = chatRoom.lastMessage ? chatRoom.lastMessage.content : 'No message';
@@ -167,6 +171,9 @@
                 stompClient.onConnect = (frame) => {
                     console.log('Connected: ' + frame);
                     stompClient.subscribe('/user/topic/notify-chat-room', (message) => {
+                        getChatRoomList();
+                    });
+                    stompClient.subscribe('/user/topic/notify-message', (message) => {
                         getChatRoomList();
                     });
                 };

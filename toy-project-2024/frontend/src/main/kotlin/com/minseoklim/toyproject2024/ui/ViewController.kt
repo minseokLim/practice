@@ -6,6 +6,7 @@ import org.springframework.security.crypto.encrypt.TextEncryptor
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import java.net.URLEncoder
 
 @Controller
@@ -51,6 +52,15 @@ class ViewController(
     @GetMapping("/chat-rooms")
     fun chatRooms(): String {
         return "chat-rooms"
+    }
+
+    @GetMapping("/chat-rooms/{chatRoomId}")
+    fun chatRoom(
+        @PathVariable chatRoomId: Long,
+        model: Model
+    ): String {
+        model.addAttribute("chatRoomId", chatRoomId)
+        return "chat-room"
     }
 
     @GetMapping("/make-chatting")
