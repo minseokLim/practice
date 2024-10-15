@@ -39,6 +39,7 @@ dependencies {
     testImplementation(project(":test-module"))
     testImplementation(testFixtures(project(":auth-module")))
     testImplementation(testFixtures(project(":member-module")))
+    testImplementation(testFixtures(project(":websocket-module")))
 
     testFixturesImplementation(project(":test-module"))
 }

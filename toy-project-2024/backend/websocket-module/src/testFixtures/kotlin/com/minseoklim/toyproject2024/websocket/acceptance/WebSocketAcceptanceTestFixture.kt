@@ -6,6 +6,7 @@ import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.http.HttpStatus
+import org.springframework.messaging.converter.MappingJackson2MessageConverter
 import org.springframework.messaging.simp.stomp.StompSession
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter
 import org.springframework.web.socket.client.standard.StandardWebSocketClient
@@ -27,6 +28,8 @@ object WebSocketAcceptanceTestFixture {
     ): StompSession {
         val client = StandardWebSocketClient()
         val stompClient = WebSocketStompClient(client)
+        stompClient.messageConverter = MappingJackson2MessageConverter()
+
         val handler = object : StompSessionHandlerAdapter() {}
 
         return stompClient.connectAsync("ws://localhost:$port/ws?token=$token", handler).join()
