@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>토큰 발급</title>
+</head>
+<body>
+    <h1 id="token"></h1>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVu5U46BmdTD6avNcq9JQDzyFMce5USRA",
+            authDomain: "toy-project-2024-621cb.firebaseapp.com",
+            projectId: "toy-project-2024-621cb",
+            storageBucket: "toy-project-2024-621cb.appspot.com",
+            messagingSenderId: "258677921235",
+            appId: "1:258677921235:web:97183416ef7d4818e78b26",
+            measurementId: "G-1BTZNVVFFD"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        Notification.requestPermission().then((permission) => {
+            console.log('permission:', permission);
+            if (permission === 'granted') {
+                messaging.getToken({vapidKey: 'BFLFe1NkGXeLIOx9vO6jYRGtySvM9mLMnI1TMH2EN0l6V3tJICwKztxJMRPBnuGs1ioFTs8Ohpgm0_idccyRRU4'})
+                    .then((currentToken) => {
+                        if (currentToken) {
+                            document.getElementById('token').innerText = currentToken;
+                        } else {
+                            alert('No registration token available. Request permission to generate one.');
+                        }
+                    });
+            } else {
+                alert('Unable to get permission to notify.');
+            }
+        });
+    </script>
+</body>
+</html>

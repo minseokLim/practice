@@ -68,6 +68,11 @@ class ViewController(
         return "make-chatting"
     }
 
+    @GetMapping("/firebase-token")
+    fun getFirebaseToken(): String {
+        return "firebase-token"
+    }
+
     private fun getBaseUrl(request: HttpServletRequest): String {
         val scheme = request.scheme
         val serverName = request.serverName
