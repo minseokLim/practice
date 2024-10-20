@@ -73,6 +73,11 @@ class ViewController(
         return "firebase-token"
     }
 
+    @GetMapping("/register-push-token")
+    fun registerPushToken(): String {
+        return "register-push-token"
+    }
+
     private fun getBaseUrl(request: HttpServletRequest): String {
         val scheme = request.scheme
         val serverName = request.serverName
