@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface PushTokenRepository : JpaRepository<PushToken, Int> {
     fun findByToken(token: String): PushToken?
+
+    fun findByMemberId(memberId: Int): PushToken?
 }
