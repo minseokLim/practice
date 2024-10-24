@@ -78,7 +78,7 @@ subprojects {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
         // db
-        runtimeOnly("com.mysql:mysql-connector-j")
+        runtimeOnly("org.postgresql:postgresql")
         testRuntimeOnly("com.h2database:h2")
     }
 

@@ -2,9 +2,9 @@ spring:
   application:
     name: toy-project-2024-backend
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/toy2024
-    username: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/toy2024
+    username: postgres
     password: password
     hikari:
       minimum-idle: 10
