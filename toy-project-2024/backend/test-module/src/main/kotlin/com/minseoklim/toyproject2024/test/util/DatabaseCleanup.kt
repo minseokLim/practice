@@ -26,9 +26,14 @@ class DatabaseCleanup(
 
     private fun extractTableNames(): List<String> {
         return jdbcTemplate.query("SHOW TABLES") { resultSet, _ -> resultSet.getString(1) }
+            .filter { it !in h2gisTables }
     }
 
     private fun execute(query: String) {
         jdbcTemplate.update(query, emptyMap<String, Any>())
+    }
+
+    companion object {
+        private val h2gisTables = listOf("geometry_columns", "spatial_ref_sys")
     }
 }

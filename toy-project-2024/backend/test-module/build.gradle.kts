@@ -13,4 +13,5 @@ dependencies {
     implementation("io.rest-assured:rest-assured")
     implementation("io.mockk:mockk:${property("mockkVersion")}")
     implementation("com.github.codemonstur:embedded-redis:${property("embeddedRedisVersion")}")
+    implementation("org.orbisgis:h2gis:${property("h2gisVersion")}")
 }

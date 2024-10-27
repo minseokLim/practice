@@ -18,7 +18,8 @@ import org.locationtech.jts.geom.PrecisionModel
 @Entity
 @Table(
     uniqueConstraints = [UniqueConstraint(columnNames = ["member_id"])],
-    indexes = [Index(columnList = "coordinate")] // using GIST(coordinate)
+    // using GIST(coordinate) for spatial index
+    indexes = [Index(columnList = "coordinate")]
 )
 class Location(
     latitude: Double,
@@ -35,7 +36,10 @@ class Location(
 
     val memberId: Int = memberId
 
-    fun setCoordinate(latitude: Double, longitude: Double) {
+    fun setCoordinate(
+        latitude: Double,
+        longitude: Double
+    ) {
         this.coordinate = geometryFactory.createPoint(Coordinate(longitude, latitude))
     }
 
