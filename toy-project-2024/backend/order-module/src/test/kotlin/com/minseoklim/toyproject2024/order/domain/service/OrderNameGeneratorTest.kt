@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.order.domain.service
 
 import com.minseoklim.toyproject2024.order.domain.model.Product
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class OrderNameGeneratorTest {
@@ -20,7 +20,7 @@ class OrderNameGeneratorTest {
         val result1 = OrderNameGenerator.generate(products1)
 
         // then
-        assertEquals("상품1", result1)
+        assertThat(result1).isEqualTo("상품1")
 
         // given
         val products2 = listOf(
@@ -31,6 +31,6 @@ class OrderNameGeneratorTest {
 
         val result2 = OrderNameGenerator.generate(products2)
 
-        assertEquals("상품1 외 2종", result2)
+        assertThat(result2).isEqualTo("상품1 외 2종")
     }
 }

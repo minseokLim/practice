@@ -2,7 +2,8 @@ package com.minseoklim.toyproject2024.order.domain.service
 
 import com.minseoklim.toyproject2024.order.domain.model.OrderProduct
 import com.minseoklim.toyproject2024.order.domain.model.Product
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.Test
 
 class TotalAmountCalculatorTest {
@@ -24,6 +25,16 @@ class TotalAmountCalculatorTest {
         val result = TotalAmountCalculator.calculate(orderProducts, products)
 
         // then
-        assertEquals(14000, result)
+        assertThat(result).isEqualTo(14000)
+
+        // when, then
+        assertThatIllegalArgumentException().isThrownBy {
+            TotalAmountCalculator.calculate(emptyList(), products)
+        }
+
+        // when, then
+        assertThatIllegalArgumentException().isThrownBy {
+            TotalAmountCalculator.calculate(orderProducts, emptyList())
+        }
     }
 }
