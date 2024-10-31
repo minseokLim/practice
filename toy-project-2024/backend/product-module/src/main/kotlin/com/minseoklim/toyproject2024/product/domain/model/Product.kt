@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.product.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
@@ -45,17 +46,17 @@ class Product(
 
     fun addStockQuantity(increment: Int) {
         if (increment <= 0) {
-            throw BadRequestException("INVALID_INCREMENT", "재고 수량을 0 이하로 늘릴 수 없습니다.")
+            throw BadRequestException(ErrorCode.INVALID_INCREMENT)
         }
         this.stockQuantity = StockQuantity(this.stockQuantity.value + increment)
     }
 
     fun removeStockQuantity(decrement: Int) {
         if (decrement <= 0) {
-            throw BadRequestException("INVALID_DECREMENT", "재고 수량을 0 이하로 줄일 수 없습니다.")
+            throw BadRequestException(ErrorCode.INVALID_DECREMENT)
         }
         if (this.stockQuantity.value - decrement < 0) {
-            throw BadRequestException("OUT_OF_STOCK", "재고 수량이 부족합니다.")
+            throw BadRequestException(ErrorCode.OUT_OF_STOCK)
         }
         this.stockQuantity = StockQuantity(this.stockQuantity.value - decrement)
     }
@@ -66,7 +67,7 @@ class Product(
 
     fun checkAuthority(memberId: Int) {
         if (this.memberId != memberId) {
-            throw NoPermissionException("NO_PRODUCT_PERMISSION", "상품에 대한 권한이 없습니다.")
+            throw NoPermissionException(ErrorCode.NO_PRODUCT_PERMISSION)
         }
     }
 

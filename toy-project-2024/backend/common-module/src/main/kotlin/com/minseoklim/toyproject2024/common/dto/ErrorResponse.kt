@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.common.dto
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.CommonException
 
 data class ErrorResponse(
@@ -8,7 +9,7 @@ data class ErrorResponse(
 ) {
     companion object {
         fun from(e: CommonException): ErrorResponse {
-            return ErrorResponse(e.code, e.message)
+            return ErrorResponse(e.code.name, e.message)
         }
     }
 }

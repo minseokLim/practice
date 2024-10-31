@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.notification.application
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.notification.domain.repository.NotificationRepository
 import com.minseoklim.toyproject2024.notification.domain.repository.PushTokenRepository
@@ -19,7 +20,7 @@ class SendNotificationService(
         input: SendNotificationInput
     ) {
         val token = pushTokenRepository.findByMemberId(memberId)
-            ?: throw BadRequestException("PUSH_TOKEN_NOT_FOUND", "푸시 토큰을 찾을 수 없습니다.")
+            ?: throw BadRequestException(ErrorCode.PUSH_TOKEN_NOT_FOUND)
         notificationRepository.save(input.toEntity(memberId))
 
         val pushRequest = PushApi.PushRequest(

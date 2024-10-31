@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.websocket.infra
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.websocket.domain.service.TokenParser
 import io.jsonwebtoken.JwtException
@@ -22,7 +23,7 @@ class JwtWebSocketTokenParser(
             val claims = jwtParser.parseSignedClaims(token).payload
             return claims.subject
         } catch (e: JwtException) {
-            throw BadRequestException("INVALID_TOKEN", "유효하지 않은 토큰입니다.")
+            throw BadRequestException(ErrorCode.INVALID_TOKEN)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.common.util
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.QuerydslUtil.and
 import com.querydsl.core.types.Predicate
@@ -12,7 +13,7 @@ abstract class FilterParser {
             return Expressions.TRUE
         }
         if (!filterRegex.matches(filter)) {
-            throw BadRequestException("INVALID_FILTER_FORMAT", "유효하지 않은 필터 형식입니다.")
+            throw BadRequestException(ErrorCode.INVALID_FILTER_FORMAT)
         }
 
         val predicates = filter.removePrefix("[").removeSuffix("]").split(",")

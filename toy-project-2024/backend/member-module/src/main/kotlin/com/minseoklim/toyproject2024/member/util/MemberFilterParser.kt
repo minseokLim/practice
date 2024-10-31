@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.member.util
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.ConsistentHashUtil
 import com.minseoklim.toyproject2024.common.util.FilterParser
@@ -46,7 +47,7 @@ object MemberFilterParser : FilterParser() {
             }
 
             "isDeleted" -> member.isDeleted equal value.toBoolean()
-            else -> throw BadRequestException("INVALID_FILTER_KEY", "유효하지 않은 필터 키입니다.")
+            else -> throw BadRequestException(ErrorCode.INVALID_FILTER_KEY)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.payment.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.NoPermissionException
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.hashCodeForEntity
@@ -44,7 +45,7 @@ abstract class Payment(
 
     fun checkAuthority(memberId: Int) {
         if (this.memberId != memberId) {
-            throw NoPermissionException("NO_PAYMENT_PERMISSION", "결제에 대한 권한이 없습니다.")
+            throw NoPermissionException(ErrorCode.NO_PAYMENT_PERMISSION)
         }
     }
 

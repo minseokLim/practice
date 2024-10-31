@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.member.domain.model
 
 import com.minseoklim.toyproject2024.common.domain.BaseTimeEntity
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
 import com.minseoklim.toyproject2024.common.util.EventPublisher
 import com.minseoklim.toyproject2024.common.util.JpaEqualityUtil.equalsForEntity
@@ -70,7 +71,7 @@ class Member(
 
     fun addRole(role: Role) {
         if (memberRoles.getRoles().contains(role)) {
-            throw BadRequestException("ROLE_DUPLICATED", "이미 등록된 권한입니다.")
+            throw BadRequestException(ErrorCode.ROLE_DUPLICATED)
         }
         memberRoles.addRole(role)
     }
@@ -78,7 +79,7 @@ class Member(
     fun deleteRole(role: Role) {
         memberRoles.deleteRole(role)
         if (memberRoles.getRoles().isEmpty()) {
-            throw BadRequestException("ROLE_REQUIRED", "최소 1개 이상의 권한은 필수입니다.")
+            throw BadRequestException(ErrorCode.ROLE_REQUIRED)
         }
     }
 
@@ -91,7 +92,7 @@ class Member(
         socialId: String
     ) {
         if (socialLinks.getSocialLinks().map { it.socialType }.contains(socialType)) {
-            throw BadRequestException("SOCIAL_LINK_DUPLICATED", "이미 연동된 소셜 계정입니다.")
+            throw BadRequestException(ErrorCode.SOCIAL_LINK_DUPLICATED)
         }
         socialLinks.addSocialLink(socialType, socialId)
     }
@@ -99,7 +100,7 @@ class Member(
     fun deleteSocialLink(socialType: SocialType) {
         socialLinks.deleteSocialLink(socialType)
         if (loginId == null && socialLinks.getSocialLinks().isEmpty()) {
-            throw BadRequestException("SOCIAL_LINK_REQUIRED", "로그인 ID가 없는 경우, 1개 이상의 소셜 계정 연동은 필수입니다.")
+            throw BadRequestException(ErrorCode.SOCIAL_LINK_REQUIRED)
         }
     }
 
@@ -109,10 +110,10 @@ class Member(
 
     fun update(other: Member) {
         if (loginId != null && other.password == null) {
-            throw BadRequestException("PASSWORD_REQUIRED", "로그인 ID가 있는 경우, 비밀번호는 필수입니다.")
+            throw BadRequestException(ErrorCode.PASSWORD_REQUIRED)
         }
         if (loginId == null && other.password != null) {
-            throw BadRequestException("PASSWORD_NOT_ALLOWED", "로그인 ID가 없는 경우, 비밀번호는 허용되지 않습니다.")
+            throw BadRequestException(ErrorCode.PASSWORD_NOT_ALLOWED)
         }
         password = other.password
         name = other.name

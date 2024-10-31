@@ -1,5 +1,6 @@
 package com.minseoklim.toyproject2024.order.application
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.NotFoundException
 import com.minseoklim.toyproject2024.order.domain.model.Order
 import com.minseoklim.toyproject2024.order.domain.model.OrderProduct
@@ -15,7 +16,7 @@ object OrderServiceHelper {
         orderId: Int
     ): Order {
         return orderRepository.findById(orderId)
-            .orElseThrow { throw NotFoundException("ORDER_NOT_FOUND", "찾을 수 없는 주문 정보입니다.") }
+            .orElseThrow { throw NotFoundException(ErrorCode.ORDER_NOT_FOUND) }
     }
 
     fun removeStockQuantity(

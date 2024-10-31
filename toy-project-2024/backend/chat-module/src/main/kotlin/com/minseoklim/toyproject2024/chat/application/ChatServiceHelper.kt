@@ -2,6 +2,7 @@ package com.minseoklim.toyproject2024.chat.application
 
 import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.NotFoundException
 
 object ChatServiceHelper {
@@ -10,6 +11,6 @@ object ChatServiceHelper {
         chatRoomId: Long
     ): ChatRoom {
         return chatRoomRepository.findById(chatRoomId)
-            .orElseThrow { NotFoundException("ROOM_NOT_FOUND", "찾을 수 없는 채팅 방입니다.") }
+            .orElseThrow { NotFoundException(ErrorCode.ROOM_NOT_FOUND) }
     }
 }

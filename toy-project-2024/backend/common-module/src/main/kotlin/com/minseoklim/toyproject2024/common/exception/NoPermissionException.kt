@@ -1,6 +1,7 @@
 package com.minseoklim.toyproject2024.common.exception
 
+import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
+
 class NoPermissionException(
-    code: String,
-    message: String
-) : CommonException(code, message)
+    code: ErrorCode
+) : CommonException(code)
