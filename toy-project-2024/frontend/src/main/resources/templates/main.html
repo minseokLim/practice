@@ -91,6 +91,7 @@
                     displayLinkButtons(memberInfo);
                     displayUnlinkButtons(memberInfo);
                     setStompClient();
+                    registerLocation();
                 });
         };
 
@@ -221,6 +222,20 @@
                 };
 
                 stompClient.activate();
+            });
+        }
+
+        function registerLocation() {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                requestToApi('/locations', 'PUT', {
+                    latitude: latitude,
+                    longitude: longitude
+                }, response => {
+                    console.log('위치 정보가 등록되었습니다.');
+                });
             });
         }
     </script>
