@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":card-module"))
     implementation(project(":chat-module"))
     implementation(project(":common-module"))
+    implementation(project(":feed-module"))
     implementation(project(":location-module"))
     implementation(project(":member-module"))
     implementation(project(":notification-module"))
