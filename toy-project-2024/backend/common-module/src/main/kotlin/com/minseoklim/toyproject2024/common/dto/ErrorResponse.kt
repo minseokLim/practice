@@ -1,6 +1,5 @@
 package com.minseoklim.toyproject2024.common.dto
 
-import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.CommonException
 
 data class ErrorResponse(
