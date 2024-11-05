@@ -1,1 +1,0 @@
-org.springframework.boot.env.EnvironmentPostProcessor=com.minseoklim.toyproject2024.notification.config.NotificationEnvironmentPostProcessor
