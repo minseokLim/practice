@@ -29,5 +29,6 @@ enum class ErrorCode(
     INVALID_INCREMENT("재고 수량을 0 이하로 늘릴 수 없습니다."),
     INVALID_DECREMENT("재고 수량을 0 이하로 줄일 수 없습니다."),
     OUT_OF_STOCK("재고 수량이 부족합니다."),
-    NO_PRODUCT_PERMISSION("상품에 대한 권한이 없습니다.")
+    NO_PRODUCT_PERMISSION("상품에 대한 권한이 없습니다."),
+    INVALID_FEED_FIELD("유효하지 않은 피드 필드입니다."),
 }

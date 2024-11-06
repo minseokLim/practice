@@ -4,6 +4,7 @@ enum class FeedType {
     TEXT,
     IMAGE,
     VIDEO,
+    AUDIO,
     PDF,
     DOC,
     YOUTUBE
