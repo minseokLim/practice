@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 class DeleteMemberService(
     private val memberRepository: MemberRepository
 ) {
-    fun delete(id: Int) {
+    fun delete(id: Long) {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         member.delete()
     }

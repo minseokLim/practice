@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.chat.dto.application.ChatRoomDto
 
 interface ChatRoomNotifier {
     fun notify(
-        memberIds: Collection<Int>,
+        memberIds: Collection<Long>,
         chatRoom: ChatRoomDto
     )
 }

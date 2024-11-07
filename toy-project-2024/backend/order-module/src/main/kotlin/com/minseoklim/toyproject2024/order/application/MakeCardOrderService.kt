@@ -22,7 +22,7 @@ class MakeCardOrderService(
     private val makeCardPaymentService: MakeCardPaymentService
 ) {
     fun order(
-        memberId: Int,
+        memberId: Long,
         input: MakeCardOrderInput
     ): MakeCardOrderOutput {
         val productIds = input.orderProducts.map { it.productId }

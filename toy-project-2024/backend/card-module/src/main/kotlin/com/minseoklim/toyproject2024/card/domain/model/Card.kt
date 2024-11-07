@@ -20,11 +20,11 @@ class Card(
     birth: String,
     pwd2digit: String,
     issuerName: String,
-    memberId: Int
+    memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     val cardNumber: CardNumber = CardNumber(cardNumber)
 
@@ -36,12 +36,12 @@ class Card(
 
     val issuerName: IssuerName = IssuerName(issuerName)
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     var isDeleted: Boolean = false
         protected set
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (this.memberId != memberId) {
             throw NoPermissionException(ErrorCode.NO_CARD_PERMISSION)
         }

@@ -42,7 +42,7 @@ object MemberAcceptanceTestFixture {
 
     fun `회원 조회 요청`(
         accessToken: String,
-        id: Int
+        id: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.get("/members/$id", accessToken)
     }
@@ -54,7 +54,7 @@ object MemberAcceptanceTestFixture {
 
     fun `회원 수정 요청`(
         accessToken: String,
-        id: Int,
+        id: Long,
         request: Map<String, Any?>
     ): ExtractableResponse<Response> {
         return RequestUtil.put("/members/$id", accessToken, request)
@@ -71,7 +71,7 @@ object MemberAcceptanceTestFixture {
 
     fun `회원 탈퇴 요청`(
         accessToken: String,
-        id: Int
+        id: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.delete("/members/$id", accessToken)
     }

@@ -16,7 +16,7 @@ class MakeCardOrderController(
 ) {
     @PostMapping("/card-orders")
     fun order(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: MakeCardOrderRequest
     ): ResponseEntity<MakeCardOrderResponse> {
         val output = makeCardOrderService.order(memberId, request.toInput())

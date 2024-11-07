@@ -7,7 +7,7 @@ data class RegisterProductInput(
     val price: Long,
     val stockQuantity: Int
 ) {
-    fun toEntity(memberId: Int): Product {
+    fun toEntity(memberId: Long): Product {
         return Product(
             name = name,
             price = price,

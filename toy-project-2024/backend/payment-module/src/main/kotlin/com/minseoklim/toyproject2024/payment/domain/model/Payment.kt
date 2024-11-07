@@ -26,24 +26,24 @@ import jakarta.persistence.UniqueConstraint
 abstract class Payment(
     amount: Long,
     productName: String,
-    memberId: Int
+    memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     val amount: Amount = Amount(amount)
 
     val productName: ProductName = ProductName(productName)
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     val paymentUid: PaymentUid = PaymentUid()
 
     var isCanceled: Boolean = false
         protected set
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (this.memberId != memberId) {
             throw NoPermissionException(ErrorCode.NO_PAYMENT_PERMISSION)
         }

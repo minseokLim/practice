@@ -15,7 +15,7 @@ data class QueryMessageOutput private constructor(
     companion object {
         fun of(
             message: Message,
-            memberIdToName: Map<Int, String>
+            memberIdToName: Map<Long, String>
         ): QueryMessageOutput {
             return QueryMessageOutput(
                 id = checkNotNull(message.id),
@@ -29,7 +29,7 @@ data class QueryMessageOutput private constructor(
     }
 
     data class MemberOutput(
-        val id: Int,
+        val id: Long,
         val name: String
     )
 }

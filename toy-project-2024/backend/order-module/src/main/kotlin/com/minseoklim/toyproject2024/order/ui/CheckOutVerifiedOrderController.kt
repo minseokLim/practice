@@ -16,7 +16,7 @@ class CheckOutVerifiedOrderController(
 ) {
     @PostMapping("/verified-orders")
     fun checkOut(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: CheckOutVerifiedOrderRequest
     ): ResponseEntity<CheckOutVerifiedOrderResponse> {
         val output = checkOutVerifiedOrderService.checkOut(memberId, request.toInput())

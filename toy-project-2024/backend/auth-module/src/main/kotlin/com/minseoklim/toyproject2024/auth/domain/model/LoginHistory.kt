@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 
 @Entity
 class LoginHistory(
-    val memberId: Int,
+    val memberId: Long,
     val tokenId: String,
     val clientIp: String,
     val userAgent: String,
@@ -24,7 +24,7 @@ class LoginHistory(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 ) {
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntity(other) { x, y -> x.id == y.id }

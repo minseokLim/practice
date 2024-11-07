@@ -15,7 +15,7 @@ class SendNotificationController(
 ) {
     @PostMapping("/notifications")
     fun send(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: SendNotificationRequest
     ): ResponseEntity<Unit> {
         sendNotificationService.send(memberId, request.toInput())

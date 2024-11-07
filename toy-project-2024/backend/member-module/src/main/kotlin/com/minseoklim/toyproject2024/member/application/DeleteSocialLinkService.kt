@@ -11,7 +11,7 @@ class DeleteSocialLinkService(
     private val memberRepository: MemberRepository
 ) {
     fun deleteSocialLink(
-        id: Int,
+        id: Long,
         socialType: SocialType
     ) {
         val member = MemberServiceHelper.getMember(memberRepository, id)

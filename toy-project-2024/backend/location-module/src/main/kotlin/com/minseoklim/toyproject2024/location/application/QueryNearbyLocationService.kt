@@ -13,7 +13,7 @@ class QueryNearbyLocationService(
     private val queryMemberService: QueryMemberService
 ) {
     fun list(
-        memberId: Int,
+        memberId: Long,
         radius: Int
     ): List<QueryNearbyLocationOutput> {
         val location = locationRepository.findByMemberId(memberId) ?: return emptyList()

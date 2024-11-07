@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 interface LoginNotifier {
     fun notifyLogin(
-        memberId: Int,
+        memberId: Long,
         clientIp: String,
         userAgent: String,
         loginDateTime: LocalDateTime

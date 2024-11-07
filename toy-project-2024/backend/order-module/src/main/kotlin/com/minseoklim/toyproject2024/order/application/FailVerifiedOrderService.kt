@@ -15,8 +15,8 @@ class FailVerifiedOrderService(
     private val addStockQuantityService: AddStockQuantityService
 ) {
     fun fail(
-        memberId: Int,
-        orderId: Int
+        memberId: Long,
+        orderId: Long
     ) {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)

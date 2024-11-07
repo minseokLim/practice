@@ -16,7 +16,7 @@ class CompleteVerifiedOrderController(
 ) {
     @PostMapping("/complete-verified-order")
     fun complete(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: CompleteVerifiedOrderRequest
     ): ResponseEntity<CompleteVerifiedOrderResponse> {
         val output = completeVerifiedOrderService.complete(memberId, request.orderId)

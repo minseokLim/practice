@@ -36,7 +36,7 @@ class OAuth2AuthenticationSuccessHandler(
         val userAgent = request.getUserAgent()
         loginHistoryRepository.save(
             LoginHistory(
-                memberId = authentication.name.toInt(),
+                memberId = authentication.name.toLong(),
                 tokenId = token.id,
                 clientIp = clientIp,
                 userAgent = userAgent,
@@ -44,7 +44,7 @@ class OAuth2AuthenticationSuccessHandler(
                 loginDateTime = loginDateTime
             )
         )
-        loginNotifier.notifyLogin(authentication.name.toInt(), clientIp, userAgent, loginDateTime)
+        loginNotifier.notifyLogin(authentication.name.toLong(), clientIp, userAgent, loginDateTime)
 
         val encodedAccessToken = URLEncoder.encode(token.accessToken, Charsets.UTF_8)
         val encodedRefreshToken = URLEncoder.encode(token.refreshToken, Charsets.UTF_8)

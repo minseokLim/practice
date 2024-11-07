@@ -18,7 +18,7 @@ data class QueryNearbyLocationResponse private constructor(
     }
 
     data class MemberResponse private constructor(
-        val id: Int,
+        val id: Long,
         val name: String
     ) {
         companion object {

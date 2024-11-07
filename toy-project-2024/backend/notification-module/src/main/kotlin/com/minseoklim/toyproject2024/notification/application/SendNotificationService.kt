@@ -16,7 +16,7 @@ class SendNotificationService(
     private val pushApi: PushApi
 ) {
     fun send(
-        memberId: Int,
+        memberId: Long,
         input: SendNotificationInput
     ) {
         val token = pushTokenRepository.findByMemberId(memberId)

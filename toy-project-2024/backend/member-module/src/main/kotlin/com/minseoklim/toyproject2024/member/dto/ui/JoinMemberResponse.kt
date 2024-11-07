@@ -5,7 +5,7 @@ import com.minseoklim.toyproject2024.member.domain.model.SocialType
 import com.minseoklim.toyproject2024.member.dto.application.JoinMemberOutput
 
 data class JoinMemberResponse private constructor(
-    val id: Int,
+    val id: Long,
     val loginId: String,
     val name: String,
     val email: String,

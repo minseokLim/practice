@@ -15,11 +15,11 @@ import jakarta.persistence.UniqueConstraint
 @Table(indexes = [Index(columnList = "member_id")], uniqueConstraints = [UniqueConstraint(columnNames = ["token"])])
 class PushToken(
     val token: String,
-    val memberId: Int
+    val memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntity(other) { x, y -> x.id != null && x.id == y.id }

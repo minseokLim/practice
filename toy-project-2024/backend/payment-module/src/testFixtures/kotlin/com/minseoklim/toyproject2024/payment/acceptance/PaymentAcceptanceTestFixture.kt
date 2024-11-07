@@ -31,7 +31,7 @@ object PaymentAcceptanceTestFixture {
 
     fun `결제 취소 요청`(
         accessToken: String,
-        paymentId: Int
+        paymentId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.post("/cancel-payments/$paymentId", accessToken)
     }

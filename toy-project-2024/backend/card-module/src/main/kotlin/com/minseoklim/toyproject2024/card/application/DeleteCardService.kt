@@ -10,8 +10,8 @@ class DeleteCardService(
     private val cardRepository: CardRepository
 ) {
     fun delete(
-        memberId: Int,
-        cardId: Int
+        memberId: Long,
+        cardId: Long
     ) {
         val card = CardServiceHelper.getCard(cardRepository, cardId)
         card.checkAuthority(memberId)

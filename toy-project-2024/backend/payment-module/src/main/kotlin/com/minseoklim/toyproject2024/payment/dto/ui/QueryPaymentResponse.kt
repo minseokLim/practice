@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.payment.dto.ui
 import com.minseoklim.toyproject2024.payment.dto.application.QueryPaymentOutput
 
 data class QueryPaymentResponse private constructor(
-    val id: Int,
+    val id: Long,
     val amount: Long,
     val productName: String,
     val isCanceled: Boolean

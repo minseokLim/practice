@@ -18,12 +18,12 @@ class LogoutService(
         accessTokenDbCheckFlagActivator.activateAccessTokenDbCheckFlag(extractMemberId(input.accessToken))
     }
 
-    fun logoutAll(memberId: Int) {
+    fun logoutAll(memberId: Long) {
         deleteTokenService.deleteAllToken(memberId)
         accessTokenDbCheckFlagActivator.activateAccessTokenDbCheckFlag(memberId)
     }
 
-    private fun extractMemberId(accessToken: String): Int {
-        return tokenParser.extractAuthentication(accessToken).name.toInt()
+    private fun extractMemberId(accessToken: String): Long {
+        return tokenParser.extractAuthentication(accessToken).name.toLong()
     }
 }

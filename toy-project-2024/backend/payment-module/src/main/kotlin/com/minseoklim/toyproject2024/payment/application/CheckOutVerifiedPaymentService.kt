@@ -12,7 +12,7 @@ class CheckOutVerifiedPaymentService(
     private val paymentRepository: PaymentRepository
 ) {
     fun checkOut(
-        memberId: Int,
+        memberId: Long,
         input: CheckOutVerifiedPaymentInput
     ): CheckOutVerifiedPaymentOutput {
         val verifiedPayment = paymentRepository.save(input.toEntity(memberId))

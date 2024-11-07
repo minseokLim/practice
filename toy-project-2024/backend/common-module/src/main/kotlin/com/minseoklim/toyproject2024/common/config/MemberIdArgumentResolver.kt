@@ -20,7 +20,7 @@ class MemberIdArgumentResolver : HandlerMethodArgumentResolver {
         mavContainer: ModelAndViewContainer?,
         webRequest: NativeWebRequest,
         binderFactory: WebDataBinderFactory?
-    ): Int {
-        return SecurityContextHolder.getContext().authentication.name.toInt()
+    ): Long {
+        return SecurityContextHolder.getContext().authentication.name.toLong()
     }
 }

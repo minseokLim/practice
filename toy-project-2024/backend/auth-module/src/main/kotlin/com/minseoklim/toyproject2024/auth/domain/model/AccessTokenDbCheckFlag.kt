@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 @RedisHash("access_token_db_check_flag")
 data class AccessTokenDbCheckFlag(
     @Id
-    val memberId: Int,
+    val memberId: Long,
 
     @TimeToLive(unit = TimeUnit.MILLISECONDS)
     val timeToLive: Long

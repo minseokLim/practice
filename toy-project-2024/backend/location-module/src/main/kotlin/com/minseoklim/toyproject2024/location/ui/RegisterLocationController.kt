@@ -15,7 +15,7 @@ class RegisterLocationController(
 ) {
     @PutMapping("/locations")
     fun register(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: RegisterLocationRequest
     ): ResponseEntity<Unit> {
         registerLocationService.register(memberId, request.toInput())

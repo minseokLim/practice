@@ -8,16 +8,16 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Lock
 import org.springframework.data.jpa.repository.Query
 
-interface ProductRepository : JpaRepository<Product, Int> {
+interface ProductRepository : JpaRepository<Product, Long> {
     fun findAllByMemberId(
-        memberId: Int,
+        memberId: Long,
         pageable: Pageable
     ): Page<Product>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    fun findAllByIdIn(ids: Collection<Int>): List<Product>
+    fun findAllByIdIn(ids: Collection<Long>): List<Product>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("SELECT p FROM Product p WHERE p.id = :id")
-    fun findByIdForUpdate(id: Int): Product?
+    fun findByIdForUpdate(id: Long): Product?
 }

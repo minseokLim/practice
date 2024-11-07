@@ -16,7 +16,7 @@ class UpdateLastReadMessageController(
 ) {
     @PostMapping("/chat-rooms/{chatRoomId}/last-read-message")
     fun update(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @PathVariable chatRoomId: Long,
         @Valid @RequestBody request: UpdateLastReadMessageRequest
     ): ResponseEntity<Unit> {

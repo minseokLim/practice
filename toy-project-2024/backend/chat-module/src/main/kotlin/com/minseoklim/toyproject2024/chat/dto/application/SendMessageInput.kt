@@ -6,7 +6,7 @@ data class SendMessageInput(
     val content: String,
     val chatRoomId: Long
 ) {
-    fun toEntity(memberId: Int): Message {
+    fun toEntity(memberId: Long): Message {
         return Message(
             content = content,
             chatRoomId = chatRoomId,

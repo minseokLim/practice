@@ -8,7 +8,7 @@ import com.minseoklim.toyproject2024.product.domain.repository.ProductRepository
 object ProductServiceHelper {
     fun getProduct(
         productRepository: ProductRepository,
-        productId: Int
+        productId: Long
     ): Product {
         return productRepository.findById(productId)
             .orElseThrow { NotFoundException(ErrorCode.PRODUCT_NOT_FOUND) }
@@ -16,7 +16,7 @@ object ProductServiceHelper {
 
     fun getProductForUpdate(
         productRepository: ProductRepository,
-        productId: Int
+        productId: Long
     ): Product {
         return productRepository.findByIdForUpdate(productId)
             ?: throw NotFoundException(ErrorCode.PRODUCT_NOT_FOUND)

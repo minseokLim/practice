@@ -8,7 +8,7 @@ import com.minseoklim.toyproject2024.common.exception.NotFoundException
 object CardServiceHelper {
     fun getCard(
         cardRepository: CardRepository,
-        cardId: Int
+        cardId: Long
     ): Card {
         return cardRepository.findById(cardId)
             .orElseThrow { NotFoundException(ErrorCode.CARD_NOT_FOUND) }

@@ -9,10 +9,10 @@ import com.minseoklim.toyproject2024.order.domain.model.ShippingInfo
 data class MakeCardOrderInput(
     val orderProducts: List<OrderProductInput>,
     val shippingInfo: ShippingInfoInput,
-    val cardId: Int
+    val cardId: Long
 ) {
     fun toEntity(
-        memberId: Int,
+        memberId: Long,
         orderName: String
     ): Order {
         return Order(
@@ -24,7 +24,7 @@ data class MakeCardOrderInput(
     }
 
     data class OrderProductInput(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         fun toEmbeddable(): OrderProduct {

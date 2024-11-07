@@ -15,7 +15,7 @@ class FailVerifiedOrderController(
 ) {
     @PostMapping("/fail-verified-order")
     fun fail(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: FailVerifiedOrderRequest
     ): ResponseEntity<Unit> {
         failVerifiedOrderService.fail(memberId, request.orderId)

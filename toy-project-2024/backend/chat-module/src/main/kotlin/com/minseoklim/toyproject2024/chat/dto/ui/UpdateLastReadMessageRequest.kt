@@ -6,7 +6,7 @@ data class UpdateLastReadMessageRequest(
     val lastReadMessageId: Long
 ) {
     fun toInput(
-        memberId: Int,
+        memberId: Long,
         chatRoomId: Long
     ): UpdateLastReadMessageInput {
         return UpdateLastReadMessageInput(

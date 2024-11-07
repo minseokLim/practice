@@ -16,7 +16,7 @@ class QueryOrderController(
 ) {
     @GetMapping("/orders")
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         pageable: Pageable
     ): ResponseEntity<Page<QueryOrderResponse>> {
         val outputs = queryOrderService.list(memberId, pageable)
@@ -25,8 +25,8 @@ class QueryOrderController(
 
     @GetMapping("/orders/{orderId}")
     fun get(
-        @MemberId memberId: Int,
-        @PathVariable orderId: Int
+        @MemberId memberId: Long,
+        @PathVariable orderId: Long
     ): ResponseEntity<QueryOrderResponse> {
         val output = queryOrderService.get(memberId, orderId)
         return ResponseEntity.ok(QueryOrderResponse.from(output))

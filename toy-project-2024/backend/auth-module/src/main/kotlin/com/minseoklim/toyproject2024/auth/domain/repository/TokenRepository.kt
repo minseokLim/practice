@@ -4,5 +4,5 @@ import com.minseoklim.toyproject2024.auth.domain.model.Token
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface TokenRepository : JpaRepository<Token, String> {
-    fun findAllByMemberId(memberId: Int): List<Token>
+    fun findAllByMemberId(memberId: Long): List<Token>
 }

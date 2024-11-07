@@ -16,7 +16,7 @@ class MakeCardPaymentController(
 ) {
     @PostMapping("/card-payments")
     fun make(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: MakeCardPaymentRequest
     ): ResponseEntity<MakeCardPaymentResponse> {
         val output = makeCardPaymentService.make(memberId, request.toInput())

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.querydsl.QuerydslPredicateExecutor
 
-interface MemberRepository : JpaRepository<Member, Int>, QuerydslPredicateExecutor<Member> {
+interface MemberRepository : JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
     fun findByLoginIdValue(loginId: String): Member?
 
     fun countByLoginIdValue(loginId: String): Int
@@ -23,7 +23,7 @@ interface MemberRepository : JpaRepository<Member, Int>, QuerydslPredicateExecut
     ): Member?
 
     fun findAllByIdIsNotAndIsDeleted(
-        id: Int,
+        id: Long,
         isDeleted: Boolean
     ): List<Member>
 }

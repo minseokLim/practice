@@ -14,8 +14,8 @@ class CompleteVerifiedOrderService(
     private val completeVerifiedPaymentService: CompleteVerifiedPaymentService
 ) {
     fun complete(
-        memberId: Int,
-        orderId: Int
+        memberId: Long,
+        orderId: Long
     ): CompleteVerifiedOrderOutput {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)

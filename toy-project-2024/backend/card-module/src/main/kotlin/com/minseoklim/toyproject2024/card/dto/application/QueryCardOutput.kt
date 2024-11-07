@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.card.domain.model.Card
 import com.minseoklim.toyproject2024.common.util.TextEncryptUtil
 
 data class QueryCardOutput private constructor(
-    val id: Int,
+    val id: Long,
     val maskedCardNumber: String,
     val cardNumber: String,
     val cardExpiry: String,

@@ -12,8 +12,8 @@ class AddStockQuantityService(
     private val productRepository: ProductRepository
 ) {
     fun addStockQuantity(
-        memberId: Int? = null,
-        productId: Int,
+        memberId: Long? = null,
+        productId: Long,
         input: AddStockQuantityInput
     ): AddStockQuantityOutput {
         val product = ProductServiceHelper.getProductForUpdate(productRepository, productId)

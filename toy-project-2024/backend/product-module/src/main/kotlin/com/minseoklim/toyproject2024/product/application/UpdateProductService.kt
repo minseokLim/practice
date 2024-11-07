@@ -12,8 +12,8 @@ class UpdateProductService(
     private val productRepository: ProductRepository
 ) {
     fun update(
-        memberId: Int,
-        productId: Int,
+        memberId: Long,
+        productId: Long,
         input: UpdateProductInput
     ): UpdateProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)

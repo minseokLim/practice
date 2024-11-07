@@ -13,7 +13,7 @@ class IssueTokenController(
 ) {
     @PostMapping("/websocket/token")
     fun issue(
-        @MemberId memberId: Int
+        @MemberId memberId: Long
     ): ResponseEntity<IssueTokenResponse> {
         val token = issueTokenService.issue(memberId)
         return ResponseEntity.ok(IssueTokenResponse(token))

@@ -16,8 +16,8 @@ class MakeChatRoomService(
     private val chatRoomNotifier: ChatRoomNotifier
 ) {
     fun make(
-        creatorId: Int,
-        memberIds: List<Int>
+        creatorId: Long,
+        memberIds: List<Long>
     ): MakeChatRoomOutput {
         val chatRoom = chatRoomRepository.save(ChatRoom(memberIds = memberIds, creatorId = creatorId))
         val members = queryMemberService.findAllByIds(chatRoom.getMemberIds())

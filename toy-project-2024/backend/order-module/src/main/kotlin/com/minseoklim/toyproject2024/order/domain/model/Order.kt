@@ -26,12 +26,12 @@ class Order(
     orderProducts: List<OrderProduct>,
     shippingInfo: ShippingInfo,
     orderStatus: OrderStatus = OrderStatus.PAYMENT_WAITING,
-    paymentId: Int? = null,
-    memberId: Int
+    paymentId: Long? = null,
+    memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     val orderName: OrderName = OrderName(orderName)
 
@@ -46,10 +46,10 @@ class Order(
     var orderStatus: OrderStatus = orderStatus
         protected set
 
-    var paymentId: Int? = paymentId
+    var paymentId: Long? = paymentId
         protected set
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     var isCanceled: Boolean = false
         protected set
@@ -57,7 +57,7 @@ class Order(
     val isPaymentWaiting: Boolean
         get() = this.orderStatus == OrderStatus.PAYMENT_WAITING
 
-    fun applyPaymentId(paymentId: Int) {
+    fun applyPaymentId(paymentId: Long) {
         this.paymentId = paymentId
     }
 
@@ -65,7 +65,7 @@ class Order(
         this.orderStatus = OrderStatus.PREPARING
     }
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (this.memberId != memberId) {
             throw NoPermissionException(ErrorCode.NO_ORDER_PERMISSION)
         }

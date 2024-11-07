@@ -6,7 +6,7 @@ data class RegisterLocationInput(
     val latitude: Double,
     val longitude: Double
 ) {
-    fun toEntity(memberId: Int): Location {
+    fun toEntity(memberId: Long): Location {
         return Location(
             latitude = latitude,
             longitude = longitude,

@@ -12,8 +12,8 @@ class RemoveStockQuantityService(
     private val productRepository: ProductRepository
 ) {
     fun removeStockQuantity(
-        memberId: Int? = null,
-        productId: Int,
+        memberId: Long? = null,
+        productId: Long,
         input: RemoveStockQuantityInput
     ): RemoveStockQuantityOutput {
         val product = ProductServiceHelper.getProductForUpdate(productRepository, productId)

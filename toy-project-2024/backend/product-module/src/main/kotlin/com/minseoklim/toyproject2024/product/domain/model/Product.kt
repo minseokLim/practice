@@ -19,11 +19,11 @@ class Product(
     name: String,
     price: Long,
     stockQuantity: Int,
-    memberId: Int
+    memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     var name: Name = Name(name)
         protected set
@@ -34,7 +34,7 @@ class Product(
     var stockQuantity: StockQuantity = StockQuantity(stockQuantity)
         protected set
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     var isDeleted: Boolean = false
         protected set
@@ -65,7 +65,7 @@ class Product(
         return this.stockQuantity.isSoldOut()
     }
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (this.memberId != memberId) {
             throw NoPermissionException(ErrorCode.NO_PRODUCT_PERMISSION)
         }

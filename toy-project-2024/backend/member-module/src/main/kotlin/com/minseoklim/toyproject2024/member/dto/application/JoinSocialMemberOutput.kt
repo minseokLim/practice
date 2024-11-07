@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Member
 import com.minseoklim.toyproject2024.member.domain.model.Role
 
 data class JoinSocialMemberOutput private constructor(
-    val id: Int,
+    val id: Long,
     val roles: Set<Role>
 ) {
     companion object {

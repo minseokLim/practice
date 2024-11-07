@@ -17,7 +17,7 @@ class QueryCardController(
 ) {
     @GetMapping
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         pageable: Pageable
     ): ResponseEntity<Page<QueryCardResponse>> {
         val outputs = queryCardService.list(memberId, pageable)

@@ -15,8 +15,8 @@ class CancelPaymentService(
     private val verifiedPaymentApi: VerifiedPaymentApi
 ) {
     fun cancel(
-        memberId: Int,
-        paymentId: Int
+        memberId: Long,
+        paymentId: Long
     ) {
         val payment = PaymentServiceHelper.getPayment(paymentRepository, paymentId)
         payment.checkAuthority(memberId)

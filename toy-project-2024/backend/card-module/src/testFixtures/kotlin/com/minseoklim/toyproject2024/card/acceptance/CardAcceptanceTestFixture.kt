@@ -31,7 +31,7 @@ object CardAcceptanceTestFixture {
 
     fun `카드 삭제 요청`(
         accessToken: String,
-        cardId: Int
+        cardId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.delete("/cards/$cardId", accessToken)
     }

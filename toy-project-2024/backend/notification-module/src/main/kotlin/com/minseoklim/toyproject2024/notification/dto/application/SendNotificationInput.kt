@@ -7,7 +7,7 @@ data class SendNotificationInput(
     val body: String,
     val imageUrl: String?
 ) {
-    fun toEntity(memberId: Int): Notification {
+    fun toEntity(memberId: Long): Notification {
         return Notification(
             title = title,
             body = body,

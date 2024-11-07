@@ -8,8 +8,8 @@ import jakarta.persistence.Entity
 class CardPayment(
     amount: Long,
     productName: String,
-    memberId: Int,
-    cardId: Int
+    memberId: Long,
+    cardId: Long
 ) : Payment(amount, productName, memberId) {
-    val cardId: Int = cardId
+    val cardId: Long = cardId
 }

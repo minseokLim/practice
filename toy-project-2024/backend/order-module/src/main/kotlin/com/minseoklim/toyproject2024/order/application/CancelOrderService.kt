@@ -12,8 +12,8 @@ class CancelOrderService(
     private val cancelPaymentService: CancelPaymentService
 ) {
     fun cancel(
-        memberId: Int,
-        orderId: Int
+        memberId: Long,
+        orderId: Long
     ) {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)

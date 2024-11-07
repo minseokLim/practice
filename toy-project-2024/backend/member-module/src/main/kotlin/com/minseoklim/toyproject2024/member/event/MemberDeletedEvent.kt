@@ -4,5 +4,5 @@ import com.minseoklim.toyproject2024.common.event.DomainEvent
 
 class MemberDeletedEvent(
     source: Any,
-    val memberId: Int
+    val memberId: Long
 ) : DomainEvent(source)

@@ -3,8 +3,8 @@ package com.minseoklim.toyproject2024.payment.dto.ui
 import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentOutput
 
 data class MakeCardPaymentResponse private constructor(
-    val id: Int,
-    val cardId: Int,
+    val id: Long,
+    val cardId: Long,
     val amount: Long,
     val productName: String,
     val isCanceled: Boolean

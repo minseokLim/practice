@@ -17,5 +17,5 @@ interface ChatRoomRepository : JpaRepository<ChatRoom, Long> {
             ORDER BY cr.modifiedDateTime DESC
         """
     )
-    fun findAllByMemberId(memberId: Int): List<ChatRoom>
+    fun findAllByMemberId(memberId: Long): List<ChatRoom>
 }

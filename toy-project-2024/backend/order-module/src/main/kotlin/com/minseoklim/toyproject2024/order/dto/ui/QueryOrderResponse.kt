@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.order.dto.ui
 import com.minseoklim.toyproject2024.order.dto.application.QueryOrderOutput
 
 data class QueryOrderResponse private constructor(
-    val id: Int,
+    val id: Long,
     val orderProducts: List<OrderProductResponse>,
     val shippingInfo: ShippingInfoResponse
 ) {
@@ -18,7 +18,7 @@ data class QueryOrderResponse private constructor(
     }
 
     data class OrderProductResponse private constructor(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         companion object {

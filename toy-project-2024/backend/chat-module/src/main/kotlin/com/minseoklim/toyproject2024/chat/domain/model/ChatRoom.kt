@@ -12,8 +12,8 @@ import jakarta.persistence.Id
 
 @Entity
 class ChatRoom(
-    memberIds: List<Int>,
-    creatorId: Int
+    memberIds: List<Long>,
+    creatorId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +21,20 @@ class ChatRoom(
 
     val chatRoomMembers: ChatRoomMembers = ChatRoomMembers(memberIds)
 
-    val creatorId: Int = creatorId
+    val creatorId: Long = creatorId
 
     var lastMessageId: Long? = null
         protected set
 
-    fun inviteMember(memberId: Int) {
+    fun inviteMember(memberId: Long) {
         chatRoomMembers.addMember(memberId)
     }
 
-    fun leaveMember(memberId: Int) {
+    fun leaveMember(memberId: Long) {
         chatRoomMembers.deleteMember(memberId)
     }
 
-    fun getMemberIds(): List<Int> {
+    fun getMemberIds(): List<Long> {
         return chatRoomMembers.getMemberIds()
     }
 
@@ -44,7 +44,7 @@ class ChatRoom(
         }
     }
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (memberId !in this.getMemberIds()) {
             throw NoPermissionException(ErrorCode.NO_CHAT_ROOM_PERMISSION)
         }

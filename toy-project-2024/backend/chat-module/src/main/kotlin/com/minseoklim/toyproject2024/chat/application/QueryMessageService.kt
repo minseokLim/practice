@@ -16,7 +16,7 @@ class QueryMessageService(
     private val queryMemberService: QueryMemberService
 ) {
     fun list(
-        memberId: Int,
+        memberId: Long,
         chatRoomId: Long,
         cursorId: Long,
         size: Int

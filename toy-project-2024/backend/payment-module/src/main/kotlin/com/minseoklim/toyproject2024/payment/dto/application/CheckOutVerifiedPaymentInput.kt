@@ -6,7 +6,7 @@ data class CheckOutVerifiedPaymentInput(
     val amount: Long,
     val productName: String
 ) {
-    fun toEntity(memberId: Int): VerifiedPayment {
+    fun toEntity(memberId: Long): VerifiedPayment {
         return VerifiedPayment(
             amount = amount,
             productName = productName,

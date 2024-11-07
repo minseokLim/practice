@@ -17,7 +17,7 @@ class DeleteMemberController(
     @DeleteMapping("/{id}")
     @CheckAdminPermission
     fun delete(
-        @PathVariable id: Int
+        @PathVariable id: Long
     ): ResponseEntity<Unit> {
         deleteMemberService.delete(id)
         return ResponseEntity.noContent().build()
@@ -25,7 +25,7 @@ class DeleteMemberController(
 
     @DeleteMapping("/me")
     fun deleteMe(
-        @MemberId id: Int
+        @MemberId id: Long
     ): ResponseEntity<Unit> {
         deleteMemberService.delete(id)
         return ResponseEntity.noContent().build()

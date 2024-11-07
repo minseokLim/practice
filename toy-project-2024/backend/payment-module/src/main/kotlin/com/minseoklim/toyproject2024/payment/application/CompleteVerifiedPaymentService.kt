@@ -13,7 +13,7 @@ class CompleteVerifiedPaymentService(
     private val verifiedPaymentApi: VerifiedPaymentApi
 ) {
     fun completeVerifiedPayment(
-        memberId: Int,
+        memberId: Long,
         input: CompleteVerifiedPaymentInput
     ): CompleteVerifiedPaymentOutput {
         val payment = PaymentServiceHelper.getVerifiedPayment(paymentRepository, input.paymentId)

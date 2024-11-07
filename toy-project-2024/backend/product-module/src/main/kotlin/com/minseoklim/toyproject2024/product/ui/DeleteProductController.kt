@@ -15,8 +15,8 @@ class DeleteProductController(
 ) {
     @DeleteMapping("/{productId}")
     fun delete(
-        @MemberId memberId: Int,
-        @PathVariable productId: Int
+        @MemberId memberId: Long,
+        @PathVariable productId: Long
     ): ResponseEntity<Unit> {
         deleteProductService.delete(memberId, productId)
         return ResponseEntity.noContent().build()

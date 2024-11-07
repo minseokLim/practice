@@ -15,7 +15,7 @@ class FailVerifiedPaymentController(
 ) {
     @PostMapping("/fail-verified-payment")
     fun failVerifiedPayment(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: FailVerifiedPaymentRequest
     ): ResponseEntity<Unit> {
         failVerifiedPaymentService.failVerifiedPayment(memberId, request.toInput())

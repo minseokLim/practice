@@ -11,7 +11,7 @@ class AccessTokenDbCheckFlagActivator(
     @Value("\${auth.access-token-db-check-in-milliseconds}")
     private val accessTokenDbCheckInMilliseconds: Long
 ) {
-    fun activateAccessTokenDbCheckFlag(memberId: Int) {
+    fun activateAccessTokenDbCheckFlag(memberId: Long) {
         accessTokenDbCheckFlagRepository.save(
             AccessTokenDbCheckFlag(
                 memberId = memberId,

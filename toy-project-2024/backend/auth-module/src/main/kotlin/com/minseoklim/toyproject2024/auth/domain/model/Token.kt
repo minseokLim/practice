@@ -15,7 +15,7 @@ import org.hibernate.annotations.SQLRestriction
 class Token(
     @Id
     val id: String,
-    val memberId: Int,
+    val memberId: Long,
     val accessToken: String,
     val refreshToken: String
 ) : BaseTimeEntity() {

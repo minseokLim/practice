@@ -15,7 +15,7 @@ class QueryPaymentController(
 ) {
     @GetMapping("/payments")
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         pageable: Pageable
     ): ResponseEntity<Page<QueryPaymentResponse>> {
         val outputs = queryPaymentService.list(memberId, pageable)

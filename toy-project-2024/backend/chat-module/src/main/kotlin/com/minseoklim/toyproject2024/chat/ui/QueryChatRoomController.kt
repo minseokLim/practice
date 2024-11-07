@@ -13,7 +13,7 @@ class QueryChatRoomController(
 ) {
     @GetMapping("/chat-rooms")
     fun list(
-        @MemberId memberId: Int
+        @MemberId memberId: Long
     ): ResponseEntity<List<QueryChatRoomResponse>> {
         val outputs = queryChatRoomService.list(memberId)
         return ResponseEntity.ok(outputs.map { QueryChatRoomResponse.from(it) })

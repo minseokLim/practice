@@ -4,7 +4,7 @@ import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPaymentStatus
 import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentOutput
 
 data class CheckOutVerifiedPaymentResponse private constructor(
-    val id: Int,
+    val id: Long,
     val amount: Long,
     val productName: String,
     val paymentUid: String,

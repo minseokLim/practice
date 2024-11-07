@@ -9,7 +9,7 @@ class JwtWebSocketTokenProviderTest {
     @Test
     fun createToken() {
         // given
-        val memberId = 1
+        val memberId = 1L
 
         // when
         val token = tokenProvider.createToken(memberId)

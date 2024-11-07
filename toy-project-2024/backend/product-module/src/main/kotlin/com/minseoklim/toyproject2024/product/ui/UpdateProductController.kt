@@ -19,8 +19,8 @@ class UpdateProductController(
 ) {
     @PutMapping("/{productId}")
     fun update(
-        @MemberId memberId: Int,
-        @PathVariable productId: Int,
+        @MemberId memberId: Long,
+        @PathVariable productId: Long,
         @Valid @RequestBody request: UpdateProductRequest
     ): ResponseEntity<UpdateProductResponse> {
         val output = updateProductService.update(memberId, productId, request.toInput())

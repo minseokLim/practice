@@ -9,7 +9,7 @@ data class RegisterCardInput(
     val pwd2digit: String,
     val issuerName: String
 ) {
-    fun toEntity(memberId: Int): Card {
+    fun toEntity(memberId: Long): Card {
         return Card(
             cardNumber = cardNumber,
             cardExpiry = cardExpiry,

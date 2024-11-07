@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
-interface PaymentRepository : JpaRepository<Payment, Int> {
+interface PaymentRepository : JpaRepository<Payment, Long> {
     @Query(
         """
             SELECT
@@ -20,7 +20,7 @@ interface PaymentRepository : JpaRepository<Payment, Int> {
         """
     )
     fun findAllByMemberIdWithVerifiedCompleted(
-        memberId: Int,
+        memberId: Long,
         pageable: Pageable
     ): Page<Payment>
 }

@@ -231,7 +231,7 @@ class MemberTest {
             name = "testName",
             email = "test@test.com"
         )
-        ReflectionTestUtils.setField(member, "id", 1)
+        ReflectionTestUtils.setField(member, "id", 1L)
 
         // when
         member.delete()
@@ -284,8 +284,8 @@ class MemberTest {
             name = "otherName",
             email = "other@other.com"
         )
-        ReflectionTestUtils.setField(member1, "id", 1)
-        ReflectionTestUtils.setField(member2, "id", 1)
+        ReflectionTestUtils.setField(member1, "id", 1L)
+        ReflectionTestUtils.setField(member2, "id", 1L)
 
         // when, then
         assertThat(setOf(member1, member2, member3)).hasSize(2)

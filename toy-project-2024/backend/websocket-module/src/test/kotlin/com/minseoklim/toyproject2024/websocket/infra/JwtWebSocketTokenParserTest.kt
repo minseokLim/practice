@@ -12,7 +12,7 @@ class JwtWebSocketTokenParserTest {
     @Test
     fun extractMemberId() {
         // given
-        val memberId = 1
+        val memberId = 1L
         val token1 = tokenProvider.createToken(memberId)
 
         // when
@@ -39,7 +39,7 @@ class JwtWebSocketTokenParserTest {
     @Test
     fun isValidToken() {
         // given
-        val memberId = 1
+        val memberId = 1L
         val token1 = tokenProvider.createToken(memberId)
 
         // when

@@ -19,7 +19,7 @@ class CreateTokenService(
         val tokenId = TokenIdGenerator.generate()
         val accessToken = tokenProvider.createAccessToken(authentication, tokenId)
         val refreshToken = tokenProvider.createRefreshToken(tokenId)
-        tokenRepository.save(Token(tokenId, authentication.name.toInt(), accessToken, refreshToken))
+        tokenRepository.save(Token(tokenId, authentication.name.toLong(), accessToken, refreshToken))
 
         return TokenOutput(tokenId, accessToken, refreshToken)
     }

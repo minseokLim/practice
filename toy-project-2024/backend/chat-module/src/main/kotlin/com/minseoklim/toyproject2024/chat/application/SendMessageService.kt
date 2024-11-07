@@ -18,7 +18,7 @@ class SendMessageService(
     private val messageNotifier: MessageNotifier
 ) {
     fun send(
-        memberId: Int,
+        memberId: Long,
         input: SendMessageInput
     ): SendMessageOutput {
         val message = messageRepository.save(input.toEntity(memberId))

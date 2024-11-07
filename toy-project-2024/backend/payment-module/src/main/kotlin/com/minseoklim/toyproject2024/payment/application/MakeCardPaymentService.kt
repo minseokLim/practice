@@ -16,7 +16,7 @@ class MakeCardPaymentService(
     private val cardPaymentApi: CardPaymentApi
 ) {
     fun make(
-        memberId: Int,
+        memberId: Long,
         input: MakeCardPaymentInput
     ): MakeCardPaymentOutput {
         val card = queryCardService.get(memberId, input.cardId)

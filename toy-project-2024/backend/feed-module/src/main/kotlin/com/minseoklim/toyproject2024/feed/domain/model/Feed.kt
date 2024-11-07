@@ -30,7 +30,7 @@ class Feed(
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     var title: String = title
         protected set

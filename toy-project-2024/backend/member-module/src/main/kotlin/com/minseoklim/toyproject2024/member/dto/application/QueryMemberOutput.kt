@@ -6,7 +6,7 @@ import com.minseoklim.toyproject2024.member.domain.model.Role
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 
 data class QueryMemberOutput private constructor(
-    val id: Int,
+    val id: Long,
     val loginId: String?,
     val password: String?,
     val name: String,

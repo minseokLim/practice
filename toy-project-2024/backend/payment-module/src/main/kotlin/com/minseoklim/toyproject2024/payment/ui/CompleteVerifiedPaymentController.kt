@@ -16,7 +16,7 @@ class CompleteVerifiedPaymentController(
 ) {
     @PostMapping("/complete-verified-payment")
     fun completeVerifiedPayment(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: CompleteVerifiedPaymentRequest
     ): ResponseEntity<CompleteVerifiedPaymentResponse> {
         val output = completeVerifiedPaymentService.completeVerifiedPayment(memberId, request.toInput())

@@ -12,7 +12,7 @@ class UpdateMemberService(
     private val memberRepository: MemberRepository
 ) {
     fun update(
-        id: Int,
+        id: Long,
         input: UpdateMemberInput
     ): UpdateMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)

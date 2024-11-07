@@ -29,14 +29,14 @@ class LoginService(
         val loginDateTime = LocalDateTime.now()
         loginHistoryRepository.save(
             LoginHistory(
-                memberId = authentication.name.toInt(),
+                memberId = authentication.name.toLong(),
                 tokenId = token.id,
                 clientIp = clientIp,
                 userAgent = userAgent,
                 loginDateTime = loginDateTime
             )
         )
-        loginNotifier.notifyLogin(authentication.name.toInt(), clientIp, userAgent, loginDateTime)
+        loginNotifier.notifyLogin(authentication.name.toLong(), clientIp, userAgent, loginDateTime)
 
         return LoginOutput(token.accessToken, token.refreshToken)
     }

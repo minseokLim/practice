@@ -14,7 +14,7 @@ data class QueryChatRoomOutput private constructor(
     companion object {
         fun of(
             chatRoom: ChatRoom,
-            memberIdToName: Map<Int, String>,
+            memberIdToName: Map<Long, String>,
             messageIdToMessage: Map<Long, Message>,
             chatRoomIdToUnreadMessageCount: Map<Long, Int>
         ): QueryChatRoomOutput {
@@ -33,7 +33,7 @@ data class QueryChatRoomOutput private constructor(
     }
 
     data class MemberOutput(
-        val id: Int,
+        val id: Long,
         val name: String,
         val lastReadMessageId: Long?
     )
@@ -41,7 +41,7 @@ data class QueryChatRoomOutput private constructor(
     data class MessageOutput private constructor(
         val id: Long,
         val content: String,
-        val memberId: Int,
+        val memberId: Long,
         val isDeleted: Boolean,
         val createdDateTime: LocalDateTime
     ) {

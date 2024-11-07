@@ -23,7 +23,7 @@ class QueryMemberService(
         return members.map { QueryMemberOutput.from(it) }
     }
 
-    fun get(id: Int): QueryMemberOutput {
+    fun get(id: Long): QueryMemberOutput {
         val member = MemberServiceHelper.getMember(memberRepository, id)
         return QueryMemberOutput.from(member)
     }
@@ -41,12 +41,12 @@ class QueryMemberService(
         return member?.let { QueryMemberOutput.from(it) }
     }
 
-    fun findAllByIds(ids: Collection<Int>): List<QueryMemberOutput> {
+    fun findAllByIds(ids: Collection<Long>): List<QueryMemberOutput> {
         val members = memberRepository.findAllById(ids)
         return members.map { QueryMemberOutput.from(it) }
     }
 
-    fun findAllNotDeletedExceptId(id: Int): List<QueryMemberOutput> {
+    fun findAllNotDeletedExceptId(id: Long): List<QueryMemberOutput> {
         val members = memberRepository.findAllByIdIsNotAndIsDeleted(id, false)
         return members.map { QueryMemberOutput.from(it) }
     }

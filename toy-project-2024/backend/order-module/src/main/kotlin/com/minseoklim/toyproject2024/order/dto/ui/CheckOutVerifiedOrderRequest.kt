@@ -18,7 +18,7 @@ data class CheckOutVerifiedOrderRequest(
     }
 
     data class OrderProductRequest(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         fun toInput(): CheckOutVerifiedOrderInput.OrderProductInput {

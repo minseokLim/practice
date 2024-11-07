@@ -24,17 +24,17 @@ import org.locationtech.jts.geom.PrecisionModel
 class Location(
     latitude: Double,
     longitude: Double,
-    memberId: Int
+    memberId: Long
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     @Column(columnDefinition = "geometry(Point, 4326)")
     var coordinate: Point = geometryFactory.createPoint(Coordinate(longitude, latitude))
         protected set
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     fun setCoordinate(
         latitude: Double,

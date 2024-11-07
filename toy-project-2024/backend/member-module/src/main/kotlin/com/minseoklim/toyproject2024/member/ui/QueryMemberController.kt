@@ -32,7 +32,7 @@ class QueryMemberController(
     @GetMapping("/{id}")
     @CheckAdminPermission
     fun get(
-        @PathVariable id: Int
+        @PathVariable id: Long
     ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
         return ResponseEntity.ok(QueryMemberResponse.from(output))
@@ -40,7 +40,7 @@ class QueryMemberController(
 
     @GetMapping("/me")
     fun getMe(
-        @MemberId id: Int
+        @MemberId id: Long
     ): ResponseEntity<QueryMemberResponse> {
         val output = queryMemberService.get(id)
         return ResponseEntity.ok(QueryMemberResponse.from(output))
@@ -48,7 +48,7 @@ class QueryMemberController(
 
     @GetMapping("/except-me")
     fun listExceptMe(
-        @MemberId id: Int
+        @MemberId id: Long
     ): ResponseEntity<List<SimpleQueryMemberResponse>> {
         val outputs = queryMemberService.findAllNotDeletedExceptId(id)
         return ResponseEntity.ok(outputs.map { SimpleQueryMemberResponse.from(it) })

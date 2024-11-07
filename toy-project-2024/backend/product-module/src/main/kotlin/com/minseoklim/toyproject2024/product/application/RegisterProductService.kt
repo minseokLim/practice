@@ -12,7 +12,7 @@ class RegisterProductService(
     private val productRepository: ProductRepository
 ) {
     fun register(
-        memberId: Int,
+        memberId: Long,
         input: RegisterProductInput
     ): RegisterProductOutput {
         val product = productRepository.save(input.toEntity(memberId))

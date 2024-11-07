@@ -11,7 +11,7 @@ class LocationTest {
         val location = Location(
             latitude = 1.0,
             longitude = 2.0,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -28,20 +28,20 @@ class LocationTest {
         val location1 = Location(
             latitude = 1.0,
             longitude = 2.0,
-            memberId = 1
+            memberId = 1L
         )
         val location2 = Location(
             latitude = 1.0,
             longitude = 2.0,
-            memberId = 1
+            memberId = 1L
         )
         val location3 = Location(
             latitude = 1.0,
             longitude = 2.0,
             memberId = 2
         )
-        ReflectionTestUtils.setField(location1, "id", 1)
-        ReflectionTestUtils.setField(location2, "id", 1)
+        ReflectionTestUtils.setField(location1, "id", 1L)
+        ReflectionTestUtils.setField(location2, "id", 1L)
 
         // when, then
         assertThat(setOf(location1, location2, location3)).hasSize(2)

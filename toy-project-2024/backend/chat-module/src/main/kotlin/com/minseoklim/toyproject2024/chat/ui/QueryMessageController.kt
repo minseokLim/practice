@@ -15,7 +15,7 @@ class QueryMessageController(
 ) {
     @GetMapping("/chat-rooms/{chatRoomId}/messages")
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @PathVariable chatRoomId: Long,
         @RequestParam(required = false, defaultValue = Long.MAX_VALUE.toString()) cursorId: Long,
         @RequestParam size: Int

@@ -14,7 +14,7 @@ class PaymentTest {
         val cardPayment = CardPayment(
             amount = 1000L,
             productName = "테스트 상품",
-            memberId = 1,
+            memberId = 1L,
             cardId = 1
         )
 
@@ -35,7 +35,7 @@ class PaymentTest {
         val cardPayment = CardPayment(
             amount = 1000L,
             productName = "테스트 상품",
-            memberId = 1,
+            memberId = 1L,
             cardId = 1
         )
 
@@ -52,7 +52,7 @@ class PaymentTest {
         val verifiedPayment = VerifiedPayment(
             amount = 1000L,
             productName = "테스트 상품",
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -74,7 +74,7 @@ class PaymentTest {
         val cardPayment1 = CardPayment(
             amount = 1000L,
             productName = "테스트 상품",
-            memberId = 1,
+            memberId = 1L,
             cardId = 1
         )
         val cardPayment2 = CardPayment(
@@ -89,8 +89,8 @@ class PaymentTest {
             memberId = 2,
             cardId = 2
         )
-        ReflectionTestUtils.setField(cardPayment1, "id", 1)
-        ReflectionTestUtils.setField(cardPayment2, "id", 1)
+        ReflectionTestUtils.setField(cardPayment1, "id", 1L)
+        ReflectionTestUtils.setField(cardPayment2, "id", 1L)
 
         // when, then
         assertThat(setOf(cardPayment1, cardPayment2, cardPayment3)).hasSize(2)

@@ -21,7 +21,7 @@ data class QueryChatRoomResponse private constructor(
     }
 
     data class MemberResponse private constructor(
-        val id: Int,
+        val id: Long,
         val name: String,
         val lastReadMessageId: Long?
     ) {
@@ -39,7 +39,7 @@ data class QueryChatRoomResponse private constructor(
     data class MessageResponse private constructor(
         val id: Long,
         val content: String,
-        val memberId: Int,
+        val memberId: Long,
         val isDeleted: Boolean,
         val createdDateTime: LocalDateTime
     ) {

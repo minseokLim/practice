@@ -19,8 +19,8 @@ class AddStockQuantityController(
 ) {
     @PostMapping("/{productId}/add-stock-quantity")
     fun addStockQuantity(
-        @MemberId memberId: Int,
-        @PathVariable productId: Int,
+        @MemberId memberId: Long,
+        @PathVariable productId: Long,
         @Valid @RequestBody request: AddStockQuantityRequest
     ): ResponseEntity<AddStockQuantityResponse> {
         val output = addStockQuantityService.addStockQuantity(memberId, productId, request.toInput())

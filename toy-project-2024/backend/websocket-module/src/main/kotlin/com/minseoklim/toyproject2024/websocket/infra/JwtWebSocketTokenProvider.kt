@@ -16,7 +16,7 @@ class JwtWebSocketTokenProvider(
 ) : TokenProvider {
     private val secretKey: Key = Keys.hmacShaKeyFor(secretKey.toByteArray(StandardCharsets.UTF_8))
 
-    override fun createToken(memberId: Int): String {
+    override fun createToken(memberId: Long): String {
         val now = Date()
         val validity = Date(now.time + tokenValidityInMilliseconds)
 

@@ -13,7 +13,7 @@ import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantity
 object OrderServiceHelper {
     fun getOrder(
         orderRepository: OrderRepository,
-        orderId: Int
+        orderId: Long
     ): Order {
         return orderRepository.findById(orderId)
             .orElseThrow { throw NotFoundException(ErrorCode.ORDER_NOT_FOUND) }

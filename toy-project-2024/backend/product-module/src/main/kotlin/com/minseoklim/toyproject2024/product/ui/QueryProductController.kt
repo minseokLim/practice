@@ -18,7 +18,7 @@ class QueryProductController(
 ) {
     @GetMapping
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         pageable: Pageable
     ): ResponseEntity<Page<QueryProductResponse>> {
         val outputs = queryProductService.list(memberId, pageable)
@@ -27,8 +27,8 @@ class QueryProductController(
 
     @GetMapping("/{productId}")
     fun get(
-        @MemberId memberId: Int,
-        @PathVariable productId: Int
+        @MemberId memberId: Long,
+        @PathVariable productId: Long
     ): ResponseEntity<QueryProductResponse> {
         val output = queryProductService.get(memberId, productId)
         return ResponseEntity.ok(QueryProductResponse.from(output))

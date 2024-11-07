@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Pattern
 data class MakeCardOrderRequest(
     val orderProducts: List<OrderProductRequest>,
     val shippingInfo: ShippingInfoRequest,
-    val cardId: Int
+    val cardId: Long
 ) {
     fun toInput(): MakeCardOrderInput {
         return MakeCardOrderInput(
@@ -20,7 +20,7 @@ data class MakeCardOrderRequest(
     }
 
     data class OrderProductRequest(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         fun toInput(): MakeCardOrderInput.OrderProductInput {

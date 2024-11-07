@@ -6,7 +6,7 @@ import java.util.Objects
 
 @Embeddable
 class ChatRoomMember(
-    memberId: Int,
+    memberId: Long,
     lastReadMessageId: Long? = null
 ) {
     val memberId = memberId

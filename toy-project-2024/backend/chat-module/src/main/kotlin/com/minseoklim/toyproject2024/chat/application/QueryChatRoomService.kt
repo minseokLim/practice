@@ -20,7 +20,7 @@ class QueryChatRoomService(
     private val messageRepository: MessageRepository,
     private val chatMapper: ChatMapper
 ) {
-    fun list(memberId: Int): List<QueryChatRoomOutput> {
+    fun list(memberId: Long): List<QueryChatRoomOutput> {
         val chatRooms = chatRoomRepository.findAllByMemberId(memberId)
         if (chatRooms.isEmpty()) {
             return emptyList()
@@ -60,7 +60,7 @@ class QueryChatRoomService(
 
     private fun getUnreadMessageCounts(
         chatRooms: List<ChatRoom>,
-        memberId: Int
+        memberId: Long
     ): List<UnreadMessageCount> {
         val params = chatRooms.map { chatRoom ->
             mapOf(

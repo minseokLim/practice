@@ -18,7 +18,7 @@ import jakarta.persistence.Table
 class Message(
     content: String,
     chatRoomId: Long,
-    memberId: Int,
+    memberId: Long,
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +28,12 @@ class Message(
 
     val chatRoomId: Long = chatRoomId
 
-    val memberId: Int = memberId
+    val memberId: Long = memberId
 
     var isDeleted: Boolean = false
         protected set
 
-    fun checkAuthority(memberId: Int) {
+    fun checkAuthority(memberId: Long) {
         if (this.memberId != memberId) {
             throw NoPermissionException(ErrorCode.NO_MESSAGE_PERMISSION)
         }

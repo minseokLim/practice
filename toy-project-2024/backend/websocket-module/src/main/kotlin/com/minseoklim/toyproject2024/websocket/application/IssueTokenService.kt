@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 class IssueTokenService(
     private val tokenProvider: TokenProvider
 ) {
-    fun issue(memberId: Int): String {
+    fun issue(memberId: Long): String {
         return tokenProvider.createToken(memberId)
     }
 }

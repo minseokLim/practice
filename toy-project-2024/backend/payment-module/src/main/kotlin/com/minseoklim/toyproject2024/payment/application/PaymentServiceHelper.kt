@@ -10,7 +10,7 @@ import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
 object PaymentServiceHelper {
     fun getPayment(
         paymentRepository: PaymentRepository,
-        paymentId: Int
+        paymentId: Long
     ): Payment {
         return paymentRepository.findById(paymentId)
             .orElseThrow { throw NotFoundException(ErrorCode.PAYMENT_NOT_FOUND) }
@@ -18,7 +18,7 @@ object PaymentServiceHelper {
 
     fun getVerifiedPayment(
         paymentRepository: PaymentRepository,
-        paymentId: Int
+        paymentId: Long
     ): VerifiedPayment {
         val payment = getPayment(paymentRepository, paymentId)
         if (payment !is VerifiedPayment) {

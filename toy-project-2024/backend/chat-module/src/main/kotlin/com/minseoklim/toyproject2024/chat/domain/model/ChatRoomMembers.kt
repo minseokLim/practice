@@ -12,7 +12,7 @@ import java.util.Objects
 
 @Embeddable
 class ChatRoomMembers(
-    memberIds: List<Int>
+    memberIds: List<Long>
 ) {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
@@ -23,11 +23,11 @@ class ChatRoomMembers(
     @OrderColumn(name = "chat_room_member_idx")
     private val values: MutableList<ChatRoomMember> = memberIds.map { ChatRoomMember(it) }.toMutableList()
 
-    fun addMember(memberId: Int) {
+    fun addMember(memberId: Long) {
         values.add(ChatRoomMember(memberId))
     }
 
-    fun deleteMember(memberId: Int) {
+    fun deleteMember(memberId: Long) {
         values.removeIf { it.memberId == memberId }
     }
 
@@ -35,7 +35,7 @@ class ChatRoomMembers(
         return values
     }
 
-    fun getMemberIds(): List<Int> {
+    fun getMemberIds(): List<Long> {
         return values.map { it.memberId }
     }
 

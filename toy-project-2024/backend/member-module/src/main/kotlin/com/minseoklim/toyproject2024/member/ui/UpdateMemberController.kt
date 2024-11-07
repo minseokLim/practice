@@ -21,7 +21,7 @@ class UpdateMemberController(
     @PutMapping("/{id}")
     @CheckAdminPermission
     fun update(
-        @PathVariable id: Int,
+        @PathVariable id: Long,
         @Valid @RequestBody request: UpdateMemberRequest
     ): ResponseEntity<UpdateMemberResponse> {
         val output = updateMemberService.update(id, request.toInput())
@@ -30,7 +30,7 @@ class UpdateMemberController(
 
     @PutMapping("/me")
     fun updateMe(
-        @MemberId id: Int,
+        @MemberId id: Long,
         @Valid @RequestBody request: UpdateMemberRequest
     ): ResponseEntity<UpdateMemberResponse> {
         val output = updateMemberService.update(id, request.toInput())

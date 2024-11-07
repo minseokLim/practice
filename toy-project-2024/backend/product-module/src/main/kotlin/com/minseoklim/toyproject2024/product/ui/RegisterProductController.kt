@@ -19,7 +19,7 @@ class RegisterProductController(
 ) {
     @PostMapping
     fun register(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: RegisterProductRequest
     ): ResponseEntity<RegisterProductResponse> {
         val output = registerProductService.register(memberId, request.toInput())

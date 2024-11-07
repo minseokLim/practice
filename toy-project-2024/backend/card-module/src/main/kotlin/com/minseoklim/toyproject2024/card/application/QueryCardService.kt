@@ -13,7 +13,7 @@ class QueryCardService(
     private val cardRepository: CardRepository
 ) {
     fun list(
-        memberId: Int,
+        memberId: Long,
         pageable: Pageable
     ): Page<QueryCardOutput> {
         val cards = cardRepository.findAllByMemberId(memberId, pageable)
@@ -21,8 +21,8 @@ class QueryCardService(
     }
 
     fun get(
-        memberId: Int,
-        cardId: Int
+        memberId: Long,
+        cardId: Long
     ): QueryCardOutput {
         val card = CardServiceHelper.getCard(cardRepository, cardId)
         card.checkAuthority(memberId)

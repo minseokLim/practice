@@ -10,7 +10,7 @@ data class ChatRoomDto private constructor(
     companion object {
         fun of(
             chatRoom: ChatRoom,
-            memberIdToName: Map<Int, String>
+            memberIdToName: Map<Long, String>
         ): ChatRoomDto {
             return ChatRoomDto(
                 id = checkNotNull(chatRoom.id),
@@ -21,7 +21,7 @@ data class ChatRoomDto private constructor(
     }
 
     data class MemberDto(
-        val id: Int,
+        val id: Long,
         val name: String
     )
 }

@@ -15,13 +15,13 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
         val other = Product(
             name = "other",
             price = 2000,
             stockQuantity = 200,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -39,7 +39,7 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -56,7 +56,7 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -73,7 +73,7 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 0,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -90,7 +90,7 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
 
         // when, then
@@ -109,7 +109,7 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -126,22 +126,22 @@ class ProductTest {
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
         val product2 = Product(
             name = "test",
             price = 1000,
             stockQuantity = 100,
-            memberId = 1
+            memberId = 1L
         )
         val product3 = Product(
             name = "other",
             price = 2000,
             stockQuantity = 200,
-            memberId = 1
+            memberId = 1L
         )
-        ReflectionTestUtils.setField(product1, "id", 1)
-        ReflectionTestUtils.setField(product2, "id", 1)
+        ReflectionTestUtils.setField(product1, "id", 1L)
+        ReflectionTestUtils.setField(product2, "id", 1L)
 
         // when, then
         assertThat(setOf(product1, product2, product3)).hasSize(2)

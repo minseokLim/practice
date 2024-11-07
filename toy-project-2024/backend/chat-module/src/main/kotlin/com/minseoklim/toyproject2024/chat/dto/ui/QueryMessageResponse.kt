@@ -25,7 +25,7 @@ data class QueryMessageResponse private constructor(
     }
 
     data class MemberResponse(
-        val id: Int,
+        val id: Long,
         val name: String
     ) {
         companion object {

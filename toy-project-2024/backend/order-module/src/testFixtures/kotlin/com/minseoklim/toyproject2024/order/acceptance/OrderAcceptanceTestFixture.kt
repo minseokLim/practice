@@ -31,7 +31,7 @@ object OrderAcceptanceTestFixture {
 
     fun `주문 조회 요청`(
         accessToken: String,
-        orderId: Int
+        orderId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.get("/orders/$orderId", accessToken)
     }
@@ -42,7 +42,7 @@ object OrderAcceptanceTestFixture {
 
     fun `주문 취소 요청`(
         accessToken: String,
-        orderId: Int
+        orderId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.post("/cancel-orders/$orderId", accessToken)
     }

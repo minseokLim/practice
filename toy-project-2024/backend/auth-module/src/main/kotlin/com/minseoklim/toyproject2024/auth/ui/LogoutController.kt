@@ -23,7 +23,7 @@ class LogoutController(
 
     @PostMapping("/logout-all")
     fun logoutAll(
-        @MemberId memberId: Int
+        @MemberId memberId: Long
     ): ResponseEntity<Unit> {
         logoutService.logoutAll(memberId)
         return ResponseEntity.ok().build()

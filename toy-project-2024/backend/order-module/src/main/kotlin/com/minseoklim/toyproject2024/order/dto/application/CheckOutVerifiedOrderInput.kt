@@ -11,7 +11,7 @@ data class CheckOutVerifiedOrderInput(
     val shippingInfo: ShippingInfoInput
 ) {
     fun toEntity(
-        memberId: Int,
+        memberId: Long,
         orderName: String
     ): Order {
         return Order(
@@ -23,7 +23,7 @@ data class CheckOutVerifiedOrderInput(
     }
 
     data class OrderProductInput(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         fun toEmbeddable(): OrderProduct {

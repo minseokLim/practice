@@ -19,7 +19,7 @@ class SendMessageController(
         @DestinationVariable chatRoomId: Long,
         @Valid request: SendMessageRequest
     ): SendMessageResponse {
-        val output = sendMessageService.send(principal.name.toInt(), request.toInput(chatRoomId))
+        val output = sendMessageService.send(principal.name.toLong(), request.toInput(chatRoomId))
         return SendMessageResponse.from(output)
     }
 }

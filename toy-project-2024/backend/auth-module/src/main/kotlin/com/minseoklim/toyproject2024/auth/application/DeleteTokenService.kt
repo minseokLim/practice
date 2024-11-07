@@ -26,7 +26,7 @@ class DeleteTokenService(
         token.delete()
     }
 
-    fun deleteAllToken(memberId: Int) {
+    fun deleteAllToken(memberId: Long) {
         tokenRepository.findAllByMemberId(memberId).forEach {
             it.delete()
         }

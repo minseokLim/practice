@@ -25,7 +25,7 @@ class CardTest {
             birth = "990101",
             pwd2digit = "12",
             issuerName = "삼성카드",
-            memberId = 1
+            memberId = 1L
         )
 
         // when, then
@@ -46,7 +46,7 @@ class CardTest {
             birth = "990101",
             pwd2digit = "12",
             issuerName = "삼성카드",
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -65,7 +65,7 @@ class CardTest {
             birth = "990101",
             pwd2digit = "12",
             issuerName = "삼성카드",
-            memberId = 1
+            memberId = 1L
         )
         val card2 = Card(
             cardNumber = "9876-5432-9876-5432",
@@ -73,7 +73,7 @@ class CardTest {
             birth = "991231",
             pwd2digit = "34",
             issuerName = "우리카드",
-            memberId = 1
+            memberId = 1L
         )
         val card3 = Card(
             cardNumber = "9876-5432-9876-5432",
@@ -81,10 +81,10 @@ class CardTest {
             birth = "991231",
             pwd2digit = "34",
             issuerName = "우리카드",
-            memberId = 1
+            memberId = 1L
         )
-        ReflectionTestUtils.setField(card1, "id", 1)
-        ReflectionTestUtils.setField(card2, "id", 1)
+        ReflectionTestUtils.setField(card1, "id", 1L)
+        ReflectionTestUtils.setField(card2, "id", 1L)
 
         // when, then
         assertThat(setOf(card1, card2, card3)).hasSize(2)

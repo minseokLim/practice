@@ -13,11 +13,11 @@ class Notification(
     val title: String,
     val body: String,
     val imageUrl: String?,
-    val memberId: Int
+    val memberId: Long
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     final override fun equals(other: Any?): Boolean {
         return this.equalsForEntity(other) { x, y -> x.id != null && x.id == y.id }

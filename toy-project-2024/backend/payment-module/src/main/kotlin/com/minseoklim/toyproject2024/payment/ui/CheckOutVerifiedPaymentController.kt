@@ -16,7 +16,7 @@ class CheckOutVerifiedPaymentController(
 ) {
     @PostMapping("/verified-payments")
     fun checkOut(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: CheckOutVerifiedPaymentRequest
     ): ResponseEntity<CheckOutVerifiedPaymentResponse> {
         val output = checkOutVerifiedPaymentService.checkOut(memberId, request.toInput())

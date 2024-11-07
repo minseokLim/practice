@@ -11,7 +11,7 @@ class RegisterPushTokenService(
     private val pushTokenRepository: PushTokenRepository
 ) {
     fun register(
-        memberId: Int,
+        memberId: Long,
         token: String
     ) {
         val pushToken = pushTokenRepository.findByToken(token)

@@ -125,7 +125,7 @@ class JpaEqualityUtilTest {
     }
 
     open class TestEntity(
-        open val id: Int? = null
+        open val id: Long? = null
     )
 
     class TestValueClass(

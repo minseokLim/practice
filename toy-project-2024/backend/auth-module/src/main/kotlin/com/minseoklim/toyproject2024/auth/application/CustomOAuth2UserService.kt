@@ -34,7 +34,7 @@ class CustomOAuth2UserService(
     }
 
     private class CustomOAuth2User(
-        private val id: Int,
+        private val id: Long,
         private val attributes: Map<String, Any>,
         private val roles: Set<Role>
     ) : OAuth2User {

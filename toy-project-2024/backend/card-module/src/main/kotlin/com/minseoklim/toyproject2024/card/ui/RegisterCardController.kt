@@ -19,7 +19,7 @@ class RegisterCardController(
 ) {
     @PostMapping
     fun register(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: RegisterCardRequest
     ): ResponseEntity<RegisterCardResponse> {
         val output = registerCardService.register(memberId, request.toInput())

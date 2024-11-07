@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Positive
 
 data class MakeCardPaymentRequest(
-    val cardId: Int,
+    val cardId: Long,
 
     @get:Positive(message = Amount.ERR_MSG)
     val amount: Long,

@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.member.dto.ui
 import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
 
 data class SimpleQueryMemberResponse private constructor(
-    val id: Int,
+    val id: Long,
     val name: String
 ) {
     companion object {

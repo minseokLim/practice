@@ -19,8 +19,8 @@ class RemoveStockQuantityController(
 ) {
     @PostMapping("/{productId}/remove-stock-quantity")
     fun removeStockQuantity(
-        @MemberId memberId: Int,
-        @PathVariable productId: Int,
+        @MemberId memberId: Long,
+        @PathVariable productId: Long,
         @Valid @RequestBody request: RemoveStockQuantityRequest
     ): ResponseEntity<RemoveStockQuantityResponse> {
         val output = removeStockQuantityService.removeStockQuantity(memberId, productId, request.toInput())

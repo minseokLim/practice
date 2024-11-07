@@ -11,7 +11,7 @@ class RegisterLocationService(
     private val locationRepository: LocationRepository
 ) {
     fun register(
-        memberId: Int,
+        memberId: Long,
         input: RegisterLocationInput
     ) {
         val location = locationRepository.findByMemberId(memberId)

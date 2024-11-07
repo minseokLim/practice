@@ -22,7 +22,7 @@ class MessageTest {
         val message = Message(
             content = "Hello, World!",
             chatRoomId = 1,
-            memberId = 1
+            memberId = 1L
         )
 
         // when, then
@@ -40,7 +40,7 @@ class MessageTest {
         val message = Message(
             content = "Hello, World!",
             chatRoomId = 1,
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -56,12 +56,12 @@ class MessageTest {
         val message1 = Message(
             content = "Hello, World!",
             chatRoomId = 1,
-            memberId = 1
+            memberId = 1L
         )
         val message2 = Message(
             content = "Hello, World!",
             chatRoomId = 1,
-            memberId = 1
+            memberId = 1L
         )
         val message3 = Message(
             content = "Hello, World!",

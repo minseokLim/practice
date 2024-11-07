@@ -9,7 +9,7 @@ import com.minseoklim.toyproject2024.order.domain.model.ShippingInfo
 import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentOutput
 
 data class CheckOutVerifiedOrderOutput private constructor(
-    val id: Int,
+    val id: Long,
     val orderName: String,
     val payment: PaymentOutput,
     val orderProducts: List<OrderProductOutput>,
@@ -31,7 +31,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
     }
 
     data class PaymentOutput private constructor(
-        val id: Int,
+        val id: Long,
         val amount: Long,
         val paymentUid: String
     ) {
@@ -47,7 +47,7 @@ data class CheckOutVerifiedOrderOutput private constructor(
     }
 
     data class OrderProductOutput private constructor(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         companion object {

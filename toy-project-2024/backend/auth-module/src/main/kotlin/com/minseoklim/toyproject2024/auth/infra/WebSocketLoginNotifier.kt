@@ -10,7 +10,7 @@ class WebSocketLoginNotifier(
     private val messagingTemplate: SimpMessagingTemplate
 ) : LoginNotifier {
     override fun notifyLogin(
-        memberId: Int,
+        memberId: Long,
         clientIp: String,
         userAgent: String,
         loginDateTime: LocalDateTime

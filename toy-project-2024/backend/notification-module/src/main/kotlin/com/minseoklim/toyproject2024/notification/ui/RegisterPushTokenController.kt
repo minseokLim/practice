@@ -15,7 +15,7 @@ class RegisterPushTokenController(
 ) {
     @PostMapping("/push-tokens")
     fun register(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @Valid @RequestBody request: RegisterPushTokenRequest
     ): ResponseEntity<Unit> {
         registerPushTokenService.register(memberId, request.token)

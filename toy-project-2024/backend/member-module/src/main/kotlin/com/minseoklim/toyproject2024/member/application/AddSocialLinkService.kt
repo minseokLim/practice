@@ -11,7 +11,7 @@ class AddSocialLinkService(
     private val memberRepository: MemberRepository
 ) {
     fun addSocialLink(
-        id: Int,
+        id: Long,
         input: AddSocialLinkInput
     ) {
         val member = MemberServiceHelper.getMember(memberRepository, id)

@@ -14,11 +14,11 @@ object TestUtil {
         return HttpStatus.valueOf(this.statusCode())
     }
 
-    fun ExtractableResponse<Response>.extractId(): Int {
+    fun ExtractableResponse<Response>.extractId(): Long {
         return this.jsonPath()["id"]
     }
 
-    fun ExtractableResponse<Response>.extractIds(): List<Int> {
+    fun ExtractableResponse<Response>.extractIds(): List<Long> {
         return this.jsonPath().getList("content.id")
     }
 

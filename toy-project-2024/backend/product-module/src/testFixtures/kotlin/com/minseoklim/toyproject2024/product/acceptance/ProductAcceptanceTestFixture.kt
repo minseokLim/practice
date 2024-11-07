@@ -33,7 +33,7 @@ object ProductAcceptanceTestFixture {
 
     fun `상품 조회 요청`(
         accessToken: String,
-        productId: Int
+        productId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.get("/products/$productId", accessToken)
     }
@@ -45,7 +45,7 @@ object ProductAcceptanceTestFixture {
 
     fun `상품 수정 요청`(
         accessToken: String,
-        productId: Int,
+        productId: Long,
         request: Map<String, Any?>
     ): ExtractableResponse<Response> {
         return RequestUtil.put("/products/$productId", accessToken, request)
@@ -58,7 +58,7 @@ object ProductAcceptanceTestFixture {
 
     fun `상품 재고 추가 요청`(
         accessToken: String,
-        productId: Int,
+        productId: Long,
         request: Map<String, Any?>
     ): ExtractableResponse<Response> {
         return RequestUtil.post("/products/$productId/add-stock-quantity", accessToken, request)
@@ -70,7 +70,7 @@ object ProductAcceptanceTestFixture {
 
     fun `상품 재고 감소 요청`(
         accessToken: String,
-        productId: Int,
+        productId: Long,
         request: Map<String, Any?>
     ): ExtractableResponse<Response> {
         return RequestUtil.post("/products/$productId/remove-stock-quantity", accessToken, request)
@@ -82,7 +82,7 @@ object ProductAcceptanceTestFixture {
 
     fun `상품 삭제 요청`(
         accessToken: String,
-        productId: Int
+        productId: Long
     ): ExtractableResponse<Response> {
         return RequestUtil.delete("/products/$productId", accessToken)
     }

@@ -9,7 +9,7 @@ class TokenTest {
         // given
         val token = Token(
             id = "id",
-            memberId = 1,
+            memberId = 1L,
             accessToken = "accessToken",
             refreshToken = "refreshToken"
         )
@@ -26,7 +26,7 @@ class TokenTest {
         // given
         val token1 = Token(
             id = "id",
-            memberId = 1,
+            memberId = 1L,
             accessToken = "accessToken",
             refreshToken = "refreshToken"
         )

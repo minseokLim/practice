@@ -22,7 +22,7 @@ class CheckOutVerifiedOrderService(
     private val checkOutVerifiedPaymentService: CheckOutVerifiedPaymentService
 ) {
     fun checkOut(
-        memberId: Int,
+        memberId: Long,
         input: CheckOutVerifiedOrderInput
     ): CheckOutVerifiedOrderOutput {
         val productIds = input.orderProducts.map { it.productId }

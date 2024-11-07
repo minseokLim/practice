@@ -17,7 +17,7 @@ class MakeChatRoomController(
 ) {
     @PostMapping("/chat-rooms")
     fun make(
-        @MemberId creatorId: Int,
+        @MemberId creatorId: Long,
         @Valid @RequestBody request: MakeChatRoomRequest
     ): ResponseEntity<MakeChatRoomResponse> {
         val output = makeChatRoomService.make(creatorId, request.memberIds)

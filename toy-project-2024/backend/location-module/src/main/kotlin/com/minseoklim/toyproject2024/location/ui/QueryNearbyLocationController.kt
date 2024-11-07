@@ -14,7 +14,7 @@ class QueryNearbyLocationController(
 ) {
     @GetMapping("/locations")
     fun list(
-        @MemberId memberId: Int,
+        @MemberId memberId: Long,
         @RequestParam radius: Int
     ): ResponseEntity<List<QueryNearbyLocationResponse>> {
         val outputs = queryNearbyLocationService.list(memberId, radius)

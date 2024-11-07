@@ -13,7 +13,7 @@ class QueryProductService(
     private val productRepository: ProductRepository
 ) {
     fun list(
-        memberId: Int,
+        memberId: Long,
         pageable: Pageable
     ): Page<QueryProductOutput> {
         val products = productRepository.findAllByMemberId(memberId, pageable)
@@ -21,8 +21,8 @@ class QueryProductService(
     }
 
     fun get(
-        memberId: Int,
-        productId: Int
+        memberId: Long,
+        productId: Long
     ): QueryProductOutput {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)

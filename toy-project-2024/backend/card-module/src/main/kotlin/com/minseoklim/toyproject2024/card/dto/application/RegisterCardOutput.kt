@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.card.dto.application
 import com.minseoklim.toyproject2024.card.domain.model.Card
 
 data class RegisterCardOutput private constructor(
-    val id: Int,
+    val id: Long,
     val maskedCardNumber: String,
     val issuerName: String
 ) {

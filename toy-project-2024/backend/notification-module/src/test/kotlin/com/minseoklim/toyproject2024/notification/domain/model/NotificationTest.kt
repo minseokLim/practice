@@ -12,13 +12,13 @@ class NotificationTest {
             title = "title",
             body = "body",
             imageUrl = "imageUrl",
-            memberId = 1
+            memberId = 1L
         )
         val notification2 = Notification(
             title = "title",
             body = "body",
             imageUrl = "imageUrl",
-            memberId = 1
+            memberId = 1L
         )
         val notification3 = Notification(
             title = "title",
@@ -26,8 +26,8 @@ class NotificationTest {
             imageUrl = "imageUrl",
             memberId = 2
         )
-        ReflectionTestUtils.setField(notification1, "id", 1)
-        ReflectionTestUtils.setField(notification2, "id", 1)
+        ReflectionTestUtils.setField(notification1, "id", 1L)
+        ReflectionTestUtils.setField(notification2, "id", 1L)
 
         // when, then
         assertThat(setOf(notification1, notification2, notification3)).hasSize(2)

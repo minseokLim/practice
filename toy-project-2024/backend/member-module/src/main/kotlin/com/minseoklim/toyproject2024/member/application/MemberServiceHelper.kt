@@ -8,7 +8,7 @@ import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
 object MemberServiceHelper {
     fun getMember(
         memberRepository: MemberRepository,
-        id: Int
+        id: Long
     ): Member {
         return memberRepository.findById(id)
             .orElseThrow { NotFoundException(ErrorCode.MEMBER_NOT_FOUND) }

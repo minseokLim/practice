@@ -11,7 +11,7 @@ data class QueryNearbyLocationOutput private constructor(
     companion object {
         fun of(
             location: Location,
-            memberIdToMember: Map<Int, QueryMemberOutput>
+            memberIdToMember: Map<Long, QueryMemberOutput>
         ): QueryNearbyLocationOutput {
             return QueryNearbyLocationOutput(
                 latitude = location.coordinate.y,
@@ -25,7 +25,7 @@ data class QueryNearbyLocationOutput private constructor(
     }
 
     data class MemberOutput(
-        val id: Int,
+        val id: Long,
         val name: String
     )
 }

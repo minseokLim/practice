@@ -13,15 +13,15 @@ class QueryOrderService(
     private val orderRepository: OrderRepository
 ) {
     fun list(
-        memberId: Int,
+        memberId: Long,
         pageable: Pageable
     ): Page<QueryOrderOutput> {
         return orderRepository.findAllByMemberId(memberId, pageable).map { QueryOrderOutput.from(it) }
     }
 
     fun get(
-        memberId: Int,
-        orderId: Int
+        memberId: Long,
+        orderId: Long
     ): QueryOrderOutput {
         val order = OrderServiceHelper.getOrder(orderRepository, orderId)
         order.checkAuthority(memberId)

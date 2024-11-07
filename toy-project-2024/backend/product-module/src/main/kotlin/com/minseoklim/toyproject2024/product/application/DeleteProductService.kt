@@ -10,8 +10,8 @@ class DeleteProductService(
     private val productRepository: ProductRepository
 ) {
     fun delete(
-        memberId: Int,
-        productId: Int
+        memberId: Long,
+        productId: Long
     ) {
         val product = ProductServiceHelper.getProduct(productRepository, productId)
         product.checkAuthority(memberId)

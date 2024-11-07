@@ -28,7 +28,7 @@ class Member(
 ) : BaseTimeEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    val id: Long? = null
 
     val loginId: LoginId? = loginId?.let { LoginId(loginId) }
 

@@ -3,7 +3,7 @@ package com.minseoklim.toyproject2024.order.dto.ui
 import com.minseoklim.toyproject2024.order.dto.application.CheckOutVerifiedOrderOutput
 
 data class CheckOutVerifiedOrderResponse private constructor(
-    val id: Int,
+    val id: Long,
     val orderName: String,
     val payment: PaymentResponse,
     val orderProducts: List<OrderProductResponse>,
@@ -22,7 +22,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
     }
 
     data class PaymentResponse private constructor(
-        val id: Int,
+        val id: Long,
         val amount: Long,
         val paymentUid: String
     ) {
@@ -38,7 +38,7 @@ data class CheckOutVerifiedOrderResponse private constructor(
     }
 
     data class OrderProductResponse private constructor(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         companion object {

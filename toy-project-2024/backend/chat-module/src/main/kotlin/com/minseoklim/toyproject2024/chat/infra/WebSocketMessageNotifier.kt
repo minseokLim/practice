@@ -12,7 +12,7 @@ class WebSocketMessageNotifier(
 ) : MessageNotifier {
     @Async
     override fun notify(
-        memberIds: Collection<Int>,
+        memberIds: Collection<Long>,
         message: MessageDto
     ) {
         memberIds.forEach {

@@ -34,7 +34,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -62,7 +62,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -90,7 +90,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
 
         // when, then
@@ -122,7 +122,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
 
         // when
@@ -150,7 +150,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
         val order2 = Order(
             orderName = "주문명",
@@ -167,7 +167,7 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
         val order3 = Order(
             orderName = "다른 주문명",
@@ -184,10 +184,10 @@ class OrderTest {
                     phone = "010-1234-5678"
                 )
             ),
-            memberId = 1
+            memberId = 1L
         )
-        ReflectionTestUtils.setField(order1, "id", 1)
-        ReflectionTestUtils.setField(order2, "id", 1)
+        ReflectionTestUtils.setField(order1, "id", 1L)
+        ReflectionTestUtils.setField(order2, "id", 1L)
 
         // when, then
         assertThat(setOf(order1, order2, order3)).hasSize(2)

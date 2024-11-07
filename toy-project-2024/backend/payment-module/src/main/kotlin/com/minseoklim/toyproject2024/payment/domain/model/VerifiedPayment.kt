@@ -10,7 +10,7 @@ import jakarta.persistence.Enumerated
 class VerifiedPayment(
     amount: Long,
     productName: String,
-    memberId: Int
+    memberId: Long
 ) : Payment(amount, productName, memberId) {
     @Enumerated(EnumType.STRING)
     var status: VerifiedPaymentStatus = VerifiedPaymentStatus.CREATED

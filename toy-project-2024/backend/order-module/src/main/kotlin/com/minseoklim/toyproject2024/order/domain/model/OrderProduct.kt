@@ -6,14 +6,14 @@ import java.util.Objects
 
 @Embeddable
 class OrderProduct(
-    productId: Int,
+    productId: Long,
     quantity: Int
 ) {
     init {
         require(quantity > 0) { ERR_MSG_QUANTITY }
     }
 
-    val productId: Int = productId
+    val productId: Long = productId
     val quantity: Int = quantity
 
     final override fun equals(other: Any?): Boolean {

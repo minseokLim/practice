@@ -23,7 +23,7 @@ class AccessTokenDbCheckFlagActivatorTest {
     @Test
     fun activateAccessTokenDbCheckFlag() {
         // given
-        val memberId = 1
+        val memberId = 1L
         every {
             accessTokenDbCheckFlagRepository.save(any())
         } returns AccessTokenDbCheckFlag(

@@ -12,7 +12,7 @@ class WebSocketChatRoomNotifier(
 ) : ChatRoomNotifier {
     @Async
     override fun notify(
-        memberIds: Collection<Int>,
+        memberIds: Collection<Long>,
         chatRoom: ChatRoomDto
     ) {
         memberIds.forEach {

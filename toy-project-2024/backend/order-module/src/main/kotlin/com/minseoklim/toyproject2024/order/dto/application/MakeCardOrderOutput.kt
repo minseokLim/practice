@@ -8,7 +8,7 @@ import com.minseoklim.toyproject2024.order.domain.model.Receiver
 import com.minseoklim.toyproject2024.order.domain.model.ShippingInfo
 
 data class MakeCardOrderOutput private constructor(
-    val id: Int,
+    val id: Long,
     val orderProducts: List<OrderProductOutput>,
     val shippingInfo: ShippingInfoOutput
 ) {
@@ -23,7 +23,7 @@ data class MakeCardOrderOutput private constructor(
     }
 
     data class OrderProductOutput private constructor(
-        val productId: Int,
+        val productId: Long,
         val quantity: Int
     ) {
         companion object {

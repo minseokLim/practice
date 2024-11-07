@@ -12,7 +12,7 @@ class RegisterCardService(
     private val cardRepository: CardRepository
 ) {
     fun register(
-        memberId: Int,
+        memberId: Long,
         input: RegisterCardInput
     ): RegisterCardOutput {
         val card = cardRepository.save(input.toEntity(memberId))

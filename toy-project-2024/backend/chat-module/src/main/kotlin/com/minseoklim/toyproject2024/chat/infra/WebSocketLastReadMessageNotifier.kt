@@ -10,7 +10,7 @@ class WebSocketLastReadMessageNotifier(
     private val messagingTemplate: SimpMessagingTemplate
 ) : LastReadMessageNotifier {
     override fun notify(
-        memberIds: Collection<Int>,
+        memberIds: Collection<Long>,
         lastReadMessage: LastReadMessageDto
     ) {
         memberIds.forEach {

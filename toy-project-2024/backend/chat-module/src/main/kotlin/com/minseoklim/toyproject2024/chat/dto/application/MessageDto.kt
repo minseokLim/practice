@@ -15,7 +15,7 @@ data class MessageDto private constructor(
     companion object {
         fun of(
             message: Message,
-            memberIdToName: Map<Int, String>
+            memberIdToName: Map<Long, String>
         ): MessageDto {
             return MessageDto(
                 id = checkNotNull(message.id),
@@ -29,7 +29,7 @@ data class MessageDto private constructor(
     }
 
     data class MemberDto(
-        val id: Int,
+        val id: Long,
         val name: String
     )
 }
