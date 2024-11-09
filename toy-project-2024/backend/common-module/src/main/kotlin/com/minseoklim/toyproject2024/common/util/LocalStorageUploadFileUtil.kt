@@ -2,8 +2,9 @@ package com.minseoklim.toyproject2024.common.util
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import java.io.File
 import java.io.InputStream
+import java.nio.file.Files
+import java.nio.file.Paths
 
 @Component
 class LocalStorageUploadFileUtil(
@@ -16,8 +17,11 @@ class LocalStorageUploadFileUtil(
         uploadFileName: String,
         inputStream: InputStream
     ): String {
-        val file = File("$uploadPath/$uploadFileName")
-        file.outputStream().use { it.write(inputStream.readBytes()) }
+        val uploadDir = Paths.get(uploadPath)
+        if (Files.notExists(uploadDir)) {
+            Files.createDirectories(uploadDir)
+        }
+        Files.copy(inputStream, uploadDir.resolve(uploadFileName))
         return "$baseUrl/$uploadFileName"
     }
 }

@@ -2,5 +2,5 @@ encryptor:
   password: ${ENCRYPTOR_PASSWORD}
   salt: ${ENCRYPTOR_SALT}
 upload:
-  path: /uploaded
+  path: /Users/minseoklim/uploaded
   base-url:
