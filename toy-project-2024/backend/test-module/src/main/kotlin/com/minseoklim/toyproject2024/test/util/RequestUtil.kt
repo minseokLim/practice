@@ -50,7 +50,7 @@ object RequestUtil {
         path: String,
         accessToken: String?,
         fileParameterName: String,
-        file: File,
+        files: List<File>,
         requestParam: Map<String, Any?>,
         vararg pathParams: Any
     ): ExtractableResponse<Response> {
@@ -61,7 +61,11 @@ object RequestUtil {
                     this.auth().oauth2(accessToken)
                 }
             }
-            .multiPart(fileParameterName, file)
+            .apply {
+                files.forEach { file ->
+                    this.multiPart(fileParameterName, file)
+                }
+            }
             .formParams(requestParam)
             .contentType(ContentType.MULTIPART)
             .`when`().post(path, *pathParams)
