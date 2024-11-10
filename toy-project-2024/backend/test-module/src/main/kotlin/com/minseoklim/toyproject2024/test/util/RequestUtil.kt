@@ -4,6 +4,7 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.response.ExtractableResponse
 import io.restassured.response.Response
+import java.io.File
 
 object RequestUtil {
     fun get(
@@ -41,6 +42,28 @@ object RequestUtil {
                 }
             }
             .contentType(ContentType.JSON)
+            .`when`().post(path, *pathParams)
+            .then().log().all().extract()
+    }
+
+    fun postWithMultipartFormData(
+        path: String,
+        accessToken: String?,
+        fileParameterName: String,
+        file: File,
+        requestParam: Map<String, Any?>,
+        vararg pathParams: Any
+    ): ExtractableResponse<Response> {
+        return RestAssured
+            .given().log().all()
+            .apply {
+                if (accessToken != null) {
+                    this.auth().oauth2(accessToken)
+                }
+            }
+            .multiPart(fileParameterName, file)
+            .formParams(requestParam)
+            .contentType(ContentType.MULTIPART)
             .`when`().post(path, *pathParams)
             .then().log().all().extract()
     }
