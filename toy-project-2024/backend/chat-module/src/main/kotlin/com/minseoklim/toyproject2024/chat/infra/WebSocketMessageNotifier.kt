@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.chat.infra
 
 import com.minseoklim.toyproject2024.chat.application.MessageNotifier
-import com.minseoklim.toyproject2024.chat.dto.application.MessageDto
+import com.minseoklim.toyproject2024.chat.application.dto.MessageDto
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component

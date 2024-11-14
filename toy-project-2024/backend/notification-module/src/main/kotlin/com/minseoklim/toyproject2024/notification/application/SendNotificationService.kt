@@ -2,9 +2,9 @@ package com.minseoklim.toyproject2024.notification.application
 
 import com.minseoklim.toyproject2024.common.domain.type.ErrorCode
 import com.minseoklim.toyproject2024.common.exception.BadRequestException
+import com.minseoklim.toyproject2024.notification.application.dto.SendNotificationInput
 import com.minseoklim.toyproject2024.notification.domain.repository.NotificationRepository
 import com.minseoklim.toyproject2024.notification.domain.repository.PushTokenRepository
-import com.minseoklim.toyproject2024.notification.dto.application.SendNotificationInput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

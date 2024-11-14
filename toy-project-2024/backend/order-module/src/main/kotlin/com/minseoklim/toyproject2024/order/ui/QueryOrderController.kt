@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.order.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.order.application.QueryOrderService
-import com.minseoklim.toyproject2024.order.dto.ui.QueryOrderResponse
+import com.minseoklim.toyproject2024.order.ui.dto.QueryOrderResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity

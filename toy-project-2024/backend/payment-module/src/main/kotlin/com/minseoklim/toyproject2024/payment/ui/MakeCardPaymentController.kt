@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.payment.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.MakeCardPaymentService
-import com.minseoklim.toyproject2024.payment.dto.ui.MakeCardPaymentRequest
-import com.minseoklim.toyproject2024.payment.dto.ui.MakeCardPaymentResponse
+import com.minseoklim.toyproject2024.payment.ui.dto.MakeCardPaymentRequest
+import com.minseoklim.toyproject2024.payment.ui.dto.MakeCardPaymentResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

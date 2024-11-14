@@ -7,8 +7,8 @@ import com.minseoklim.toyproject2024.order.domain.model.OrderProduct
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
 import com.minseoklim.toyproject2024.product.application.AddStockQuantityService
 import com.minseoklim.toyproject2024.product.application.RemoveStockQuantityService
-import com.minseoklim.toyproject2024.product.dto.application.AddStockQuantityInput
-import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityInput
+import com.minseoklim.toyproject2024.product.application.dto.AddStockQuantityInput
+import com.minseoklim.toyproject2024.product.application.dto.RemoveStockQuantityInput
 
 object OrderServiceHelper {
     fun getOrder(

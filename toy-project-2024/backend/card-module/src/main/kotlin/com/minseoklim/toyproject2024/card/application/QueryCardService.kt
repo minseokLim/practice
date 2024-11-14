@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.card.application
 
+import com.minseoklim.toyproject2024.card.application.dto.QueryCardOutput
 import com.minseoklim.toyproject2024.card.domain.repository.CardRepository
-import com.minseoklim.toyproject2024.card.dto.application.QueryCardOutput
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

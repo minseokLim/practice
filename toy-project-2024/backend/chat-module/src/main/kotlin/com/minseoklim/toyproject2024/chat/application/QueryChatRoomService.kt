@@ -1,14 +1,14 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.application.dto.QueryChatRoomOutput
 import com.minseoklim.toyproject2024.chat.domain.mapper.ChatMapper
 import com.minseoklim.toyproject2024.chat.domain.mapper.UnreadMessageCount
 import com.minseoklim.toyproject2024.chat.domain.model.ChatRoom
 import com.minseoklim.toyproject2024.chat.domain.model.Message
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
 import com.minseoklim.toyproject2024.chat.domain.repository.MessageRepository
-import com.minseoklim.toyproject2024.chat.dto.application.QueryChatRoomOutput
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
-import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
+import com.minseoklim.toyproject2024.member.application.dto.QueryMemberOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

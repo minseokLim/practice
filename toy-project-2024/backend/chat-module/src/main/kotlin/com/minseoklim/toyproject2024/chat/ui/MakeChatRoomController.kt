@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.chat.ui
 
 import com.minseoklim.toyproject2024.chat.application.MakeChatRoomService
-import com.minseoklim.toyproject2024.chat.dto.ui.MakeChatRoomRequest
-import com.minseoklim.toyproject2024.chat.dto.ui.MakeChatRoomResponse
+import com.minseoklim.toyproject2024.chat.ui.dto.MakeChatRoomRequest
+import com.minseoklim.toyproject2024.chat.ui.dto.MakeChatRoomResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

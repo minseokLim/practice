@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.application.dto.LastReadMessageDto
+import com.minseoklim.toyproject2024.chat.application.dto.UpdateLastReadMessageInput
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
-import com.minseoklim.toyproject2024.chat.dto.application.LastReadMessageDto
-import com.minseoklim.toyproject2024.chat.dto.application.UpdateLastReadMessageInput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

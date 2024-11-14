@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.feed.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.feed.application.RegisterFeedService
-import com.minseoklim.toyproject2024.feed.dto.ui.RegisterFeedRequest
+import com.minseoklim.toyproject2024.feed.ui.dto.RegisterFeedRequest
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ModelAttribute

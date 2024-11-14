@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.feed.application
 
+import com.minseoklim.toyproject2024.feed.application.dto.QueryFeedOutput
 import com.minseoklim.toyproject2024.feed.domain.repository.FeedRepository
-import com.minseoklim.toyproject2024.feed.dto.application.QueryFeedOutput
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service

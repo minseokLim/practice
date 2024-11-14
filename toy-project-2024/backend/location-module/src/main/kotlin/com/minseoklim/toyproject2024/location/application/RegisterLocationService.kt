@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.location.application
 
+import com.minseoklim.toyproject2024.location.application.dto.RegisterLocationInput
 import com.minseoklim.toyproject2024.location.domain.repository.LocationRepository
-import com.minseoklim.toyproject2024.location.dto.application.RegisterLocationInput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.order.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.order.application.FailVerifiedOrderService
-import com.minseoklim.toyproject2024.order.dto.ui.FailVerifiedOrderRequest
+import com.minseoklim.toyproject2024.order.ui.dto.FailVerifiedOrderRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

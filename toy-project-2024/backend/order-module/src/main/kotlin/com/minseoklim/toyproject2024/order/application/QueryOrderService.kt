@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.order.application
 
+import com.minseoklim.toyproject2024.order.application.dto.QueryOrderOutput
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
-import com.minseoklim.toyproject2024.order.dto.application.QueryOrderOutput
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

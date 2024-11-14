@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.notification.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.notification.application.RegisterPushTokenService
-import com.minseoklim.toyproject2024.notification.dto.ui.RegisterPushTokenRequest
+import com.minseoklim.toyproject2024.notification.ui.dto.RegisterPushTokenRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

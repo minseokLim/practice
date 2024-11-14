@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.card.ui
 
 import com.minseoklim.toyproject2024.card.application.QueryCardService
-import com.minseoklim.toyproject2024.card.dto.ui.QueryCardResponse
+import com.minseoklim.toyproject2024.card.ui.dto.QueryCardResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

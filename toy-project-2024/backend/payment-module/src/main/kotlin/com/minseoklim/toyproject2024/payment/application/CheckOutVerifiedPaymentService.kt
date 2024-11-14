@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.payment.application
 
+import com.minseoklim.toyproject2024.payment.application.dto.CheckOutVerifiedPaymentInput
+import com.minseoklim.toyproject2024.payment.application.dto.CheckOutVerifiedPaymentOutput
 import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
-import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentInput
-import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

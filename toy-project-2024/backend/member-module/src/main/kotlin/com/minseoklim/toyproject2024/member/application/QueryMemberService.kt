@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
+import com.minseoklim.toyproject2024.member.application.dto.QueryMemberOutput
 import com.minseoklim.toyproject2024.member.domain.model.SocialType
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
-import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
 import com.minseoklim.toyproject2024.member.util.MemberFilterParser
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

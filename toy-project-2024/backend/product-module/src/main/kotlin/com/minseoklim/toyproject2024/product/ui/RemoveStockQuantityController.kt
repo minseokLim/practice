@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.RemoveStockQuantityService
-import com.minseoklim.toyproject2024.product.dto.ui.RemoveStockQuantityRequest
-import com.minseoklim.toyproject2024.product.dto.ui.RemoveStockQuantityResponse
+import com.minseoklim.toyproject2024.product.ui.dto.RemoveStockQuantityRequest
+import com.minseoklim.toyproject2024.product.ui.dto.RemoveStockQuantityResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable

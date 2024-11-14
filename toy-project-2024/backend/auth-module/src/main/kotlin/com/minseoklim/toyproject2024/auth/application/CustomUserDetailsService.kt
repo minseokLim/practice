@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.application
 
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
-import com.minseoklim.toyproject2024.member.dto.application.QueryMemberOutput
+import com.minseoklim.toyproject2024.member.application.dto.QueryMemberOutput
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService

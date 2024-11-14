@@ -1,0 +1,16 @@
+package com.minseoklim.toyproject2024.payment.application.dto
+
+import com.minseoklim.toyproject2024.payment.domain.model.VerifiedPayment
+
+data class CheckOutVerifiedPaymentInput(
+    val amount: Long,
+    val productName: String
+) {
+    fun toEntity(memberId: Long): VerifiedPayment {
+        return VerifiedPayment(
+            amount = amount,
+            productName = productName,
+            memberId = memberId
+        )
+    }
+}

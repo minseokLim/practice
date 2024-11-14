@@ -1,13 +1,13 @@
 package com.minseoklim.toyproject2024.order.application
 
 import com.minseoklim.toyproject2024.order.application.converter.ProductConverter
+import com.minseoklim.toyproject2024.order.application.dto.CheckOutVerifiedOrderInput
+import com.minseoklim.toyproject2024.order.application.dto.CheckOutVerifiedOrderOutput
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
 import com.minseoklim.toyproject2024.order.domain.service.OrderNameGenerator
 import com.minseoklim.toyproject2024.order.domain.service.TotalAmountCalculator
-import com.minseoklim.toyproject2024.order.dto.application.CheckOutVerifiedOrderInput
-import com.minseoklim.toyproject2024.order.dto.application.CheckOutVerifiedOrderOutput
 import com.minseoklim.toyproject2024.payment.application.CheckOutVerifiedPaymentService
-import com.minseoklim.toyproject2024.payment.dto.application.CheckOutVerifiedPaymentInput
+import com.minseoklim.toyproject2024.payment.application.dto.CheckOutVerifiedPaymentInput
 import com.minseoklim.toyproject2024.product.application.PessimisticQueryProductService
 import com.minseoklim.toyproject2024.product.application.RemoveStockQuantityService
 import org.springframework.stereotype.Service

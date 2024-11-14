@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.order.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.order.application.MakeCardOrderService
-import com.minseoklim.toyproject2024.order.dto.ui.MakeCardOrderRequest
-import com.minseoklim.toyproject2024.order.dto.ui.MakeCardOrderResponse
+import com.minseoklim.toyproject2024.order.ui.dto.MakeCardOrderRequest
+import com.minseoklim.toyproject2024.order.ui.dto.MakeCardOrderResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

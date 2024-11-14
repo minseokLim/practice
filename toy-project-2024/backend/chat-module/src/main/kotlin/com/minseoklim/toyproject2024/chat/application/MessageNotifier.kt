@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.chat.application
 
-import com.minseoklim.toyproject2024.chat.dto.application.MessageDto
+import com.minseoklim.toyproject2024.chat.application.dto.MessageDto
 
 interface MessageNotifier {
     fun notify(

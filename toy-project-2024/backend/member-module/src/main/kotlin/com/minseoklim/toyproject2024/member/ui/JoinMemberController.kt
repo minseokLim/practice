@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.ui
 
 import com.minseoklim.toyproject2024.member.application.JoinMemberService
-import com.minseoklim.toyproject2024.member.dto.ui.JoinMemberRequest
-import com.minseoklim.toyproject2024.member.dto.ui.JoinMemberResponse
+import com.minseoklim.toyproject2024.member.ui.dto.JoinMemberRequest
+import com.minseoklim.toyproject2024.member.ui.dto.JoinMemberResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

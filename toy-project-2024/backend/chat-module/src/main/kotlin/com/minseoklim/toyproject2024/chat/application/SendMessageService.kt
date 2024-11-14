@@ -1,10 +1,10 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.application.dto.MessageDto
+import com.minseoklim.toyproject2024.chat.application.dto.SendMessageInput
+import com.minseoklim.toyproject2024.chat.application.dto.SendMessageOutput
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
 import com.minseoklim.toyproject2024.chat.domain.repository.MessageRepository
-import com.minseoklim.toyproject2024.chat.dto.application.MessageDto
-import com.minseoklim.toyproject2024.chat.dto.application.SendMessageInput
-import com.minseoklim.toyproject2024.chat.dto.application.SendMessageOutput
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

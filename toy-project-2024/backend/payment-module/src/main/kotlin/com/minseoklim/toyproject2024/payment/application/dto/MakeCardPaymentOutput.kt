@@ -1,0 +1,23 @@
+package com.minseoklim.toyproject2024.payment.application.dto
+
+import com.minseoklim.toyproject2024.payment.domain.model.CardPayment
+
+data class MakeCardPaymentOutput private constructor(
+    val id: Long,
+    val cardId: Long,
+    val amount: Long,
+    val productName: String,
+    val isCanceled: Boolean
+) {
+    companion object {
+        fun from(cardPayment: CardPayment): MakeCardPaymentOutput {
+            return MakeCardPaymentOutput(
+                id = checkNotNull(cardPayment.id),
+                cardId = cardPayment.cardId,
+                amount = cardPayment.amount.value.toLong(),
+                productName = cardPayment.productName.value,
+                isCanceled = cardPayment.isCanceled
+            )
+        }
+    }
+}

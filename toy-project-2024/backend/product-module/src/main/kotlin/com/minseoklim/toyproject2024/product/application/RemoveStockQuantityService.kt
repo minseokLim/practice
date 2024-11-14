@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.product.application
 
+import com.minseoklim.toyproject2024.product.application.dto.RemoveStockQuantityInput
+import com.minseoklim.toyproject2024.product.application.dto.RemoveStockQuantityOutput
 import com.minseoklim.toyproject2024.product.domain.repository.ProductRepository
-import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityInput
-import com.minseoklim.toyproject2024.product.dto.application.RemoveStockQuantityOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

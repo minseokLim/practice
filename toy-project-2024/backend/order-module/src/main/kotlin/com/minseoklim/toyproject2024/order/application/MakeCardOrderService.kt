@@ -1,13 +1,13 @@
 package com.minseoklim.toyproject2024.order.application
 
 import com.minseoklim.toyproject2024.order.application.converter.ProductConverter
+import com.minseoklim.toyproject2024.order.application.dto.MakeCardOrderInput
+import com.minseoklim.toyproject2024.order.application.dto.MakeCardOrderOutput
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
 import com.minseoklim.toyproject2024.order.domain.service.OrderNameGenerator
 import com.minseoklim.toyproject2024.order.domain.service.TotalAmountCalculator
-import com.minseoklim.toyproject2024.order.dto.application.MakeCardOrderInput
-import com.minseoklim.toyproject2024.order.dto.application.MakeCardOrderOutput
 import com.minseoklim.toyproject2024.payment.application.MakeCardPaymentService
-import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentInput
+import com.minseoklim.toyproject2024.payment.application.dto.MakeCardPaymentInput
 import com.minseoklim.toyproject2024.product.application.PessimisticQueryProductService
 import com.minseoklim.toyproject2024.product.application.RemoveStockQuantityService
 import org.springframework.stereotype.Service

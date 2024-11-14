@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.product.application
 
+import com.minseoklim.toyproject2024.product.application.dto.UpdateProductInput
+import com.minseoklim.toyproject2024.product.application.dto.UpdateProductOutput
 import com.minseoklim.toyproject2024.product.domain.repository.ProductRepository
-import com.minseoklim.toyproject2024.product.dto.application.UpdateProductInput
-import com.minseoklim.toyproject2024.product.dto.application.UpdateProductOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

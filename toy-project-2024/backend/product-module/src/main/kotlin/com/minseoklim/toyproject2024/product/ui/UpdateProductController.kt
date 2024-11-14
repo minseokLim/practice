@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.UpdateProductService
-import com.minseoklim.toyproject2024.product.dto.ui.UpdateProductRequest
-import com.minseoklim.toyproject2024.product.dto.ui.UpdateProductResponse
+import com.minseoklim.toyproject2024.product.ui.dto.UpdateProductRequest
+import com.minseoklim.toyproject2024.product.ui.dto.UpdateProductResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable

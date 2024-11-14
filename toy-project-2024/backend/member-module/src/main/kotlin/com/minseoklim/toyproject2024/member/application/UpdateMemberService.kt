@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.member.application
 
+import com.minseoklim.toyproject2024.member.application.dto.UpdateMemberInput
+import com.minseoklim.toyproject2024.member.application.dto.UpdateMemberOutput
 import com.minseoklim.toyproject2024.member.domain.repository.MemberRepository
-import com.minseoklim.toyproject2024.member.dto.application.UpdateMemberInput
-import com.minseoklim.toyproject2024.member.dto.application.UpdateMemberOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

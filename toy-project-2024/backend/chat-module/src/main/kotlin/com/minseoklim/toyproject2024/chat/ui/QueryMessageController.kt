@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.chat.ui
 
 import com.minseoklim.toyproject2024.chat.application.QueryMessageService
-import com.minseoklim.toyproject2024.chat.dto.ui.QueryMessageResponse
+import com.minseoklim.toyproject2024.chat.ui.dto.QueryMessageResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

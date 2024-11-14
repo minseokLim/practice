@@ -3,8 +3,8 @@ package com.minseoklim.toyproject2024.member.ui
 import com.minseoklim.toyproject2024.common.annotation.CheckAdminPermission
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.member.application.UpdateMemberService
-import com.minseoklim.toyproject2024.member.dto.ui.UpdateMemberRequest
-import com.minseoklim.toyproject2024.member.dto.ui.UpdateMemberResponse
+import com.minseoklim.toyproject2024.member.ui.dto.UpdateMemberRequest
+import com.minseoklim.toyproject2024.member.ui.dto.UpdateMemberResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable

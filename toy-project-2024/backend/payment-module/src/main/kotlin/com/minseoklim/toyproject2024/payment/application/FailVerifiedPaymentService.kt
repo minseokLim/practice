@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.payment.application
 
+import com.minseoklim.toyproject2024.payment.application.dto.FailVerifiedPaymentInput
 import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
-import com.minseoklim.toyproject2024.payment.dto.application.FailVerifiedPaymentInput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

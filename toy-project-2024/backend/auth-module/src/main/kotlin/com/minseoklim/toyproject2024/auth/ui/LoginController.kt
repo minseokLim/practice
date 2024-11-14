@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.LoginService
-import com.minseoklim.toyproject2024.auth.dto.ui.LoginRequest
-import com.minseoklim.toyproject2024.auth.dto.ui.LoginResponse
+import com.minseoklim.toyproject2024.auth.ui.dto.LoginRequest
+import com.minseoklim.toyproject2024.auth.ui.dto.LoginResponse
 import com.minseoklim.toyproject2024.common.util.ClientUtil.getClientIp
 import com.minseoklim.toyproject2024.common.util.ClientUtil.getUserAgent
 import jakarta.servlet.http.HttpServletRequest

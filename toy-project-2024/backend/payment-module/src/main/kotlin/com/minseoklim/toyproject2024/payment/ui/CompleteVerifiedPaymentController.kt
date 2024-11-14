@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.payment.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.CompleteVerifiedPaymentService
-import com.minseoklim.toyproject2024.payment.dto.ui.CompleteVerifiedPaymentRequest
-import com.minseoklim.toyproject2024.payment.dto.ui.CompleteVerifiedPaymentResponse
+import com.minseoklim.toyproject2024.payment.ui.dto.CompleteVerifiedPaymentRequest
+import com.minseoklim.toyproject2024.payment.ui.dto.CompleteVerifiedPaymentResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

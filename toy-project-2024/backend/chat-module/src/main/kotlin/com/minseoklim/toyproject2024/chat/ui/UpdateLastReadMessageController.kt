@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.chat.ui
 
 import com.minseoklim.toyproject2024.chat.application.UpdateLastReadMessageService
-import com.minseoklim.toyproject2024.chat.dto.ui.UpdateLastReadMessageRequest
+import com.minseoklim.toyproject2024.chat.ui.dto.UpdateLastReadMessageRequest
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

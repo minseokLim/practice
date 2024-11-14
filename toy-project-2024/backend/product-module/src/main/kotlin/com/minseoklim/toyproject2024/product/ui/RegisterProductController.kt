@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.product.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.product.application.RegisterProductService
-import com.minseoklim.toyproject2024.product.dto.ui.RegisterProductRequest
-import com.minseoklim.toyproject2024.product.dto.ui.RegisterProductResponse
+import com.minseoklim.toyproject2024.product.ui.dto.RegisterProductRequest
+import com.minseoklim.toyproject2024.product.ui.dto.RegisterProductResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.location.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.location.application.RegisterLocationService
-import com.minseoklim.toyproject2024.location.dto.ui.RegisterLocationRequest
+import com.minseoklim.toyproject2024.location.ui.dto.RegisterLocationRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PutMapping

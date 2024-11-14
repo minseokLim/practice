@@ -2,8 +2,8 @@ package com.minseoklim.toyproject2024.order.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.order.application.CheckOutVerifiedOrderService
-import com.minseoklim.toyproject2024.order.dto.ui.CheckOutVerifiedOrderRequest
-import com.minseoklim.toyproject2024.order.dto.ui.CheckOutVerifiedOrderResponse
+import com.minseoklim.toyproject2024.order.ui.dto.CheckOutVerifiedOrderRequest
+import com.minseoklim.toyproject2024.order.ui.dto.CheckOutVerifiedOrderResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

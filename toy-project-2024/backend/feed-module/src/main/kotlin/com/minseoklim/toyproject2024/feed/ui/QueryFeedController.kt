@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.feed.ui
 
 import com.minseoklim.toyproject2024.feed.application.QueryFeedService
-import com.minseoklim.toyproject2024.feed.dto.ui.QueryFeedResponse
+import com.minseoklim.toyproject2024.feed.ui.dto.QueryFeedResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

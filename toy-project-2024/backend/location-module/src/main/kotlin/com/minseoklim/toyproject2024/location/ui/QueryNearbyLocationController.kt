@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.location.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.location.application.QueryNearbyLocationService
-import com.minseoklim.toyproject2024.location.dto.ui.QueryNearbyLocationResponse
+import com.minseoklim.toyproject2024.location.ui.dto.QueryNearbyLocationResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam

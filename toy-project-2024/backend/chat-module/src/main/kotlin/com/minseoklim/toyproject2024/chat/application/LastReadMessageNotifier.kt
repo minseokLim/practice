@@ -1,6 +1,6 @@
 package com.minseoklim.toyproject2024.chat.application
 
-import com.minseoklim.toyproject2024.chat.dto.application.LastReadMessageDto
+import com.minseoklim.toyproject2024.chat.application.dto.LastReadMessageDto
 
 interface LastReadMessageNotifier {
     fun notify(

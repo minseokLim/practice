@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.notification.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.notification.application.SendNotificationService
-import com.minseoklim.toyproject2024.notification.dto.ui.SendNotificationRequest
+import com.minseoklim.toyproject2024.notification.ui.dto.SendNotificationRequest
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

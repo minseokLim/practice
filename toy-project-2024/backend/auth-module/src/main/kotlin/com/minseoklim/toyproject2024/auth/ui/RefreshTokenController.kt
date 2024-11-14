@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.RefreshTokenService
-import com.minseoklim.toyproject2024.auth.dto.ui.RefreshTokenRequest
-import com.minseoklim.toyproject2024.auth.dto.ui.RefreshTokenResponse
+import com.minseoklim.toyproject2024.auth.ui.dto.RefreshTokenRequest
+import com.minseoklim.toyproject2024.auth.ui.dto.RefreshTokenResponse
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

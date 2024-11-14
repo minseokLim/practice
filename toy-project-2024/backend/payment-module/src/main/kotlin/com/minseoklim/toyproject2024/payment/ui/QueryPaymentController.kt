@@ -2,7 +2,7 @@ package com.minseoklim.toyproject2024.payment.ui
 
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import com.minseoklim.toyproject2024.payment.application.QueryPaymentService
-import com.minseoklim.toyproject2024.payment.dto.ui.QueryPaymentResponse
+import com.minseoklim.toyproject2024.payment.ui.dto.QueryPaymentResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity

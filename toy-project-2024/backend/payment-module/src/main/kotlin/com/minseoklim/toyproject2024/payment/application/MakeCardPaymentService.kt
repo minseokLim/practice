@@ -2,9 +2,9 @@ package com.minseoklim.toyproject2024.payment.application
 
 import com.minseoklim.toyproject2024.card.application.QueryCardService
 import com.minseoklim.toyproject2024.payment.application.CardPaymentApi.CardPaymentRequest
+import com.minseoklim.toyproject2024.payment.application.dto.MakeCardPaymentInput
+import com.minseoklim.toyproject2024.payment.application.dto.MakeCardPaymentOutput
 import com.minseoklim.toyproject2024.payment.domain.repository.PaymentRepository
-import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentInput
-import com.minseoklim.toyproject2024.payment.dto.application.MakeCardPaymentOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

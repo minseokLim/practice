@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.chat.ui
 
 import com.minseoklim.toyproject2024.chat.application.SendMessageService
-import com.minseoklim.toyproject2024.chat.dto.ui.SendMessageRequest
-import com.minseoklim.toyproject2024.chat.dto.ui.SendMessageResponse
+import com.minseoklim.toyproject2024.chat.ui.dto.SendMessageRequest
+import com.minseoklim.toyproject2024.chat.ui.dto.SendMessageResponse
 import jakarta.validation.Valid
 import org.springframework.messaging.handler.annotation.DestinationVariable
 import org.springframework.messaging.handler.annotation.MessageMapping

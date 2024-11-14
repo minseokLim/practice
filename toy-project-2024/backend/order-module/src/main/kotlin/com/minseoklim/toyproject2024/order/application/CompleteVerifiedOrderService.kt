@@ -1,9 +1,9 @@
 package com.minseoklim.toyproject2024.order.application
 
+import com.minseoklim.toyproject2024.order.application.dto.CompleteVerifiedOrderOutput
 import com.minseoklim.toyproject2024.order.domain.repository.OrderRepository
-import com.minseoklim.toyproject2024.order.dto.application.CompleteVerifiedOrderOutput
 import com.minseoklim.toyproject2024.payment.application.CompleteVerifiedPaymentService
-import com.minseoklim.toyproject2024.payment.dto.application.CompleteVerifiedPaymentInput
+import com.minseoklim.toyproject2024.payment.application.dto.CompleteVerifiedPaymentInput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

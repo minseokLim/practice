@@ -1,7 +1,7 @@
 package com.minseoklim.toyproject2024.auth.ui
 
 import com.minseoklim.toyproject2024.auth.application.LogoutService
-import com.minseoklim.toyproject2024.auth.dto.ui.LogoutRequest
+import com.minseoklim.toyproject2024.auth.ui.dto.LogoutRequest
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

@@ -1,9 +1,9 @@
 package com.minseoklim.toyproject2024.auth.application
 
+import com.minseoklim.toyproject2024.auth.application.dto.RefreshTokenInput
+import com.minseoklim.toyproject2024.auth.application.dto.RefreshTokenOutput
 import com.minseoklim.toyproject2024.auth.domain.service.RefreshTokenValidator
 import com.minseoklim.toyproject2024.auth.domain.service.TokenParser
-import com.minseoklim.toyproject2024.auth.dto.application.RefreshTokenInput
-import com.minseoklim.toyproject2024.auth.dto.application.RefreshTokenOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

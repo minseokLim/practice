@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.card.ui
 
 import com.minseoklim.toyproject2024.card.application.RegisterCardService
-import com.minseoklim.toyproject2024.card.dto.ui.RegisterCardRequest
-import com.minseoklim.toyproject2024.card.dto.ui.RegisterCardResponse
+import com.minseoklim.toyproject2024.card.ui.dto.RegisterCardRequest
+import com.minseoklim.toyproject2024.card.ui.dto.RegisterCardResponse
 import com.minseoklim.toyproject2024.common.annotation.MemberId
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity

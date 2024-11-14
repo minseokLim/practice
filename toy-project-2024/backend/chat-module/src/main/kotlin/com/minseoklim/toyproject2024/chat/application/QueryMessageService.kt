@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.chat.application
 
+import com.minseoklim.toyproject2024.chat.application.dto.QueryMessageOutput
 import com.minseoklim.toyproject2024.chat.domain.repository.ChatRoomRepository
 import com.minseoklim.toyproject2024.chat.domain.repository.MessageRepository
-import com.minseoklim.toyproject2024.chat.dto.application.QueryMessageOutput
 import com.minseoklim.toyproject2024.member.application.QueryMemberService
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service

@@ -1,8 +1,8 @@
 package com.minseoklim.toyproject2024.card.application
 
+import com.minseoklim.toyproject2024.card.application.dto.RegisterCardInput
+import com.minseoklim.toyproject2024.card.application.dto.RegisterCardOutput
 import com.minseoklim.toyproject2024.card.domain.repository.CardRepository
-import com.minseoklim.toyproject2024.card.dto.application.RegisterCardInput
-import com.minseoklim.toyproject2024.card.dto.application.RegisterCardOutput
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
